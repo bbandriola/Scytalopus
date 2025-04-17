@@ -12,7 +12,9 @@ bcftools merge -m snps --output mergedVCFproject1_2_6_7_8 --output-type z --thre
   # MAF cutoff at 0.01
   # samples with <2x sequencing depth
   # biallelic sites 
-bcftools view --exclude-types indels --min-af 0.01 -i 'F_MISSING <= 0.3' -m2 -M2 -v snps -Oz -o Filtered_mergedVCFproject1_2_6_7_8.vcf.gz
+bcftools view --min-af 0.01 -i 'F_MISSING <= 0.3' -m2 -M2 -v snps -Oz -o Filtered_mergedVCFproject1_2_6_7_8.vcf.gz mergedVCFproject1_2_6_7_8.vcf.gz
+# result Filtered_mergedVCFproject1_2_6_7_8.vcf.gz = 17,940,260 sites
+bcftools view -i 'F_MISSING <= 0.75 & MAF > 0.01' -m2 -M2 -v snps -Oz -o Filteredmissing0.57_mergedVCFproject1_2_6_7_8.vcf.gz mergedVCFproject1_2_6_7_8.vcf.gz
 
 # 3. Thin independent SNPs
 bcftools filter --include 
