@@ -60,7 +60,7 @@ ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
   scale_fill_manual(
     values = c("V2" = "#A6CEE3", "V3" = "#1F78B4", "V4" = "#B2DF8A",
                "V5" = "#33A02C", "V6" = "#FB9A99", "V7" = "#E31A1C"),
-    labels = c("K=1", "K=2", "K=3", "K=4", "K=5", "K=6")
+    labels = c("K=6")
   ) +
   labs(x = "Individuals", y = "Ancestry Proportion") +
   theme_minimal() +
@@ -79,8 +79,8 @@ ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
   geom_col(width = 1, color = NA) +  # Full-width bars
   scale_fill_manual(
     values = c("V2" = "#A6CEE3", "V3" = "#1F78B4", "V4" = "#B2DF8A",
-               "V5" = "#33A02C", "V6" = "#FB9A99", "V7" = "#E31A1C","V8" = "#FDBF6F" ),
-    labels = c("K=1", "K=2", "K=3", "K=4", "K=5", "K=6", "K=7")
+               "V5" = "#33A02C", "V6" = "#FB9A99", "V7" = "#E31A1C","V8" = "#FDBF6F"),
+    labels = c("K=6", "K=7")
   ) +
   labs(x = "Individuals", y = "Ancestry Proportion") +
   theme_minimal() +
@@ -100,7 +100,7 @@ ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
   scale_fill_manual(
     values = c("V2" = "#A6CEE3", "V3" = "#1F78B4", "V4" = "#B2DF8A",
                "V5" = "#33A02C", "V6" = "#FB9A99", "V7" = "#E31A1C","V8" = "#FDBF6F" , "V=9"="#FF7F00"),
-    labels = c("K=1", "K=2", "K=3", "K=4", "K=5", "K=6", "K=7", "K=8")
+    labels = c("K=6", "K=7", "K=8")
   ) +
   labs(x = "Individuals", y = "Ancestry Proportion") +
   theme_minimal() +
@@ -120,8 +120,8 @@ ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
   scale_fill_manual(
     values = c("V2" = "#A6CEE3", "V3" = "#1F78B4", "V4" = "#B2DF8A",
                "V5" = "#33A02C", "V6" = "#FB9A99", "V7" = "#E31A1C","V8" = "#FDBF6F" , "V=9"="#FF7F00",
-               "V=10"="#66C2A5"),
-    labels = c("K=1", "K=2", "K=3", "K=4", "K=5", "K=6", "K=7", "K=8","K=9")
+               "V=10"="#1B9E77"),
+    labels = c("K=6", "K=7", "K=8","K=9")
   ) +
   labs(x = "Individuals", y = "Ancestry Proportion") +
   theme_minimal() +
@@ -141,8 +141,8 @@ ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
   scale_fill_manual(
     values = c("V2" = "#A6CEE3", "V3" = "#1F78B4", "V4" = "#B2DF8A",
                "V5" = "#33A02C", "V6" = "#FB9A99", "V7" = "#E31A1C","V8" = "#FDBF6F" , "V=9"="#FF7F00",
-               "V=10"="#66C2A5","V=11"="#FC8D62"),
-    labels = c("K=1", "K=2", "K=3", "K=4", "K=5", "K=6", "K=7", "K=8","K=9","K=10")
+               "V=10"="#1B9E77","V=11"="#BEAED4"),
+    labels = c("K=6", "K=7", "K=8","K=9","K=10")
   ) +
   labs(x = "Individuals", y = "Ancestry Proportion") +
   theme_minimal() +
@@ -162,8 +162,8 @@ ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
   scale_fill_manual(
     values = c("V2" = "#A6CEE3", "V3" = "#1F78B4", "V4" = "#B2DF8A",
                "V5" = "#33A02C", "V6" = "#FB9A99", "V7" = "#E31A1C","V8" = "#FDBF6F" , "V=9"="#FF7F00",
-               "V=10"="#66C2A5","V=11"="#FC8D62","V=12"="#8DA0CB"),
-    labels = c("K=1", "K=2", "K=3", "K=4", "K=5", "K=6", "K=7", "K=8","K=9","K=10","K=11")
+               "V=10"="#1B9E77","V=11"="#BEAED4","V=12"="#7570B3"),
+    labels = c("K=6", "K=7", "K=8","K=9","K=10","K=11")
   ) +
   labs(x = "Individuals", y = "Ancestry Proportion") +
   theme_minimal() +
@@ -183,8 +183,8 @@ ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
   scale_fill_manual(
     values = c("V2" = "#A6CEE3", "V3" = "#1F78B4", "V4" = "#B2DF8A",
                "V5" = "#33A02C", "V6" = "#FB9A99", "V7" = "#E31A1C","V8" = "#FDBF6F" , "V=9"="#FF7F00",
-               "V=10"="#66C2A5","V=11"="#FC8D62","V=12"="#8DA0CB","V=13"="#E78AC3"),
-    labels = c("K=1", "K=2", "K=3", "K=4", "K=5", "K=6", "K=7", "K=8","K=9","K=10","K=11","K=12")
+               "V=10"="#1B9E77","V=11"="#BEAED4","V=12"="#7570B3","V=13"="#E7298A"),
+    labels = c("K=6", "K=7", "K=8","K=9","K=10","K=11","K=12")
   ) +
   labs(x = "Individuals", y = "Ancestry Proportion") +
   theme_minimal() +
@@ -204,8 +204,8 @@ ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
   scale_fill_manual(
     values = c("V2" = "#A6CEE3", "V3" = "#1F78B4", "V4" = "#B2DF8A",
                "V5" = "#33A02C", "V6" = "#FB9A99", "V7" = "#E31A1C","V8" = "#FDBF6F" , "V=9"="#FF7F00",
-               "V=10"="#66C2A5","V=11"="#FC8D62","V=12"="#8DA0CB","V=13"="#E78AC3","V=14"="#A6D854"),
-    labels = c("K=1", "K=2", "K=3", "K=4", "K=5", "K=6", "K=7", "K=8","K=9","K=10","K=11","K=12","K=13")
+               "V=10"="#1B9E77","V=11"="#BEAED4","V=12"="#7570B3","V=13"="#E7298A","V=14"="#E78AC3"),
+    labels = c("K=6", "K=7", "K=8","K=9","K=10","K=11","K=12","K=13")
   ) +
   labs(x = "Individuals", y = "Ancestry Proportion") +
   theme_minimal() +
@@ -225,9 +225,10 @@ ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
   scale_fill_manual(
     values = c("V2" = "#A6CEE3", "V3" = "#1F78B4", "V4" = "#B2DF8A",
                "V5" = "#33A02C", "V6" = "#FB9A99", "V7" = "#E31A1C","V8" = "#FDBF6F" , "V=9"="#FF7F00",
-               "V=10"="#66C2A5","V=11"="#FC8D62","V=12"="#8DA0CB","V=13"="#E78AC3","V=14"="#A6D854", 
-               "V=15"="#FFD92F"),
-    labels = c("K=1", "K=2", "K=3", "K=4", "K=5", "K=6", "K=7", "K=8","K=9","K=10","K=11","K=12","K=13","K=14")
+               "V=10"="#1B9E77","V=11"="#BEAED4","V=12"="#7570B3","V=13"="#E7298A","V=14"="#E78AC3", 
+               "V=15"="#E6AB02"),
+    labels = c("K=6", "K=7", "K=8","K=9","K=10","K=11","K=12","K=13",
+               "K=14")
   ) +
   labs(x = "Individuals", y = "Ancestry Proportion") +
   theme_minimal() +
@@ -247,9 +248,9 @@ ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
   scale_fill_manual(
     values = c("V2" = "#A6CEE3", "V3" = "#1F78B4", "V4" = "#B2DF8A",
                "V5" = "#33A02C", "V6" = "#FB9A99", "V7" = "#E31A1C","V8" = "#FDBF6F" , "V=9"="#FF7F00",
-               "V=10"="#66C2A5","V=11"="#FC8D62","V=12"="#8DA0CB","V=13"="#E78AC3","V=14"="#A6D854", 
-               "V=15"="#FFD92F","V=16"="#E5C494"),
-    labels = c("K=1", "K=2", "K=3", "K=4", "K=5", "K=6", "K=7", "K=8","K=9","K=10","K=11","K=12","K=13",
+               "V=10"="#1B9E77","V=11"="#BEAED4","V=12"="#7570B3","V=13"="#E7298A","V=14"="#E78AC3", 
+               "V=15"="#E6AB02","V=16"="#386CB0"),
+    labels = c("K=6", "K=7", "K=8","K=9","K=10","K=11","K=12","K=13",
                "K=14","K=15")
   ) +
   labs(x = "Individuals", y = "Ancestry Proportion") +
@@ -270,9 +271,9 @@ ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
   scale_fill_manual(
     values = c("V2" = "#A6CEE3", "V3" = "#1F78B4", "V4" = "#B2DF8A",
                "V5" = "#33A02C", "V6" = "#FB9A99", "V7" = "#E31A1C","V8" = "#FDBF6F" , "V=9"="#FF7F00",
-               "V=10"="#66C2A5","V=11"="#FC8D62","V=12"="#8DA0CB","V=13"="#E78AC3","V=14"="#A6D854", 
-               "V=15"="#FFD92F","V=16"="#E5C494","V=17"="#B3B3B3"),
-    labels = c("K=1", "K=2", "K=3", "K=4", "K=5", "K=6", "K=7", "K=8","K=9","K=10","K=11","K=12","K=13",
+               "V=10"="#1B9E77","V=11"="#BEAED4","V=12"="#7570B3","V=13"="#E7298A","V=14"="#E78AC3", 
+               "V=15"="#E6AB02","V=16"="#386CB0","V=17"="#762A83"),
+    labels = c("K=6", "K=7", "K=8","K=9","K=10","K=11","K=12","K=13",
                "K=14","K=15","K=16")
   ) +
   labs(x = "Individuals", y = "Ancestry Proportion") +
@@ -293,9 +294,9 @@ ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
   scale_fill_manual(
     values = c("V2" = "#A6CEE3", "V3" = "#1F78B4", "V4" = "#B2DF8A",
                "V5" = "#33A02C", "V6" = "#FB9A99", "V7" = "#E31A1C","V8" = "#FDBF6F" , "V=9"="#FF7F00",
-               "V=10"="#66C2A5","V=11"="#FC8D62","V=12"="#8DA0CB","V=13"="#E78AC3","V=14"="#A6D854", 
-               "V=15"="#FFD92F","V=16"="#E5C494","V=17"="#B3B3B3","V=17"="#E7298A"),
-    labels = c("K=1", "K=2", "K=3", "K=4", "K=5", "K=6", "K=7", "K=8","K=9","K=10","K=11","K=12","K=13",
+               "V=10"="#1B9E77","V=11"="#BEAED4","V=12"="#7570B3","V=13"="#E7298A","V=14"="#E78AC3", 
+               "V=15"="#E6AB02","V=16"="#386CB0","V=17"="#762A83","V=18"="#7FC97F"),
+    labels = c("K=6", "K=7", "K=8","K=9","K=10","K=11","K=12","K=13",
                "K=14","K=15","K=16","K=17")
   ) +
   labs(x = "Individuals", y = "Ancestry Proportion") +
@@ -316,9 +317,9 @@ ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
   scale_fill_manual(
     values = c("V2" = "#A6CEE3", "V3" = "#1F78B4", "V4" = "#B2DF8A",
                "V5" = "#33A02C", "V6" = "#FB9A99", "V7" = "#E31A1C","V8" = "#FDBF6F" , "V=9"="#FF7F00",
-               "V=10"="#66C2A5","V=11"="#FC8D62","V=12"="#8DA0CB","V=13"="#E78AC3","V=14"="#A6D854", 
-               "V=15"="#FFD92F","V=16"="#E5C494","V=17"="#B3B3B3","V=17"="#E7298A","V=18"="#A6761D"),
-    labels = c("K=1", "K=2", "K=3", "K=4", "K=5", "K=6", "K=7", "K=8","K=9","K=10","K=11","K=12","K=13",
+               "V=10"="#1B9E77","V=11"="#BEAED4","V=12"="#7570B3","V=13"="#E7298A","V=14"="#E78AC3", 
+               "V=15"="#E6AB02","V=16"="#386CB0","V=17"="#762A83","V=18"="#7FC97F","V=19"="#FFFF99"),
+    labels = c("K=6", "K=7", "K=8","K=9","K=10","K=11","K=12","K=13",
                "K=14","K=15","K=16","K=17","K=18")
   ) +
   labs(x = "Individuals", y = "Ancestry Proportion") +
@@ -339,10 +340,10 @@ ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
   scale_fill_manual(
     values = c("V2" = "#A6CEE3", "V3" = "#1F78B4", "V4" = "#B2DF8A",
                "V5" = "#33A02C", "V6" = "#FB9A99", "V7" = "#E31A1C","V8" = "#FDBF6F" , "V=9"="#FF7F00",
-               "V=10"="#66C2A5","V=11"="#FC8D62","V=12"="#8DA0CB","V=13"="#E78AC3","V=14"="#A6D854", 
-               "V=15"="#FFD92F","V=16"="#E5C494","V=17"="#B3B3B3","V=17"="#E7298A","V=18"="#A6761D",
-               "V=19"="#D95F02"),
-    labels = c("K=1", "K=2", "K=3", "K=4", "K=5", "K=6", "K=7", "K=8","K=9","K=10","K=11","K=12","K=13",
+               "V=10"="#1B9E77","V=11"="#BEAED4","V=12"="#7570B3","V=13"="#E7298A","V=14"="#E78AC3", 
+               "V=15"="#E6AB02","V=16"="#386CB0","V=17"="#762A83","V=18"="#7FC97F","V=19"="#FFFF99",
+               "V=20"="#FD8D3C"),
+    labels = c("K=6", "K=7", "K=8","K=9","K=10","K=11","K=12","K=13",
                "K=14","K=15","K=16","K=17","K=18","K=19")
   ) +
   labs(x = "Individuals", y = "Ancestry Proportion") +
