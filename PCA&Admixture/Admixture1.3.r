@@ -4,7 +4,7 @@
 ## all individuals 
 #vcftools --vcf ../vcffiles/Thinned1SNPevery25kb_Filtered_mergedVCFproject1_2_5_6_7_8.vcf.gz.recode.vcf --out Thinned1SNPevery25kb_Filtered_mergedVCFproject1_2_5_6_7_8 --plink 
 ## only speluncae 
-vcftools --vcf ../vcffiles/Thinned1SNPevery25kb_Filtered_mergedVCFproject1_2_5_6_7_8.vcf.gz.recode.vcf --out Thinned1SNPevery25kb_Filtered_mergedVCFproject1_2_5_6_7_8 --plink --remove-indv 
+# vcftools --vcf ../vcffiles/Thinned1SNPevery25kb_Filtered_mergedVCFproject1_2_5_6_7_8.vcf.gz.recode.vcf --out Thinned1SNPevery25kb_Filtered_mergedVCFproject1_2_5_6_7_8 --plink --remove-indv 
 
 # 2. generate the 012 file 
 #plink --file Thinned1SNPevery25kb_Filtered_mergedVCFproject1_2_5_6_7_8 --out Thinned1SNPevery25kb_Filtered_mergedVCFproject1_2_5_6_7_8 --recode12
