@@ -14,7 +14,7 @@ bcftools merge -m snps --output mergedVCFproject1_2_5_6_7_8 --output-type z --th
   # biallelic sites 
 bcftools view --min-af 0.01 -i 'F_MISSING <= 0.3' -m2 -M2 -v snps -Oz -o Filtered_mergedVCFproject1_2_5_6_7_8.vcf.gz mergedVCFproject1_2_5_6_7_8.vcf.gz
 # result Filtered_mergedVCFproject1_2_5_6_7_8.vcf.gz = 
-bcftools view -i 'F_MISSING <= 0.75 & MAF > 0.01' -m2 -M2 -v snps -Oz -o Filteredmissing0.57_mergedVCFproject1_2_5_6_7_8.vcf.gz mergedVCFproject1_2_5_6_7_8.vcf.gz
+bcftools view -i 'F_MISSING <= 0.75 & MAF > 0.01' -m2 -M2 -v snps -Oz -o Filteredmissing0.75_mergedVCFproject1_2_5_6_7_8.vcf.gz mergedVCFproject1_2_5_6_7_8.vcf.gz
 # result Filteredmissing0.57_mergedVCFproject1_2_5_6_7_8.vcf.gz =
 
 # 3. Thin independent SNPs for Admixture
