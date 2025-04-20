@@ -10,10 +10,9 @@ conda activate snparcher
 mkdir snparcher
 cd snparcher
 mkdir project
-cp snpArcher (file from github already edited)
 
 # 3 -> construct the samples.csv file
-BioSample,LibraryName,Run,fq1,fq2,lat,long
+# BioSample,LibraryName,Run,fq1,fq2,lat,long
 # lat and long are not needed
 # can be a number from 1-inf
 # example: AUSturtle_1,turtle_1_lib,1,/media/labgenoma5/DATAPART1/sandro_group/Chelonioidea/N5239-Lo_1.fastq.gz,/media/labgenoma5/DATAPART1/sandro_group/Chelonioidea/N5239-Lo_2.fastq.gz,,
@@ -37,5 +36,12 @@ snakemake -p -s /snpArcher/workflow/Snakefile -d ./ --cores 10 --use-conda --wor
 # actual run
 snakemake -p -s /snpArcher/workflow/Snakefile -d ./ --cores 10 --use-conda --workflow-profile project/profiles/genoma
 
-# 5 -> Check genome coverage and mean depth
+# 5 -> Check BAM quality 
+# http://qualimap.conesalab.org/doc_html/analysis.html
+for i in *bam; do qualimap bamqc -bam $i -outdir qualimap/ -outfile QCreport_$i.pdf -outformat PDF:HTML -nt 5; done
+  # estimate the multibam QC with depth comparation 
+  qualimap multi-bamqc --data QCbams.txt -outdir qualimap/ -outfile multibamQCqualimap -outformat PDF
+
+
+# 6 -> genome coverage and mean depth
 samtools depth -a *_final.bam | awk '{c++; if($3>0) total+=1}END{print (total/c)*100}' > coverage_Sp*.txt
