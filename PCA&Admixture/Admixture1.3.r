@@ -29,59 +29,61 @@ library(readr)
 library(tibble)
 library(ggplot2)
 library(ggrepel)
+library(RColorBrewer)
+library(tidyr)
 
-k = c(1:20)
-cv1.err = c(0.47153,0.33409,0.33988,0.40225,0.38751,0.42939,0.53406,0.56896,0.59632,0.50977,0.47235,0.42158,
+k = c(6:20)
+cv1.err = c(0.42939,0.53406,0.56896,0.59632,0.50977,0.47235,0.42158,
             0.60191,0.59212,0.64720,0.78124,0.62473,0.43106,0.62745,0.58790)
 
-pdf("CVK1-20.pdf",)
+pdf("CVK6-20.pdf",)
 plot(k,cv1.err, type="b",xlab = "K", ylab = "cross-validation error", main = "CV test for K=1-20",
      cex.main=1.5, cex.lab=1.5,yaxt="n",xaxt="n")
 axis(1,cex.axis=1.3)
 axis(2,cex.axis=1.3)
 dev.off()
 
+# R pallette to get the colors 
+# brewer.pal(n = 8, name = "Paired")
+
+rowSums(tbl[, 2:7])
+
 pdf("K6.pdf", height = 5, width = 6)
 tbl=read.table("Thinned1SNPevery25kb_Filtered_mergedVCFproject1_2_5_6_7_8.6.Q")
-tbl$V1 <- factor(tbl$V1, levels = tbl$V1)
-ggplot(tbl, aes(x = V1)) +
-  geom_col(aes(y = V2, fill = "K=1"), width = 0.98) +
-  geom_col(aes(y = V3, fill = "K=2"), width = 0.98) +
-  geom_col(aes(y = V4, fill = "K=3"), width = 0.98) +
-  geom_col(aes(y = V5, fill = "K=4"), width = 0.98) +
-  geom_col(aes(y = V6, fill = "K=5"), width = 0.98) +
-  geom_col(aes(y = V7, fill = "K=6"), width = 0.98) +
-  #scale_fill_manual(values = c("K=1" = "#f3a433", "K=2" = "#326504","K=3"="#c78cff")) + a351f0
-  scale_fill_manual(values = c("K=1" = "#1f6fcf","K=2" = "#326504", "K=3" = "#f3a433","K=4"="#e93f33","K=5"="#a351f0","K=6"="#019eff")) +
-  labs(x = "Individuals", y = "Ancestry") +
-  theme_minimal() + 
-  theme(panel.grid.major = element_line(colour = "white", size = 0.3),
-        panel.grid.minor = element_blank(),
-        axis.title.x = element_text(size = 12),  
-        axis.title.y = element_text(size = 12),
-        axis.text.x = element_text(angle = 90, hjust = 0.8, vjust = 1, margin=margin(t = -7)),
-        axis.text.y = element_text(angle = 0, hjust = 1, margin = margin(r = -7)))
+tbl$V1 <- factor(tbl$V1, levels = unique(tbl$V1))
+tbl_long <- pivot_longer(tbl, cols = V2:V7, names_to = "K", values_to = "Proportion")
+ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
+  geom_col(width = 1, color = NA) +  # Full-width bars
+  scale_fill_manual(
+    values = c("V2" = "#A6CEE3", "V3" = "#1F78B4", "V4" = "#B2DF8A",
+               "V5" = "#33A02C", "V6" = "#FB9A99", "V7" = "#E31A1C"),
+    labels = c("K=1", "K=2", "K=3", "K=4", "K=5", "K=6")
+  ) +
+  labs(x = "Individuals", y = "Ancestry Proportion") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
+    panel.grid = element_blank()
+  )
+
 dev.off()
 
 pdf("K7.pdf", height = 5, width = 6)
 tbl=read.table("Thinned1SNPevery25kb_Filtered_mergedVCFproject1_2_5_6_7_8.7.Q")
-tbl$V1 <- factor(tbl$V1, levels = tbl$V1)
-ggplot(tbl, aes(x = V1)) +
-  geom_col(aes(y = V2, fill = "K=1"), width = 0.98) +
-  geom_col(aes(y = V3, fill = "K=2"), width = 0.98) +
-  geom_col(aes(y = V4, fill = "K=3"), width = 0.98) +
-  geom_col(aes(y = V5, fill = "K=4"), width = 0.98) +
-  geom_col(aes(y = V6, fill = "K=5"), width = 0.98) +
-  geom_col(aes(y = V7, fill = "K=6"), width = 0.98) +
-  geom_col(aes(y = V7, fill = "K=7"), width = 0.98) +
-  #scale_fill_manual(values = c("K=1" = "#f3a433", "K=2" = "#326504","K=3"="#c78cff")) + a351f0
-  scale_fill_manual(values = c("K=1" = "#1f6fcf","K=2" = "navy", "K=3" = "brown1","K=4"="darkgreen","K=5"="darkorchid2","K=6"="deeppink1","K=7"="olivedrab1")) +
-  labs(x = "Individuals", y = "Ancestry") +
-  theme_minimal() + 
-  theme(panel.grid.major = element_line(colour = "white", size = 0.3),
-        panel.grid.minor = element_blank(),
-        axis.title.x = element_text(size = 12),  
-        axis.title.y = element_text(size = 12),
-        axis.text.x = element_text(angle = 90, hjust = 0.8, vjust = 1, margin=margin(t = -7)),
-        axis.text.y = element_text(angle = 0, hjust = 1, margin = margin(r = -7)))
+tbl$V1 <- factor(tbl$V1, levels = unique(tbl$V1))
+tbl_long <- pivot_longer(tbl, cols = V2:V8, names_to = "K", values_to = "Proportion")
+ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
+  geom_col(width = 1, color = NA) +  # Full-width bars
+  scale_fill_manual(
+    values = c("V2" = "#A6CEE3", "V3" = "#1F78B4", "V4" = "#B2DF8A",
+               "V5" = "#33A02C", "V6" = "#FB9A99", "V7" = "#E31A1C","V8" = "#FDBF6F" ),
+    labels = c("K=1", "K=2", "K=3", "K=4", "K=5", "K=6", "K=7")
+  ) +
+  labs(x = "Individuals", y = "Ancestry Proportion") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
+    panel.grid = element_blank()
+  )
+        
 dev.off()
