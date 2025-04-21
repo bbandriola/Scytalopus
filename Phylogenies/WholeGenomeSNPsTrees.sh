@@ -8,4 +8,4 @@ python vcf2phylip.py --input ../vcffiles/Filteredmissing0.75_mergedVCFproject1_2
 iqtree -s Filteredmissing0.75_mergedVCFproject1_2_5_6_7_8.min4.phy --alrt 1000 -B 1000 -b 100 -o Snovacapitalis152_lin --prefix Filteredmissing0.75_mergedVCFproject1_2_5_6_7_8.100boots_UFb_ALR -T 5
 
 #3. run RAxML-NG
-raxml-ng-mpi --msa Filteredmissing0.75_mergedVCFproject1_2_5_6_7_8.min4.phy --all --prefix Filteredmissing0.75_mergedVCFproject1_2_5_6_7_8 --threads 10 --model GTR --outgroup Ccar_01 --bs-trees 100 --redo
+raxml-ng-mpi --msa Filteredmissing0.75_mergedVCFproject1_2_5_6_7_8.min4.phy --all --prefix Filteredmissing0.75_mergedVCFproject1_2_5_6_7_8 --threads 6 --model GTR --outgroup Snovacapitalis152_lin --bs-trees 100
