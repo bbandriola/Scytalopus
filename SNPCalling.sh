@@ -17,10 +17,14 @@ bcftools view -i 'F_MISSING <= 0.3 && FORMAT/DP>=5' -m2 -M2 -v snps -Oz -o Filte
 # result FilteredMax30missingDepthmin5_mergedVCFproject1_2_5_6_7_8.vcf.gz = 
 
 # 3. Filter per clade
-# South
+# South 
 bcftools view -s Sspeluncae75_lin7,Sspeluncae85_lin5,Sspeluncae86_lin5,Sspeluncae87_lin7,Sspeluncae139_lin7,Sspeluncae140_lin5,Sspeluncae30_lin5,Sspeluncae32_lin5,Sspeluncae19_lin7,Sspeluncae23_lin5,Sspeluncae28_lin5,Sspeluncae122_lin6,Sspeluncae123_lin7 -Oz -o Southclade_FilteredMax30missingDepthmin5_mergedVCFproject1_2_5_6_7_8.vcf.gz FilteredMax30missingDepthmin5_mergedVCFproject1_2_5_6_7_8.vcf.gz
+# result = 19,642,334
+
 # North
 bcftools view -s Sspeluncae113_lin3,Sspeluncae114_lin3,Sspeluncae83_lin2,Sspeluncae116_lin3,Sspeluncae117_lin1,Sspeluncae118_lin1,Sspeluncae119_lin1,Sspeluncae120_lin1,Sspeluncae38_lin3,Sspeluncae16_lin4,Sspeluncae46_lin1,Sspeluncae47_lin1,Sspeluncae121_lin1 -Oz -o Northclade_FilteredMax30missingDepthmin5_mergedVCFproject1_2_5_6_7_8.vcf.gz FilteredMax30missingDepthmin5_mergedVCFproject1_2_5_6_7_8.vcf.gz
+# result = 19,642,334
+
 # ONLY Speluncae
 bcftools view -s ^Snovacapitalis152_lin,Spachecoi154,Sspeluncae33_lin,Sdiamantinensis127 -Oz -o OnlySspeluncae_FilteredMax30missingDepthmin5_mergedVCFproject1_2_5_6_7_8.vcf.gz FilteredMax30missingDepthmin5_mergedVCFproject1_2_5_6_7_8.vcf.gz
 
@@ -29,8 +33,9 @@ bcftools view -s ^Snovacapitalis152_lin,Spachecoi154,Sspeluncae33_lin,Sdiamantin
 # result Thinned1SNPevery25kb_Filtered_mergedVCFproject1_2_5_6_7_8.vcf.gz =
 # south clade
 vcftools --gzvcf Southclade_FilteredMax30missingDepthmin5_mergedVCFproject1_2_5_6_7_8.vcf.gz --out Thinned1SNPevery25kSouthclade_FilteredMax30missingDepthmin5_mergedVCFproject1_2_5_6_7_8.vcf.gz --thin 25000 --recode 
+# result = 51,400
 
 # north clade
 vcftools --gzvcf Northclade_FilteredMax30missingDepthmin5_mergedVCFproject1_2_5_6_7_8.vcf.gz --out Thinned1SNPevery25kNorthclade_FilteredMax30missingDepthmin5_mergedVCFproject1_2_5_6_7_8.vcf.gz --thin 25000 --recode 
-
+# result = 51,400
 
