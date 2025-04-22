@@ -25,6 +25,12 @@ bcftools view -s Sspeluncae113_lin3,Sspeluncae114_lin3,Sspeluncae83_lin2,Sspelun
 bcftools view -s ^Snovacapitalis152_lin,Spachecoi154,Sspeluncae33_lin,Sdiamantinensis127 -Oz -o OnlySspeluncae_FilteredMax30missingDepthmin5_mergedVCFproject1_2_5_6_7_8.vcf.gz FilteredMax30missingDepthmin5_mergedVCFproject1_2_5_6_7_8.vcf.gz
 
 # 4. Thin independent SNPs for Admixture
-vcftools --gzvcf Filtered_mergedVCFproject1_2_5_6_7_8.vcf.gz --out Thinned1SNPevery25kb_Filtered_mergedVCFproject1_2_5_6_7_8.vcf.gz --thin 25000 --recode 
+# vcftools --gzvcf Filtered_mergedVCFproject1_2_5_6_7_8.vcf.gz --out Thinned1SNPevery25kb_Filtered_mergedVCFproject1_2_5_6_7_8.vcf.gz --thin 25000 --recode 
 # result Thinned1SNPevery25kb_Filtered_mergedVCFproject1_2_5_6_7_8.vcf.gz =
+# south clade
+vcftools --gzvcf Southclade_FilteredMax30missingDepthmin5_mergedVCFproject1_2_5_6_7_8.vcf.gz --out Thinned1SNPevery25kSouthclade_FilteredMax30missingDepthmin5_mergedVCFproject1_2_5_6_7_8.vcf.gz --thin 25000 --recode 
+
+# north clade
+vcftools --gzvcf Northclade_FilteredMax30missingDepthmin5_mergedVCFproject1_2_5_6_7_8.vcf.gz --out Thinned1SNPevery25kNorthclade_FilteredMax30missingDepthmin5_mergedVCFproject1_2_5_6_7_8.vcf.gz --thin 25000 --recode 
+
 
