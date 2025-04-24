@@ -3,7 +3,7 @@
 ## 14/4/25
 # 1. merge the generated vcf from snpArcher project's into one single vcf
 # https://samtools.github.io/bcftools/bcftools.html#merge
-bcftools merge -m snps --output mergedVCFproject1_2_5_6_7_8 --output-type z --threads 7 --file-list vcffiles2merge.txt
+bcftools merge -m snps --output mergedVCFproject1_2_4_5_6_7_8 --output-type z --threads 7 --file-list vcffiles2merge.txt
 
 # merge result of mergedVCFproject1_2_5_6_7_8.vcf.gz : 
 
