@@ -41,4 +41,4 @@ vcftools --gzvcf Northclade_FilteredMax30missingDepthmin5_mergedVCFproject1_2_5_
 
 # non-missing ind per site 
 vcftools --gzvcf OnlySspeluncae_FilteredMax30missingDepthmin5_mergedVCFproject1_2_5_6_7_8.vcf.gz --max-missing 1 --recode --out NONMISSINGOnlySspeluncae_FilteredMax30missingDepthmin5_mergedVCFproject1_2_5_6_7_8.vcf.gz
-
+# kept 12974392 out of a possible 19642334 Sites
