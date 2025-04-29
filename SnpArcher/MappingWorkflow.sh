@@ -38,10 +38,12 @@ snakemake -p -s /snpArcher/workflow/Snakefile -d ./ --cores 10 --use-conda --wor
 
 # 5 -> Check BAM quality (NÃO RODEI PORQUE FALTOU MEMORIA. FAZER QUANDO TIVER TODOS OS BAMS)
 # http://qualimap.conesalab.org/doc_html/analysis.html
-for i in *bam; do qualimap bamqc -bam $i -outdir qualimap/ -outfile QCreport_$i.pdf -outformat PDF:HTML -nt 5; done
+#for i in *bam; do qualimap bamqc -bam $i -outdir qualimap/ -outfile QCreport_$i.pdf -outformat PDF:HTML -nt 5; done
   # estimate the multibam QC with depth comparation 
-  qualimap multi-bamqc --data QCbams.txt -outdir qualimap/ -outfile multibamQCqualimap -outformat PDF
+#  qualimap multi-bamqc --data QCbams.txt -outdir qualimap/ -outfile multibamQCqualimap -outformat PDF
 
-
-# 6 -> genome coverage and mean depth
+# 5 -> genome coverage
 for i in *bam; do samtools depth -a $i | awk '{c++; if($3>0) total+=1}END{print (total/c)*100}' > coverage_$i.txt; done
+
+# 6 -> genome depth
+plotCoverage --bamfiles [put all bam files that should be used] -o Coverage_Scytalopus.png --minMappingQuality 30
