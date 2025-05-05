@@ -11,6 +11,8 @@ bcftools merge -m snps --output mergedVCFproject0_1_2_4_5_6_7_8 --output-type z 
   # biallelic sites 
 bcftools view -i 'F_MISSING <= 0.3 && FORMAT/DP>=5' -m2 -M2 -v snps -Oz -o FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8 mergedVCFproject0_1_2_4_5_6_7_8
 # result:
+  # extra filtering according base quality = 10 and no missing genotypes allowed per site
+  vcftools --gzvcf OnlySspeluncae_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8.vcf.gz --max-missing 1 --minQ 10 --minGQ 10 --recode --recode-INFO-all --out Nomissing_MinBaseQual10_OnlySspeluncae_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8.vcf.gz
 
 # 3. Filter per clade
 ## ONLY Speluncae
@@ -38,9 +40,9 @@ bcftools view -s Sspeluncae9_lin3,Sspeluncae13_lin3,Sspeluncae14_lin3,Sspeluncae
 # result = 51,400
 
 # north clade
-vcftools --gzvcf Northclade_FilteredMax30missingDepthmin5_mergedVCFproject1_2_5_6_7_8.vcf.gz --out Thinned1SNPevery25kNorthclade_FilteredMax30missingDepthmin5_mergedVCFproject1_2_5_6_7_8.vcf.gz --thin 25000 --recode 
+# vcftools --gzvcf Northclade_FilteredMax30missingDepthmin5_mergedVCFproject1_2_5_6_7_8.vcf.gz --out Thinned1SNPevery25kNorthclade_FilteredMax30missingDepthmin5_mergedVCFproject1_2_5_6_7_8.vcf.gz --thin 25000 --recode 
 # result = 51,400
 
 # non-missing ind per site 
-vcftools --gzvcf OnlySspeluncae_FilteredMax30missingDepthmin5_mergedVCFproject1_2_5_6_7_8.vcf.gz --max-missing 1 --recode --out NONMISSINGOnlySspeluncae_FilteredMax30missingDepthmin5_mergedVCFproject1_2_5_6_7_8.vcf.gz
+# vcftools --gzvcf OnlySspeluncae_FilteredMax30missingDepthmin5_mergedVCFproject1_2_5_6_7_8.vcf.gz --max-missing 1 --recode --out NONMISSINGOnlySspeluncae_FilteredMax30missingDepthmin5_mergedVCFproject1_2_5_6_7_8.vcf.gz
 # kept 12974392 out of a possible 19642334 Sites
