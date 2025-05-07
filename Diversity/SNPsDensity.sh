@@ -21,11 +21,11 @@ echo "done"
 ./GenerateVCF.sh ../../vcffiles/OnlySspeluncae_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8.vcf.gz  Sspeluncae48_lin1 Sspeluncae118_lin1 Sspeluncae6_lin2 Sspeluncae8_lin2 Sspeluncae83_lin2 Sspeluncae116_lin3 Sspeluncae113_lin3 Sspeluncae13_lin3 Sspeluncae5_lin4 Sspeluncae16_lin4 Sspeluncae28_lin5 Sspeluncae140_lin5 Sspeluncae54_lin6 Sspeluncae122_lin6 Sspeluncae56_lin7 Sspeluncae87_lin7 Sspeluncae52_lin7 Sspeluncae64_lin7 Sspeluncae71_lin7 Sspeluncae123_lin7 Sspeluncae139_lin7
 
 # 2. Genetate the snps density files with vcftools 
-for file in *.vcf.gz
+for file in *.vcf
 do
     name=$(basename $file)
     name=${name%.vcf.gz}
-    vcftools --vcf $file --SNPdensity 1000000 --out ${name}_density
+    vcftools --vcf $file --SNPdensity 50000 --out ${name}_density
 done
 
 
