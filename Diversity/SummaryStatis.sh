@@ -8,6 +8,3 @@ bcftools stats -s - ../vcffiles/OnlySspeluncae_FilteredMax30missingDepthmin5_mer
 
 # inbreeding coefficient
 vcftools --gzvcf ../vcffiles/OnlySspeluncae_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8.vcf.gz --het --out Fstats_OnlySspeluncae_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8
-
-# nucleotidy diversity 
-pixy --stats pi --vcf ../../vcffiles/OnlySspeluncae_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8.vcf.gz --window_size 1000000 --n_cores 4 --output_prefix PiIndividuals.txt --population populations_speluncae.txt --bypass_invariant_check 'yes'
