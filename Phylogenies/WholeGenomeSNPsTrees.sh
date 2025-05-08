@@ -19,4 +19,7 @@ raxml-ng-mpi --msa Filteredmissing0.75_mergedVCFproject1_2_5_6_7_8.min4.phy --al
 ../../Softwares/VCF2Dis-1.54/bin/VCF2Dis -i ../vcffiles/FilteredMax30missingDepthmin5_mergedVCFproject1_2_5_6_7_8.vcf.gz -o Second2_allspecies_project1_2_5_6_7_8_DistanceMatrix -TreeMethod 1 -OutPut p_dist.matrix
 
 # CASTER:
-../../Softwares/ASTER/bin/caster-site --output CASTER --thread 5 --support 1 --input Filteredmissing0.75_mergedVCFproject1_2_5_6_7_8.min4.phy 2> CASTER.log
+# make phy file
+vcf2phy -i ../vcffiles/FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_5_6_7_8.vcf.gz --out FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_5_6_7_8
+# generate tree
+../../Softwares/ASTER/bin/caster-site --output CASTER --thread 5 --support 1 --input FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_5_6_7_8.min4.phy 2> CASTER.log
