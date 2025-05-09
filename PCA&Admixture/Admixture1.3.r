@@ -354,3 +354,28 @@ ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
   )
 
 dev.off()
+
+# WIDER AXIS PLOT 
+pdf("PCA_NorthcladeSspeluncae.pdf",width = 10,height = 10)
+x_range <- range(pca$PC1)
+x_padding <- diff(x_range) * 0.2  # Add 20% padding (adjust as needed)
+
+# Apply wider x-axis limits while keeping coord_equal()
+b <- ggplot(pca, aes(PC1, PC2, color = lineages, label = X1)) +  # Removed pca$ prefix
+  geom_text(position = position_jitter(seed = 1, width = 0.02, height = 0.03), 
+            size = 4, show.legend = TRUE) +
+  scale_color_manual(values = c("#A6CEE3","#1F78B4","#B2DF8A","#33A02C")) +
+  coord_equal() +  # Ensures 1:1 aspect ratio
+  xlim(x_range[1] - x_padding, x_range[2] + x_padding) +  # Expand x-axis
+  theme_bw(base_size = 15) +
+  theme(axis.ticks = element_line(colour = "white", size = 0.3),
+        panel.grid.major = element_line(colour = "white", size = 0.3),
+        panel.grid.minor = element_blank())
+
+# Final plot with axis labels
+b + xlab(paste0("PC1(", signif(pve$pve[1], 3), "%)")) + 
+  ylab(paste0("PC2(", signif(pve$pve[2], 3), "%)")) +
+  theme_bw(base_size = 20) +
+  theme(axis.title.x = element_text(size = 20),  
+        axis.title.y = element_text(size = 20))
+dev.off()
