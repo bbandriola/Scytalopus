@@ -32,15 +32,16 @@ bcftools view -s SulMantiqueira1_lin3,SulMantiqueira2_lin3,SulMantiqueira3_lin3,
 # Sspeluncae9_lin3,Sspeluncae13_lin3,Sspeluncae14_lin3,Sspeluncae15_lin3,Sspeluncae38_lin3,Sspeluncae46_lin1,Sspeluncae47_lin1,Sspeluncae48_lin1,Sspeluncae49_lin1,Sspeluncae73_lin3,Sspeluncae83_lin2,Sspeluncae113_lin3,Sspeluncae114_lin3,Sspeluncae116_lin3,Sspeluncae117_lin1,Sspeluncae118_lin1,Sspeluncae119_lin1,Sspeluncae120_lin1,Sspeluncae121_lin1
 ## Lineage 4
 bcftools view -s CunhaSerraDoMarRJ1_lin4,BocainaSerraDoMocainaSerraDoMarRJ3_lin4,BocainaSerraDoMarRJ4_lin4,CunhaSerraDoMarRJ2_lin4 -Oz -o Lin4_GeographicNames_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8.vcf.gz ../GeographicNamesFilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8.vcf.gz
-# 4. Thin independent SNPs for Admixture
-# all speluncae filtered PCA
 
-# south clade
-vcftools --gzvcf SouthcladeSspeluncae_GeographicNames_FilteredPCA_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8.vcf.gz --out Southclade_Thinned1SNPevery25kb_GeographicNames_FilteredPCA_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8 --thin 25000 --recode
-# north clade
-vcftools --gzvcf NorthcladeSspeluncae_GeographicNames_filteredPCA_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8.vcf.gz --out Northclade_Thinned1SNPevery25kb_GeographicNames_filteredPCA_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8 --thin 25000 --recode
-# lineage 4
-vcftools --gzvcf Lin4_GeographicNames_FilteredPCA_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8.vcf.gz --out Lin4_Thinned1SNPevery25kb_GeographicNames_FilteredPCA_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8 --thin 25000 --recode
+# 4. Thin independent SNPs for Admixture
+  # all speluncae filtered PCA
+
+  # south clade
+  vcftools --gzvcf SouthcladeSspeluncae_GeographicNames_FilteredPCA_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8.vcf.gz --out Southclade_Thinned1SNPevery25kb_GeographicNames_FilteredPCA_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8 --thin 25000 --recode
+  # north clade
+  vcftools --gzvcf NorthcladeSspeluncae_GeographicNames_filteredPCA_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8.vcf.gz --out Northclade_Thinned1SNPevery25kb_GeographicNames_filteredPCA_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8 --thin 25000 --recode
+  # lineage 4
+  vcftools --gzvcf Lin4_GeographicNames_FilteredPCA_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8.vcf.gz --out Lin4_Thinned1SNPevery25kb_GeographicNames_FilteredPCA_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8 --thin 25000 --recode
 
 #########################################################
  vcftools --gzvcf Filtered_mergedVCFproject1_2_5_6_7_8.vcf.gz --out Thinned1SNPevery25kb_Filtered_mergedVCFproject1_2_5_6_7_8.vcf.gz --thin 25000 --recode 
