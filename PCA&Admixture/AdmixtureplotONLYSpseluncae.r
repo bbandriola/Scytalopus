@@ -1,3 +1,6 @@
+# North lineages colors: c("#A6CEE3","#1F78B4","#B2DF8A","#33A02C"))
+# South lineages: "#EEAEEE","#E31A1C","#FDBF6F"
+
 pdf("K1_ONLYSspeluncae.pdf", height = 5, width = 6)
 tbl=read.table("SpeluncaeONLY_Filtered_mergedVCFproject1_2_5_6_7_8.1.Q")
 tbl$V1 <- factor(tbl$V1, levels = unique(tbl$V1))
