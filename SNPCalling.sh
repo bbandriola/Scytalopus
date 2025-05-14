@@ -2,7 +2,7 @@
 
 # 1. merge the generated vcf from snpArcher project's into one single vcf
 # https://samtools.github.io/bcftools/bcftools.html#merge
-bcftools merge -m snps --output mergedVCFproject0_1_2_4_5_6_7_8 --output-type z --threads 7 --file-list vcffiles2merge.txt
+bcftools merge -m snps --output mergedVCFproject0_1_2_3_4_5_6_7_8_9 --output-type z --threads 7 --file-list ../vcffiles2merge.txt
 # results: 200,835,553
 
 # 2. Filter sites for:
