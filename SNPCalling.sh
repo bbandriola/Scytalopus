@@ -1,9 +1,11 @@
 ## Workflow used to generate the vcf files
 
-# 1. merge the generated vcf from snpArcher project's into one single vcf
+# 1. merge all generated vcf from snpArcher project's into a single vcf
 # https://samtools.github.io/bcftools/bcftools.html#merge
-bcftools merge -m snps --output mergedVCFproject0_1_2_3_4_5_6_7_8_9 --output-type z --threads 7 --file-list ../vcffiles2merge.txt
-# results: 200,835,553
+bcftools merge -m snps --output mergedVCFproject0_1_2_3_4_5_6_7_8_9.vcf.gz --output-type z --threads 7 --file-list ../vcffiles2merge.txt
+# results: 68 individuals | 206.000.140 SNPs
+  # 1.1 change for geographic names 
+  bcftools reheader --samples GeographicNames.txt --output GeographicNames_allsamples.vcf.gz mergedVCFproject0_1_2_3_4_5_6_7_8_9.vcf.gz
 
 # 2. Filter sites for:
   # SNPs with <30% missing data
