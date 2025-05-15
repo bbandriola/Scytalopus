@@ -45,6 +45,9 @@ snakemake -p -s /snpArcher/workflow/Snakefile -d ./ --cores 10 --use-conda --wor
 # 5 -> genome coverage
 for i in *bam; do samtools depth -a $i | awk '{c++; if($3>0) total+=1}END{print (total/c)*100}' > coverage_$i.txt; done
 
+# 6 -> consensus with angsd
+for i in *bam; do angsd -i $i -doFasta 2 -doCounts 1 -explode 1 -setMinDepth 5 -p 10 -minQ 30 -out $i.fasta; done
+
 # 6 -> genome depth per lineage
 plotCoverage --bamfiles [put all bam files that should be used] -o Coverage_Lin.png --minMappingQuality 30
 
