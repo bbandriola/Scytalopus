@@ -48,7 +48,7 @@ for i in *bam; do samtools depth -a $i | awk '{c++; if($3>0) total+=1}END{print 
   plotCoverage --bamfiles [put all bam files that should be used] -o Coverage_Lin.png --minMappingQuality 30
 
 # 6 -> consensus with angsd
-for i in *bam; do angsd -i $i -doFasta 2 -doCounts 1 -explode 1 -setMinDepth 5 -p 10 -minQ 30 -out $i.fasta; done
+for i in *bam; do angsd -i $i -doFasta 2 -doCounts 1 -explode 1 -setMinDepth 5 -p 10 -minQ 30 -out $i; done
 
 # 7 -> mask regions 
 RepeatMasker -specie birds -dir masked_fastas/ *.fa
