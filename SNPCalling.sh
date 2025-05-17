@@ -11,7 +11,7 @@ bcftools merge -m snps --output mergedVCFproject0_1_2_3_4_5_6_7_8_9.vcf.gz --out
   # SNPs with <30% missing data
   # samples with <5x sequencing depth
   # biallelic sites 
-bcftools view -i 'F_MISSING <= 0.3 && FORMAT/DP>=5' -m2 -M2 -v snps -Oz -o FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8 mergedVCFproject0_1_2_4_5_6_7_8
+bcftools view -i 'F_MISSING <= 0.3 && FORMAT/DP>=5' -m2 -M2 -v snps -Oz -o FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz GeographicNames_allsamples.vcf.gz
 
 # 3. Filter per clade
 ## ONLY Speluncae
