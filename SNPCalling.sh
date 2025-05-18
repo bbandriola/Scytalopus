@@ -15,7 +15,7 @@ bcftools view -i 'F_MISSING <= 0.3 && FORMAT/DP>=5' -m2 -M2 -v snps -Oz -o Filte
 
 # 3. Filter per clade
 ## ONLY Speluncae
-bcftools view -s ^Snovacapitalis152_lin,Spachecoi154,Sspeluncae33_lin,Sdiamantinensis127 -Oz -o OnlySspeluncae_FilteredMax30missingDepthmin5_mergedVCFproject1_2_5_6_7_8.vcf.gz FilteredMax30missingDepthmin5_mergedVCFproject1_2_5_6_7_8.vcf.gz
+bcftools view -s ^EleoindigoticusUCE,EleopsychopompusUCE1,Sdiamantinensis,SiraiensisUCE,Snovacapitalis,Spachecoi,Spetrophilus,Ssuperciliaris -Oz -o OnlySspeluncae_FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz
 # result: 18.960.551
     # extra filtering according base quality = 10 and no missing genotypes allowed per site
     vcftools --gzvcf OnlySspeluncae_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8.vcf.gz --max-missing 1 --minQ 10 --minGQ 10 --recode --recode-INFO-all --out Nomissing_MinBaseQual10_OnlySspeluncae_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8.vcf.gz
