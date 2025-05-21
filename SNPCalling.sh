@@ -18,11 +18,12 @@ bcftools view -i 'F_MISSING <= 0.3 && FORMAT/DP>=5' -m2 -M2 -v snps -Oz -o Filte
 bcftools view -s ^EleoindigoticusUCE,EleopsychopompusUCE1,Sdiamantinensis,SiraiensisUCE,Snovacapitalis,Spachecoi,Spetrophilus,Ssuperciliaris -Oz -o OnlySspeluncae_FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz
 # result: 18.960.551
     # extra filtering according base quality = 10 and no missing genotypes allowed per site
-    vcftools --gzvcf OnlySspeluncae_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8.vcf.gz --max-missing 1 --minQ 10 --minGQ 10 --recode --recode-INFO-all --out Nomissing_MinBaseQual10_OnlySspeluncae_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8.vcf.gz
+    # vcftools --gzvcf OnlySspeluncae_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8.vcf.gz --max-missing 1 --minQ 10 --minGQ 10 --recode --recode-INFO-all --out Nomissing_MinBaseQual10_OnlySspeluncae_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8.vcf.gz
     # results: 3.851.016
 
 ## Remove bad samples from OnlySspeluncae_FilteredMax30missingDepthmin5_mergedVCFproject1_2_5_6_7_8.vcf.gz
-bcftools view -s ^Sspeluncae1_lin4,Sspeluncae3_lin4,Sspeluncae6_lin2,Sspeluncae8_lin2,Sspeluncae12_lin3,Sspeluncae57_lin5 -Oz -o OnlySspeluncae_FilteredPCA_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8.vcf.gz OnlySspeluncae_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8.vcf.gz
+bcftools view -s ^CunhaSerraDoMarRJ1_lin4,BocainaSerraDoMarRJ2_lin4,SerraDosOrgaos1_lin2,SerraDosOrgaos2_lin2,SulMantiqueira1_lin3,DevonianaPR1_lin5 -Oz -o OnlySspeluncae_FilteredPCA_FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz OnlySspeluncae_FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz
+# result: 16,897,926 sites
 
 ## South 
 bcftools view -s BoaEsperanca1_lin6,NortePR1_lin7,DevonianaPR1_lin5,DevonianaPR2_lin5,HNortePR_lin7,ExtremoSulRS2_lin7,CentroOesteSC1_lin7,CentroOesteSC2_lin7,CentroOesteSC3_lin7,CentroOesteSC4_lin7,CentroOesteSC5_lin7,NortePR2_lin7,DevonianaPR3_lin5,DevonianaPR4_lin5,NortePR3_lin7,CentroLesteSC1_lin7,DevonianaPR8_lin5,DevonianaSP3_lin5,DevonianaSP4_lin5,ExtremoSulSC1_lin7,DevonianaSP1_lin5,DevonianaSP2_lin5,BoaEsperanca2_lin6,BoaEsperanca3_lin7 -Oz -o SouthcladeSspeluncae_GeographicNames_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8.vcf.gz GeographicNamesFilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8.vcf.gz 
