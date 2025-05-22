@@ -1,13 +1,10 @@
 ## Workflow for admixture 
 
-# 1. Generate a ped/map file (plink) from thinned vcf (1 snp every 25kb)
-## all individuals 
-#vcftools --vcf ../vcffiles/Thinned1SNPevery25kb_Filtered_mergedVCFproject1_2_5_6_7_8.vcf.gz.recode.vcf --out Thinned1SNPevery25kb_Filtered_mergedVCFproject1_2_5_6_7_8 --plink 
-## only speluncae 
-# vcftools --vcf ../vcffiles/Thinned1SNPevery25kb_Filtered_mergedVCFproject1_2_5_6_7_8.vcf.gz.recode.vcf --out Thinned1SNPevery25kb_Filtered_mergedVCFproject1_2_5_6_7_8 --plink --remove-indv 
+# 1. Generate a ped/map file (plink) from thinned vcf (1 snp every 25kb) 
+# vcftools -gzvcf Thinned1SNPevery25kb_*.recode.vcf.gz --out Thinned1SNPevery25kb_*.recode --plink --remove-indv 
 
 # 2. generate the 012 file 
-#plink --file Thinned1SNPevery25kb_Filtered_mergedVCFproject1_2_5_6_7_8 --out Thinned1SNPevery25kb_Filtered_mergedVCFproject1_2_5_6_7_8 --recode12
+#plink --file Thinned1SNPevery25kb_prefix --out Thinned1SNPevery25kb_prefix --recode12
 
 #3: K estimation with Adxmiture 1.3
 #bash admixture_crossvalidation.sh
