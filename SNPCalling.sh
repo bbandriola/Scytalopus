@@ -36,10 +36,12 @@ bcftools view -s ^EleoindigoticusUCE,EleopsychopompusUCE1,Sdiamantinensis,Siraie
     # results:
 
 # 4. Thin independent SNPs for Admixture
-  # all speluncae filtered PCA
-
+  # all speluncae filtered PCA without Lin 1
+  vcftools --gzvcf OnlySspeluncae_FilteredPCA_FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz --out Thinned1SNPevery25kb_AllSpeluncae_exceptLin1_FilteredPCA_FilteredMax30missingDepthmin5_GeographicNames.vcf.gz --thin 25000 --recode --remove-indv SerradaLontras2_lin1 --remove-indv SerradaLontras3_lin1 --remove-indv SerraDaOuricana2_lin1 --remove-indv SerraDaOuricana3_lin1 --remove-indv SerraDaOuricana4_lin1 --remove-indv SerradaLontras4_lin1 --remove-indv SerraDaOuricana1_lin1 --remove-indv SerradaLontras1_lin1 --remove-indv SerradaLontras5_lin1
+    # result: 50,974
   # south clade
   vcftools --gzvcf SouthcladeSspeluncae_FilteredPCA_FilteredMax30missingDepthmin5_GeographicNames.vcf.gz --out Thinned1SNPevery25kb_SouthcladeSspeluncae_FilteredPCA_FilteredMax30missingDepthmin5_GeographicNames.vcf.gz --thin 25000 --recode
+    # results: 50,974
   # north clade
   vcftools --gzvcf NorthcladeSspeluncae_GeographicNames__FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8.recode.vcf.gz --out Thinned1SNPevery25kb_NorthcladeSspeluncae_GeographicNames__FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8.recode.vcf.gz --thin 25000 --recode
   # lineage 4
