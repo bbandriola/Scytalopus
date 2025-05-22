@@ -20,6 +20,6 @@ raxml-ng-mpi --msa Filteredmissing0.75_mergedVCFproject1_2_5_6_7_8.min4.phy --al
 
 # CASTER:
 # make phy file
-vcf2phy -i ../vcffiles/FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_5_6_7_8.vcf.gz --out FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_5_6_7_8
+../Softwares/vcf2phy -i ../vcffiles/FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_5_6_7_8.vcf.gz --output-prefix FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_5_6_7_8
 # generate tree
 ../../Softwares/ASTER/bin/caster-site --output CASTER --thread 5 --support 1 --input FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_5_6_7_8.min4.phy 2> CASTER.log
