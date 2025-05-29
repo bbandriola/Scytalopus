@@ -9,6 +9,8 @@ pixy --stats pi --vcf ../../vcffiles/OnlySspeluncae_FilteredMax30missingDepthmin
 pixy --stats pi --vcf ../../vcffiles/OnlySspeluncae_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8.vcf.gz --window_size 1000000 --n_cores 4 --output_prefix lin1GroupA_Pi --population lin1GroupA.txt --bypass_invariant_check 'yes'
 # group a lineage B
 pixy --stats pi --vcf ../../vcffiles/OnlySspeluncae_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8.vcf.gz --window_size 1000000 --n_cores 1 --output_prefix lin1GroupB_Pi --population lin1GroupB.txt --bypass_invariant_check 'yes'
+  # Pi with vcftools
+  # vcftools --gzvcf ../vcffiles/OnlySspeluncae_FilteredMax30missingDepthmin5_mergedVCFproject1_2_5_6_7_8.vcf.gz --window-pi 100000 --out pi_100kb_lin1 --keep lin1.txt
 
 # 2. Separate the output by lineage
 grep -h '^lin1' * > lin1_pi.txt
