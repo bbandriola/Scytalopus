@@ -7,6 +7,9 @@ library(Rmisc) # multiplot
 library(tidyverse)
 library(hrbrthemes)
 library(viridis)
+library(plyr)
+library(dplyr)
+library(ggplot2)
 
 Fst <- read.table("Lin3A3B_FstHudson_fst.txt", header=T)
 
@@ -26,6 +29,12 @@ plotwinhet = function(fstfile, myname, hete, calls) {
     cumulative_pos[chrom_mask] = fst$window_pos_1[chrom_mask] + 
       (i - 1) * max_pos
   }
+  # there is a problem here TRY TO FIX SO IT WILL BE POSSIBLE TO SHOW THE SCALE O THE FST VALUES ALONG THE PLOT
+  pos=as.numeric(rownames(unique(data.frame(fst$chromosome)[1])))
+  pos=append(pos,length(fst$chromosome))
+  numpos=NULL
+  for (i in 1:length(pos)-1){numpos[i]=(pos[i]+pos[i+1])/2}
+  
   # Prepare alternating colors for chromosomes
   mycols = rep(c("dodgerblue4", "dodgerblue3"), length.out = length(chroms))
   names(mycols) = chroms
@@ -39,6 +48,7 @@ plotwinhet = function(fstfile, myname, hete, calls) {
        type = "h", lwd = 1, col = mycols[as.character(fst$chromosome)],
        xlab = "Genomic Position", ylab = "FST", 
        main = plotname, xaxt = "n")
+  axis(side=1, at=plot[pos], labels=F)
   # Add horizontal lines for median and quartiles
   abline(h = median_fst, col = "red", lty = 15)
   abline(h = quartiles, col = "orange", lty = 15)
@@ -62,3 +72,4 @@ no_snps=7
 pdf(paste("Lin3A3",myname,".pdf", sep=""), width=20, height=10)
 plotwinhet(fstfile, myname,avg_hudson_fst,no_snps)
 dev.off()
+
