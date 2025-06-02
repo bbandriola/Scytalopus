@@ -11,7 +11,7 @@ library(plyr)
 library(dplyr)
 library(ggplot2)
 
-Fst <- read.table("Lin3A3B_FstHudson_fst.txt", header=T)
+Fst <- read.table("AllSspeluncaePops_WithoutLin1_FstHudson_fst.txt", header=T)
 
 # plot
 plotwinhet = function(fstfile, myname, hete, calls) {
@@ -48,7 +48,6 @@ plotwinhet = function(fstfile, myname, hete, calls) {
        type = "h", lwd = 1, col = mycols[as.character(fst$chromosome)],
        xlab = "Genomic Position", ylab = "FST", 
        main = plotname, xaxt = "n")
-  axis(side=1, at=plot[pos], labels=F)
   # Add horizontal lines for median and quartiles
   abline(h = median_fst, col = "red", lty = 15)
   abline(h = quartiles, col = "orange", lty = 15)
@@ -65,11 +64,11 @@ plotwinhet = function(fstfile, myname, hete, calls) {
 }
 
 
-fstfile="Lin3A3B_FstHudson_fst.txt"
-myname="Lin3A3B"
+fstfile="AllSspeluncaePops_WithoutLin1_FstHudson_fst.txt"
+myname="AllSspeluncaePops_WithoutLin1_FstWC_pixy_fst"
 avg_hudson_fst=6
 no_snps=7
-pdf(paste("Lin3A3",myname,".pdf", sep=""), width=20, height=10)
+pdf(paste("FstHudson_",myname,".pdf", sep=""), width=20, height=10)
 plotwinhet(fstfile, myname,avg_hudson_fst,no_snps)
 dev.off()
 
