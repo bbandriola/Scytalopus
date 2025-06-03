@@ -46,3 +46,6 @@ bcftools view -s ^EleoindigoticusUCE,EleopsychopompusUCE1,Sdiamantinensis,Siraie
   vcftools --gzvcf NorthcladeSspeluncae_GeographicNames__FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8.recode.vcf.gz --out Thinned1SNPevery25kb_NorthcladeSspeluncae_GeographicNames__FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8.recode.vcf.gz --thin 25000 --recode
   # lineage 4
   vcftools --gzvcf Lin4_GeographicNames_FilteredPCA_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8.vcf.gz --out Lin4_Thinned1SNPevery25kb_GeographicNames_FilteredPCA_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8 --thin 25000 --recode
+
+# 5. UCE vcf
+bcftools view -Oz -o UCEsites_FilteredPCA_FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz -s ^CunhaSerraDoMarRJ1_lin4,BocainaSerraDoMarRJ2_lin4,SerraDosOrgaos1_lin2,SerraDosOrgaos2_lin2,SulMantiqueira1_lin3,DevonianaPR1_lin5 --genotype ^miss FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz
