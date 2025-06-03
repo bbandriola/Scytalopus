@@ -23,7 +23,7 @@ vcftools --gzvcf ../vcffiles/OnlySspeluncae_FilteredMax30missingDepthmin5_merged
 # Fst with pixy according hudson method (ref:https://www.biorxiv.org/content/10.1101/2024.09.24.614506v1.full)
 pixy --stats fst --vcf ../../vcffiles/FinalVCFs/OnlySspeluncae_WithoutLin1_FilteredPCA_FilteredMax30missingDepthmin5_GeographicNames.vcf.gz --populations AllSspeluncaePops.txt --window_size 100000 --n_cores 4 --output_prefix AllSspeluncaePops_WithoutLin1_FstHudson --fst_type hudson --bypass_invariant_check 'yes'
   # between populations according PCA
-  pixy --stats fst --vcf ../../vcffiles/FinalVCFs/OnlySspeluncae_WithoutLin1_FilteredPCA_FilteredMax30missingDepthmin5_GeographicNames.vcf.gz --populations Lin3A3B.txt --window_size 100000 --n_cores 1 --output_prefix Lin3A3B_FstHudson --fst_type hudson --bypass_invariant_check 'yes'
+  pixy --stats fst --vcf ../../vcffiles/FinalVCFs/OnlySspeluncae_WithoutLin1_FilteredPCA_FilteredMax30missingDepthmin5_GeographicNames.vcf.gz --populations Lin3A3B.txt --window_size 50000 --n_cores 1 --output_prefix Lin3A3B_FstHudson --fst_type hudson --bypass_invariant_check 'yes'
   pixy --stats fst --vcf ../../vcffiles/FinalVCFs/OnlySspeluncae_WithoutLin1_FilteredPCA_FilteredMax30missingDepthmin5_GeographicNames.vcf.gz --populations Lin3A3B.txt --window_size 100000 --n_cores 1 --output_prefix Lin3A3B_FstHudson --fst_type hudson --bypass_invariant_check 'yes'
   pixy --stats fst --vcf ../../vcffiles/FinalVCFs/OnlySspeluncae_WithoutLin1_FilteredPCA_FilteredMax30missingDepthmin5_GeographicNames.vcf.gz --populations Lin67Lin7.txt --window_size 100000 --n_cores 1 --output_prefix Lin67Lin7_FstHudson --fst_type hudson --bypass_invariant_check 'yes'
   pixy --stats fst --vcf ../../vcffiles/FinalVCFs/OnlySspeluncae_WithoutLin1_FilteredPCA_FilteredMax30missingDepthmin5_GeographicNames.vcf.gz --populations Lin5Lin7.txt --window_size 100000 --n_cores 1 --output_prefix Lin5Lin7_FstHudson --fst_type hudson --bypass_invariant_check 'yes'
@@ -32,3 +32,17 @@ pixy --stats fst --vcf ../../vcffiles/FinalVCFs/OnlySspeluncae_WithoutLin1_Filte
   
 # Fst with pixy according WC method
 pixy --stats fst --vcf ../../vcffiles/FinalVCFs/OnlySspeluncae_WithoutLin1_FilteredPCA_FilteredMax30missingDepthmin5_GeographicNames.vcf.gz --populations AllSspeluncaePops.txt --window_size 100000 --n_cores 2 --output_prefix AllSspeluncaePops_WithoutLin1_FstWC_pixy --bypass_invariant_check 'yes'
+
+# Fst per scaffold: 
+# lins: Lin3A3B, Lin4A4B, Lin67Lin7, Lin5Lin7, Lin5Lin67, Lin5Lin2, Lin67Lin2, Lin7Lin2
+for i in $(cat 1Mscaffolds.txt); do
+    pixy --stats fst \
+         --vcf ../../vcffiles/FinalVCFs/OnlySspeluncae_WithoutLin1_FilteredPCA_FilteredMax30missingDepthmin5_GeographicNames.vcf.gz \
+         --populations Lin7Lin2.txt \
+         --chromosomes $i \
+         --window_size 50000 \
+         --n_cores 1 \
+         --output_prefix Lin7Lin2_WC_$i \
+         --output_folder Lin7Lin2/ \
+         --bypass_invariant_check 'yes'
+done
