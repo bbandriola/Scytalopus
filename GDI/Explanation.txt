@@ -1,0 +1,26 @@
+Methods:
+
+1. GDI with PHRAPL (DOI:10.1093/sysbio/syw117)
+  Software: PHRAPL
+  Gene tree topologies along with a priori assignments of individuals to populations or species
+  Choosing a model based on: AIC value and log-likelihood
+
+2. GDI with BPP (DOI:https://doi.org/10.1093/isd/ixab021)
+  Estimate species delimitation with and without a guide tree (A10 and A11 models) in BPP 
+  To generate the control file of BPP: https://brannala.github.io/bpps/#/CtrlFile
+  "program determines a sensible prior distribution for the θ and τ parameters based on the input 
+  sequence data; otherwise, inappropriate prior distribution choices for θ and τ may affect the species delimitation results (Leaché and Fujita 2010, Chan and Grismer 2019)"
+  "...Performed three additional BPP analyses (A00 model) to estimate the θ and τ parameters and used the estimated parameters from all post-burn-in MCMC 
+  samples to estimate the probability densities of the gdi values.  The convergence among the BPP runs was evaluated using the checkConvergence function 
+  in the R package gdiPipeline (https://github.com/dmacguigan/gdiPipeline). The gdi value for each post-burn-in MCMC sample was calculated using the R 
+  script gdi <−1 − exp((−2 * τ/θ)) (Jackson et al. 2017, Leaché et al. 2019)."
+  GDI calculation: "For estimating gdi values, the following two grouping strategies were employed. 1) I first treated each geographic taxon separately and 
+  calculated the gdi values using the geographic taxon's estimated θ and the τ values from different nodes, which represented different stages along the 
+  speciation continuum. This strategy was used to reflect the common practice of empirical studies that treated each geographic genetic groups as a candidate 
+  of being a new species. 2) I also performed analyses that calculated the θ values by lumping different geographic taxa from the same lineage. The gdi 
+  values were then estimated based on these θ values and different τ values. The second strategy was used to imitate empirical studies that may have 
+  collected genetically distinct geographic populations for each species while assuming there was no intraspecific genetic structure (Leaché et al. 2019)."
+  other refs:  https://doi.org/10.1111/mec.17718 | https://doi.org/10.1093/jmammal/gyaf010
+
+3. Species delimitation under multicoalescence method with DELINEATE (https://jeetsukumaran.github.io/delineate/)
+  
