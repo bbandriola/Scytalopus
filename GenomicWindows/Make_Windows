@@ -1,0 +1,79 @@
+  # 1: genomas mapeados devem estar em linha (devem ser checados e transformados caso estejam em blocos)
+  ## input: *.fa
+  ## output: output_SampleName...*.fa
+command
+
+  # 2:comparar o tamanho dos scaffold dos samples com a referência para verificar se são iguais (de tamanhos)
+|wc -l
+
+  # 3: mascarar os genomas - colocar N em sequências genômicas repetitivas- microssatélites
+  # utiliza o arquivo *.bed da referência para pegar as coordenadas das zonas repetitivas
+  ## input: *.BED
+  ## input mapped files: output_*.fa
+  ## output:
+command
+
+  # 4: indexar o arquivo fasta
+  # software: samtools
+  ## input: output_*.fa (mascarados)
+  ## output: *.fai
+command
+
+  # 5: gerar arquivos .GENOME
+  ## input: *.fai
+  ## output: *.GENOME (gera o tamanho dos scaffolds)
+command
+
+  # 6: gerar um arquivo list.txt - irá conter o tamanho de todos os scaffolds mascarados
+  ## input: *.GENOME
+  ## output: list.txt
+command
+    #colocar em um doc excel para separar os scaffolds com o mínimo informação
+
+  # 7: make BED - gera as coordenadas de inicio e fim das janelas dentro dos scaffolds selecionados
+  # software: bedtools
+  ## input: *.GENOME
+  ## output: *.list.txt
+command
+
+  # 8: create windowns - os arquivos gerados possuem um corte de 50kb no mesmo local de acordo com as coordenadas dos arquivos *.BED
+  ## input: *.BED (coordenadas) / *.fasta (original)
+  ## output: (arquivo com os cortes )
+python 8_1*.py list.txt
+
+  # 9: FILTROS
+
+    # 9.1: verifica se o sitio é significativo, ou seja, conta em quantas sp existem -/N, se 80% tiver N ele deixa o sitio passar, se ele tiver menos que 80% ele corta o sitio
+    ## substitui N por -:
+for i in FileName; do 's/N/-/g' $i; done
+    ## conta e corta as bases: software trimal
+command
+    ## substitui - de volta para N:
+for i in FileName; do 's/-/N/g' $i; done
+
+
+    # 9.2: filtrar janelas com pelo menos 50% da informação original
+    ## input: edited*
+    ## output: list.txt/csv (arquivo com o nome dos arquivos com pelo menos 50% ou mais da info original)
+command
+
+  # 10: 3seq - testa a recombinação nas janelas selecionadas
+  # as que apresentam alto índice de recombinação devem ser excluídas
+  ## input: edited*
+  ## output: *.log/*.pval/*.longRec/*.rec (o mais útil é o *.log, pois contem o valor da correção de Bonferroni)
+for i in edited*.fa; do path/to/compiled/3seq -f $i -id $i; done
+  #mover todos os outputs para dentro de um diretório 3seq
+
+  # 11: Gerar arquivos com a correção Bonferroni
+  # A correção Bonferroni é uma análise de multiplas comparações, informa um p-value, quanto menor esse valor mais chances de haver recombinações
+  ## input: *.log
+  ## ouput: *.csv
+for i in *.log; do grep -H 'Bonferroni' $i >> NameFile.csv; done
+      #os edited abaixo de 0.01 devem ser movidos para um pasta chamada recomb* atraves de um bash com o comando:
+      mv file.fa directory
+
+  # 12: AMAS (estatísticas de cada amostra)
+  ## input: todas as janelas *edited
+  ## output: *.csv
+for i in edited*; do ./AMAS.py summary -f fasta -d dna -i $i | grep 'edited' summary.txt >> allsummaries.csv; done
+  # remover as files com outliers, ou seja, aquelas as quais fogem de um padrão do número de sítios parcimoniosos
