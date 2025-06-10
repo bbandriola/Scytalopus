@@ -49,9 +49,10 @@ plotwinhet = function(searchstring, myname, avg_fst) {
          col = c("deeppink1", "orange", "orange"), lty = c(2, 3, 3), cex = 0.8)
 }
 
-searchstring="Lin2Lin5_"
-myname="Lin2 x Lin5"
+searchstring="Lin7Lin2"
+myname="Lin7 x Lin2"
 avg_fst=6
-pdf(paste("FstWC_",myname,".pdf", sep=""), width=20, height=10)
+pdf(paste("FstWC_",searchstring,".pdf", sep=""), width=20, height=10)
 plotwinhet(searchstring, myname,avg_fst)
 dev.off()
+
