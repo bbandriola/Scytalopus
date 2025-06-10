@@ -34,7 +34,7 @@ pixy --stats fst --vcf ../../vcffiles/FinalVCFs/OnlySspeluncae_WithoutLin1_Filte
 pixy --stats fst --vcf ../../vcffiles/FinalVCFs/OnlySspeluncae_WithoutLin1_FilteredPCA_FilteredMax30missingDepthmin5_GeographicNames.vcf.gz --populations AllSspeluncaePops.txt --window_size 100000 --n_cores 2 --output_prefix AllSspeluncaePops_WithoutLin1_FstWC_pixy --bypass_invariant_check 'yes'
 
 # Fst per scaffold: 
-# lins: Lin3A3B, Lin4A4B, Lin67Lin7, Lin5Lin7, Lin5Lin67, Lin5Lin2, Lin67Lin2, Lin7Lin2
+# lins: Lin3A3B, Lin4A4B, Lin67Lin7, Lin5Lin7, Lin5Lin67, Lin5Lin2, Lin67Lin2, Lin7Lin2, Lin2Lin3, Lin2Lin4, Lin3Lin4, 
 for i in $(cat 1Mscaffolds.txt); do
     pixy --stats fst \
          --vcf ../../vcffiles/FinalVCFs/OnlySspeluncae_WithoutLin1_FilteredPCA_FilteredMax30missingDepthmin5_GeographicNames.vcf.gz \
