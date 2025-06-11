@@ -11,7 +11,6 @@ library(plyr)
 library(dplyr)
 library(ggplot2)
 
-
 # plot
 plotwinhet = function(searchstring, myname, avg_fst) {
   fstfiles=list.files(pattern= searchstring)
@@ -49,10 +48,14 @@ plotwinhet = function(searchstring, myname, avg_fst) {
          col = c("deeppink1", "orange", "orange"), lty = c(2, 3, 3), cex = 0.8)
 }
 
-searchstring="Lin7Lin2"
-myname="Lin7 x Lin2"
+# change searchstring for the fst folder you are analysing 
+# change myname for the populations you are comparing
+
+searchstring="Lin4Lin6"
+base_dir <- "~/Desktop/Projetos/Sspeluncae/Analises/fst/1Mscaffolds/"
+setwd(paste0(base_dir, searchstring))
+myname="Lin4 x Lin67"
 avg_fst=6
 pdf(paste("FstWC_",searchstring,".pdf", sep=""), width=20, height=10)
 plotwinhet(searchstring, myname,avg_fst)
 dev.off()
-
