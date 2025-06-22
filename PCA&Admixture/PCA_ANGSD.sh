@@ -8,3 +8,4 @@ angsd -b bamlist_onlySspeluncae.txt -ref /media/labgenoma4/DATAPART7/sandro_grup
 
 # 2-> Generate PCA and Adxmiture with PCAangsd
 pcangsd --beagle ../../vcffiles/ANGSD_vcf/allsamples_IndMind5_Maxdepth100.beagle.gz --eig 2 --threads 5 --out allsamples_PCAangsd -inbreedSamples --admix 
+pcangsd --beagle onlySspeluncae_PCAfiltered_IndMind5_Maxdepth100.beagle.gz --eig 2 --threads 5 --out onlySspeluncae_PCAfiltered_IndMind5_Maxdepth100 --admix --tree
