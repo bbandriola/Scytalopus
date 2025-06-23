@@ -2,9 +2,9 @@
 # first frun Dtrios
 ../../Softwares/Dsuite/Build/Dsuite Dtrios -t allsamples_PCAfiltered.nwk -o allsamples_PCAfiltered ../vcffiles/FinalVCFs/FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz popfile.txt
 # then Fbranch  
-../../Softwares/Dsuite/Build/Dsuite Fbranch -Z allsamples_PCAfiltered.nwk allsamples_PCAfiltered.txt > fbranch_allsamples_PCAfiltered.txt
+../../Softwares/Dsuite/Build/Dsuite Fbranch -Z allsamples_PCAfiltered.nwk allsamples_PCAfiltered_tree.txt > fbranch_allsamples_PCAfiltered.txt
 # plot fbranch
-../../Softwares/Dsuite/utils/dtools.py -n fbranch_allsamples_PCAfiltered --outgroup Outgroup fbranch_allsamples_PCAfiltered.txt allsamples_PCAfiltered.nwk
+../../Softwares/Dsuite/utils/dtools.py -n fbranch_allsamples_PCAfiltered --outgroup Outgroup fbranch_allsamples_PCAfiltered.txt allsamples_PCAfiltered.nwk 
 
 # look u for the next steps to plot D-stats and f4ratio  
 # plot gene flow with f4-radio and D statistics
