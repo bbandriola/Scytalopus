@@ -1,5 +1,5 @@
 # PLOT angsd PCA 
-# adapted from source: https://github.com/Rosemeis/pcangsd
+# adapted from source: https://github.com/mfumagalli/ngsTools/blob/master/Scripts/plotPCA.R
 
 library(ggplot2)
 
@@ -32,7 +32,16 @@ title <- paste("PC",comp[1]," (",signif(eig$val[comp[1]], digits=3)*100,"%)"," /
 x_axis = paste("PC",comp[1],sep="")
 y_axis = paste("PC",comp[2],sep="")
 
-PCA <- ggplot() + geom_point(data=PC, aes_string(x=x_axis, y=y_axis, color="Paired")) + ggtitle(title)
-PCA + theme_bw()
+# PCA <- ggplot() + geom_point(data=PC, aes_string(x=x_axis, y=y_axis, color="annot$CLUSTER"), size= 4) + coord_equal() + ggtitle(title) + scale_color_brewer(palette = "Paired") + theme_bw()
+
+PCA <- ggplot(data = PC, aes_string(x = x_axis, y = y_axis, color = "annot$CLUSTER")) +
+  geom_point(size = 3) +  # Adjust size as needed
+  geom_text(aes(label = rownames(PC)), vjust = -0.5, size = 3, color = "gray",position = position_jitter(seed = 1, width = 0.02, height = 0.03)) +  # Add labels
+  coord_equal() +
+  ggtitle(title) +
+  scale_color_brewer(palette = "Dark2") +  # Apply color palette
+  theme_bw() +
+  labs(color = "Lineage")  # Rename legend title if needed
+
 ggsave(out_file)
 unlink("Rplots.pdf", force=TRUE)
