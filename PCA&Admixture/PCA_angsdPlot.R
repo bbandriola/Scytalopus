@@ -1,7 +1,7 @@
 # PLOT angsd PCA 
 # adapted from source: https://github.com/Rosemeis/pcangsd
 
-library(ggplot)
+library(ggplot2)
 
 write.table(cbind(seq(1,68),rep(1,68),c(rep("outgroups",6),rep("lin7",3),rep("lin5",3),rep("lin3",3),rep("lin1",5),
                                         rep("lin6",1),rep("lin7",1),rep("lin3",1),rep("lin7",1),rep("lin3",1),rep("lin5",1),
