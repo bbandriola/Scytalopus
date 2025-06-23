@@ -8,6 +8,6 @@
 
 # look u for the next steps to plot D-stats and f4ratio  
 # plot gene flow with f4-radio and D statistics
-#conda activate ruby
-#ruby plot_d.rb allsamples_PCAfiltered_BBAA.txt plot_order.txt 0.7 Lepidochelys_Ccar_run2_BBAA_D.svg
-#ruby plot_f4ratio.rb Lepidochelys_Ccar_run2_BBAA.txt plot_order.txt 0.2 Lepidochelys_Ccar_run2_BBAA_f4ratio.svg
+#conda activate dsuite
+ruby plot_f4ratio.rb allsamples_PCAfiltered_BBAA.txt plot_order.txt 0.2 allsamples_PCAfiltered_BBAA_f4ratio.svg
+ruby plot_d.rb allsamples_PCAfiltered_BBAA.txt popfile.txt 0.7 allsamples_PCAfiltered_BBAA_D.svg
