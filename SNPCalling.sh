@@ -46,6 +46,9 @@ bcftools view -s ^EleoindigoticusUCE,EleopsychopompusUCE1,Sdiamantinensis,Siraie
   vcftools --gzvcf NorthcladeSspeluncae_GeographicNames__FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8.recode.vcf.gz --out Thinned1SNPevery25kb_NorthcladeSspeluncae_GeographicNames__FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8.recode.vcf.gz --thin 25000 --recode
   # lineage 4
   vcftools --gzvcf Lin4_GeographicNames_FilteredPCA_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8.vcf.gz --out Lin4_Thinned1SNPevery25kb_GeographicNames_FilteredPCA_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8 --thin 25000 --recode
-
+  # thinned 1000 bases
+  vcftools --gzvcf FilteredPCA_FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz --thin 1000 --recode --out Thinned1000_maxmissin0.7_FilteredPCA_FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz --max-missing 0.7
+    # results: 962,387
+    
 # 5. UCE vcf
 vcftools --gzvcf FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz --max-missing 0.7 --recode --out UCEsites_FilteredPCA_FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz
