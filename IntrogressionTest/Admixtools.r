@@ -15,6 +15,9 @@ new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"
 if(length(new.packages)) install.packages(new.packages)
 lapply(list.of.packages, library, character.only = TRUE) 
 
+setwd("/media/labgenoma4/DATAPART6/bandriola/Scytalopus/admixtools/")
+prefix ="Thinned1000_maxmissin0.7_FilteredPCAandUCE_FilteredMax30missingDepthmin5_GeographicNames_allsamples"
+outd = "/media/labgenoma4/DATAPART6/bandriola/Scytalopus/admixtools/allsamples/"
 
 
 
