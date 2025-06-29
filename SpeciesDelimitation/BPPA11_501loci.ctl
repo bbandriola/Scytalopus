@@ -1,13 +1,12 @@
-          seed =  -1
+          seed = -1
 
        seqfile = combined_5kb_rightLabels_filtered_cleaned_noNspaces_renamed_noNspaces_nospace_ZEROspacebetweenletters_501loci.phy
       Imapfile = Sspeluncae_outgroupSdiamantinensis.Imap.txt
-       jobname = Sspeluncae_outgroupSdiamantinensis
+       outfile = Sspeluncae_outgroupSdiamantinensisoutfile.txt
+      mcmcfile = Sspeluncae_outgroupSdiamantinensismcmc.txt
 
-* speciesdelimitation = 1 * fixed species tree
-* speciesdelimitation = 1 0 2   * species delimitation rjMCMC algorithm0 and finetune(e)
   speciesdelimitation = 1 1 2 1  * species delimitation rjMCMC algorithm1 finetune (a m)
-         speciestree = 1  0.4 0.2 0.1 * speciestree pSlider ExpandRatio ShrinkRatio
+         speciestree = 1 * speciestree pSlider ExpandRatio ShrinkRatio
 
    speciesmodelprior = 1  * 0: uniform LH; 1:uniform rooted trees; 2: uniformSLH; 3: uniformSRooted
 
@@ -22,7 +21,7 @@
 
      cleandata = 0    * remove sites with ambiguity data (1:yes, 0:no)?
 
-   thetaprior = invgamma 3 0.003 # gamma(a, b) for theta (estimate theta)
+   thetaprior = invgamma 3 0.003 e # gamma(a, b) for theta (estimate theta)
      tauprior = invgamma 3 0.035 # gamma(a, b) for root tau & Dirichlet(a) for other tau's
 
 *     heredity = 1 4 4
@@ -34,3 +33,4 @@
         burnin = 20000
       sampfreq = 3
        nsample = 600000
+       threads = 10
