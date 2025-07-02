@@ -13,7 +13,8 @@ for i in $(cat /media/labgenoma4/DATAPART6/bandriola/Scytalopus/SummaryStats/fst
     smc++ vcf2smc ~/Scytalopus/vcffiles/FinalVCFs/FilteredPCA_FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz pop5$i.smc.gz $i pop5:DevonianaPR2_lin5,DevonianaPR3_lin5,DevonianaPR4_lin5,DevonianaPR5_lin5,DevonianaPR6_lin5,DevonianaPR7_lin5,DevonianaPR8_lin5,DevonianaSP1_lin5,DevonianaSP2_lin5,DevonianaSP3_lin5,DevonianaSP4_lin5,NortePR1_lin7,NortePR2_lin7,NortePR3_lin7,NortePR4_lin7,NortePR5_lin7 
 done
 
-# pop 7 DO NOT USE
+# pop 7 DO NOT USE because of possible inbred samples
+# https://github.com/popgenmethods/smcpp/issues/138
 #for i in $(cat /media/labgenoma4/DATAPART6/bandriola/Scytalopus/SummaryStats/fst/1Mscaffolds.txt); do smc++ vcf2smc ~/Scytalopus/vcffiles/FinalVCFs/FilteredPCA_FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz pop7$i.smc.gz $i pop7:CentroLestePR1_lin7,CentroLesteSC1_lin7,CentroOesteSC1_lin7,CentroOesteSC2_lin7,CentroOesteSC3_lin7,CentroOesteSC4_lin7,CentroOesteSC5_lin7,ExtremoSulRS2_lin7,ExtremoSulRS3_lin7,ExtremoSulSC1_lin7,HCentroLesteSC_lin7; done 
 
 # pop 7 PCA no inbred
@@ -49,7 +50,7 @@ done
 # command to plot: smc++ plot joint.pdf split/model.final.json
 smc++ split -o splitpop7PCAnoHpop67/ ./pop7PCAnoH/pop7PCAnoH.final.json ./pop67/pop67.final.json ./pop7PCAnoHpop67/*.smc.gz
 smc++ plot --csv -g 3.2 splitpop7pop67/splitpop7pop67.pdf splitpop7pop67/model.final.json
-# the following command didnt work probabibly caused by inbred
+
 smc++ split -o splitpop5pop7PCAnoH/ pop5/pop5.final.json pop7PCAnoH/pop7PCAnoH.final.json pop5pop7PCAnoH/*.smc.gz
 smc++ plot --csv -g 3.2 splitpop5pop7PCAnoH/splitpop5pop7PCAnoH.pdf plitpop5pop7PCAnoH/model.final.json
 
