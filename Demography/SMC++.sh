@@ -42,17 +42,17 @@ for i in $(cat /media/labgenoma4/DATAPART6/bandriola/Scytalopus/SummaryStats/fst
     smc++ vcf2smc ~/Scytalopus/vcffiles/FinalVCFs/FilteredPCA_FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz pop5pop7PCAnoH/pop5pop7PCAnoH$i.smc.gz $i pop5:DevonianaPR2_lin5,DevonianaPR3_lin5,DevonianaPR4_lin5,DevonianaPR5_lin5,DevonianaPR6_lin5,DevonianaPR7_lin5,DevonianaPR8_lin5,DevonianaSP1_lin5,DevonianaSP2_lin5,DevonianaSP3_lin5,DevonianaSP4_lin5,NortePR1_lin7,NortePR2_lin7,NortePR3_lin7,NortePR4_lin7,NortePR5_lin7 pop7PCAnoH:CentroLestePR1_lin7,CentroLesteSC1_lin7,CentroOesteSC1_lin7,CentroOesteSC2_lin7,CentroOesteSC3_lin7,CentroOesteSC4_lin7,CentroOesteSC5_lin7,ExtremoSulRS2_lin7,ExtremoSulRS3_lin7,ExtremoSulSC1_lin7
 done 
 for i in $(cat /media/labgenoma4/DATAPART6/bandriola/Scytalopus/SummaryStats/fst/1Mscaffolds.txt); do
-    smc++ vcf2smc ~/Scytalopus/vcffiles/FinalVCFs/FilteredPCA_FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz pop7PCAnoinbredpop67/pop7PCAnoinbredpop67$i.smc.gz $i pop67:BoaEsperanca1_lin6,BoaEsperanca2_lin6,BoaEsperanca3_lin7 pop7:CentroLestePR1_lin7,CentroLesteSC1_lin7,CentroOesteSC1_lin7,CentroOesteSC2_lin7,CentroOesteSC3_lin7,CentroOesteSC4_lin7,CentroOesteSC5_lin7,ExtremoSulRS2_lin7,ExtremoSulRS3_lin7,ExtremoSulSC1_lin7
+    smc++ vcf2smc ~/Scytalopus/vcffiles/FinalVCFs/FilteredPCA_FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz pop7PCAnoinbredpop67/pop7PCAnoinbredpop67$i.smc.gz $i pop67:BoaEsperanca1_lin6,BoaEsperanca2_lin6,BoaEsperanca3_lin7 pop7PCAnoH:CentroLestePR1_lin7,CentroLesteSC1_lin7,CentroOesteSC1_lin7,CentroOesteSC2_lin7,CentroOesteSC3_lin7,CentroOesteSC4_lin7,CentroOesteSC5_lin7,ExtremoSulRS2_lin7,ExtremoSulRS3_lin7,ExtremoSulSC1_lin7
 done  
 
 # 4. split
 # command 1:  smc++ split -o split/ pop1/model.final.json pop2/model.final.json data/*.smc.gz
 # command to plot: smc++ plot joint.pdf split/model.final.json
-smc++ split -o splitpop7PCAnoHpop67/ ./pop7PCAnoH/pop7PCAnoH.final.json ./pop67/pop67.final.json ./pop7PCAnoHpop67/*.smc.gz
+smc++ split -o splitpop7PCAnoHpop67/ ./pop7PCAnoH/pop7PCAnoH.final.json ./pop67/pop67.final.json ./pop7PCAnoinbredpop67/*.smc.gz
 smc++ plot --csv -g 3.2 splitpop7pop67/splitpop7pop67.pdf splitpop7pop67/model.final.json
 
 smc++ split -o splitpop5pop7PCAnoH/ pop5/pop5.final.json pop7PCAnoH/pop7PCAnoH.final.json pop5pop7PCAnoH/*.smc.gz
-smc++ plot --csv -g 3.2 splitpop5pop7PCAnoH/splitpop5pop7PCAnoH.pdf plitpop5pop7PCAnoH/model.final.json
+smc++ plot --csv -g 3.2 splitpop5pop7PCAnoH/splitpop5pop7PCAnoH.pdf splitpop5pop7PCAnoH/model.final.json
 
 smc++ split -o splitpop5pop67/ pop5/pop5.final.json pop67/pop67.final.json pop5pop67/*.smc.gz
 smc++ plot --csv -g 3.2 splitpop5pop67/splitpop5pop67.pdf splitpop5pop67/model.final.json
