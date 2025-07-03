@@ -173,3 +173,27 @@ svg("Thinned1000_maxmissin0.7_FilteredPCAandUCE_FilteredMax30missingDepthmin5_Ge
 plot_graph(winnerb.3m6$edges[[1]], textsize=6)
 dev.off()
 ########################################
+
+########################################
+# 7 migration, 1 run
+aab.1m7 = find_graphs(outd,outpop = "Ssuperciliaris",numadmix = 6,stop_gen2 = 1000,numgraphs=100,plusminus_generations=20,verbose=TRUE)
+winnerb.1m7 = aab.1m7 %>% slice_min(score, with_ties = FALSE)
+plot_graph(winnerb.1m7$edges[[1]], textsize=6)
+svg("Thinned1000_maxmissin0.7_FilteredPCAandUCE_FilteredMax30missingDepthmin5_GeographicNames_allsamples-1m7.svg")
+plot_graph(winnerb.1m7$edges[[1]], textsize=6)
+dev.off()
+# 7 migration, 2 run
+aab.2m7 = find_graphs(outd,outpop = "Ssuperciliaris",numadmix = 6,stop_gen2 = 1000,numgraphs=100,plusminus_generations=20,verbose=TRUE)
+winnerb.2m7 = aab.2m7 %>% slice_min(score, with_ties = FALSE)
+plot_graph(winnerb.2m7$edges[[1]], textsize=6)
+svg("Thinned1000_maxmissin0.7_FilteredPCAandUCE_FilteredMax30missingDepthmin5_GeographicNames_allsamples-2m7.svg")
+plot_graph(winnerb.2m7$edges[[1]], textsize=6)
+dev.off()
+# 7 migration, 3 run
+aab.3m7 = find_graphs(outd,outpop = "Ssuperciliaris",numadmix = 6,stop_gen2 = 1000,numgraphs=100,plusminus_generations=20,verbose=TRUE)
+winnerb.3m7 = aab.3m7 %>% slice_min(score, with_ties = FALSE)
+plot_graph(winnerb.3m7$edges[[1]], textsize=6)
+svg("Thinned1000_maxmissin0.7_FilteredPCAandUCE_FilteredMax30missingDepthmin5_GeographicNames_allsamples-3m7.svg")
+plot_graph(winnerb.3m7$edges[[1]], textsize=6)
+dev.off()
+########################################
