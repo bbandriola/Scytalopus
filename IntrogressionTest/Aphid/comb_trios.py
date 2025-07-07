@@ -1,3 +1,4 @@
+# usage: python comb_trios.py > possible_trios.txt
 from itertools import combinations
 
 # Lista de suas 6 espécies
