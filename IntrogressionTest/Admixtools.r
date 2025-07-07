@@ -2,6 +2,7 @@
 # convert vcf to eign with python vcf2eigenstrat.py from https://github.com/mathii/gdc/blob/master/vcf2eigenstrat.py respositorio 
 # py27
 # python vcf2eigenstrat.py -v vcf_file.vcf(.gz) -o out_root
+# python ../../../Softwares/gdc/vcf2eigenstrat.py -v Thinned1000_maxmissin0.7_FilteredPCAandUCE_FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz.recode.vcf.gz -o Thinned1000_maxmissin0.7_FilteredPCAandUCE_FilteredMax30missingDepthmin5_GeographicNames_allsamples
 # the script above generates root.snp, root.ind and root.geno and the .ind POPS column should be change to pop labels
 # About ADMIXTOOLS2: "run findGraphs allowing between zero and eight admixture events (100 algorithm iterations per graph complexity class), saving one or a few best-fitting 
 #                     AGs after each iteration. The smallest number of admixture events that yields models where the (negative) LL score or the worst f-statistic residual is 
