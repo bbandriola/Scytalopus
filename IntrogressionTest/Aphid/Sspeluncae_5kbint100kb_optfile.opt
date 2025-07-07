@@ -1,0 +1,18 @@
+# Gene tree filtering.
+require_triplet_other_monophyly = 1
+require_outgroup_monophyly = 1
+max_alphai = 10
+max_clock_ratio = 2
+
+# Likelihood calculation.
+#nb_HGT_times = 2
+#HGT_time_coeff = 1.0, 0.5
+#min_d = 0.5
+# fixed_pac = 0
+# (uncomment the above line to calculate the likelihood
+#  assuming no GF between A and C)
+
+# Output.
+CI_param = 1
+CI_ILS_GF = 1
+verbose = 0
