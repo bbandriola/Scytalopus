@@ -1,0 +1,49 @@
+## Aphid Workpflow
+## README file explaining all steps to produce the output for Aphid analysis
+## https://gitlab.mbb.cnrs.fr/ibonnici/aphid
+## https://hal.science/hal-04304320v2/document
+# Pipeline explanation: maximum-likelihood method aimed at quantifying the
+# sources of phylogenetic conflict via topology and branch length analysis of three-species
+# gene trees. Meaning that, you have to have all possible trees to each trio species. Aphid
+# returns estimates of the speciation times and ancestral effective population size, and a
+# posterior assessment of the contribution of gene flow and incomplete lineage sorting to the
+# conflict. Aphid basically asks whether discordant gene trees tend to be taller, indicating ILS,
+# or shorter, indicating GF, than the majority gene trees. 
+# Description above us took from the original article.
+# ps: I had a few trouble making aphid to work. It was resolved once I installed libm library in a conda
+# env with the following code: conda install hcc::libmatheval
+
+# three files are needed gene-tree file, taxon file, control file
+# 1. taxon file generation
+python comb_trios.py > possible_trios.txt
+  # 1.2 taxon file construction
+
+# 2. gene trees selection 
+  #2.1 count the size of every sequence from the 5kb int 100kb
+  bash GetFastaLength.sh
+  #2.1.1 get only the name of the file and the first line of the length
+  awk '/^Results/' || '/^Sdiamantinensis127win5kb/' result_all_fafiles5kb.txt > output_result_all_fafiles5kb.txt
+  #2.2 write all tree + file name in a file
+  bash WriteTree_FastaName.sh
+  # 2.3 get the name of the file + the size and add into the gene-tree file in the following form:
+  # create a tab separate file with the extension *.in
+  # name of the file: Sspeluncae_5kb_int100kb.in
+  # tree; length	tree_name
+  # do that with the procv command in excell
+
+# 3. create config file 
+Sspeluncae_5kbint100kb_config.toml
+
+
+#4. run as bash with all files
+./aphid tree_file taxon_file option_file outfile
+
+#5. conca all results
+# WriteAllTXTFiles.sh
+for i in Lepi*.txt; do
+    echo "Results for $i:" >> result_all_triplets.txt
+    cat $i >> result_all_triplets.txt
+done
+
+
+
