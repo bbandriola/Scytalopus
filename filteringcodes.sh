@@ -1,2 +1,6 @@
 # kinship test with plink 
 plink2 --vcf FilteredPCA_FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz --make-king
+
+# maf filtering vcf 
+vcftools --gzvcf Thinned1000_maxmissin0.7_FilteredPCA_FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz.recode.vcf.gz --maf 0.05 --recode --out Thinned1000_maxmissin0.7_FilteredPCA_FilteredMax30missingDepthmin5_GeographicNames_allsamples_maf0.05
+vcftools --gzvcf Thinned1000_maxmissin0.7_FilteredPCAandUCEandOtherspecies_andOutgroupandNOl_FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz --maf 0.05 --recode --out Thinned1000_maxmissin0.7_FilteredPCAandUCEandOtherspecies_andOutgroupandNOl_FilteredMax30missingDepthmin5_GeographicNames_allsamples_maf0.05
