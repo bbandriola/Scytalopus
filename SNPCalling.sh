@@ -52,3 +52,8 @@ bcftools view -s ^EleoindigoticusUCE,EleopsychopompusUCE1,Sdiamantinensis,Siraie
     
 # 5. UCE vcf
 vcftools --gzvcf FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz --max-missing 0.7 --recode --out UCEsites_FilteredPCA_FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz
+
+
+####### Filtered files:
+Thinned1000_maxmissin0.7_FilteredPCA_FilteredMax30missingDepthmin5_GeographicNames_allsamples_maf0.05 = 452.057 SNPs
+Thinned1000_maxmissin0.7_FilteredPCAandUCEandOtherspecies_andOutgroupandNOl_FilteredMax30missingDepthmin5_GeographicNames_allsamples_maf0.05.recode.vcf = 416.663 SNPs
