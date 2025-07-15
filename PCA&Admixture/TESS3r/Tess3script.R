@@ -39,6 +39,7 @@ library(ggplot2)
 library(sf)
 library(dplyr)
 library(rasterVis)
+library(RColorBrewer)
 
 # Set your working directory to where your TESS3 files are located
 # setwd("path/to/your/tess3/files")
@@ -47,6 +48,12 @@ set.seed(123)
 k6 <- read.table("k6.txt")  # Ancestry proportions matrix (Q matrix)
 coord <- read.table("coord.txt", sep="\t")  # Coordinates
 coord_asmatrix <- as.matrix(coord)  # Convert to matrix
+
+plot(k6, coord_asmatrix, method = "map.max", interpol = FieldsKrigModel(10),  
+     main = "Ancestry coefficients",
+     xlab = "Longitude", ylab = "Latitude", 
+     resolution = c(300,300), cex = .4, 
+     col.palette = my.palette)
 
 # Create a raster layer
 r <- raster("~/Desktop/NE1_HR_LC_SR/NE1_HR_LC_SR.tif")
