@@ -12,8 +12,8 @@ write.table(cbind(seq(1,68),rep(1,68),c(rep("outgroups",6),rep("lin7",3),rep("li
                                         rep("lin5",2),rep("lin7",1),rep("lin2",1),rep("lin7",1),rep("lin3",1),rep("outgroups",1))), 
             row.names=F, sep="\t", col.names=c("FID","IID","CLUSTER"), file="ALL.clst", quote=F)
 
-covar <- read.table("allsamples_PCAangsd.cov",stringsAsFact=FALSE)                                                                                          
-annot <- read.table("ALL.clst",sep="\t", header=TRUE)    
+covar <- read.table("onlySspeluncae_PCAfiltered_IndMind5_Maxdepth100_int1000.cov",stringsAsFact=FALSE)                                                                                          
+annot <- read.table("2plotPCAonlyspeluncaetable.clst",sep=";", header=TRUE)    
 comp <- as.numeric(strsplit("1-2", "-", fixed = TRUE)[[1]])
 out_file <- "allsamples_PCAANGSD.pdf"
 
@@ -34,14 +34,16 @@ y_axis = paste("PC",comp[2],sep="")
 
 # PCA <- ggplot() + geom_point(data=PC, aes_string(x=x_axis, y=y_axis, color="annot$CLUSTER"), size= 4) + coord_equal() + ggtitle(title) + scale_color_brewer(palette = "Paired") + theme_bw()
 
-PCA <- ggplot(data = PC, aes_string(x = x_axis, y = y_axis, color = "annot$CLUSTER")) +
-  geom_point(size = 3) +  # Adjust size as needed
-  geom_text(aes(label = rownames(PC)), vjust = -0.5, size = 3, color = "gray",position = position_jitter(seed = 1, width = 0.02, height = 0.03)) +  # Add labels
+PCA <- ggplot(data = PC, aes_string(x = x_axis, y = y_axis, fill = "annot$CLUSTER")) +
+  geom_point(position = position_jitter(seed = 1, width = 0.02, height=0.03),size = 6,
+             shape = 21,stroke = 0.2,color = "gray30") +  # Adjust size as needed
+  #geom_text(aes(label = rownames(PC)), vjust = -0.5, size = 3, color = "gray",position = position_jitter(seed = 1, width = 0.02, height = 0.03)) +  # Add labels
+  scale_fill_manual(values = c("#0660FB","#4D9F8C","#7570B3","deeppink","#66A61D","#E93F33","#E6AC2F"))+
   coord_equal() +
   ggtitle(title) +
-  scale_color_brewer(palette = "Dark2") +  # Apply color palette
-  theme_bw() +
-  labs(color = "Lineage")  # Rename legend title if needed
+  #scale_color_brewer(palette = "Dark2") +  # Apply color palette
+  theme_bw(base_size = 10) +
+  labs(fill = "Lineage")  # Rename legend title if needed
 
 ggsave(out_file)
 unlink("Rplots.pdf", force=TRUE)
