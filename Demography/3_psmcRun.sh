@@ -1,4 +1,5 @@
 # utilizar no intervalor de tempo (-p) o sugerido por Nadachowska-Brzyska et al., 2015, 2016: 34 free atomic time intervals (parapattern = 4 + 30*2 + 4 + 6 + 10).
+# N30 –t5 –r5 –p 4+30∗2+4+6+10”... 
 
 ./psmc/psmc -N25 -t15 -r5 -p "4+25*2+4+6" -o Sdiamantinensis.d7.D70.diploid.psmc Sdiamantinensis.d7.D70.diploid.psmcfa
 ./psmc/psmc -N25 -t15 -r5 -p "4+25*2+4+6" -o Snovacapitalis.d10.D90.diploid.psmc Snovacapitalis.d10.D90.diploid.psmcfa
