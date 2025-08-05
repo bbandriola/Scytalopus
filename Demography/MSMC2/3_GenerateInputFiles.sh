@@ -1,20 +1,20 @@
+#!/usr/bin/env bash
+# uma arquivo por população 
+
 # Combining Multiple Individuals into One Input File
 # script generate_multihetsep.py from MSMC-tools
 git clone https://github.com/stschiff/msmc-tools.git
 
-# generate msmc2 input from mask files and VCFs
-# generate a loop to every 
-for maskfile in *_maskfile.bed.gz; do
-    # Extract the sampleid and scaffold number from the filename
-    base=$(basename "$maskfile"_maskfile.bed.gz)
 
-    # Construct the names of the other required files
-    vcfmask="${base}_outMSMC2vcf.gz"
-    output="${base}_multihetsep.txt"
-
-    # Run the command
-    msmc-tools.git/generate_multihetsep.py \
-        --mask "$maskfile" \
-        --mask "$vcfmask" \
-        > "$output"
-done
+INDIR=/path/to/VCF/and/mask/files
+OUTDIR=/path/to/output_files
+MAPDIR=/path/to/mappability/mask
+generate_multihetsep.py --chr 1 \
+--mask $INDIR/ind1.chr1.mask.bed.gz \ 
+--mask $INDIR/ind2.chr1.mask.bed.gz \ 
+--mask $INDIR/ind3.chr1.mask.bed.gz \
+--mask $INDIR/ind4.chr1.mask.bed.gz \
+--mask $MAPDIR/hs37d5_chr1.mask.bed \
+$INDIR/ind1.chr1.vcf.gz $INDIR/ind2.chr1.vcf.gz $INDIR/ind3.chr1.vcf.gz \
+$INDIR/ind4.chr1.vcf.gz \
+> $OUTDIR/pop1.chr1.multihetsep.txt
