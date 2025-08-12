@@ -16,15 +16,19 @@ bcftools view -i 'F_MISSING <= 0.3 && FORMAT/DP>=5' -m2 -M2 -v snps -Oz -o Filte
 # results: 16,897,926
   # + ld + maf
   # PCA+admix+fst 
-vcftools --gzvcf FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz -maf 0.05 --recode | gzip -c > FilteredMax30missingDepthmin5MAFandLD_GeographicNames_allsamples.vcf.gz
+vcftools --gzvcf FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz -maf 0.05 --recode | gzip -c > FilteredMax30missingDepthmin5MAF_GeographicNames_allsamples.vcf.gz
   # result: 10,391,668
-vcftools --gzvcf FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz --geno-r2 --min-r2 0.8 
+# LD pairwise calculation
+vcftools --gzvcf FilteredMax30missingDepthmin5MAFa_GeographicNames_allsamples.vcf.gz --geno-r2 --min-r2 0.8 
+# LD decay to filter at a minimun distance
+vcftools --gzvcf FilteredMax30missingDepthmin5MAF_GeographicNames_allsamples.vcf.gz --out FilteredMax30missingDepthmin5MAF_GeographicNames_onlyspeluncae --plink --remove-indv EleoindigoticusUCE --remove-indv EleopsychopompusUCE1 --remove-indv Sdiamantinensis --remove-indv SiraiensisUCE --remove-indv Snovacapitalis --remove-indv Spachecoi --remove-indv Spetrophilus --remove-indv Ssuperciliaris
+PopLDdecay -InVCF ../FilteredMax30missingDepthmin5MAF_GeographicNames_allsamples. -OutStat LDdecay
 
 
 # 3. Filter per clade
 ## ONLY Speluncae
 bcftools view -s ^EleoindigoticusUCE,EleopsychopompusUCE1,Sdiamantinensis,SiraiensisUCE,Snovacapitalis,Spachecoi,Spetrophilus,Ssuperciliaris -Oz -o OnlySspeluncae_FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz
-# result: 18,960,551
+# result: 16,897,926
   ## Remove bad samples from OnlySspeluncae_FilteredMax30missingDepthmin5_mergedVCFproject1_2_5_6_7_8.vcf.gz
   bcftools view -s ^CunhaSerraDoMarRJ1_lin4,BocainaSerraDoMarRJ2_lin4,SerraDosOrgaos1_lin2,SerraDosOrgaos2_lin2,SulMantiqueira1_lin3,DevonianaPR1_lin5 -Oz -o OnlySspeluncae_FilteredPCA_FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz OnlySspeluncae_FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz
   # result: 16,897,926 sites
