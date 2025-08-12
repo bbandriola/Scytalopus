@@ -18,11 +18,14 @@ bcftools view -i 'F_MISSING <= 0.3 && FORMAT/DP>=5' -m2 -M2 -v snps -Oz -o Filte
   # PCA+admix+fst 
 vcftools --gzvcf FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz -maf 0.05 --recode | gzip -c > FilteredMax30missingDepthmin5MAF_GeographicNames_allsamples.vcf.gz
   # result: 10,391,668
-# LD pairwise calculation
-vcftools --gzvcf FilteredMax30missingDepthmin5MAFa_GeographicNames_allsamples.vcf.gz --geno-r2 --min-r2 0.8 
-# LD decay to filter at a minimun distance
-vcftools --gzvcf FilteredMax30missingDepthmin5MAF_GeographicNames_allsamples.vcf.gz --out FilteredMax30missingDepthmin5MAF_GeographicNames_onlyspeluncae --plink --remove-indv EleoindigoticusUCE --remove-indv EleopsychopompusUCE1 --remove-indv Sdiamantinensis --remove-indv SiraiensisUCE --remove-indv Snovacapitalis --remove-indv Spachecoi --remove-indv Spetrophilus --remove-indv Ssuperciliaris
-PopLDdecay -InVCF ../FilteredMax30missingDepthmin5MAF_GeographicNames_allsamples. -OutStat LDdecay
+# LD pairwise calculation | # LD decay to filter at a minimun distance
+bcftools view -s ^EleoindigoticusUCE,EleopsychopompusUCE1,Sdiamantinensis,SiraiensisUCE,Snovacapitalis,Spachecoi,Spetrophilus,Ssuperciliaris,CunhaSerraDoMarRJ1_lin4,BocainaSerraDoMarRJ2_lin4,SerraDosOrgaos1_lin2,SerraDosOrgaos2_lin2,SulMantiqueira1_lin3,DevonianaPR1_lin5 -Oz -o FilteredMax30missingDepthmin5MAF_FilteredPCA_GeographicNames_onlyspeluncae.vcf.gz.recode.vcf.gz FilteredMax30missingDepthmin5MAF_GeographicNames_allsamples.vcf.gz.recode.vcf.gz
+PopLDdecay -InVCF ../FilteredMax30missingDepthmin5MAF_FilteredPCA_GeographicNames_onlyspeluncae.vcf.gz.recode.vcf.gz -OutStat LDdecay_speluncae
+# do LD prunning with plink 
+  # a partir disso, fazer um filtro de prunning adequado para os dados  
+  plink --file data --indep-pairwise 50 5 0.5 # ajustar o ultimo valor para o valor que tiver saido no LDdecay
+  plink --file data --extract plink.prune.in --make-bed --out pruneddata
+  
 
 
 # 3. Filter per clade
