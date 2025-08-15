@@ -21,11 +21,15 @@ vcftools --gzvcf FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz
 # LD pairwise calculation | # LD decay to filter at a minimun distance
 bcftools view -s ^EleoindigoticusUCE,EleopsychopompusUCE1,Sdiamantinensis,SiraiensisUCE,Snovacapitalis,Spachecoi,Spetrophilus,Ssuperciliaris,CunhaSerraDoMarRJ1_lin4,BocainaSerraDoMarRJ2_lin4,SerraDosOrgaos1_lin2,SerraDosOrgaos2_lin2,SulMantiqueira1_lin3,DevonianaPR1_lin5 -Oz -o FilteredMax30missingDepthmin5MAF_FilteredPCA_GeographicNames_onlyspeluncae.vcf.gz.recode.vcf.gz FilteredMax30missingDepthmin5MAF_GeographicNames_allsamples.vcf.gz.recode.vcf.gz
 PopLDdecay -InVCF ../FilteredMax30missingDepthmin5MAF_FilteredPCA_GeographicNames_onlyspeluncae.vcf.gz.recode.vcf.gz -OutStat LDdecay_speluncae
+  # plot: perl ./PopLDdecay/bin/Plot_OnePop.pl -inFile LDdecay.stat.gz
+  # Rscrip LDdecay.r
+#test with plink; ref: https://speciationgenomics.github.io/ld_decay/
+plink --vcf ../FilteredMax30missingDepthmin5MAF_GeographicNames_allsamples.vcf.gz.recode.vcf.gz --double-id --allow-extra-chr --set-missing-var-ids @:# --geno 0.1 --thin 0.1 --r2 gz --ld-window 100 --ld-window-kb 1000 --ld-window-r2 0 --out r2Plink_onlyspeluncae
 # do LD prunning with plink 
   # a partir disso, fazer um filtro de prunning adequado para os dados  
-  plink --file data --indep-pairwise 50 5 0.5 # ajustar o ultimo valor para o valor que tiver saido no LDdecay
-  plink --file data --extract plink.prune.in --make-bed --out pruneddata
-  
+  plink2 --vcf ../FilteredMax30missingDepthmin5MAF_FilteredPCA_GeographicNames_onlyspeluncae.vcf.gz.recode.vcf.gz --indep-pairwise 1 1 0.15 --out pruning_1kb_r2_0.15 --allow-extra-chr --set-missing-var-ids @:# # ajustar o ultimo valor para o valor que tiver saido no LDdecay
+  awk -F':' '{print $1"\t"($2-1)"\t"$2}' pruning_1kb_r2_0.15.prune.in > prune_in.bed
+  bcftools view -R LDdecay/prune_in.bed -Oz -o FilteredMax30missingDepthmin5MAFand15LD_FilteredPCA_GeographicNames_onlyspeluncae.vcf.gz.recode.vcf.gz FilteredMax30missingDepthmin5MAF_FilteredPCA_GeographicNames_onlyspeluncae.vcf.gz.recode.vcf.gz
 
 
 # 3. Filter per clade
