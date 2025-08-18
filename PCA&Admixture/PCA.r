@@ -59,6 +59,10 @@ dev.off()
 ###############################################
 ########## with individual identification #####
 ###############################################
+
+names(pca)[2] <- "lineages"
+names(pca)[3:ncol(pca)] <- paste0("PC", 1:(ncol(pca)-1))
+
 pdf("PCA_indIndetification.pdf",width = 10,height = 10)
 b <- ggplot(pca, aes(PC1, PC2, color = lineages, label = pca$X1)) + 
   geom_text(position = position_jitter(seed = 1, width = 0.02, height = 0.03), 
