@@ -1,7 +1,3 @@
-## add mantel test to fulfill the square
-
-library(tidyverse)
-
 fst <- read.table("FSTMean.txt", header = TRUE, sep = "\t", stringsAsFactors = FALSE)
 colnames(fst)[3] <- "FST"
 fst$FST <- as.numeric(fst$FST)
@@ -26,17 +22,21 @@ colnames(fst_long) <- c("Pop1", "Pop2", "FST")
 fst_long <- fst_long %>% filter(!is.na(FST))
 
 # Plot heatmap
-pdf()
+pdf("heatmap_fst.pdf",height = 6, width = 6)
 ggplot(fst_long, aes(x = Pop2, y = Pop1, fill = FST)) +
   geom_tile(color = "white") +
   geom_text(aes(label = sprintf("%.2f", FST)), size = 3) +
   scale_fill_gradient(low = "white", high = "red", limits = c(0, 1),
                        name = "FST") +
-  scale_y_discrete(limits = all_pops) +  # keep first pop at bottom
-  theme_minimal(base_size = 8) +
+  scale_y_discrete(limits = rev(all_pops)) +  # keep first pop at bottom
+  scale_x_discrete(limits = all_pops)+
+  scale_x_discrete(position = "top")+
+  theme_minimal(base_size = 10) +
   theme(
     axis.text.x = element_text(angle = 90, hjust = 1),
     axis.title = element_blank(),
     panel.grid = element_blank()
   ) +
   ggtitle("Pairwise FST")
+dev.off()
+
