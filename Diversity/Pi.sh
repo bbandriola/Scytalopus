@@ -2,7 +2,8 @@
 
 # 1. Estimate nucleotidy diversity 
 # including hybrids in lineage 7
-pixy --stats pi --vcf ../../vcffiles/OnlySspeluncae_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8.vcf.gz --window_size 1000000 --n_cores 4 --output_prefix AllLineages_pi --population populations_speluncae.txt --bypass_invariant_check 'yes'
+  ##### REVER REVER REVER PORQUE EU SO POSSUO UM VCF COM SITIOS VARIANTES
+pixy --stats pi --vcf ../../vcffiles/FinalVCFs/OnlySspeluncae_FilteredPCA_FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz --window_size 1000 --n_cores 1 --output_prefix Lin1 --population ../lin1.txt 
 # NOT including hybrids in lineage 7
 pixy --stats pi --vcf ../../vcffiles/OnlySspeluncae_FilteredMax30missingDepthmin5_mergedVCFproject0_1_2_4_5_6_7_8.vcf.gz --window_size 1000000 --n_cores 4 --output_prefix lin7NoHybridsInd_Pi --population lin7NoHybridsInd.txt --bypass_invariant_check 'yes'
 # group a lineage A
