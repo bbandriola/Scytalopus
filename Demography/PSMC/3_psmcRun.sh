@@ -12,8 +12,8 @@
 ./psmc/psmc -N30 -t5 -r5 -p "2+2+30*2+4+6+10" -o 2epochrecentpresent_Caparao_lin3.d5.D50.diploid.psmc Caparao_lin3.d5.D50.diploid.psmcfa
 ./psmc/psmc -N30 -t5 -r5 -p "2+2+30*2+4+6+10" -o 2epochrecentpresent_SerradaOuricana_lin1.d5.D45.diploid.psmc SerradaOuricana_lin1.d5.D45.diploid.psmcfa
 ./psmc/psmc -N30 -t5 -r5 -p "2+2+30*2+4+6+10" -o 2epochrecentpresent_SerradasLontra4_lin1.d6.D60.diploid.psmc SerradasLontra4_lin1.d6.D60.diploid.psmcfa
-./psmc/psmc -N30 -t5 -r5 -p "2+2+30*2+4+6+10" -o 2epochrecentpresent_BoaEsperanca_lin67.d10.D90.diploid.psmc BoaEsperanca_lin67.d10.D90.diploid.psmcfa
-./psmc/psmc -N30 -t5 -r5 -p "2+2+30*2+4+6+10" -o 2epochrecentpresent_BoaEsperanca_lin67.d10.D90.diploid.psmc BoaEsperanca_lin67.d10.D90.diploid.psmcfa
+./psmc/psmc -N30 -t5 -r5 -p "2+2+30*2+4+6+10" -o 2epochrecentpresent_BoaEsperanca2_lin67.d10.D90.diploid.psmc BoaEsperanca2_lin67.d10.D90.diploid.psmcfa
+./psmc/psmc -N30 -t5 -r5 -p "2+2+30*2+4+6+10" -o 2epochrecentpresent_BoaEsperanca3_lin67.d10.D90.diploid.psmc BoaEsperanca3_lin67.d10.D90.diploid.psmcfa
 ./psmc/psmc -N30 -t5 -r5 -p "2+2+30*2+4+6+10" -o 2epochrecentpresent_DevonianaPR8.d10.D90.diploid.psmc DevonianaPR8.d10.D90.diploid.psmcfa
 ./psmc/psmc -N30 -t5 -r5 -p "2+2+30*2+4+6+10" -o 2epochrecentpresent_SulMantiqueira3_lin3.d7.D66.diploid.psmc SulMantiqueira3_lin3.d7.D66.diploid.psmcfa
 ./psmc/psmc -N30 -t5 -r5 -p "2+2+30*2+4+6+10" -o 2epochrecentpresent_CunhaSerradoMarRJ2_lin4.d5.D45.diploid.psmc CunhaSerradoMarRJ2_lin4.d5.D45.diploid.psmcfa
@@ -36,8 +36,8 @@
 ./psmc/psmc -N30 -t5 -r5 -p "1+1+1+1+30*2+4+6+10" -o 4epochrecentpresent_Caparao_lin3.d5.D50.diploid.psmc Caparao_lin3.d5.D50.diploid.psmcfa
 ./psmc/psmc -N30 -t5 -r5 -p "1+1+1+1+30*2+4+6+10" -o 4epochrecentpresent_SerradaOuricana_lin1.d5.D45.diploid.psmc SerradaOuricana_lin1.d5.D45.diploid.psmcfa
 ./psmc/psmc -N30 -t5 -r5 -p "1+1+1+1+30*2+4+6+10" -o 4epochrecentpresent_SerradasLontra4_lin1.d6.D60.diploid.psmc SerradasLontra4_lin1.d6.D60.diploid.psmcfa
-./psmc/psmc -N30 -t5 -r5 -p "1+1+1+1+30*2+4+6+10" -o 4epochrecentpresent_BoaEsperanca_lin67.d10.D90.diploid.psmc BoaEsperanca_lin67.d10.D90.diploid.psmcfa
-./psmc/psmc -N30 -t5 -r5 -p "1+1+1+1+30*2+4+6+10" -o 4epochrecentpresent_BoaEsperanca_lin67.d10.D90.diploid.psmc BoaEsperanca_lin67.d10.D90.diploid.psmcfa
+./psmc/psmc -N30 -t5 -r5 -p "1+1+1+1+30*2+4+6+10" -o 4epochrecentpresent_BoaEsperanca2_lin67.d10.D90.diploid.psmc BoaEsperanca2_lin67.d10.D90.diploid.psmcfa
+./psmc/psmc -N30 -t5 -r5 -p "1+1+1+1+30*2+4+6+10" -o 4epochrecentpresent_BoaEsperanca3_lin67.d10.D90.diploid.psmc BoaEsperanca3_lin67.d10.D90.diploid.psmcfa
 ./psmc/psmc -N30 -t5 -r5 -p "1+1+1+1+30*2+4+6+10" -o 4epochrecentpresent_DevonianaPR8.d10.D90.diploid.psmc DevonianaPR8.d10.D90.diploid.psmcfa
 ./psmc/psmc -N30 -t5 -r5 -p "1+1+1+1+30*2+4+6+10" -o 4epochrecentpresent_SulMantiqueira3_lin3.d7.D66.diploid.psmc SulMantiqueira3_lin3.d7.D66.diploid.psmcfa
 ./psmc/psmc -N30 -t5 -r5 -p "1+1+1+1+30*2+4+6+10" -o 4epochrecentpresent_CunhaSerradoMarRJ2_lin4.d5.D45.diploid.psmc CunhaSerradoMarRJ2_lin4.d5.D45.diploid.psmcfa
