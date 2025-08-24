@@ -50,3 +50,6 @@
 ./psmc/psmc -N30 -t5 -r5 -p "1+1+1+1+30*2+4+6+10" -o 4epochrecentpresent_NortePR3_lin5.d6.D60.diploid.psmc NortePR3_lin5.d6.D60.diploid.psmcfa
 ./psmc/psmc -N30 -t5 -r5 -p "1+1+1+1+30*2+4+6+10" -o 4epochrecentpresent_ExtremoSulRS3_lin7.d5.D45.diploid.psmc ExtremoSulRS3_lin7.d5.D45.diploid.psmcfa
 ./psmc/psmc -N30 -t5 -r5 -p "1+1+1+1+30*2+4+6+10" -o 4epochrecentpresent_Ssuperciliaris.d3.D30.diploid.psmc Ssuperciliaris.d3.D30.diploid.psmcfa
+
+# teste https://doi.org/10.1002/ece3.5804 60*1 + 2 + 2
+./psmc/psmc -N30 -t5 -r5 -p "60*1+2+2" -o teste_Sdiamantinensis.d7.D70.diploid.psmc Sdiamantinensis.d7.D70.diploid.psmcfa
