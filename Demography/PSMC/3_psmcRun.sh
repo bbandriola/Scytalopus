@@ -53,3 +53,25 @@
 
 # teste https://doi.org/10.1002/ece3.5804 60*1 + 2 + 2
 ./psmc/psmc -N30 -t5 -r5 -p "60*1+2+2" -o teste_Sdiamantinensis.d7.D70.diploid.psmc Sdiamantinensis.d7.D70.diploid.psmcfa
+../../Softwares/psmc/psmc -N30 -t5 -r5 -p "60*1+2+2" -o 60epochrecentpresent_Snovacapitalis.d10.D90.diploid.psmc Snovacapitalis.d10.D90.diploid.psmcfa
+../../Softwares/psmc/psmc -N30 -t5 -r5 -p "60*1+2+2" -o 60epochrecentpresent_Spachecoi.d10.D90.diploid.psmc Spachecoi.d10.D90.diploid.psmcfa
+../../Softwares/psmc/psmc -N30 -t5 -r5 -p "60*1+2+2" -o 60epochrecentpresent_CentroLestePR1_lin7.d5.D45.diploid.psmc CentroLestePR1_lin7.d5.D45.diploid.psmcfa
+../../Softwares/psmc/psmc -N30 -t5 -r5 -p "60*1+2+2" -o 60epochrecentpresent_NorteMantiqueira3_lin3.d6.D60.diploid.psmc NorteMantiqueira3_lin3.d6.D60.diploid.psmcfa
+../../Softwares/psmc/psmc -N30 -t5 -r5 -p "60*1+2+2" -o 60epochrecentpresent_Caparao_lin3.d5.D50.diploid.psmc Caparao_lin3.d5.D50.diploid.psmcfa
+../../Softwares/psmc/psmc -N30 -t5 -r5 -p "60*1+2+2" -o 60epochrecentpresent_SerradaOuricana_lin1.d5.D45.diploid.psmc SerradaOuricana_lin1.d5.D45.diploid.psmcfa
+../../Softwares/psmc/psmc -N30 -t5 -r5 -p "60*1+2+2" -o 60epochrecentpresent_SerradasLontra4_lin1.d6.D60.diploid.psmc SerradasLontra4_lin1.d6.D60.diploid.psmcfa
+../../Softwares/psmc/psmc -N30 -t5 -r5 -p "60*1+2+2" -o 60epochrecentpresent_BoaEsperanca2_lin67.d10.D90.diploid.psmc BoaEsperanca2_lin67.d10.D90.diploid.psmcfa
+../../Softwares/psmc/psmc -N30 -t5 -r5 -p "60*1+2+2" -o 60epochrecentpresent_BoaEsperanca3_lin67.d10.D90.diploid.psmc BoaEsperanca3_lin67.d10.D90.diploid.psmcfa
+../../Softwares/psmc/psmc -N30 -t5 -r5 -p "60*1+2+2" -o 60epochrecentpresent_DevonianaPR8.d10.D90.diploid.psmc DevonianaPR8.d10.D90.diploid.psmcfa
+../../Softwares/psmc/psmc -N30 -t5 -r5 -p "60*1+2+2" -o 60epochrecentpresent_SulMantiqueira3_lin3.d7.D66.diploid.psmc SulMantiqueira3_lin3.d7.D66.diploid.psmcfa
+../../Softwares/psmc/psmc -N30 -t5 -r5 -p "60*1+2+2" -o 60epochrecentpresent_CunhaSerradoMarRJ2_lin4.d5.D45.diploid.psmc CunhaSerradoMarRJ2_lin4.d5.D45.diploid.psmcfa
+../../Softwares/psmc/psmc -N30 -t5 -r5 -p "60*1+2+2" -o 60epochrecentpresent_BocainaSerradoMarRJ1_lin4.d5.D45.diploid.psmc BocainaSerradoMarRJ1_lin4.d5.D45.diploid.psmcfa
+../../Softwares/psmc/psmc -N30 -t5 -r5 -p "60*1+2+2" -o 60epochrecentpresent_DevonianaPR3_lin5.d5.D45.diploid.psmc DevonianaPR3_lin5.d5.D45.diploid.psmcfa
+../../Softwares/psmc/psmc -N30 -t5 -r5 -p "60*1+2+2" -o 60epochrecentpresent_Spetrophilus.d5.D50.diploid.psmc Spetrophilus.d5.D50.diploid.psmcfa
+../../Softwares/psmc/psmc -N30 -t5 -r5 -p "60*1+2+2" -o 60epochrecentpresent_NortePR_lin7.d6.D60.diploid.psmc NortePR_lin7.d6.D60.diploid.psmcfa
+../../Softwares/psmc/psmc -N30 -t5 -r5 -p "60*1+2+2" -o 60epochrecentpresent_CentroOesteSC1_lin7.d5.D45.diploid.psmc CentroOesteSC1_lin7.d5.D45.diploid.psmcfa
+../../Softwares/psmc/psmc -N30 -t5 -r5 -p "60*1+2+2" -o 60epochrecentpresent_SerradosOrgaos3_lin2.d3.D30.diploid.psmc SerradosOrgaos3_lin2.d3.D30.diploid.psmcfa
+../../Softwares/psmc/psmc -N30 -t5 -r5 -p "60*1+2+2" -o 60epochrecentpresent_NortePR3_lin5.d6.D60.diploid.psmc NortePR3_lin5.d6.D60.diploid.psmcfa
+../../Softwares/psmc/psmc -N30 -t5 -r5 -p "60*1+2+2" -o 60epochrecentpresent_ExtremoSulRS3_lin7.d5.D45.diploid.psmc ExtremoSulRS3_lin7.d5.D45.diploid.psmcfa
+../../Softwares/psmc/psmc -N30 -t5 -r5 -p "60*1+2+2" -o 60epochrecentpresent_Ssuperciliaris.d3.D30.diploid.psmc Ssuperciliaris.d3.D30.diploid.psmcfa
+
