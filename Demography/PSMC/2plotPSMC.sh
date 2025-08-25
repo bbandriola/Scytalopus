@@ -43,3 +43,6 @@
 /media/labgenoma5/DATAPART1/bandriola/Softwares/psmc/utils/psmc_plot.pl -u 0.00000000289 -g 3.1 -p -R -G 4epochrecentpresent_Spetrophilus.d5.D50.diploid.psmc
 /media/labgenoma5/DATAPART1/bandriola/Softwares/psmc/utils/psmc_plot.pl -u 0.00000000289 -g 3.0 -p -R -G 4epochrecentpresent_Ssuperciliaris.d3.D30.diploid.psmc
 /media/labgenoma5/DATAPART1/bandriola/Softwares/psmc/utils/psmc_plot.pl -u 0.00000000289 -g 3.2 -p -R -G 4epochrecentpresent_SulMantiqueira3_lin3.d7.D66.diploid.psmc
+
+# teste dif atomic intervals
+/media/labgenoma5/DATAPART1/bandriola/Softwares/psmc/utils/psmc_plot.pl -u 0.00000000289 -g 3.1 -p -R -G teste_Sdiamantinensis.d7.D70.diploid.psmc
