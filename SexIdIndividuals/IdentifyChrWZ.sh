@@ -52,6 +52,7 @@
 ~/Softwares/minimap2-2.30_x64-linux/minimap2 -a -t 5 /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/bams/Fastas/masked_fastas/Sspeluncae86_lin5_final.bam.fa.bam_masked.fa Wchr_Clanceolata.fasta > DevonianaPR4_lin5.WChr.sam
 ~/Softwares/minimap2-2.30_x64-linux/minimap2 -a -t 5 /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/bams/Fastas/masked_fastas/Sspeluncae87_lin7_final.bam.fa.bam_masked.fa Wchr_Clanceolata.fasta > NortePR3_lin7.WChr.sam
 ~/Softwares/minimap2-2.30_x64-linux/minimap2 -a -t 5 /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/bams/Fastas/masked_fastas/Sspeluncae95_lin7_final.bam.fa.bam_masked.fa Wchr_Clanceolata.fasta > NorteMantiqueira1_lin3.WChr.sam
+
 ~/Softwares/minimap2-2.30_x64-linux/minimap2 -a -t 5 /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/bams/Fastas/masked_fastas/Sspeluncae9_lin3_final.bam.fa.bam_masked.fa Wchr_Clanceolata.fasta > ExtremoSulRS3_lin7.WChr.sam
 
 # convert sam to fasta 
