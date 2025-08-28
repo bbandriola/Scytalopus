@@ -1,7 +1,4 @@
 # Scytalopus
-Repository referenced to the population analyses with Scytalopus.
-The files are organized into directorios for analysis type. 
-
 Lineage colors: 
 Lin1:#0660FB 
 Lin2:#4D9F8C
