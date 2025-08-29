@@ -20,6 +20,7 @@ vcftools --gzvcf ../../../vcffiles/FinalVCFs/FilteredMax30missingDepthmin5_Filte
 vcftools --gzvcf ../../../vcffiles/FinalVCFs/FilteredMax30missingDepthmin5_FilteredPCA_GeographicNames_onlyspeluncae.vcf.gz.recode.vcf.gz --weir-fst-pop lin57.txt --weir-fst-pop lin6.txt --out fstlin57_lin6
 vcftools --gzvcf ../../../vcffiles/FinalVCFs/FilteredMax30missingDepthmin5_FilteredPCA_GeographicNames_onlyspeluncae.vcf.gz.recode.vcf.gz --weir-fst-pop lin57.txt --weir-fst-pop lin7.txt --out fstlin57_lin7 
 vcftools --gzvcf ../../../vcffiles/FinalVCFs/FilteredMax30missingDepthmin5_FilteredPCA_GeographicNames_onlyspeluncae.vcf.gz.recode.vcf.gz --weir-fst-pop lin6.txt --weir-fst-pop lin7.txt --out fstlin6_lin7
+vcftools --gzvcf --out FSTlin3lin4.txt --weir-fst-pop lin3.txt --weir-fst-pop lin4.txt --fst-window-size 10000 --fst-window-step 0
   # heatmap with the result 
   Rscript heatmap.r
 
