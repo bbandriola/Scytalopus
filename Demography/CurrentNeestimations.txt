@@ -1,0 +1,5 @@
+# test with currentNe https://github.com/esrud/currentNe it has to have a maximum of 2M snps
+# filtered vcf to contain only inds from lin1 + 2m snps including only the bigger scaffolds
+
+# count how many unique scaffold there is to include in the estimation
+
