@@ -17,21 +17,30 @@ df = read.csv("Your_OTU_table.csv", header= TRUE)
 # ge <- data[,4:5] #pega só as colunas latitude e longitude da tabela
 # test <- dist(ge, method = "euclidean", diag = TRUE, upper = TRUE) #gera matriz dist euclidiana
 # write.table(as.matrix(test), "utm_matrix_56samples_Ponca.txt") #salva em um arquivo
+UTM <- read.table("UTM.csv",sep="",header=T)
+longlat <- data.frame(UTM$Longitude,UTM$Latitude)
+testUTM <- dist(longlat, method = "euclidean", diag = TRUE, upper = TRUE)
+write.table(as.matrix(testUTM), "utm_matrixeuclideanist.txt")
 
-#Quando ja tiver uma matriz, o comando abaixo serve para carrega-la
-setwd("C:/Users/comprador/OneDrive - PUCRS - BR/Mestrado/Pipelines/Matrizes de distância/GeographicMatrix/new_samples")
-geo_matrix <- read.xlsx("woutliers.xlsx", 1, header = TRUE)
+# Quando ja tiver uma matriz, o comando abaixo serve para carrega-la
+geo_matrix <- read.xlsx("utm_matrixeuclideanist.xlsx", 1)
 row.names(geo_matrix) <- geo_matrix$NA.
 geo_matrix[1] <- NULL
 #geo_matrix <- geo_matrix[-c(48),]
 
-setwd("C:/Users/comprador/OneDrive - PUCRS - BR/Mestrado/Pipelines/Matrizes de distância/GeneticMatrix")
-#Carrega matriz genética gerada com o ngsdist (beagle) ou VCF2Dis (VCF)
+# Carrega matriz genética gerada com o ngsdist (beagle) ou VCF2Dis (VCF)
 # VCF2Dis calcula p-distance = numero de diferenças nucleotidicas / numero de nucleotideos comparados
-gene_matrix <- read.xlsx("woutliers.xlsx", 1, header = TRUE)
+gene_matrix <- read.xlsx("GeneticDist2.xlsx",1, header = TRUE)
 row.names(gene_matrix) <- gene_matrix$NA.
 gene_matrix[1] <- NULL
 #gene_matrix <- gene_matrix[-c(3),]
+
+# Matrix de variáveis ambientais
+env_variables = read.csv("SpeluncaeSamples.csv",sep=";")
+temp = env_variables$wc2.1_30s_bio_1
+annualprecip = env_variables$wc2.1_30s_bio_12
+precipseasonality = env_variables$wc2.1_30s_bio_15
+meandiurnalrange = env_variables$wc2.1_30s_bio_2
 
 #Teste de Mantel
 results_mantel <- mantel(as.dist(gene_matrix) ~ as.dist(geo_matrix), nperm = 10000) # as.dist muda a classe do objeto
