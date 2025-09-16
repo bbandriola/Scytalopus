@@ -41,6 +41,29 @@ temp = env_variables$wc2.1_30s_bio_1
 annualprecip = env_variables$wc2.1_30s_bio_12
 precipseasonality = env_variables$wc2.1_30s_bio_15
 meandiurnalrange = env_variables$wc2.1_30s_bio_2
+# calculate euclidean dist
+dist.temp = dist(temp, method = "euclidean")
+dist.annualprecip = dist(annualprecip, method = "euclidean")
+dist.precipseasonality = dist(precipseasonality, method = "euclidean")
+dist.meandiurnalrange = dist(meandiurnalrange, method = "euclidean")
+# tables
+write.table(as.matrix(dist.temp), "dist.temp_matrixeuclideanist.txt")
+write.table(as.matrix(dist.annualprecip), "dist.annualprecip_matrixeuclideanist.txt")
+write.table(as.matrix(dist.precipseasonality), "dist.precipseasonality_matrixeuclideanist.txt")
+write.table(as.matrix(dist.meandiurnalrange), "dist.meandiurnalrange_matrixeuclideanist.txt")
+
+gene_matrix <- read.xlsx("GeneticDist2.xlsx",1, header = TRUE)
+row.names(gene_matrix) <- gene_matrix$NA.
+gene_matrix[1] <- NULL
+
+gene_matrix <- read.xlsx("GeneticDist2.xlsx",1, header = TRUE)
+row.names(gene_matrix) <- gene_matrix$NA.
+gene_matrix[1] <- NULL
+
+gene_matrix <- read.xlsx("GeneticDist2.xlsx",1, header = TRUE)
+row.names(gene_matrix) <- gene_matrix$NA.
+gene_matrix[1] <- NULL
+
 
 #Teste de Mantel
 results_mantel <- mantel(as.dist(gene_matrix) ~ as.dist(geo_matrix), nperm = 10000) # as.dist muda a classe do objeto
