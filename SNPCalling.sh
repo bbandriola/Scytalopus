@@ -1,5 +1,20 @@
 ## Workflow used to generate the vcf files
 
+#BEFORE EVERYTHING: 
+# normalizar os vcfs antes de fazer o merge
+# command:
+bcftools norm -f ../../../../../DATAPART7/sandro_grupo/raw_data/bruna/refSsuperciliaris/GCA_013400415.1_ASM1340041v1/GCA_013400415.1_ASM1340041v1_genomic.fa -Oz -o Scyta121-127_raw_norm.vcf.gz Scyta121-127_raw.vcf.gz
+bcftools norm -f ../../../../../DATAPART7/sandro_grupo/raw_data/bruna/refSsuperciliaris/GCA_013400415.1_ASM1340041v1/GCA_013400415.1_ASM1340041v1_genomic.fa -Oz -o Scyta139-154_raw_norm.vcf.gz Scyta139-154_raw.vcf.gz
+bcftools norm -f ../../../../../DATAPART7/sandro_grupo/raw_data/bruna/refSsuperciliaris/GCA_013400415.1_ASM1340041v1/GCA_013400415.1_ASM1340041v1_genomic.fa -Oz -o Scyta1_raw_norm.vcf.gz Scyta1_raw.vcf.gz
+bcftools norm -f ../../../../../DATAPART7/sandro_grupo/raw_data/bruna/refSsuperciliaris/GCA_013400415.1_ASM1340041v1/GCA_013400415.1_ASM1340041v1_genomic.fa -Oz -o Scyta95-110_raw_norm.vcf.gz Scyta95-110_raw.vcf.gz
+bcftools norm -f ../../../../../DATAPART7/sandro_grupo/raw_data/bruna/refSsuperciliaris/GCA_013400415.1_ASM1340041v1/GCA_013400415.1_ASM1340041v1_genomic.fa -Oz -o Scyta_1-15_48-64_raw_norm.vcf.gz Scyta_1-15_48-64_raw.vcf.gz
+bcftools norm -f ../../../../../DATAPART7/sandro_grupo/raw_data/bruna/refSsuperciliaris/GCA_013400415.1_ASM1340041v1/GCA_013400415.1_ASM1340041v1_genomic.fa -Oz -o Scyta_116-120_raw_norm.vcf.gz Scyta_116-120_raw.vcf.gz
+bcftools norm -f ../../../../../DATAPART7/sandro_grupo/raw_data/bruna/refSsuperciliaris/GCA_013400415.1_ASM1340041v1/GCA_013400415.1_ASM1340041v1_genomic.fa -Oz -o Scyta_16-28_46-47_raw_norm.vcf.gz Scyta_16-28_46-47_raw.vcf.gz
+bcftools norm -f ../../../../../DATAPART7/sandro_grupo/raw_data/bruna/refSsuperciliaris/GCA_013400415.1_ASM1340041v1/GCA_013400415.1_ASM1340041v1_genomic.fa -Oz -o Scyta_43_68-74_raw_norm.vcf.gz Scyta_43_68-74_raw.vcf.gz
+bcftools norm -f ../../../../../DATAPART7/sandro_grupo/raw_data/bruna/refSsuperciliaris/GCA_013400415.1_ASM1340041v1/GCA_013400415.1_ASM1340041v1_genomic.fa -Oz -o Scyta_75-87_113-114_raw_norm.vcf.gz Scyta_75-87_113-114_raw.vcf.gz
+bcftools norm -f ../../../../../DATAPART7/sandro_grupo/raw_data/bruna/refSsuperciliaris/GCA_013400415.1_ASM1340041v1/GCA_013400415.1_ASM1340041v1_genomic.fa -Oz -o Scyta_ira_psy_indi_super_raw_norm.vcf.gz Scyta_ira_psy_indi_super_raw.vcf.gz
+
+
 # 1. merge all generated vcf from snpArcher project's into a single vcf
 # https://samtools.github.io/bcftools/bcftools.html#merge
 bcftools merge -m snps --output mergedVCFproject0_1_2_3_4_5_6_7_8_9.vcf.gz --output-type z --threads 7 --file-list ../vcffiles2merge.txt
@@ -7,6 +22,7 @@ bcftools merge -m snps --output mergedVCFproject0_1_2_3_4_5_6_7_8_9.vcf.gz --out
   # 1.1 change for geographic names 
   bcftools reheader --samples GeographicNames.txt --output GeographicNames_allsamples.vcf.gz mergedVCFproject0_1_2_3_4_5_6_7_8_9.vcf.gz
   # results:
+
 
 # 2. Filter sites for:
   # SNPs with <30% missing data
