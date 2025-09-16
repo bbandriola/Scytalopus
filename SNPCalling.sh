@@ -20,7 +20,7 @@ bcftools norm -f ../../../../../DATAPART7/sandro_grupo/raw_data/bruna/refSsuperc
 bcftools merge -m snps --output mergeallvcfsfromsnparcher.vcf.gz -Oz --threads 7 --file-list vcffiles2merge.txt #rodando
 # results: 68 individuals | 206.000.140 SNPs
   # 1.1 change for geographic names 
-  bcftools reheader --samples GeographicNames.txt --output GeographicNames_allsamples.vcf.gz mergedVCFproject0_1_2_3_4_5_6_7_8_9.vcf.gz
+  #bcftools reheader --samples GeographicNames.txt --output GeographicNames_allsamples.vcf.gz mergeallvcfsfromsnparcher.vcf.gz
   # results:
 
 
@@ -28,7 +28,7 @@ bcftools merge -m snps --output mergeallvcfsfromsnparcher.vcf.gz -Oz --threads 7
   # SNPs with <30% missing data
   # samples with <5x sequencing depth
   # biallelic sites 
-bcftools view -i 'F_MISSING <= 0.3 && FORMAT/DP>=5' -m2 -M2 -v snps -Oz -o FilteredMax30missingDepthmin5_GeographicNames_allsamples.vcf.gz GeographicNames_allsamples.vcf.gz
+#bcftools view -i 'F_MISSING <= 0.3 && FORMAT/DP>=10 && FORMAT/DP>=100' -m2 -M2 -v snps -Oz -o FilteredMax30missingDepthmin5max100_GeographicNames_allsamples.vcf.gz GeographicNames_allsamples.vcf.gz
 # results: 16,897,926
   # + ld + maf
   # PCA+admix+fst 
