@@ -17,9 +17,11 @@ bcftools norm -f ../../../../../DATAPART7/sandro_grupo/raw_data/bruna/refSsuperc
 # 1. merge all generated vcf from snpArcher project's into a single vcf
 # https://samtools.github.io/bcftools/bcftools.html#merge
 bcftools merge -m snps --output mergeallvcfsfromsnparcher.vcf.gz -Oz --threads 7 --file-list vcffiles2merge.txt
+# 68 ind; 205,398,098
 
 # 2. rename; filter by PCA, depth max and mix and missing
 mergeallvcfsfromsnparcher.vcf.gz | bcftools view -s ^SulMantiqueira1_lin3,CunhaSerraDoMarRJ1_lin4,BocainaSerraDoMarRJ2_lin4,DevonianaPR1_lin5,SerraDosOrgaos1_lin2,SerraDosOrgaos2_lin2 - | bcftools view -i 'F_MISSING <= 0.3 && FORMAT/DP>=10 && FORMAT/DP>=100' -m2 -M2 -v snps -Oz -o FilteredPCAMax30missingDepthmin10max100_GeographicNames_allsamples.vcf.gz
+# 62 ind;
 
 # 3. remove sexual chromossomes
 
