@@ -31,7 +31,7 @@ geo_matrix[1] <- NULL
 # Carrega matriz genética gerada com o ngsdist (beagle) ou VCF2Dis (VCF)
 # VCF2Dis calcula p-distance = numero de diferenças nucleotidicas / numero de nucleotideos comparados
 gene_matrix <- read.xlsx("GeneticDist2.xlsx",1, header = TRUE)
-row.names(gene_matrix) <- gene_matrix$NA.
+row.names(gene_matrix) <- gene_matrix$X1
 gene_matrix[1] <- NULL
 #gene_matrix <- gene_matrix[-c(3),]
 
