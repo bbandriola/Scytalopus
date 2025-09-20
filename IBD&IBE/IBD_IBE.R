@@ -1,15 +1,12 @@
-install.packages("geosphere")
-install.packages("vegan")
-install.packages("ecodist")
-install.packages("xlsx")
+#install.packages("geosphere")
+#install.packages("vegan")
+#install.packages("ecodist")
+#install.packages("xlsx")
 
 library(ecodist)
 library(xlsx)
 library(vegan)
 library(geosphere)
-
-# read environment variables together with UTMs
-df = read.csv("Your_OTU_table.csv", header= TRUE)
 
 # As matrizes precisam ser iguais em tamanho (mesmo numero de ind) e ter a mesma ordem
 # Matriz geografica é gerada a partir de coordenadas no formato UTM
@@ -21,12 +18,6 @@ UTM <- read.table("UTM.csv",sep="",header=T)
 longlat <- data.frame(UTM$Longitude,UTM$Latitude)
 testUTM <- dist(longlat, method = "euclidean", diag = TRUE, upper = TRUE)
 write.table(as.matrix(testUTM), "utm_matrixeuclideanist.txt")
-
-# Quando ja tiver uma matriz, o comando abaixo serve para carrega-la
-geo_matrix <- read.xlsx("utm_matrixeuclideanist.xlsx", 1)
-row.names(geo_matrix) <- geo_matrix$NA.
-geo_matrix[1] <- NULL
-#geo_matrix <- geo_matrix[-c(48),]
 
 # Carrega matriz genética gerada com o ngsdist (beagle) ou VCF2Dis (VCF)
 # VCF2Dis calcula p-distance = numero de diferenças nucleotidicas / numero de nucleotideos comparados
@@ -55,14 +46,23 @@ write.table(as.matrix(dist.meandiurnalrange), "dist.meandiurnalrange_matrixeucli
 gene_matrix <- read.xlsx("GeneticDist2.xlsx",1, header = TRUE)
 row.names(gene_matrix) <- gene_matrix$NA.
 gene_matrix[1] <- NULL
-
+gene_matrix <- read.xlsx("GeneticDist2.xlsx",1, header = TRUE)
+row.names(gene_matrix) <- gene_matrix$NA.
+gene_matrix[1] <- NULL
 gene_matrix <- read.xlsx("GeneticDist2.xlsx",1, header = TRUE)
 row.names(gene_matrix) <- gene_matrix$NA.
 gene_matrix[1] <- NULL
 
-gene_matrix <- read.xlsx("GeneticDist2.xlsx",1, header = TRUE)
-row.names(gene_matrix) <- gene_matrix$NA.
-gene_matrix[1] <- NULL
+
+#carregar variaveis de dis geo e gene para cada par de populações
+# Quando ja tiver uma matriz, o comando abaixo serve para carrega-la
+geo_matrix <- read.xlsx("utm_lin1vslin2.xlsx", 1, header=F)
+row.names(geo_matrix) <- geo_matrix$X1
+#geo_matrix <- geo_matrix[-c(48),]
+gene_matrix <- read.xlsx("GenDist_lin1vslin2.xlsx",1, header = TRUE)
+row.names(gene_matrix) <- gene_matrix$X1
+
+
 
 
 #Teste de Mantel
