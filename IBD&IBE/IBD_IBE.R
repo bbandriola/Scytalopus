@@ -87,11 +87,11 @@ write.table(as.matrix(dist.meandiurnalrange), "dist.meandiurnalrange_matrixeucli
 # all the txt file where opened into the excel and extracted as xlsx files
 
 # all files were subsetted to include only the pairwise compartion lineages
-run_mantel <- function(env_file, gene_file, sheet_geo = 1, sheet_gene = 1, permutations = 10000) {
+run_mantelENV <- function(env_file, gene_file, sheet_env = 1, sheet_gene = 1, permutations = 10000) {
   # Read geographic matrix
-  geo_matrix <- read.xlsx(geo_file, sheet_geo, header = TRUE)
-  row.names(geo_matrix) <- geo_matrix[,1]   # use first column as row names
-  geo_matrix <- geo_matrix[,-1]             # remove first column
+  env_matrix <- read.xlsx(env_file, sheet_env, header = TRUE)
+  row.names(env_matrix) <- env_matrix[,1]   # use first column as row names
+  env_matrix <- env_matrix[,-1]             # remove first column
   
   # Read genetic matrix
   gene_matrix <- read.xlsx(gene_file, sheet_gene, header = TRUE)
@@ -99,33 +99,33 @@ run_mantel <- function(env_file, gene_file, sheet_geo = 1, sheet_gene = 1, permu
   gene_matrix <- gene_matrix[,-1]           # remove first column
   
   # Convert to distance objects
-  geo_dist  <- as.dist(geo_matrix)
+  env_dist  <- as.dist(env_matrix)
   gene_dist <- as.dist(gene_matrix)
   
   # Run Mantel test
-  results_mantel <- mantel(gene_dist, geo_dist, method = "pearson", permutations = permutations)
+  results_mantel <- mantel(gene_dist, env_dist, method = "pearson", permutations = permutations)
   
   return(results_mantel)
 }
 
-env_file="temp_lin1vslin4.xlsx"
-gene_file="genedist_lin1vslin4.xlsx"
-run_mantel(geo_file,gene_file)
+env_file="temp_lin1vslin2.xlsx"
+gene_file="genedist_lin1vslin2.xlsx"
+run_mantelENV(env_file,gene_file)
 
 env_file="precipseasonality_lin1vslin4.xlsx"
 gene_file="genedist_lin1vslin4.xlsx"
-run_mantel(geo_file,gene_file)
+run_mantelENV(env_file,gene_file)
 
 env_file="meandiurnalrange_lin1vslin4.xlsx"
 gene_file="genedist_lin1vslin4.xlsx"
-run_mantel(geo_file,gene_file)
+run_mantelENV(env_file,gene_file)
 
 env_file="annualprecip_lin1vslin4.xlsx"
 gene_file="genedist_lin1vslin4.xlsx"
-run_mantel(geo_file,gene_file)
+run_mantelENV(env_file,gene_file)
 
 env_file="elev_lin1vslin4.xlsx"
 gene_file="genedist_lin1vslin4.xlsx"
-run_mantel(geo_file,gene_file)
+run_mantelENV(env_file,gene_file)
 
 
