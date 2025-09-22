@@ -131,4 +131,7 @@ env_file="elev_lin1vslin4.xlsx"
 gene_file="genedist_lin1vslin4.xlsx"
 run_mantelENV(env_file,gene_file)
 
+#### Pairwise scatter plots ####
+library(ggplot2)
+
 
