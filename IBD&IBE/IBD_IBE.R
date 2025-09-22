@@ -74,16 +74,19 @@ temp = env_variables$wc2.1_30s_bio_1
 annualprecip = env_variables$wc2.1_30s_bio_12
 precipseasonality = env_variables$wc2.1_30s_bio_15
 meandiurnalrange = env_variables$wc2.1_30s_bio_2
+elevation = read.csv("elevationvssamples.csv",sep=";")
 # calculate euclidean dist
 dist.temp = dist(temp, method = "euclidean")
 dist.annualprecip = dist(annualprecip, method = "euclidean")
 dist.precipseasonality = dist(precipseasonality, method = "euclidean")
 dist.meandiurnalrange = dist(meandiurnalrange, method = "euclidean")
+dist.elevation = dist(elevation, method = "euclidean")
 # tables
 write.table(as.matrix(dist.temp), "dist.temp_matrixeuclideanist.txt")
 write.table(as.matrix(dist.annualprecip), "dist.annualprecip_matrixeuclideanist.txt")
 write.table(as.matrix(dist.precipseasonality), "dist.precipseasonality_matrixeuclideanist.txt")
 write.table(as.matrix(dist.meandiurnalrange), "dist.meandiurnalrange_matrixeuclideanist.txt")
+write.table(as.matrix(dist.elevation), "dist.elevation_matrixeuclideanist.xlsx")
 # all the txt file where opened into the excel and extracted as xlsx files
 
 # all files were subsetted to include only the pairwise compartion lineages
