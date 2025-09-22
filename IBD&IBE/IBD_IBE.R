@@ -132,6 +132,46 @@ gene_file="genedist_lin1vslin4.xlsx"
 run_mantelENV(env_file,gene_file)
 
 #### Pairwise scatter plots ####
+# data preparation 
+# load distance matrices
+gene_matrix <- read.xlsx("genedist_lin1vslin3.xlsx", 1, header = TRUE)
+gene_matrix <- gene_matrix[,-1] 
+geo_matrix <- read.xlsx("utm_lin1vslin3.xlsx", 1, header = TRUE)
+geo_matrix <- geo_matrix[,-1] 
+
+temp_matrix <- read.xlsx("temp_euclideanmatrix.xlsx", 1, header = TRUE)
+temp_matrix <- temp_matrix[,-1]
+precips_matrix <- read.xlsx("precipseasonality_distancematrix.xlsx", 1, header = TRUE)
+precips_matrix <- precips_matrix[,-1] 
+diurnal_matrix <- read.xlsx("meandiurnalrange_distancematrix.xlsx", 1, header = TRUE)
+diurnal_matrix <- diurnal_matrix[,-1] 
+annualprecip_matrix <- read.xlsx("AnnualPrecipitation_distancematrix.xlsx", 1, header = TRUE)
+annualprecip_matrix <- annualprecip_matrix[,-1] 
+
+# convert as vector 
+geo  <- as.vector(as.dist(geo_matrix))
+gene <- as.vector(as.dist(gene_matrix))
+
+# conca in a single data frame
+mat <- data.frame(
+  geo          = as.vector(as.dist(geo_matrix)),
+  gene         = as.vector(as.dist(gene_matrix))
+)
+
+#gene vs geo
+mm = ggplot(mat, aes(y = gene, x = geo)) + 
+    geom_point(size = 3, alpha = 0.5,shape = 21, aes(fill = geo)) + 
+    geom_smooth(method = "lm", colour = "black", alpha = 0.2) +
+    labs(x = "Geographic distance", y = "Genetic distance", title = "Lin1 vs Lin3",
+    fill = "Geo distance") + 
+    theme( axis.text.x = element_text(face = "bold",colour = "black", size = 12), 
+        axis.text.y = element_text(face = "bold", size = 11, colour = "black"), 
+        axis.title= element_text(face = "bold", size = 14, colour = "black"), 
+        panel.background = element_blank(), 
+        panel.border = element_rect(fill = NA, colour = "black"))
+mm
+ggsave("lin1vslin3_geovsgene.svg")
+ggsave("lin1vslin3_geovsgene.png")
 library(ggplot2)
 
 
