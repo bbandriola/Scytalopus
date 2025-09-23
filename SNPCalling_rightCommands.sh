@@ -38,5 +38,6 @@ bcftools view -t ^ZWchr.txt -Oz -o NoZW_FilteredPCAandUCE_Max30missingDepthmin10
 # do LD prunning with plink 
   # a partir disso, fazer um filtro de prunning adequado para os dados  
 plink2 --vcf ../NoZW_FilteredPCAandUCE_Max30missingDepthmin10_GeographicNames_allsamples.vcf.gz --indep-pairwise 60 10 0.15 --out pruning_60snps_r2_0.15 --allow-extra-chr --set-missing-var-ids @:# # ajustar o ultimo valor para o valor que tiver saido no LDdecay
-#  awk -F':' '{print $1"\t"($2-1)"\t"$2}' pruning_1kb_r2_0.15.prune.in > prune_in.bed
-#  bcftools view -R LDdecay/prune_in.bed -Oz -o FilteredMax30missingDepthmin5MAFand15LD_FilteredPCA_GeographicNames_onlyspeluncae.vcf.gz.recode.vcf.gz FilteredMax30missingDepthmin5MAF_FilteredPCA_GeographicNames_onlyspeluncae.vcf.gz.recode.vcf.gz
+# snps 90,658 pruning_60snps_r2_0.15.prune.in
+awk -F':' '{print $1"\t"($2-1)"\t"$2}' pruning_60snps_r2_0.15.prune.in > prune_in.bed
+bcftools view -R LD/prune_in.bed -Oz -o NoZW_FilteredPCAandUCE_Max30missingDepthmin10LD015_GeographicNames_allsamples.vcf.gz NoZW_FilteredPCAandUCE_Max30missingDepthmin10_GeographicNames_allsamples.vcf.gz
