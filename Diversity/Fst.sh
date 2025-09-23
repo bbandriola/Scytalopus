@@ -37,6 +37,10 @@ pixy --stats fst --vcf ../../vcffiles/FinalVCFs/OnlySspeluncae_WithoutLin1_Filte
 # Fst with pixy according WC method
 pixy --stats fst --vcf ../../vcffiles/FinalVCFs/OnlySspeluncae_WithoutLin1_FilteredPCA_FilteredMax30missingDepthmin5_GeographicNames.vcf.gz --populations AllSspeluncaePops.txt --window_size 100000 --n_cores 2 --output_prefix AllSspeluncaePops_WithoutLin1_FstWC_pixy --bypass_invariant_check 'yes'
 
+## run FST com vcftools com o novo vcf 
+# labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/vcfs/FilteredPCAandUCE_Max30missingDepthmin10LD0.15_GeographicNames_allsamples.vcf.gz
+
+
 # Fst per scaffold: 
 # lins: Lin3A3B, Lin4A4B, Lin67Lin7, Lin5Lin7, Lin5Lin67, Lin5Lin2, Lin67Lin2, Lin7Lin2, Lin2Lin3, Lin2Lin4, Lin3Lin4, 
 for i in $(cat 1Mscaffolds.txt); do
@@ -57,3 +61,26 @@ python parseVCF.py --skipIndels --ploidyMismatchToMissing -i /media/labgenoma5/D
 
 # 2. calculate fst,dxy and pi between all populations
 python popgenWindows.py -g Onlybigger500kscaffold_OnlySspeluncae_FilteredPCA_FilteredMax10missingDepthmin10max100LD0.1_GeographicNames_allsample.geno.gz -o ./Onlybigger500kscaffold_OnlySspeluncae_FilteredPCA_FilteredMax10missingDepthmin10max100LD0.1.Fst.Dxy.pi.csv.gz -f phased -w 50000 -m 20 -s 5000 -p Lin1 -p Lin2 -p Lin3 -p Lin4 -p Lin5 -p Lin6 -p Lin7 --popsFile popfile.txt 2> popgenWindows.log
+
+# teste com vcftools 
+vcftools --gzvcf /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/vcfs/FilteredPCAandUCE_Max30missingDepthmin10LD0.15_GeographicNames_allsamples.vcf.gz --fst-window-size 50000 --fst-window-step 5000 --weir-fst-pop lin1.txt --weir-fst-pop lin2.txt --out fstlin1_lin2_FstWC_vcftools
+vcftools --gzvcf /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/vcfs/FilteredPCAandUCE_Max30missingDepthmin10LD0.15_GeographicNames_allsamples.vcf.gz --fst-window-size 50000 --fst-window-step 5000 --weir-fst-pop lin1.txt --weir-fst-pop lin3.txt --out fstlin1_lin3_FstWC_vcftools
+vcftools --gzvcf /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/vcfs/FilteredPCAandUCE_Max30missingDepthmin10LD0.15_GeographicNames_allsamples.vcf.gz --fst-window-size 50000 --fst-window-step 5000 --weir-fst-pop lin1.txt --weir-fst-pop lin4.txt --out fstlin1_lin4_FstWC_vcftools
+vcftools --gzvcf /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/vcfs/FilteredPCAandUCE_Max30missingDepthmin10LD0.15_GeographicNames_allsamples.vcf.gz --fst-window-size 50000 --fst-window-step 5000 --weir-fst-pop lin1.txt --weir-fst-pop lin57.txt --out fstlin1_lin57_FstWC_vcftools
+vcftools --gzvcf /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/vcfs/FilteredPCAandUCE_Max30missingDepthmin10LD0.15_GeographicNames_allsamples.vcf.gz --fst-window-size 50000 --fst-window-step 5000 --weir-fst-pop lin1.txt --weir-fst-pop lin6.txt --out fstlin1_lin6_FstWC_vcftools
+vcftools --gzvcf /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/vcfs/FilteredPCAandUCE_Max30missingDepthmin10LD0.15_GeographicNames_allsamples.vcf.gz --fst-window-size 50000 --fst-window-step 5000 --weir-fst-pop lin1.txt --weir-fst-pop lin7.txt --out fstlin1_lin7_FstWC_vcftools
+vcftools --gzvcf /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/vcfs/FilteredPCAandUCE_Max30missingDepthmin10LD0.15_GeographicNames_allsamples.vcf.gz --fst-window-size 50000 --fst-window-step 5000 --weir-fst-pop lin2.txt --weir-fst-pop lin3.txt --out fstlin2_lin3_FstWC_vcftools
+vcftools --gzvcf /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/vcfs/FilteredPCAandUCE_Max30missingDepthmin10LD0.15_GeographicNames_allsamples.vcf.gz --fst-window-size 50000 --fst-window-step 5000 --weir-fst-pop lin2.txt --weir-fst-pop lin4.txt --out fstlin2_lin4_FstWC_vcftools
+vcftools --gzvcf /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/vcfs/FilteredPCAandUCE_Max30missingDepthmin10LD0.15_GeographicNames_allsamples.vcf.gz --fst-window-size 50000 --fst-window-step 5000 --weir-fst-pop lin2.txt --weir-fst-pop lin57.txt --out fstlin2_lin57_FstWC_vcftools
+vcftools --gzvcf /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/vcfs/FilteredPCAandUCE_Max30missingDepthmin10LD0.15_GeographicNames_allsamples.vcf.gz --fst-window-size 50000 --fst-window-step 5000 --weir-fst-pop lin2.txt --weir-fst-pop lin6.txt --out fstlin2_lin6_FstWC_vcftools
+vcftools --gzvcf /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/vcfs/FilteredPCAandUCE_Max30missingDepthmin10LD0.15_GeographicNames_allsamples.vcf.gz --fst-window-size 50000 --fst-window-step 5000 --weir-fst-pop lin2.txt --weir-fst-pop lin7.txt --out fstlin2_lin7_FstWC_vcftools
+vcftools --gzvcf /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/vcfs/FilteredPCAandUCE_Max30missingDepthmin10LD0.15_GeographicNames_allsamples.vcf.gz --fst-window-size 50000 --fst-window-step 5000 --weir-fst-pop lin3.txt --weir-fst-pop lin4.txt --out fstlin3_lin4_FstWC_vcftools
+vcftools --gzvcf /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/vcfs/FilteredPCAandUCE_Max30missingDepthmin10LD0.15_GeographicNames_allsamples.vcf.gz --fst-window-size 50000 --fst-window-step 5000 --weir-fst-pop lin3.txt --weir-fst-pop lin57.txt --out fstlin3_lin57_FstWC_vcftools
+vcftools --gzvcf /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/vcfs/FilteredPCAandUCE_Max30missingDepthmin10LD0.15_GeographicNames_allsamples.vcf.gz --fst-window-size 50000 --fst-window-step 5000 --weir-fst-pop lin3.txt --weir-fst-pop lin6.txt --out fstlin3_lin6_FstWC_vcftools
+vcftools --gzvcf /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/vcfs/FilteredPCAandUCE_Max30missingDepthmin10LD0.15_GeographicNames_allsamples.vcf.gz --fst-window-size 50000 --fst-window-step 5000 --weir-fst-pop lin3.txt --weir-fst-pop lin7.txt --out fstlin3_lin7_FstWC_vcftools
+vcftools --gzvcf /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/vcfs/FilteredPCAandUCE_Max30missingDepthmin10LD0.15_GeographicNames_allsamples.vcf.gz --fst-window-size 50000 --fst-window-step 5000 --weir-fst-pop lin4.txt --weir-fst-pop lin57.txt --out fstlin4_lin57_FstWC_vcftools
+vcftools --gzvcf /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/vcfs/FilteredPCAandUCE_Max30missingDepthmin10LD0.15_GeographicNames_allsamples.vcf.gz --fst-window-size 50000 --fst-window-step 5000 --weir-fst-pop lin4.txt --weir-fst-pop lin6.txt --out fstlin4_lin6_FstWC_vcftools
+vcftools --gzvcf /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/vcfs/FilteredPCAandUCE_Max30missingDepthmin10LD0.15_GeographicNames_allsamples.vcf.gz --fst-window-size 50000 --fst-window-step 5000 --weir-fst-pop lin4.txt --weir-fst-pop lin7.txt --out fstlin4_lin7_FstWC_vcftools
+vcftools --gzvcf /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/vcfs/FilteredPCAandUCE_Max30missingDepthmin10LD0.15_GeographicNames_allsamples.vcf.gz --fst-window-size 50000 --fst-window-step 5000 --weir-fst-pop lin57.txt --weir-fst-pop lin6.txt --out fstlin57_lin6_FstWC_vcftools
+vcftools --gzvcf /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/vcfs/FilteredPCAandUCE_Max30missingDepthmin10LD0.15_GeographicNames_allsamples.vcf.gz --fst-window-size 50000 --fst-window-step 5000 --weir-fst-pop lin57.txt --weir-fst-pop lin7.txt --out fstlin57_lin7_FstWC_vcftools 
+vcftools --gzvcf /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/vcfs/FilteredPCAandUCE_Max30missingDepthmin10LD0.15_GeographicNames_allsamples.vcf.gz --fst-window-size 50000 --fst-window-step 5000 --weir-fst-pop lin6.txt --weir-fst-pop lin7.txt --out fstlin6_lin7_FstWC_vcftools
