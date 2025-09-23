@@ -50,3 +50,10 @@ for i in $(cat 1Mscaffolds.txt); do
          --output_folder Lin7Lin2/ \
          --bypass_invariant_check 'yes'
 done
+
+# Simon martin script to estimate FST DXY and PI simultaneously
+# 1. convert vcf into geno format 
+python parseVCF.py --skipIndels --ploidyMismatchToMissing -i /media/labgenoma5/DATAPART6/bandriola/Scytalopus/vcffiles/FinalVCFs/Onlybigger500kscaffold_OnlySspeluncae_FilteredPCA_FilteredMax10missingDepthmin10max100LD0.1_GeographicNames_allsamples.vcf.gz | gzip > Onlybigger500kscaffold_OnlySspeluncae_FilteredPCA_FilteredMax10missingDepthmin10max100LD0.1_GeographicNames_allsample.geno
+
+# 2. calculate fst,dxy and pi between all populations
+python popgenWindows.py -g Onlybigger500kscaffold_OnlySspeluncae_FilteredPCA_FilteredMax10missingDepthmin10max100LD0.1_GeographicNames_allsample.geno.gz -o ./Onlybigger500kscaffold_OnlySspeluncae_FilteredPCA_FilteredMax10missingDepthmin10max100LD0.1.Fst.Dxy.pi.csv.gz -f phased -w 50000 -m 20 -s 5000 -p Lin1 -p Lin2 -p Lin3 -p Lin4 -p Lin5 -p Lin6 -p Lin7 --popsFile popfile.txt 2> popgenWindows.log
