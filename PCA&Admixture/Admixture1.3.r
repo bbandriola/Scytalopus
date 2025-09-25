@@ -1,7 +1,7 @@
 ## Workflow for admixture 
 
 # 1. Generate a ped/map file (plink) from thinned vcf (1 snp every 25kb) 
-# vcftools -gzvcf Thinned1SNPevery25kb_*.recode.vcf.gz --out Thinned1SNPevery25kb_*.recode --plink --remove-indv 
+# vcftools -gzvcf Thinned1SNPevery25kb_*.recode.vcf.gz --out Thinned1SNPevery25kb_*.recode --plink --remove-indv Sdiamantinensis,SerradaLontras5_lin1,Snovacapitalis,Spachecoi,Spetrophilus,SerradaLontras2_lin1,SerradaLontras3_lin1,SerraDaOuricana2_lin1,SerraDaOuricana3_lin1,SerraDaOuricana4_lin1,SerradaLontras4_lin1,SerraDaOuricana1_lin1,SerradaLontras1_lin1,Ssuperciliaris
 
 # 2. generate the 012 file 
 #plink --file Thinned1SNPevery25kb_prefix --out Thinned1SNPevery25kb_prefix --recode12
