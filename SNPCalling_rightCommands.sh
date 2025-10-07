@@ -25,9 +25,19 @@ mergeallvcfsfromsnparcher.vcf.gz | bcftools view -s ^SulMantiqueira1_lin3,CunhaS
 bcftools view -i 'F_MISSING <= 0.3 && FORMAT/DP>=10' -m2 -M2 -v snps -Oz -o FilteredPCAandUCE_Max30missingDepthmin10_GeographicNames_allsamples.vcf.gz
 # 59 ind; 17,457,301
 # 3. remove sexual chromossomes
-bcftools view -t ^ZWchr.txt -Oz -o NoZW_FilteredPCAandUCE_Max30missingDepthmin10_GeographicNames_allsamples.vcf.gz FilteredPCAandUCE_Max30missingDepthmin10_GeographicNames_allsamples.vcf.gz
-# # 59 ind; 1,168,795
-  
+      # the below didn't work
+      # bcftools view -t ^ZWchr.txt -Oz -o NoZW_FilteredPCAandUCE_Max30missingDepthmin10_GeographicNames_allsamples.vcf.gz FilteredPCAandUCE_Max30missingDepthmin10_GeographicNames_allsamples.vcf.gz
+      # # 59 ind; 1,168,795
+#trying  
+cp FilteredPCAandUCE_Max30missingDepthmin10_GeographicNames_allsamples.vcf.gz temp.vcf.gz
+for scaff in $(cat ZWchr.txt); do
+    vcftools --gzvcf temp.vcf.gz --not-chr $scaff --recode --recode-INFO-all --out temp2
+    mv temp2.recode.vcf temp.vcf
+    gzip -f temp.vcf
+done
+mv temp.vcf.gz NoWZtest_FilteredPCAandUCE_Max30missingDepthmin10_GeographicNames_allsamples.vcf.gz
+
+
 # 4. prune by ld with vcftools 
 # LD pairwise calculation | # LD decay to filter at a minimun distance
 #PopLDdecay -InVCF ../FilteredMax30missingDepthmin5MAF_FilteredPCA_GeographicNames_onlyspeluncae.vcf.gz.recode.vcf.gz -OutStat LDdecay_speluncae
