@@ -1,10 +1,15 @@
+# Input phylip: 1 kb windows with a interval of 25kb between each, filtered for the individuals included in the analysis
+# check for the sequences without Ns
+# transfer a fasta file to a phylip format with vcf2phylip.py script 
+
+# ACTUAL RUN PhyNEST
 # based on https://github.com/sungsik-kong/PhyNEST.jl/wiki/ tutorial 
 # "parse the input sequence alignment and compute observed quartet site pattern frequencies"
 phylip_data = readPhylip("combined1kb.phy",checkpoint=true,writecsv=true) 
   # check the site pattern matrix 
 df=show_sp(phylip_data)
   # parse topology function
-starting_topology=readTopology("(Snovacapitalis,(Lin1,((Lin2,Lin3),(Lin4,((Lin6,Lin7),Lin5)))));")
+starting_topology=readTopology("(Snovacapitalis,((SerraDaOuricana3_lin1,SerradaLontras4_lin1),((SerraDosOrgaos3_lin2,(Caparao_lin3,(SulMantiqueira4_lin3,NorteMantiqueira3_lin3))),((CunhaSerraDoMarRJ2_lin4,BocainaSerraDoMarRJ1_lin4),(((BoaEsperanca3_lin7,BoaEsperanca1_lin6),((ExtremoSulSC1_lin7,CentroOesteSC4_lin7),HCentroLesteSC_lin7)),(NortePR3_lin7,(HNortePR_lin7,(DevonianaPR8_lin5,DevonianaPR2_lin5))))))));")
   # compute the composite likelihood with the informed tree and phylip file 
 stats,topology_1=do_optimization(starting_topology,phylip_data)
 
