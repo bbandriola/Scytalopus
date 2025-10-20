@@ -9,7 +9,7 @@ phylip_data = readPhylip("all1kbfilesSelectedInd.phy",checkpoint=true,writecsv=t
   # check the site pattern matrix 
 df=show_sp(phylip_data)
   # parse topology function
-starting_topology=readTopology("(Snovacapitalis,((SerraDaOuricana3_lin1,SerradaLontras4_lin1),((SerraDosOrgaos3_lin2,(Caparao_lin3,(SulMantiqueira4_lin3,NorteMantiqueira3_lin3))),((CunhaSerraDoMarRJ2_lin4,BocainaSerraDoMarRJ1_lin4),(((BoaEsperanca3_lin7,BoaEsperanca1_lin6),((ExtremoSulSC1_lin7,CentroOesteSC4_lin7),HCentroLesteSC_lin7)),(NortePR3_lin7,(HNortePR_lin7,(DevonianaPR8_lin5,DevonianaPR2_lin5))))))));")
+starting_topology=readTopology("(Snovacapitalis152win1kb,(Sspeluncae120,((Sspeluncae83,(Sspeluncae116,(Sspeluncae73,Sspeluncae113))),((Sspeluncae16,Sspeluncae2),(((Sspeluncae123,Sspeluncae54),((Sspeluncae19,Sspeluncae72),Sspeluncae52)),(Sspeluncae87,(Sspeluncae64,(Sspeluncae140,Sspeluncae59))))))));")
   # compute the composite likelihood with the informed tree and phylip file 
 stats,topology_1=do_optimization(starting_topology,phylip_data)
 
