@@ -5,7 +5,7 @@
 # ACTUAL RUN PhyNEST
 # based on https://github.com/sungsik-kong/PhyNEST.jl/wiki/ tutorial 
 # "parse the input sequence alignment and compute observed quartet site pattern frequencies"
-phylip_data = readPhylip("combined1kb.phy",checkpoint=true,writecsv=true) 
+phylip_data = readPhylip("all1kbfilesSelectedInd.phy",checkpoint=true,writecsv=true) 
   # check the site pattern matrix 
 df=show_sp(phylip_data)
   # parse topology function
