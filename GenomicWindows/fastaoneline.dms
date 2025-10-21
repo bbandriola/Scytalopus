@@ -2,4 +2,4 @@
 
 #awk '!/^>/ { printf "%s", $0; n = "\n" } /^>/ { print n $0; n = "" } END { printf "%s", n }' input.fasta > output_umalinha.fasta
 
-for i in *.fa; do awk '!/^>/ { printf "%s", $0; n = "\n" } /^>/ { print n $0; n = "" } END { printf "%s", n }' $i > output_$i ; done
+for i in *.fa; do awk '!/^>/ { printf "%s", $0; n = "\n" } /^>/ { print n $0; n = "" } END { printf "%s", n }' $i > oneline_$i ; done
