@@ -22,7 +22,7 @@ plt.rcParams["font.sans-serif"] = "Arial"
 
 # read the data 
 data_path = str(resources.files('feems') / 'data')
-(bim, fam, G) = read_plink("speluncaecomplex".format(os.getcwd))
+(bim, fam, G) = read_plink("OnlyVariants_NoZW_FilteredPCAandUCE_Max10missingDepthmin15LD015_GeographicNames_SpeluncaeLin1".format(os.getcwd))
 imp = SimpleImputer(missing_values=np.nan, strategy="mean")
 genotypes = imp.fit_transform((np.array(G)).T)
 print("n_samples={}, n_snps={}".format(genotypes.shape[0], genotypes.shape[1]))
@@ -73,7 +73,37 @@ plt.savefig(os.path.join(os.getcwd(), "feems_map.png"), dpi=200, bbox_inches='ti
 plt.close()
 
 # FEEMS
+sp_graph = SpatialGraph(genotypes, coord, grid, edges, scale_snps=True)
+projection = ccrs.AzimuthalEquidistant(central_longitude=-100)
+# check projection
+fig = plt.figure(dpi=300)
+ax = fig.add_subplot(1, 1, 1, projection=projection)  
+v = Viz(ax, sp_graph, projection=projection, edge_width=.5, 
+        edge_alpha=1, edge_zorder=100, sample_pt_size=10, 
+        obs_node_size=7.5, sample_pt_color="black", 
+        cbar_font_size=10)
+v.draw_map(longlat=True)
+v.draw_samples()
+v.draw_edges(use_weights=False)
+v.draw_obs_nodes(use_ids=False)
+plt.savefig(os.path.join(os.getcwd(), "feems_map2.png"), dpi=200, bbox_inches='tight')
+plt.close()
 
+# running FEEMS
+sp_graph.fit(lamb = 2.0, lamb_q = 10.0, optimize_q = 'n-dim')
+# graphic
+fig = plt.figure(dpi=300)
+ax = fig.add_subplot(1, 1, 1, projection=projection)  
+v = Viz(ax, sp_graph, projection=projection, edge_width=.5, 
+        edge_alpha=1, edge_zorder=100, sample_pt_size=20, 
+        obs_node_size=7.5, sample_pt_color="black", 
+        cbar_font_size=10)
+v.draw_map()
+v.draw_edges(use_weights=True)
+v.draw_obs_nodes(use_ids=False) 
+v.draw_edge_colorbar()
+plt.savefig(os.path.join(os.getcwd(), "feemsrun.png"), dpi=200, bbox_inches='tight')
+plt.close()
 
 
 
