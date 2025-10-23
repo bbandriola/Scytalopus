@@ -22,18 +22,18 @@ plt.rcParams["font.sans-serif"] = "Arial"
 
 # read the data 
 data_path = str(resources.files('feems') / 'data')
-(bim, fam, G) = read_plink("OnlyVariants_NoZW_FilteredPCAandUCE_Max10missingDepthmin15LD015_GeographicNames_SpeluncaeLin1".format(os.getcwd))
+(bim, fam, G) = read_plink("FilteredforVars_NoZW_Max10missingDepthmin15LD015_Speluncae".format(os.getcwd))
 imp = SimpleImputer(missing_values=np.nan, strategy="mean")
 genotypes = imp.fit_transform((np.array(G)).T)
 print("n_samples={}, n_snps={}".format(genotypes.shape[0], genotypes.shape[1]))
-coord = np.loadtxt("{}/speluncaecomplex.coord".format(os.getcwd()))
+coord = np.loadtxt("{}/Onlyspeluncae.coord".format(os.getcwd()))
 # if needed swap the columns of the coordinates 
 # coord is (lat, lon) → swap to (lon, lat)
 if np.mean(coord[:, 0]) < 0 and np.mean(coord[:, 0]) > -40:  # lat range ~ -35 to -5
     coord = coord[:, ::-1]  # swap columns
     print("Swapped columns of coord to (lon, lat)")
 # load files
-outer = np.loadtxt("{}/speluncaecomplex.outer".format(os.getcwd()))
+outer = np.loadtxt("{}/Onlyspeluncae.outer".format(os.getcwd()))
 grid_path = "{}/grid_100.shp".format(data_path)  
 
 # graph input files
@@ -69,7 +69,7 @@ for edge in edges:
 ax.scatter(coord[:, 0], coord[:, 1], s=8, color='black', zorder=2,transform=ccrs.PlateCarree(), label='sample points')
 plt.legend()
 # output in the current directory
-plt.savefig(os.path.join(os.getcwd(), "feems_map.png"), dpi=200, bbox_inches='tight')
+plt.savefig(os.path.join(os.getcwd(), "Onlyspeluncae_feems_map.png"), dpi=200, bbox_inches='tight')
 plt.close()
 
 # FEEMS
@@ -86,7 +86,7 @@ v.draw_map(longlat=True)
 v.draw_samples()
 v.draw_edges(use_weights=False)
 v.draw_obs_nodes(use_ids=False)
-plt.savefig(os.path.join(os.getcwd(), "feems_map2.png"), dpi=200, bbox_inches='tight')
+plt.savefig(os.path.join(os.getcwd(), "Onlyspeluncae_feems_map2.png"), dpi=200, bbox_inches='tight')
 plt.close()
 
 # running FEEMS
@@ -101,14 +101,9 @@ v = Viz(ax, sp_graph, projection=projection, edge_width=.5,
 v.draw_map()
 v.draw_edges(use_weights=True)
 v.draw_obs_nodes(use_ids=False) 
-v.draw_edge_colorbar()
-plt.savefig(os.path.join(os.getcwd(), "feemsrun.png"), dpi=200, bbox_inches='tight')
+# v.draw_edge_colorbar()
+plt.savefig(os.path.join(os.getcwd(), "Onlyspeluncae_lamb2feemsrun.svg"),
+            dpi=200, bbox_inches='tight')
 plt.close()
-
-
-
-
-
-
 
 
