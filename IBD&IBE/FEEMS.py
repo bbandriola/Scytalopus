@@ -1,3 +1,5 @@
+# based on: https://github.com/NovembreLab/feems/blob/main/docsrc/notebooks/getting-started.ipynb
+
 # base
 import numpy as np
 import os
