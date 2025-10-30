@@ -1,0 +1,54 @@
+####BPP####
+
+#escrever os nomes de todas as files de fragmentos em um arquivo txt
+for i in edited*.fa; do ls $i >> allfrag.txt; done
+
+#1: selecionar aleatoriamente um fragmento a cada dez
+  #Script lê arquivos com 1 item por linha
+  #Cada linha é adicionada a uma lista com todas as topologias
+  #A lista de topologias é lida a cada 17 itens um é salvo no arquivo de saída (2000_frag.txt)
+
+Input= open("all50kb_frag.txt", 'r')
+output = open("2000_frag.txt" , 'w')
+trees = Input.readlines()
+trees_list =[]
+contador = 0
+for linha in trees:
+	trees_list.append(linha)
+topologies = []
+while contador < len(trees_list):
+	topologies.append(trees_list[contador])
+	contador = contador + 17
+
+output.writelines(topologies)
+output.close()
+
+#run:
+python Select_file.py
+
+#count the numbers of line in output file
+wc -l frag.txt
+
+#2: transformar os arquivos fastas em um phillyp e organiza-los/ tem que fazer uma linha para cada arquivo
+  #bash para transformar os fastas em phillyp (https://github.com/josephhughes/Sequence-manipulation)
+perl fasta2phyllip.pl media/labgenoma/DATAPART6/bandriola/Chelonioidea/Lepidochelys_RefCmyd/Consensus/Windows/8_2_ListFilesWin_50kb_Ccar/windows/windows_for_BPP/test/*fa (tem que ser feito para cada file .fa)
+
+#3: concatenar todos os phyllips
+cat *.phy > combined_50kb.phy
+
+#4: adicionar os labels corretos
+sed 's/Lkem01.win50kb/'Lkem01'/g' combined_50kb.phy > combined_50kb_01.phy
+    # ir sobrescrevendo em um outro arquivo com nome diferente em cada substituição feita
+    #ex: sed 's/Lkem01/'Lkem01^Lkem01'/g' combined_50kb.phy > combined_50kb_01.phy
+    #    sed 's/Loli01/'Loli01^Loli01'/g' combined_50kb_01.phy > combined_50kb_02.phy
+         sed 's/Loli02/'Loli02^Loli02'/g' combined_50kb_02.phy > combined_50kb_03.phy
+         sed 's/Loli03/'Loli03^Loli03'/g' combined_50kb_03.phy > combined_50kb_04.phy
+         sed 's/Loli04/'Loli04^Loli04'/g' combined_50kb_04.phy > combined_50kb_05.phy
+         sed 's/Loli05/'Loli05^Loli05'/g' combined_50kb_05.phy > combined_50kb_06.phy
+         sed 's/Ccar01/'Ccar01^Ccar01'/g' combined_50kb_06.phy > combined_50kb_07.phy
+
+#5: quebra de linha entre as infos e as sequências
+sed 's/Lkem/\n&/g' testcombined.phy > combined_50kb.phy
+
+#rodar:
+/bpp --cfile MakefileA01.bpp.ctl
