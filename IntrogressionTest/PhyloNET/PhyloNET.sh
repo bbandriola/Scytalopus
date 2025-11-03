@@ -6,3 +6,7 @@ sed 's//;/g' allbestTrees*.txt > allbestTrees_*.txt # add ; at the end of each t
 
 # 2. nexus file 
 
+# 3. run
+java -jar Phylonet/PhyloNet.jar file.nex > output.txt
+
+
