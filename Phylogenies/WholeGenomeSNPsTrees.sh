@@ -10,6 +10,10 @@ iqtree -s file.phy --alrt 1000 -B 1000 -b 100 -o Snovacapitalis152_lin --prefix 
 # RAxML-NG:
 raxml-ng-mpi --msa file.phy --all --prefix fileprefix_raxml --threads 6 --model GTR --outgroup Snovacapitalis152_lin --bs-trees 100
 
+raxml-ng-mpi --msa ../../../../DATAPART3/bandriola/Scytalopus/snparcher/vcfs/FilteredPCAandUCE_Max30missingDepthmin10LD0.15_GeographicNames_allsamples.min4.phy --all --prefix run2_FilteredPCAandUCE_Max30missingDepthmin10LD0.15_GeographicNames_allsamples --threads 6 --model GTR --outgroup Snovacapitalis --bs-trees 100
+
+raxml-ng-mpi --msa ../../../../DATAPART3/bandriola/Scytalopus/snparcher/vcfs/NoZW_FilteredPCAandUCE_Max30missingDepthmin10LD015_GeographicNames_allsamples.min4.phy --all --prefix NoZW_FilteredPCAandUCE_Max30missingDepthmin10LD015_GeographicNames_allsamples --threads 6 --model GTR --outgroup Snovacapitalis --bs-trees 100
+
 # CASTER:
 ../../Softwares/ASTER/bin/caster-site --output file.caster.newick --thread 5 --support 1 --input file.phy 2> allsamples.caster.log
 
