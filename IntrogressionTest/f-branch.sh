@@ -3,12 +3,15 @@
 
 # 1. run Dtrios
 ../../Softwares/Dsuite/Build/Dsuite Dtrios -t speluncaeLin1.nwk -o speluncaeLin1_dtrios ../vcfs/normalizedVCFs/NoZW_FilteredPCAandUCE_Max10missingDepthmin15LD015_GeographicNames_SpeluncaeLin1.recode.vcf.gz speluncaeLin1.txt # running
+../../../Softwares/Dsuite/Build/Dsuite Dtrios -t allsamples.nwk -o allsamples_dtrio ../vcfs/normalizedVCFs/NoZW_FilteredPCAandUCE_Max10missingDepthmin10LD015_GeographicNames_allsamples.vcf.gz allsamples.txt
 
 # 2. Fbranch  
 ../../Softwares/Dsuite/Build/Dsuite Fbranch -Z speluncaeLin1.nwk speluncaeLin1_dtrios_tree.txt > fbranch_speluncaeLin1_dtrios.txt
+../../../Softwares/Dsuite/Build/Dsuite Fbranch -Z allsamples.nwk allsamples_dtrio_tree.txt > fbranch_allsamples_dtrios.txt
 
 # 3. fbranch
-../../Softwares/Dsuite/utils/dtools.py -n fbranch_speluncaeLin1_dtrios --outgroup Outgroup fbranch_speluncaeLin1_dtrios.txt speluncaeLin1.nwk 
+../../../Softwares/Dsuite/utils/dtools.py -n fbranch_speluncaeLin1_dtrios --outgroup Outgroup fbranch_speluncaeLin1_dtrios.txt speluncaeLin1.nwk 
+../../../Softwares/Dsuite/utils/dtools.py -n fbranch_allsamples_dtrios --outgroup Outgroup fbranch_allsamples_dtrios.txt allsamples.nwk 
 
 # plot D-stats and f4ratio 
 #conda activate dsuite
