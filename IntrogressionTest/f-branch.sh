@@ -10,14 +10,14 @@
 
 # 2. Fbranch  
 ../../Softwares/Dsuite/Build/Dsuite Fbranch -Z speluncaeLin1.nwk speluncaeLin1_dtrios_tree.txt > fbranch_speluncaeLin1_dtrios.txt
-../../../Softwares/Dsuite/Build/Dsuite Fbranch -Z allsamples.nwk allsamples_dtrios_tree.txt > fbranch_allsamples_dtrios.txt
+../../../Softwares/Dsuite/Build/Dsuite Fbranch -Z allsamples.nwk allsamples_dtrio_tree.txt > fbranch_allsamples_dtrios.txt
 ../../../Softwares/Dsuite/Build/Dsuite Fbranch -Z speluncaeLin1Ssuperci.nwk speluncaeLin1Ssuperci_dtrios_tree.txt > fbranch_speluncaeLin1Ssuperci_dtrios.txt
-../../../Softwares/Dsuite/Build/Dsuite Fbranch -Z speluncaeLin1.nwk speluncaeLin1Nofilter_dtrio_tree.txt > fbranch_speluncaeLin1Nofilter_dtrios.txt
+../../../Softwares/Dsuite/Build/Dsuite Fbranch -Z speluncaeLin1.nwk speluncaeLin1Nofilter_dtrios_tree.txt > fbranch_speluncaeLin1Nofilter_dtrios.txt
 
 # 3. fbranch
 ../../../Softwares/Dsuite/utils/dtools.py -n fbranch_speluncaeLin1_dtrios --outgroup Outgroup fbranch_speluncaeLin1_dtrios.txt speluncaeLin1.nwk 
-../../../Softwares/Dsuite/utils/dtools.py -n fbranch_allsamples_dtrios --outgroup Outgroup fbranch_allsamples_dtrios.txt allsamples.nwk 
-../../../Softwares/Dsuite/utils/dtools.py -n fbranch_speluncaeLin1Ssuperci_dtrios --outgroup Outgroup fbranch_speluncaeLin1Ssuperci_dtrios.txt speluncaeLin1Ssuperci.nwk 
+../../../Softwares/Dsuite/utils/dtools.py -n fbranch_allsamples_dtrios --outgroup Outgroup fbranch_allsamples_dtrios_edited.txt allsamples.nwk 
+../../../Softwares/Dsuite/utils/dtools.py -n fbranch_speluncaeLin1Ssuperci_dtrios --outgroup Outgroup fbranch_speluncaeLin1Ssuperci_dtrios_zscore.txt speluncaeLin1Ssuperci.nwk 
 ../../../Softwares/Dsuite/utils/dtools.py -n fbranch_speluncaeLin1Nofilter_dtrios --outgroup Outgroup fbranch_speluncaeLin1Nofilter_dtrios.txt speluncaeLin1.nwk 
 
 
