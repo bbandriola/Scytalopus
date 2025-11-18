@@ -24,11 +24,11 @@ for(edge in 1:7){
 source("~/Softwares/Treemix/treemix/src/plotting_funcs.R")
 
 # plot tree
-pdf("mix7.pdf",10,10)
-plot_tree(cex=0.8,"Ssuperciliarisoutgroup.7")
+pdf("Spetrophilusoutgroup_mix1.pdf",10,10)
+plot_tree(cex=0.8,"Spetrophilusoutgroup.1")
 dev.off()
 
 # plot residual 
-pdf("mix1residual.pdf",10,10)
-plot_resid(stem="Ssuperciliarisoutgroup.1",pop_order="plotorder.txt")
+pdf("Spetrophilusoutgroup_mix7residual.pdf",10,10)
+plot_resid(stem="Spetrophilusoutgroup.7",pop_order="plotorder.txt")
 dev.off()
