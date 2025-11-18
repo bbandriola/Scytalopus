@@ -124,13 +124,18 @@ print(summed_roh)
 stacked_barplot <- summed_roh %>%
   ggplot(aes(x = Sample, y = total_RoH_length/1000000, fill = RoH_category)) +
   geom_bar(stat = "identity") +
-  #facet_wrap(~ Population, nrow =1, scales = "free_x") +  # Facet by Population
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1),
-    strip.text = element_text(angle = 90, size = 10)) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    strip.text = element_text(angle = 90, size = 10)
+  ) +
   scale_y_continuous(labels = scales::comma) +
-  labs(x = "Sample", y = "Total RoH Length (Mb)", fill = "RoH Category")
-
+  scale_fill_manual(values = roh_colors) +
+  labs(
+    x = "Sample",
+    y = "Total RoH Length (Mb)",
+    fill = "RoH Category"
+  )
 # Print the plot
 print(stacked_barplot)
 ggsave("smallcategories_rohs_barplot.png", stacked_barplot, width = 8, height = 6, dpi = 300)
