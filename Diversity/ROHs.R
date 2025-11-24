@@ -28,32 +28,32 @@ library(ggrepel)
 roh <- read_delim("allsamples.edited.roh.population.txt", delim = "\t", col_names = c("Sample", "Chromosome", "RoH_length", "Population"))
 
 # Compute NROH and SROH
-#nroh <- roh %>%
-#  group_by(Sample) %>%
-#  summarize(NROH = n())
+nroh <- roh %>%
+  group_by(Sample) %>%
+  summarize(NROH = n())
 
-#sroh <- roh %>%
-#  group_by(Sample) %>%
-#  summarize(SROH = sum(RoH_length))
+sroh <- roh %>%
+  group_by(Sample) %>%
+  summarize(SROH = sum(RoH_length))
 
 # Combine population information
-#data <- inner_join(nroh, sroh, by = "Sample") %>%
-#  inner_join(roh %>% select(Sample, Population) %>% distinct(), by = "Sample")
+data <- inner_join(nroh, sroh, by = "Sample") %>%
+  inner_join(roh %>% select(Sample, Population) %>% distinct(), by = "Sample")
 
 # Inspect the resulting dataset to ensure it is correct
 #head(data)
 
 # Create the plot using the preprocessed dataset
-#snroh_plot <- data %>%
-#  ggplot(aes(x = SROH, y = NROH, color = Population)) +
-#  geom_point(size = 3) +
-#  theme_minimal() +
-#  theme(plot.title = element_text(hjust = 0.5)) +
-#  labs(title = "NROH vs. SROH", color = "Population")
+snroh_plot <- data %>%
+  ggplot(aes(x = SROH, y = NROH, color = Population)) +
+  geom_point(size = 3) +
+ theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  labs(title = "NROH vs. SROH", color = "Population")
 
 # Print the plot
-#print(snroh_plot)
-#ggsave("dsroh_nroh.png", snroh_plot, width = 8, height = 6, dpi = 300)
+print(snroh_plot)
+ggsave("dsroh_nroh_seppops.png", snroh_plot, width = 8, height = 6, dpi = 300)
 
 #summed_roh%%R
 
