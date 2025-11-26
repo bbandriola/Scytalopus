@@ -8,4 +8,4 @@ for i in *bam.fa.annotated; do ./splifastas.sh $i; done
 for i in *-*.txt; do ./concat_by_region.sh $i $i.region.fasta; done
 
 #4: choose a susbtitution model 
-java -jar jModelTest.jar -d sequence -g 4 -AIC -BIC -f -i -o Jmodelteste__.out -tr 5 -a
+iqtree -s right_1-2776.txt.region.fasta -m MFP --prefix 1-2776_modelfinder
