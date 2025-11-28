@@ -1,0 +1,5 @@
+# Activate
+conda activate py27
+
+#create samplefile + Makefile with trees
+python samplefile.txt 
