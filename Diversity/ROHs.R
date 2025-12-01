@@ -138,3 +138,96 @@ stacked_barplot <- summed_roh %>%
 # Print the plot
 print(stacked_barplot)
 ggsave("smallcategories_rohs_barplot.png", stacked_barplot, width = 8, height = 6, dpi = 300)
+
+############################################
+# multiple files
+library(tidyverse)
+library(ggrepel)
+
+files <- c("Sdiamantinensis.txt",
+"Spachecoi.txt",
+"allspeciesROHsbcftools.txt",
+"lin2.txt",
+"lin4.txt",
+"lin6.txt",
+"Snovacapitalis.txt",
+"Spetrophilus.txt",
+"lin1.txt",
+"lin3.txt",
+"lin5.txt",
+"lin7.txt")
+
+process_roh_file <- function(file){
+
+  message("Processing: ", file)
+
+  x <- read.table(file,
+                  sep = "\t",
+                  comment.char = "",
+                  stringsAsFactors = FALSE,
+                  fill = TRUE,
+                  quote = "",
+                  blank.lines.skip = TRUE)
+
+  # Keep only RG lines (these contain ROH segments)
+  x <- x[x$V1 == "RG", ]
+
+  # Keep first 8 columns only
+  x <- x[, 1:8]
+
+  colnames(x) <- c("type", "sample", "chrom", "start", "end",
+                   "length_bp", "n_markers", "quality")
+
+  return(x)
+}
+
+roh_categories <- purrr::map_dfr(files, process_roh_file)
+str(roh_categories)
+head(roh_categories)
+
+roh_categories$length_bp <- as.numeric(roh_categories$length_bp)
+
+roh_categories$class <- cut(roh_categories$length_bp,
+                      breaks = c(0, 1e5, 5e5, 1e6, 2e6, Inf),
+                      labels = c("<100kb", "100kb-500kb", "500kb-1Mb", "1Mb-2Mb", ">2Mb"))
+table(roh_categories$class)
+
+roh_summary_n <- roh_categories %>%
+  dplyr::group_by(sample, class) %>%
+  dplyr::summarise(n_roh = dplyr::n(), .groups = "drop")
+roh_summary_length <- roh_categories %>%
+  dplyr::group_by(sample, class) %>%
+  dplyr::summarise(total_bp = sum(length_bp), .groups = "drop")
+
+roh_colors <- c(
+  "<100 kb"      = "#568743",
+  "100kb-500kb" = "#5bc12c",
+  "500kb-1Mb"   = "#345e27",
+  "1Mb-2Mb"   = "#8a8368",
+  ">2Mb"        = "#231f10"
+)
+
+stacked_barplot<- ggplot(roh_summary_length,
+       aes(x = sample, y = total_bp/1000000, fill = class)) +
+  geom_bar(stat = "identity") +
+  theme_bw() + 
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    strip.text = element_text(angle = 90, size = 10)
+  )+
+  scale_y_continuous(labels = scales::comma) +
+  scale_fill_manual(values = roh_colors) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  ylab("Total ROH length (bp)") +
+  xlab("Sample") +
+  labs(
+    x = "Sample",
+    y = "Total RoH Length (Mb)",
+    fill = "RoH Category"
+  )
+
+print(stacked_barplot)
+ggsave("test_rohs_barplot.png", stacked_barplot, width = 8, height = 6, dpi = 300)
+
+
+
