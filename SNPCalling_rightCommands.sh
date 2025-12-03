@@ -44,3 +44,8 @@ bcftools view -R LD/prune_in.bed -Oz -o NoZW_FilteredPCAandUCE_Max30missingDepth
 
 # 5. maf filtering for selection analysis 
 bcftools view -Q 0.05 -Oz -o FilteredPCAandUCE_Max30missingDepthmin10maf0.05_allsamples.vcf.gz FilteredPCAandUCE_Max30missingDepthmin10_GeographicNames_allsamples.vcf.gz
+
+# Liftover vcf
+# 1) minimap2 -x asm5 -c -t 8 GCF_009829145.1_bChiLan1.pri_genomic.fna ../../snparcher/bams/Fastas/Sspeluncae140_lin5_final.bam.fa > teste.paf (running) 3/12/25
+# 2) paf2chain --input DevonianaPR8.paf > DevonianaPR8.chain
+# 2) CrossMap.py 
