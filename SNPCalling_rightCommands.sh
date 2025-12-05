@@ -49,3 +49,5 @@ bcftools view -Q 0.05 -Oz -o FilteredPCAandUCE_Max30missingDepthmin10maf0.05_all
 # 1) minimap2 -x asm5 -c -t 8 GCF_009829145.1_bChiLan1.pri_genomic.fna ../../snparcher/bams/Fastas/Sspeluncae140_lin5_final.bam.fa > teste.paf (running) 3/12/25
 # 2) paf2chain --input DevonianaPR8.paf > DevonianaPR8.chain
 # 3) picard LiftoverVcf --CHAIN --INPUT --OUTPUT --REFERENCE_SEQUENCE --REJECT
+# alternative: 
+# CrossMap 
