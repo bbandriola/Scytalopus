@@ -20,6 +20,8 @@ vcftools --gzvcf ../../../../snparcher/vcfs/FilteredPCAandUCE_Max30missingDepthm
 vcftools --gzvcf ../../../../snparcher/vcfs/FilteredPCAandUCE_Max30missingDepthmin10_GeographicNames_allsamples.vcf.gz --weir-fst-pop ../../../lin57.txt --weir-fst-pop ../../../lin6.txt --out fstlin57_lin6
 vcftools --gzvcf ../../../../snparcher/vcfs/FilteredPCAandUCE_Max30missingDepthmin10_GeographicNames_allsamples.vcf.gz --weir-fst-pop ../../../lin57.txt --weir-fst-pop ../../../lin7.txt --out fstlin57_lin7 
 vcftools --gzvcf ../../../../snparcher/vcfs/FilteredPCAandUCE_Max30missingDepthmin10_GeographicNames_allsamples.vcf.gz --weir-fst-pop ../../../lin6.txt --weir-fst-pop ../../../lin7.txt --out fstlin6_lin7
+vcftools --gzvcf ../../../../snparcher/vcfs/FilteredPCAandUCE_Max30missingDepthmin10_GeographicNames_allsamples.vcf.gz --weir-fst-pop ../../../lin57.txt --weir-fst-pop ../../../lin7.txt --out fstlin57_lin7 
+vcftools --gzvcf ../../../../snparcher/vcfs/FilteredPCAandUCE_Max30missingDepthmin10_GeographicNames_allsamples.vcf.gz --weir-fst-pop ../../../lin6.txt --weir-fst-pop ../../../lin7.txt --out fstlin6_lin7
   # heatmap with the result 
   Rscript heatmap.r
 
