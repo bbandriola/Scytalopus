@@ -1,3 +1,6 @@
+library(ggplot2)
+library(dplyr)
+
 fst <- read.table("FSTMean.txt", header = TRUE, sep = "\t", stringsAsFactors = FALSE)
 colnames(fst)[3] <- "FST"
 fst$FST <- as.numeric(fst$FST)
