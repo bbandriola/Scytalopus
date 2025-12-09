@@ -26,7 +26,7 @@ names(pca)[2:ncol(pca)] <- paste0("PC", 1:(ncol(pca)-1))
 pve <- data.frame(PC = 1:13, pve = eigenval/sum(eigenval)*100)
 
 # percentage of variance
-pdf("Southclade_project1_2_5_6_7_8_PCvariance.pdf",width = 10,height = 6)
+pdf("FilteredPCAandUCE_Max30missingDepthmin10LD0.15maf0.05_GeographicNames_speluncaecomplexPCvariance.pdf",width = 10,height = 6)
 a <- ggplot(pve, aes(PC, pve)) + geom_bar(stat = "identity")
 a + ylab("Percentage variance explained") + theme_light()
 dev.off()
@@ -35,7 +35,7 @@ dev.off()
 cumsum(pve$pve)
 
 # plot pca circles
-pdf("Sspeluncaecomplex_PCA.pdf",width = 10,height = 10)
+pdf("FilteredPCAandUCE_Max30missingDepthmin10LD0.15maf0.05_GeographicNames_speluncaecomplex_PCA.pdf",width = 10,height = 10)
 b <- ggplot(pca, aes(PC1, PC2, color = lineages)) + 
   geom_point(position = position_jitter(seed = 1, width = 0.02, height=0.03),size = 6)+
   scale_color_manual(values = c("#0660FB","#4D9F8C","#7570B3","deeppink","#66A61D","#E93F33","#E6AC2F"))+ 
