@@ -22,6 +22,9 @@ setwd("./")
 mcmcpath = "./FilteredPCAandUCE_Max30missingDepthmin10maf0.05_GeographicNames_speluncaeonly.modified"
 plotpath = "./FilteredPCAandUCE_Max30missingDepthmin10maf0.05_GeographicNames_speluncaeonly.modified"
 
+projection_none <- "+proj=longlat +datum=WGS84"
+projection_mercator <- "+proj=merc +datum=WGS84"
+
 eems.plots(mcmcpath, plotpath, longlat = TRUE, add.grid=TRUE, add.demes=TRUE,
           out.png=TRUE,res=800,add.map = TRUE,col.map="black",projection.in = projection_none,
            projection.out = projection_mercator)
