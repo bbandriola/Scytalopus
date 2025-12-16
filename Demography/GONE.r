@@ -15,7 +15,7 @@
   # awk '{$2=NR; print}' Lin1_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map > Lin1_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map
   # mv Lin1_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map Lin1_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
 # move the files to the GONE directory
-  # mv  Lin1_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr* /gonedir/
+  # mv Lin1_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr* ~/Scytalopus/GONE/Linux/
 
 # 3. run GONE
 # before running:       
