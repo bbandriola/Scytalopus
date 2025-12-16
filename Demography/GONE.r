@@ -80,3 +80,64 @@ if ("Ne_low" %in% colnames(gone)) {
   )
   lines(gone$Generation, gone$Ne, lwd = 2)
 }
+
+
+
+
+
+
+###################################################################
+
+#plink --vcf Lin1_1Mscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.recode.vcf.gz --allow-extra-chr --recode --out Lin1_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10
+#plink --vcf Lin2_1Mscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.recode.vcf.gz --allow-extra-chr --recode --out Lin2_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10
+#plink --vcf Lin3_1Mscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.recode.vcf.gz --allow-extra-chr --recode --out Lin3_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10
+#plink --vcf Lin4_1Mscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.recode.vcf.gz --allow-extra-chr --recode --out Lin4_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10
+#plink --vcf Lin5_1Mscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.recode.vcf.gz --allow-extra-chr --recode --out Lin5_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10
+#plink --vcf Lin6_1Mscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.recode.vcf.gz --allow-extra-chr --recode --out Lin6_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10
+#plink --vcf Lin7_1Mscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.recode.vcf.gz --allow-extra-chr --recode --out Lin7_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10
+#
+#awk '!seen[$1]++ { chr++; map[$1]=chr } { print map[$1], $2, $3, $4 }' Lin1_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.map > Lin1_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
+#awk '!seen[$1]++ { chr++; map[$1]=chr } { print map[$1], $2, $3, $4 }' Lin2_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.map > Lin2_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
+#awk '!seen[$1]++ { chr++; map[$1]=chr } { print map[$1], $2, $3, $4 }' Lin3_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.map > Lin3_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
+#awk '!seen[$1]++ { chr++; map[$1]=chr } { print map[$1], $2, $3, $4 }' Lin4_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.map > Lin4_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
+#awk '!seen[$1]++ { chr++; map[$1]=chr } { print map[$1], $2, $3, $4 }' Lin5_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.map > Lin5_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
+#awk '!seen[$1]++ { chr++; map[$1]=chr } { print map[$1], $2, $3, $4 }' Lin6_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.map > Lin6_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
+#awk '!seen[$1]++ { chr++; map[$1]=chr } { print map[$1], $2, $3, $4 }' Lin7_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.map > Lin7_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
+#
+#cp Lin1_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.ped Lin1_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.ped
+#cp Lin2_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.ped Lin2_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.ped
+#cp Lin3_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.ped Lin3_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.ped
+#cp Lin4_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.ped Lin4_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.ped
+#cp Lin5_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.ped Lin5_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.ped
+#cp Lin6_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.ped Lin6_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.ped
+#cp Lin7_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.ped Lin7_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.ped
+#
+#awk '{$2=NR; print}' Lin1_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map > Lin1_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map
+#awk '{$2=NR; print}' Lin2_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map > Lin2_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map
+#awk '{$2=NR; print}' Lin3_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map > Lin3_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map
+#awk '{$2=NR; print}' Lin4_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map > Lin4_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map
+#awk '{$2=NR; print}' Lin5_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map > Lin5_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map
+#awk '{$2=NR; print}' Lin6_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map > Lin6_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map
+#awk '{$2=NR; print}' Lin7_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map > Lin7_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map
+#
+#mv Lin1_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map Lin1_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
+#mv Lin2_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map Lin2_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
+#mv Lin3_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map Lin3_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
+#mv Lin4_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map Lin4_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
+#mv Lin5_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map Lin5_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
+#mv Lin6_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map Lin6_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
+#mv Lin7_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map Lin7_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
+#
+#
+#mv Lin1_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr* ~/Scytalopus/GONE/Linux/
+#mv Lin2_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr* ~/Scytalopus/GONE/Linux/
+#mv Lin3_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr* ~/Scytalopus/GONE/Linux/
+#mv Lin4_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr* ~/Scytalopus/GONE/Linux/
+#mv Lin5_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr* ~/Scytalopus/GONE/Linux/
+#mv Lin6_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr* ~/Scytalopus/GONE/Linux/
+#mv Lin7_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr* ~/Scytalopus/GONE/Linux/
+#
+#export TMPDIR="$(pwd)/tmp"
+#export TEMP="$TMPDIR"
+#export TMP="$TMPDIR"
+
