@@ -27,7 +27,7 @@
 # Read GONE output
 library(ggplot2)
 setwd("./")
-gone <- read.table("Output_Ne_fixed", header = TRUE, skip=1)
+gone <- read.table("Output_Ne_Lin7_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr", header = TRUE, skip=1)
 
 # Detect format
 if (ncol(gone) == 2) {
@@ -39,7 +39,7 @@ if (ncol(gone) == 2) {
 g <- 3.2  # example
 gone$Years <- gone$Generation * g
 
-pdf("teste.pdf",,width = 10,height = 10)
+pdf("Lin7.pdf",,width = 10,height = 10)
 ggplot(gone, aes(x = Generation, y = Ne)) +
   geom_line(linewidth = 1) +
   scale_x_log10() +
@@ -51,9 +51,8 @@ ggplot(gone, aes(x = Generation, y = Ne)) +
   theme_classic()
 
 ggplot(gone, aes(x = Generation, y = Ne)) +
-  geom_ribbon(aes(ymin = Ne_low, ymax = Ne_high), fill = "grey80") +
   geom_line(linewidth = 1) +
-  scale_x_log10() +
+  scale_x_log10(limits = c(1, 150)) +
   theme_classic()
 dev.off()
 
