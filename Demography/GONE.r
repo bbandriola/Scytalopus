@@ -2,7 +2,6 @@
 # 1. generate file ped/map
 # plink
 # --allow-extra-chr
-#  --chr VXBX01009921.1,VXBX01004249.1,VXBX01003474.1,VXBX01008609.1,VXBX01002725.1,VXBX01005888.1,VXBX01003014.1,VXBX01007701.1,VXBX01003755.1,VXBX01008695.1,VXBX01007125.1,VXBX01008236.1,VXBX01009439.1,VXBX01001056.1,VXBX01001501.1,VXBX01007795.1,VXBX01004397.1,VXBX01007997.1,VXBX01008145.1,VXBX01008674.1,VXBX01003991.1,VXBX01001608.1,VXBX01006871.1,VXBX01006773.1,VXBX01001698.1,VXBX01000547.1,VXBX01009827.1,VXBX01004616.1,VXBX01001175.1,VXBX01003868.1,VXBX01005266.1,VXBX01005702.1,VXBX01004221.1,VXBX01004071.1,VXBX01008400.1,VXBX01002109.1,VXBX01002369.1,VXBX01006211.1,VXBX01009452.1,VXBX01008453.1,VXBX01003936.1,VXBX01005247.1,VXBX01000994.1,VXBX01004400.1,VXBX01000771.1,VXBX01001798.1,VXBX01000098.1,VXBX01001503.1,VXBX01001802.1,VXBX01001954.1,VXBX01004936.1,VXBX01008007.1,VXBX01004435.1,VXBX01005595.1,VXBX01007086.1,VXBX01004450.1,VXBX01005113.1,VXBX01004609.1,VXBX01002494.1,VXBX01000330.1,VXBX01001361.1,VXBX01006700.1,VXBX01004000.1,VXBX01009318.1,VXBX01006882.1,VXBX01003661.1,VXBX01005110.1,VXBX01000100.1,VXBX01002915.1,VXBX01005896.1,VXBX01009614.1,VXBX01000457.1,VXBX01004089.1,VXBX01001194.1,VXBX01003997.1,VXBX01006887.1,VXBX01008140.1,VXBX01009446.1,VXBX01002337.1,VXBX01002499.1,VXBX01003108.1,VXBX01007602.1,VXBX01008012.1,VXBX01000798.1,VXBX01008146.1,VXBX01004959.1,VXBX01002127.1,VXBX01005325.1,VXBX01009357.1,VXBX01004892.1,VXBX01017515.1,VXBX01000899.1,VXBX01002742.1,VXBX01007003.1,VXBX01003871.1,VXBX01001289.1,VXBX01008995.1,VXBX01004429.1,VXBX01008125.1,VXBX01007486.1,VXBX01001890.1,VXBX01001788.1,VXBX01008464.1,VXBX01002496.1,VXBX01009582.1,VXBX01009108.1,VXBX01008036.1,VXBX01003639.1,VXBX01003761.1,VXBX01002012.1,VXBX01001702.1,VXBX01004312.1,VXBX01000991.1,VXBX01009535.1,VXBX01005992.1,VXBX01008133.1,VXBX01009899.1,VXBX01006127.1,VXBX01004442.1,VXBX01005472.1,VXBX01002363.1,VXBX01009038.1,VXBX01003097.1,VXBX01008045.1,VXBX01004732.1,VXBX01000450.1,VXBX01009313.1,VXBX01006201.1,VXBX01009908.1,VXBX01003745.1,VXBX01005001.1,VXBX01005335.1,VXBX01008206.1,VXBX01006518.1,VXBX01006808.1,VXBX01009605.1,VXBX01000364.1,VXBX01003748.1,VXBX01007981.1,VXBX01000659.1,VXBX01000122.1,VXBX01001580.1,VXBX01005473.1,VXBX01000774.1,VXBX01001934.1,VXBX01003777.1,VXBX01006128.1,VXBX01006417.1,VXBX01002579.1,VXBX01004176.1,VXBX01000995.1,VXBX01004733.1,VXBX01009292.1,VXBX01007708.1,VXBX01000560.1,VXBX01006119.1,VXBX01006869.1,VXBX01000786.1,VXBX01004178.1,VXBX01005740.1,VXBX01009752.1,VXBX01003000.1,VXBX01009469.1,VXBX01005327.1,VXBX01004046.1,VXBX01000010.1,VXBX01007914.1,VXBX01002712.1,VXBX01006519.1,VXBX01007493.1,VXBX01004838.1,VXBX01009008.1,VXBX01005349.1,VXBX01006670.1,VXBX01005118.1,VXBX01003483.1,VXBX01009832.1,VXBX01008688.1,VXBX01008451.1,VXBX01005245.1,VXBX01001047.1,VXBX01009855.1,VXBX01007777.1,VXBX01001585.1,VXBX01008290.1,VXBX01002916.1,VXBX01004599.1,VXBX01009584.1,VXBX01004943.1,VXBX01005867.1,VXBX01008415.1,VXBX01003747.1,VXBX01000102.1,VXBX01002566.1,VXBX01007692.1,VXBX01003263.1,VXBX01009215.1,VXBX01006199.1,VXBX01003191.1,VXBX01008231.1,VXBX01007117.1,VXBX01007491.1,VXBX01001600.1,VXBX01007131.1,VXBX01005210.1,VXBX01009114.1,VXBX01001290.1,VXBX01002809.1,VXBX01003377.1,VXBX01005253.1,VXBX01005186.1,VXBX01009069.1,VXBX01001048.1,VXBX01005632.1,VXBX01000768.1
 #  --out Lin1_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10
 #  --recode
 #  --vcf Lin1_bigger500kbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_GeographicNames_allsamples.vcf.recode.vcf.gz
@@ -82,62 +81,77 @@ if ("Ne_low" %in% colnames(gone)) {
 }
 
 
-
-
-
-
 ###################################################################
+vcftools --gzvcf Lin2_1Mscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.recode.vcf.gz --chr VXBX01009921.1 --chr VXBX01004249.1 --chr VXBX01003474.1 --chr VXBX01008609.1 --chr VXBX01002725.1 --chr VXBX01005888.1 --chr VXBX01003014.1 --chr VXBX01007701.1 --chr VXBX01003755.1 --chr VXBX01008695.1 --chr VXBX01007125.1 --chr VXBX01008236.1 --chr VXBX01009439.1 --chr VXBX01001056.1 --chr VXBX01001501.1 --chr VXBX01007795.1 --chr VXBX01004397.1 --chr VXBX01007997.1 --chr VXBX01008145.1 --chr VXBX01008674.1 --chr VXBX01003991.1 --chr VXBX01001608.1 --chr VXBX01006871.1 --chr VXBX01006773.1 --chr VXBX01001698.1 --chr VXBX01000547.1 --chr VXBX01009827.1 --chr VXBX01004616.1 --chr VXBX01001175.1 --chr VXBX01003868.1 --chr VXBX01005266.1 --chr VXBX01005702.1 --chr VXBX01004221.1 --chr VXBX01004071.1 --chr VXBX01008400.1 --chr VXBX01002109.1 --chr VXBX01002369.1 --chr VXBX01006211.1 --chr VXBX01009452.1 --chr VXBX01008453.1 --chr VXBX01003936.1 --out Lin2_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10 --recode
+vcftools --gzvcf Lin3_1Mscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.recode.vcf.gz --chr VXBX01009921.1 --chr VXBX01004249.1 --chr VXBX01003474.1 --chr VXBX01008609.1 --chr VXBX01002725.1 --chr VXBX01005888.1 --chr VXBX01003014.1 --chr VXBX01007701.1 --chr VXBX01003755.1 --chr VXBX01008695.1 --chr VXBX01007125.1 --chr VXBX01008236.1 --chr VXBX01009439.1 --chr VXBX01001056.1 --chr VXBX01001501.1 --chr VXBX01007795.1 --chr VXBX01004397.1 --chr VXBX01007997.1 --chr VXBX01008145.1 --chr VXBX01008674.1 --chr VXBX01003991.1 --chr VXBX01001608.1 --chr VXBX01006871.1 --chr VXBX01006773.1 --chr VXBX01001698.1 --chr VXBX01000547.1 --chr VXBX01009827.1 --chr VXBX01004616.1 --chr VXBX01001175.1 --chr VXBX01003868.1 --chr VXBX01005266.1 --chr VXBX01005702.1 --chr VXBX01004221.1 --chr VXBX01004071.1 --chr VXBX01008400.1 --chr VXBX01002109.1 --chr VXBX01002369.1 --chr VXBX01006211.1 --chr VXBX01009452.1 --chr VXBX01008453.1 --chr VXBX01003936.1 --out Lin3_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10 --recode
+vcftools --gzvcf Lin4_1Mscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.recode.vcf.gz --chr VXBX01009921.1 --chr VXBX01004249.1 --chr VXBX01003474.1 --chr VXBX01008609.1 --chr VXBX01002725.1 --chr VXBX01005888.1 --chr VXBX01003014.1 --chr VXBX01007701.1 --chr VXBX01003755.1 --chr VXBX01008695.1 --chr VXBX01007125.1 --chr VXBX01008236.1 --chr VXBX01009439.1 --chr VXBX01001056.1 --chr VXBX01001501.1 --chr VXBX01007795.1 --chr VXBX01004397.1 --chr VXBX01007997.1 --chr VXBX01008145.1 --chr VXBX01008674.1 --chr VXBX01003991.1 --chr VXBX01001608.1 --chr VXBX01006871.1 --chr VXBX01006773.1 --chr VXBX01001698.1 --chr VXBX01000547.1 --chr VXBX01009827.1 --chr VXBX01004616.1 --chr VXBX01001175.1 --chr VXBX01003868.1 --chr VXBX01005266.1 --chr VXBX01005702.1 --chr VXBX01004221.1 --chr VXBX01004071.1 --chr VXBX01008400.1 --chr VXBX01002109.1 --chr VXBX01002369.1 --chr VXBX01006211.1 --chr VXBX01009452.1 --chr VXBX01008453.1 --chr VXBX01003936.1 --out Lin4_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10 --recode
+vcftools --gzvcf Lin5_1Mscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.recode.vcf.gz --chr VXBX01009921.1 --chr VXBX01004249.1 --chr VXBX01003474.1 --chr VXBX01008609.1 --chr VXBX01002725.1 --chr VXBX01005888.1 --chr VXBX01003014.1 --chr VXBX01007701.1 --chr VXBX01003755.1 --chr VXBX01008695.1 --chr VXBX01007125.1 --chr VXBX01008236.1 --chr VXBX01009439.1 --chr VXBX01001056.1 --chr VXBX01001501.1 --chr VXBX01007795.1 --chr VXBX01004397.1 --chr VXBX01007997.1 --chr VXBX01008145.1 --chr VXBX01008674.1 --chr VXBX01003991.1 --chr VXBX01001608.1 --chr VXBX01006871.1 --chr VXBX01006773.1 --chr VXBX01001698.1 --chr VXBX01000547.1 --chr VXBX01009827.1 --chr VXBX01004616.1 --chr VXBX01001175.1 --chr VXBX01003868.1 --chr VXBX01005266.1 --chr VXBX01005702.1 --chr VXBX01004221.1 --chr VXBX01004071.1 --chr VXBX01008400.1 --chr VXBX01002109.1 --chr VXBX01002369.1 --chr VXBX01006211.1 --chr VXBX01009452.1 --chr VXBX01008453.1 --chr VXBX01003936.1 --out Lin5_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10 --recode
+vcftools --gzvcf Lin6_1Mscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.recode.vcf.gz --chr VXBX01009921.1 --chr VXBX01004249.1 --chr VXBX01003474.1 --chr VXBX01008609.1 --chr VXBX01002725.1 --chr VXBX01005888.1 --chr VXBX01003014.1 --chr VXBX01007701.1 --chr VXBX01003755.1 --chr VXBX01008695.1 --chr VXBX01007125.1 --chr VXBX01008236.1 --chr VXBX01009439.1 --chr VXBX01001056.1 --chr VXBX01001501.1 --chr VXBX01007795.1 --chr VXBX01004397.1 --chr VXBX01007997.1 --chr VXBX01008145.1 --chr VXBX01008674.1 --chr VXBX01003991.1 --chr VXBX01001608.1 --chr VXBX01006871.1 --chr VXBX01006773.1 --chr VXBX01001698.1 --chr VXBX01000547.1 --chr VXBX01009827.1 --chr VXBX01004616.1 --chr VXBX01001175.1 --chr VXBX01003868.1 --chr VXBX01005266.1 --chr VXBX01005702.1 --chr VXBX01004221.1 --chr VXBX01004071.1 --chr VXBX01008400.1 --chr VXBX01002109.1 --chr VXBX01002369.1 --chr VXBX01006211.1 --chr VXBX01009452.1 --chr VXBX01008453.1 --chr VXBX01003936.1 --out Lin6_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10 --recode
+vcftools --gzvcf Lin7_1Mscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.recode.vcf.gz --chr VXBX01009921.1 --chr VXBX01004249.1 --chr VXBX01003474.1 --chr VXBX01008609.1 --chr VXBX01002725.1 --chr VXBX01005888.1 --chr VXBX01003014.1 --chr VXBX01007701.1 --chr VXBX01003755.1 --chr VXBX01008695.1 --chr VXBX01007125.1 --chr VXBX01008236.1 --chr VXBX01009439.1 --chr VXBX01001056.1 --chr VXBX01001501.1 --chr VXBX01007795.1 --chr VXBX01004397.1 --chr VXBX01007997.1 --chr VXBX01008145.1 --chr VXBX01008674.1 --chr VXBX01003991.1 --chr VXBX01001608.1 --chr VXBX01006871.1 --chr VXBX01006773.1 --chr VXBX01001698.1 --chr VXBX01000547.1 --chr VXBX01009827.1 --chr VXBX01004616.1 --chr VXBX01001175.1 --chr VXBX01003868.1 --chr VXBX01005266.1 --chr VXBX01005702.1 --chr VXBX01004221.1 --chr VXBX01004071.1 --chr VXBX01008400.1 --chr VXBX01002109.1 --chr VXBX01002369.1 --chr VXBX01006211.1 --chr VXBX01009452.1 --chr VXBX01008453.1 --chr VXBX01003936.1 --out Lin7_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10 --recode
 
-#plink --vcf Lin1_1Mscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.recode.vcf.gz --allow-extra-chr --recode --out Lin1_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10
-#plink --vcf Lin2_1Mscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.recode.vcf.gz --allow-extra-chr --recode --out Lin2_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10
-#plink --vcf Lin3_1Mscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.recode.vcf.gz --allow-extra-chr --recode --out Lin3_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10
-#plink --vcf Lin4_1Mscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.recode.vcf.gz --allow-extra-chr --recode --out Lin4_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10
-#plink --vcf Lin5_1Mscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.recode.vcf.gz --allow-extra-chr --recode --out Lin5_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10
-#plink --vcf Lin6_1Mscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.recode.vcf.gz --allow-extra-chr --recode --out Lin6_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10
-#plink --vcf Lin7_1Mscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.recode.vcf.gz --allow-extra-chr --recode --out Lin7_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10
-#
-#awk '!seen[$1]++ { chr++; map[$1]=chr } { print map[$1], $2, $3, $4 }' Lin1_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.map > Lin1_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
-#awk '!seen[$1]++ { chr++; map[$1]=chr } { print map[$1], $2, $3, $4 }' Lin2_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.map > Lin2_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
-#awk '!seen[$1]++ { chr++; map[$1]=chr } { print map[$1], $2, $3, $4 }' Lin3_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.map > Lin3_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
-#awk '!seen[$1]++ { chr++; map[$1]=chr } { print map[$1], $2, $3, $4 }' Lin4_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.map > Lin4_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
-#awk '!seen[$1]++ { chr++; map[$1]=chr } { print map[$1], $2, $3, $4 }' Lin5_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.map > Lin5_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
-#awk '!seen[$1]++ { chr++; map[$1]=chr } { print map[$1], $2, $3, $4 }' Lin6_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.map > Lin6_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
-#awk '!seen[$1]++ { chr++; map[$1]=chr } { print map[$1], $2, $3, $4 }' Lin7_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.map > Lin7_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
-#
-#cp Lin1_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.ped Lin1_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.ped
-#cp Lin2_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.ped Lin2_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.ped
-#cp Lin3_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.ped Lin3_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.ped
-#cp Lin4_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.ped Lin4_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.ped
-#cp Lin5_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.ped Lin5_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.ped
-#cp Lin6_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.ped Lin6_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.ped
-#cp Lin7_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10.ped Lin7_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.ped
-#
-#awk '{$2=NR; print}' Lin1_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map > Lin1_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map
-#awk '{$2=NR; print}' Lin2_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map > Lin2_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map
-#awk '{$2=NR; print}' Lin3_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map > Lin3_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map
-#awk '{$2=NR; print}' Lin4_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map > Lin4_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map
-#awk '{$2=NR; print}' Lin5_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map > Lin5_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map
-#awk '{$2=NR; print}' Lin6_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map > Lin6_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map
-#awk '{$2=NR; print}' Lin7_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map > Lin7_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map
-#
-#mv Lin1_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map Lin1_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
-#mv Lin2_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map Lin2_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
-#mv Lin3_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map Lin3_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
-#mv Lin4_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map Lin4_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
-#mv Lin5_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map Lin5_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
-#mv Lin6_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map Lin6_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
-#mv Lin7_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map Lin7_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
-#
-#
-#mv Lin1_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr* ~/Scytalopus/GONE/Linux/
-#mv Lin2_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr* ~/Scytalopus/GONE/Linux/
-#mv Lin3_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr* ~/Scytalopus/GONE/Linux/
-#mv Lin4_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr* ~/Scytalopus/GONE/Linux/
-#mv Lin5_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr* ~/Scytalopus/GONE/Linux/
-#mv Lin6_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr* ~/Scytalopus/GONE/Linux/
-#mv Lin7_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr* ~/Scytalopus/GONE/Linux/
-#
-#export TMPDIR="$(pwd)/tmp"
-#export TEMP="$TMPDIR"
-#export TMP="$TMPDIR"
+gzip Lin2_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10.recode.vcf
+gzip Lin3_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10.recode.vcf
+gzip Lin4_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10.recode.vcf
+gzip Lin5_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10.recode.vcf
+gzip Lin6_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10.recode.vcf
+gzip Lin7_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10.recode.vcf
 
+conda activate plink
+
+plink --vcf Lin2_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10.recode.vcf.gz --allow-extra-chr --recode --out Lin2_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10
+plink --vcf Lin3_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10.recode.vcf.gz --allow-extra-chr --recode --out Lin3_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10
+plink --vcf Lin4_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10.recode.vcf.gz --allow-extra-chr --recode --out Lin4_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10
+plink --vcf Lin5_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10.recode.vcf.gz --allow-extra-chr --recode --out Lin5_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10
+plink --vcf Lin6_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10.recode.vcf.gz --allow-extra-chr --recode --out Lin6_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10
+plink --vcf Lin7_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10.recode.vcf.gz --allow-extra-chr --recode --out Lin7_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10
+
+awk '!seen[$1]++ { chr++; map[$1]=chr } { print map[$1], $2, $3, $4 }' Lin2_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10.map > Lin2_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
+awk '!seen[$1]++ { chr++; map[$1]=chr } { print map[$1], $2, $3, $4 }' Lin3_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10.map > Lin3_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
+awk '!seen[$1]++ { chr++; map[$1]=chr } { print map[$1], $2, $3, $4 }' Lin4_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10.map > Lin4_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
+awk '!seen[$1]++ { chr++; map[$1]=chr } { print map[$1], $2, $3, $4 }' Lin5_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10.map > Lin5_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
+awk '!seen[$1]++ { chr++; map[$1]=chr } { print map[$1], $2, $3, $4 }' Lin6_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10.map > Lin6_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
+awk '!seen[$1]++ { chr++; map[$1]=chr } { print map[$1], $2, $3, $4 }' Lin7_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10.map > Lin7_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
+
+cp Lin2_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10.ped Lin2_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr.ped
+cp Lin3_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10.ped Lin3_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr.ped
+cp Lin4_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10.ped Lin4_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr.ped
+cp Lin5_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10.ped Lin5_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr.ped
+cp Lin6_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10.ped Lin6_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr.ped
+cp Lin7_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10.ped Lin7_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr.ped
+
+awk '{$2=NR; print}' Lin2_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr.map > Lin2_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map
+awk '{$2=NR; print}' Lin3_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr.map > Lin3_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map
+awk '{$2=NR; print}' Lin4_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr.map > Lin4_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map
+awk '{$2=NR; print}' Lin5_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr.map > Lin5_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map
+awk '{$2=NR; print}' Lin6_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr.map > Lin6_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map
+awk '{$2=NR; print}' Lin7_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr.map > Lin7_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map
+
+awk '{ $2 = "SNP"$2; print }' Lin2_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map > Lin2_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
+awk '{ $2 = "SNP"$2; print }' Lin3_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map > Lin3_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
+awk '{ $2 = "SNP"$2; print }' Lin4_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map > Lin4_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
+awk '{ $2 = "SNP"$2; print }' Lin5_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map > Lin5_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
+awk '{ $2 = "SNP"$2; print }' Lin6_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map > Lin6_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
+awk '{ $2 = "SNP"$2; print }' Lin7_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map > Lin7_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
+
+mv Lin2_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map Lin2_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
+mv Lin3_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map Lin3_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
+mv Lin4_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map Lin4_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
+mv Lin5_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map Lin5_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
+mv Lin6_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map Lin6_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
+mv Lin7_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr1.map Lin7_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr.map
+
+
+mv Lin1_bigger1Mbscaffolds_FilteredPCAandUCE_Max30missingDepthmin10_chr* ~/Scytalopus/GONE/Linux/
+mv Lin2_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr* ~/Scytalopus/GONE/Linux/
+mv Lin3_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr* ~/Scytalopus/GONE/Linux/
+mv Lin4_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr* ~/Scytalopus/GONE/Linux/
+mv Lin5_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr* ~/Scytalopus/GONE/Linux/
+mv Lin6_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr* ~/Scytalopus/GONE/Linux/
+mv Lin7_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr* ~/Scytalopus/GONE/Linux/
+
+bash script_GONE.sh Lin2_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr
+bash script_GONE.sh Lin3_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr
+bash script_GONE.sh Lin4_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr
+bash script_GONE.sh Lin5_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr
+bash script_GONE.sh Lin6_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr
+bash script_GONE.sh Lin7_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr
