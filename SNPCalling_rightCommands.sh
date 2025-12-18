@@ -57,3 +57,11 @@ vcftools --gzvcf FilteredPCAandUCE_Max30missingDepthmin10LD0.15maf0.05_Geographi
 # 3) picard LiftoverVcf --CHAIN --INPUT --OUTPUT --REFERENCE_SEQUENCE --REJECT
 # alternative: 
 # CrossMap 
+
+# filtering for GONE (maximum allele count =2; max missing SNPs per ind= 10%; max missing per SNPs=10%)
+vcftools --gzvcf Lin3_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10.recode.vcf.gz --mac 2 --recode --out Lin3_42scaffolds2M_FilteredPCAandUCE_Max10missingDepthmin10mac2.recode.vcf.gz
+  # check missing per ind
+  vcftools --gzvcf Lin3_42scaffolds2M_FilteredPCAandUCE_Max10missingDepthmin10mac2.recode.vcf.gz.recode.vcf --missing-indv --out Lin3_42scaffolds2M_FilteredPCAandUCE_Max10missingDepthmin10mac2
+  # convert to ped file to GONE 
+  vcftools --vcf Lin3_42scaffolds2M_FilteredPCAandUCE_Max10missingDepthmin10mac2.recode.vcf.gz.recode.vcf --plink --out Lin3_42scaffolds2M_FilteredPCAandUCE_Max10missingDepthmin10mac2
+  # go to GONE dir to check transformations of the file to be accepted on GONE
