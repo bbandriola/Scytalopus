@@ -37,6 +37,7 @@ gzip NoZW_FilteredPCAandUCE_Max30missingDepthmin10_GeographicNames_allsamples.re
 # plink --vcf ../FilteredMax30missingDepthmin5MAF_GeographicNames_allsamples.vcf.gz.recode.vcf.gz --double-id --allow-extra-chr --set-missing-var-ids @:# --geno 0.1 --thin 0.1 --r2 gz --ld-window 100 --ld-window-kb 1000 --ld-window-r2 0 --out r2Plink_onlyspeluncae
 # do LD prunning with plink 
   # a partir disso, fazer um filtro de prunning adequado para os dados  
+ # no meu novo vcf utilizar 1kb e não 60 SNPs
 plink2 --vcf ../NoZW_FilteredPCAandUCE_Max30missingDepthmin10_GeographicNames_allsamples.vcf.gz --indep-pairwise 60 10 0.15 --out pruning_60snps_r2_0.15 --allow-extra-chr --set-missing-var-ids @:# # ajustar o ultimo valor para o valor que tiver saido no LDdecay
 # snps 90,658 pruning_60snps_r2_0.15.prune.in
 awk -F':' '{print $1"\t"($2-1)"\t"$2}' pruning_60snps_r2_0.15.prune.in > prune_in.bed
