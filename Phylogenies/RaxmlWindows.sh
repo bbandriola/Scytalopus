@@ -1,7 +1,7 @@
 # 5kb 
 # 1. run RAxML
 for i in edited*.fa; do raxmlHPC-PTHREADS -T 10 -s $i -w /media/labgenoma5/DATAPART3/bandriola/Scytalopus/Raxml_windows/1kb/ -m GTRGAMMA -o Ssuperciliariswin1kb -n $i -p 2352890; done
-
+for i in edited*._nosuperciliares.fasta; do raxmlHPC-PTHREADS -T 10 -s $i -w /media/labgenoma5/DATAPART3/bandriola/Scytalopus/Raxml_windows/1kb/nosuperciliaris/ -m GTRGAMMA -o Spetrophilus,Sdiamantinensis127win1kb,Snovacapitalis152win1kb,Spachecoi154win1kb -n $i -p 2352890; done
 # 2. separate directorios
 cd /media/labgenoma4/DATAPART6/bandriola/Scytalopus/Raxml_windows/5kb_run2/
 mkdir raxml_BestTree
