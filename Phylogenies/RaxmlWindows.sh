@@ -5,15 +5,15 @@ for i in edited*._nosuperciliares.fasta; do raxmlHPC-PTHREADS -T 10 -s $i -w /me
 # 2. separate directorios
 cd /media/labgenoma4/DATAPART6/bandriola/Scytalopus/Raxml_windows/5kb_run2/
 mkdir raxml_BestTree
-mv RAxML_bestTree*fa ./raxml_BestTree/
+mv RAxML_bestTree*fasta ./raxml_BestTree/
 mkdir raxml_Info
-mv RAxML_info*fa ./raxml_Info/
+mv RAxML_info*fasta ./raxml_Info/
 mkdir raxml_Log
-mv RAxML_log*fa ./raxml_Log/
+mv RAxML_log*fasta ./raxml_Log/
 mkdir raxml_Parsimony
-mv RAxML_parsimony*fa ./raxml_Parsimony/
+mv RAxML_parsimony*fasta ./raxml_Parsimony/
 mkdir raxml_Result
-mv RAxML_result*fa ./raxml_Result/
+mv RAxML_result*fasta ./raxml_Result/
 
 cd raxml_BestTree
 for i in RAxML*.fa; do cat $i >> allbestTrees_5kbint100kb_run2.fa; done
