@@ -22,7 +22,7 @@ bcftools merge -m snps --output mergeallvcfsfromsnparcher.vcf.gz -Oz --threads 7
 # 2. rename; filter by PCA, depth max and mix and missing
 mergeallvcfsfromsnparcher.vcf.gz | bcftools view -s ^EleoindigoticusUCE,EleopsychopompusUCE1,SiraiensisUCE
 # 59 ind; 205,398,098
-bcftools filter -S . -i 'FORMAT/DP>=10 & FORMAT/DP<=100' -m2 -M2 -v snps -Oz -o FilteredPCAandUCE_Max30missingDepthmin10_GeographicNames_allsamples.vcf.gz 
+bcftools filter -S . -i 'FORMAT/DP>=10 & FORMAT/DP<=100' -m2 -M2 -V indels -Oz -o FilteredPCAandUCE_Max30missingDepthmin10_GeographicNames_allsamples.vcf.gz 
 bcftools view -i 'F_MISSING <= 0.3' 
 bcftools reheader --samples GeographicNames.txt --output GeographicNames_allsamples.vcf.gz mergeallvcfsfromsnparcher.vcf.gz
 # 3. remove sexual chromossomes
