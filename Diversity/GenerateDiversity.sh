@@ -61,4 +61,28 @@ for sample in $SAMPLE_NAMES; do
 
 done
 
+######## calculate the SNV density in 1Mb 
+
+#!/bin/bash
+for file in ./*_hets.vcf.gz; do
+    name=$(basename "$file" _hets.vcf.gz)
+    vcftools --gzvcf "$file" --SNPdensity 1000000 --out ./"${name}_density"
+done
+
+
+########### FILE PLOT SNV
+# Adicione o nome do indivíduo a cada linha do output
+#!/bin/bash
+for file in ./*_density.snpden; do
+    sample=$(basename "$file" _density.snpden)
+    awk -v sample="$sample" 'NR==1 {print $0 "\tSample"} NR>1 {print $0 "\t" sample}' "$file" > ./"${sample}_annotated.snpden"
+done
+
+# Combine os outputs em um único arquivo
+
+tail -q -n +2 ./*_annotated.snpden > ./combined_snp_density.snpden
+
+####### Plot in R 
+
+
 
