@@ -1,4 +1,4 @@
-# Fst with vcftools 
+.# Fst with vcftools 
 vcftools --gzvcf ../../../../snparcher/vcfs/FilteredPCAandUCE_Max30missingDepthmin10_GeographicNames_allsamples.vcf.gz --weir-fst-pop ../../../lin1.txt --weir-fst-pop ../../../lin2.txt --out fstlin1_lin2
 vcftools --gzvcf ../../../../snparcher/vcfs/FilteredPCAandUCE_Max30missingDepthmin10_GeographicNames_allsamples.vcf.gz --weir-fst-pop ../../../lin1.txt --weir-fst-pop ../../../lin3.txt --out fstlin1_lin3
 vcftools --gzvcf ../../../../snparcher/vcfs/FilteredPCAandUCE_Max30missingDepthmin10_GeographicNames_allsamples.vcf.gz --weir-fst-pop ../../../lin1.txt --weir-fst-pop ../../../lin4.txt --out fstlin1_lin4
