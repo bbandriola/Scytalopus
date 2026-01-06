@@ -503,4 +503,129 @@ p<-ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
   )
 ggsave("K6_SspeluncaeComplex.png", plot = p, width = 14, height = 5)
 
+######################################
+########### speluncae only ###########
+# load tidyverse package
+library(readr)
+library(tibble)
+library(ggplot2)
+library(ggrepel)
+library(RColorBrewer)
+library(tidyr)
+
+k = c(1:10)
+cv1.err = c(0.53,0.96,0.44,0.45,0.47,0.54,0.61,0.70,0.76,0.62)
+
+pdf("CVK1-10_Sspeluncaeonly.pdf",)
+plot(k,cv1.err, type="b",xlab = "K", ylab = "cross-validation error", main = "CV test for K=1-10",
+     cex.main=1.5, cex.lab=1.5,yaxt="n",xaxt="n")
+axis(1,cex.axis=1.3)
+axis(2,cex.axis=1.3)
+dev.off()
+
+tbl=read.table("Autosomal_FilteredPCAandUCE_Max30missinessDepthmin10max100LD0.15_SspeluncaeOnly.1.Q")
+tbl$V1 <- factor(tbl$V1, levels = unique(tbl$V1))
+tbl_long <- pivot_longer(tbl, cols = V2, names_to = "K", values_to = "Proportion")
+p<-ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
+  geom_col(width = 1, color = NA) +  # Full-width bars
+  scale_fill_manual(
+    values = c("V2" = "#4D9F8C"),
+    labels = c("K=1")
+  ) +
+  labs(x = "Individuals", y = "Ancestry Proportion") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
+    panel.grid = element_blank()
+  )
+ggsave("K1_SspeluncaeOnly.png", plot = p, width = 14, height = 5)
+
+tbl=read.table("Autosomal_FilteredPCAandUCE_Max30missinessDepthmin10max100LD0.15_SspeluncaeOnly.2.Q")
+tbl$V1 <- factor(tbl$V1, levels = unique(tbl$V1))
+tbl_long <- pivot_longer(tbl, cols = V2:V3, names_to = "K", values_to = "Proportion")
+p<-ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
+  geom_col(width = 1, color = NA) +  # Full-width bars
+  scale_fill_manual(
+    values = c("V2" = "#66A61D","V3" = "#7570B3"),
+    labels = c("K=1","K=2")
+  ) +
+  labs(x = "Individuals", y = "Ancestry Proportion") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
+    panel.grid = element_blank()
+  )
+ggsave("K2_SspeluncaeOnly.png", plot = p, width = 14, height = 5)
+
+
+tbl=read.table("Autosomal_FilteredPCAandUCE_Max30missinessDepthmin10max100LD0.15_SspeluncaeOnly.3.Q")
+tbl$V1 <- factor(tbl$V1, levels = unique(tbl$V1))
+tbl_long <- pivot_longer(tbl, cols = V2:V4, names_to = "K", values_to = "Proportion")
+p<-ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
+  geom_col(width = 1, color = NA) +  # Full-width bars
+  scale_fill_manual(
+    values = c("V2" = "#7570B3","V3" = "deeppink","V4" = "#66A61D"),
+    labels = c("K=1","K=2","K=3")
+  ) +
+  labs(x = "Individuals", y = "Ancestry Proportion") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
+    panel.grid = element_blank()
+  )
+ggsave("K3_SspeluncaeOnly.png", plot = p, width = 14, height = 5)
+
+tbl=read.table("Autosomal_FilteredPCAandUCE_Max30missinessDepthmin10max100LD0.15_SspeluncaeOnly.4.Q")
+tbl$V1 <- factor(tbl$V1, levels = unique(tbl$V1))
+tbl_long <- pivot_longer(tbl, cols = V2:V5, names_to = "K", values_to = "Proportion")
+p<-ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
+  geom_col(width = 1, color = NA) +  # Full-width bars
+  scale_fill_manual(
+    values = c("V2" = "#66A61D","V3" = "#E6AC2F","V4" = "deeppink","V5" = "#7570B3"),
+    labels = c("K=1","K=2","K=3","K=4","K=5")
+  ) +
+  labs(x = "Individuals", y = "Ancestry Proportion") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
+    panel.grid = element_blank()
+  )
+ggsave("K4_SspeluncaeOnly.png", plot = p, width = 14, height = 5)
+
+tbl=read.table("Autosomal_FilteredPCAandUCE_Max30missinessDepthmin10max100LD0.15_SspeluncaeOnly.5.Q")
+tbl$V1 <- factor(tbl$V1, levels = unique(tbl$V1))
+tbl_long <- pivot_longer(tbl, cols = V2:V6, names_to = "K", values_to = "Proportion")
+p<-ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
+  geom_col(width = 1, color = NA) +  # Full-width bars
+  scale_fill_manual(
+    values = c("V2" = "#7570B3","V3" = "#E93F33","V4" = "#E6AC2F","V5" = "#66A61D", "V6" = "deeppink"),
+    labels = c("K=1","K=2","K=3","K=4","K=5")
+  ) +
+  labs(x = "Individuals", y = "Ancestry Proportion") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
+    panel.grid = element_blank()
+  )
+ggsave("K5_SspeluncaeOnly.png", plot = p, width = 14, height = 5)
+
+
+tbl=read.table("Autosomal_FilteredPCAandUCE_Max30missinessDepthmin10max100LD0.15_SspeluncaeOnly.6.Q")
+tbl$V1 <- factor(tbl$V1, levels = unique(tbl$V1))
+tbl_long <- pivot_longer(tbl, cols = V2:V7, names_to = "K", values_to = "Proportion")
+p<-ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
+  geom_col(width = 1, color = NA) +  # Full-width bars
+  scale_fill_manual(
+    values = c("V2" = "#4D9F8C","V3" = "red","V4" = "#66A61D","V5" = "deeppink", 
+    "V6" = "#7570B3","V7" = "#E6AC2F"),
+    labels = c("K=1","K=2","K=3","K=4","K=5","K=6")
+  ) +
+  labs(x = "Individuals", y = "Ancestry Proportion") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
+    panel.grid = element_blank()
+  )
+ggsave("K6_SspeluncaeOnly.png", plot = p, width = 14, height = 5)
+
 ########
