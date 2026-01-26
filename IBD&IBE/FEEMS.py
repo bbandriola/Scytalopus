@@ -24,18 +24,18 @@ plt.rcParams["font.sans-serif"] = "Arial"
 
 # read the data 
 data_path = str(resources.files('feems') / 'data')
-(bim, fam, G) = read_plink("FilteredforVars_NoZW_Max10missingDepthmin15LD015_Speluncae".format(os.getcwd))
+(bim, fam, G) = read_plink("NomissingGenos_FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex".format(os.getcwd))
 imp = SimpleImputer(missing_values=np.nan, strategy="mean")
 genotypes = imp.fit_transform((np.array(G)).T)
 print("n_samples={}, n_snps={}".format(genotypes.shape[0], genotypes.shape[1]))
-coord = np.loadtxt("{}/Onlyspeluncae.coord".format(os.getcwd()))
+coord = np.loadtxt("{}/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.coord".format(os.getcwd()))
 # if needed swap the columns of the coordinates 
 # coord is (lat, lon) → swap to (lon, lat)
 if np.mean(coord[:, 0]) < 0 and np.mean(coord[:, 0]) > -40:  # lat range ~ -35 to -5
     coord = coord[:, ::-1]  # swap columns
     print("Swapped columns of coord to (lon, lat)")
 # load files
-outer = np.loadtxt("{}/Onlyspeluncae.outer".format(os.getcwd()))
+outer = np.loadtxt("{}/NomissingGenos_FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.outer".format(os.getcwd()))
 grid_path = "{}/grid_100.shp".format(data_path)  
 
 # graph input files
