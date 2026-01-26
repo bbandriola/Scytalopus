@@ -1,5 +1,5 @@
 # based on: https://github.com/NovembreLab/feems/blob/main/docsrc/notebooks/getting-started.ipynb
-
+# filter for only variants files and no missing data before running: plink --allow-extra-chr --maf 0.0000001 --make-bed --out ./OnlyVars_NomissingGenos_FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex --geno 0 --vcf /media/labgenoma5/DATAPART2/bandriola/Scytalopus/vcfs/FinalVCFs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz
 # base
 import numpy as np
 import os
@@ -24,7 +24,7 @@ plt.rcParams["font.sans-serif"] = "Arial"
 
 # read the data 
 data_path = str(resources.files('feems') / 'data')
-(bim, fam, G) = read_plink("NomissingGenos_FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex".format(os.getcwd))
+(bim, fam, G) = read_plink("OnlyVars_NomissingGenos_FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex".format(os.getcwd))
 imp = SimpleImputer(missing_values=np.nan, strategy="mean")
 genotypes = imp.fit_transform((np.array(G)).T)
 print("n_samples={}, n_snps={}".format(genotypes.shape[0], genotypes.shape[1]))
