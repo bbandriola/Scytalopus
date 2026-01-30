@@ -8,12 +8,15 @@
 ../../../Softwares/Dsuite/Build/Dsuite Dtrios -t speluncaeLin1.nwk -o speluncaeLin1Nofilter_dtrios ../../vcfs/normalizedVCFs/FilteredPCAandUCE_Max30missingDepthmin10_GeographicNames_speluncaeLin1.vcf.gz speluncaeLin1.txt
 Hipo 1: ~/Softwares/Dsuite/Build/Dsuite Dtrios -t Onlyspeluncae_PCAfiltered_Devoniana_hipo1.nwk -o Onlyspeluncae_PCAfiltered_Devoniana_hipo1 ../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100LD0.15_SpeluncaeComplex.vcf.gz Onlyspeluncae_PCAfiltered_Devoniana_popfile.txt
 Hipo 2: ~/Softwares/Dsuite/Build/Dsuite Dtrios -t Onlyspeluncae_PCAfiltered_Devoniana_hipo2.nwk -o Onlyspeluncae_PCAfiltered_Devoniana_hipo2 ../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100LD0.15_SpeluncaeComplex.vcf.gz Onlyspeluncae_PCAfiltered_Devoniana_popfile.txt
+~/Softwares/Dsuite/Build/Dsuite Dtrios -t Onlyspeluncae_PCAfiltered_mitofilo.nwk -o Onlyspeluncae_PCAfiltered_mitofilo ../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100LD0.15_SpeluncaeComplex.vcf.gz Onlyspeluncae_PCAfiltered_Devoniana_popfile.txt
 
 # 2. Fbranch  
 ../../Softwares/Dsuite/Build/Dsuite Fbranch -Z speluncaeLin1.nwk speluncaeLin1_dtrios_tree.txt > fbranch_speluncaeLin1_dtrios.txt
 ../../../Softwares/Dsuite/Build/Dsuite Fbranch -Z allsamples.nwk allsamples_dtrio_tree.txt > fbranch_allsamples_dtrios.txt
 ../../../Softwares/Dsuite/Build/Dsuite Fbranch -Z speluncaeLin1Ssuperci.nwk speluncaeLin1Ssuperci_dtrios_tree.txt > fbranch_speluncaeLin1Ssuperci_dtrios.txt
-../../../Softwares/Dsuite/Build/Dsuite Fbranch -Z speluncaeLin1.nwk speluncaeLin1Nofilter_dtrios_tree.txt > fbranch_speluncaeLin1Nofilter_dtrios.txt
+../../../Softwares/Dsuite/Build/Dsuite Fbranch  -Z speluncaeLin1.nwk speluncaeLin1Nofilter_dtrios_tree.txt > fbranch_speluncaeLin1Nofilter_dtrios.txt
+
+~/Softwares/Dsuite/Build/Dsuite Fbranch -Z Onlyspeluncae_PCAfiltered_mitofilo.nwk Onlyspeluncae_PCAfiltered_mitofilo_tree.txt > fbranch_Onlyspeluncae_PCAfiltered_mitofilo_dtrios.txt
 
 # 3. fbranch
 ../../../Softwares/Dsuite/utils/dtools.py -n fbranch_speluncaeLin1_dtrios --outgroup Outgroup fbranch_speluncaeLin1_dtrios.txt speluncaeLin1.nwk 
@@ -21,6 +24,7 @@ Hipo 2: ~/Softwares/Dsuite/Build/Dsuite Dtrios -t Onlyspeluncae_PCAfiltered_Devo
 ../../../Softwares/Dsuite/utils/dtools.py -n fbranch_speluncaeLin1Ssuperci_dtrios --outgroup Outgroup fbranch_speluncaeLin1Ssuperci_dtrios_zscore.txt speluncaeLin1Ssuperci.nwk 
 ../../../Softwares/Dsuite/utils/dtools.py -n fbranch_speluncaeLin1Nofilter_dtrios --outgroup Outgroup fbranch_speluncaeLin1Nofilter_dtrios.txt speluncaeLin1.nwk 
 
+~/Softwares/Dsuite/Build/Dsuite/utils/dtools.py -n fbranch_Onlyspeluncae_PCAfiltered_mitofilo_dtrios --outgroup Outgroup fbranch_Onlyspeluncae_PCAfiltered_mitofilo_dtrios.txt Onlyspeluncae_PCAfiltered_mitofilo.nwk
 
 ### plot in R 
 #### BBAA file
