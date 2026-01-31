@@ -1,5 +1,7 @@
 #plink --allow-extra-chr --maf 0.0000001 --make-bed --out ./OnlyVars_NomissingGenos_FilteredPCAandUCE_Max30missinessDepthmin10max100_SspeluncaeOnly --vcf /media/labgenoma5/DATAPART2/bandriola/Scytalopus/vcfs/FinalVCFs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --remove-fam removeind_speluncaeOnly.txt
 
+#plink --allow-extra-chr --maf 0.0000001 --make-bed --out ./OnlyVars_NomissingGenos_FilteredPCAandUCE_Max30missinessDepthmin10max100_SspeluncaeOnly --vcf /media/labgenoma5/DATAPART2/bandriola/Scytalopus/vcfs/FinalVCFs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --remove-fam removeind_speluncaeOnly.txt
+
 import numpy as np
 import os
 from importlib import resources
@@ -16,6 +18,8 @@ from feems.objective import comp_mats
 from feems.viz import draw_FEEMSmix_surface, plot_FEEMSmix_summary
 from feems import SpatialGraph, Objective, Viz
 from feems.cross_validation import run_cv, run_cv_joint
+import matplotlib.pyplot as plt
+import matplotlib.gridspec as gridspec
 # change matplotlib fonts
 plt.rcParams["font.family"] = "Arial"
 plt.rcParams["font.sans-serif"] = "Arial"
@@ -94,11 +98,10 @@ plt.close()
 ## cross-validation approach to find the combination of lamb and lamb_q that provides the lowest error
 # define grids
 # reverse the order of lambdas and alphas for warmstart
-lamb_grid = np.geomspace(1e-3, 1e2, 10, endpoint=True)[::-1]
+lamb_grid = np.geomspace(1e2, 1e5, 10)[::-1]
 lamb_q_grid = np.geomspace(1e-2, 1e2, 5, endpoint=True)[::-1]
 
 # run cross-validation over both smoothing parameters
-# ~NEW~ function
 cv_err = run_cv_joint(sp_graph, lamb_grid, lamb_q_grid, n_folds=5, factr=1e10)
 
 # average over folds
@@ -114,19 +117,113 @@ lineObj = plt.plot(lamb_grid, mean_cv_err.T, '-o', linewidth = 2, alpha = 0.8)
 plt.legend(lineObj, lamb_q_grid, title=r'$\lambda_q$'); plt.grid()
 plt.xlabel(r'$\lambda$'); plt.semilogx(); plt.ylabel('LOO-CV error')
 plt.axvline(lamb_cv, linewidth = 2, color = 'orange')
-plt.savefig(os.path.join(os.getcwd(), "SspeluncaeOnlygridr8_cross-validation.svg"),
+plt.savefig(os.path.join(os.getcwd(), "SspeluncaeOnlygridr8_cross-validation_.svg"),
             dpi=200, bbox_inches='tight')
 plt.close()
 
+##########################################
+## testing different lamb params ########
 
+# figure params
+projection = ccrs.AzimuthalEquidistant(central_longitude=-108.842926, central_latitude=66.037547)
+title_loc = "left"
+title_pad = "-10"
+title_fontsize = 12
+edge_width = .2
+edge_alpha = 1
+edge_zorder = 3
+obs_node_size = 3
+obs_node_linewidth = .4
+cbar_font_size = 8
+cbar_ticklabelsize = 8
+cbar_orientation = "horizontal"
+
+# figure setup
+fig = plt.figure(dpi=300)
+spec = gridspec.GridSpec(ncols=2, nrows=2, figure=fig, wspace=0.0, hspace=0.0)
+
+# axis 00 
+ax_00 = fig.add_subplot(spec[0, 0], projection=projection)
+ax_00.set_title("A", loc=title_loc, pad=title_pad, fontdict={"fontsize": title_fontsize})
+sp_graph.fit(lamb=lamb_grid[0], lamb_q=lamb_q_grid[0])
+v = Viz(ax_00, sp_graph, projection=projection, edge_width=edge_width, 
+        edge_alpha=1, edge_zorder=100, sample_pt_size=20, 
+        obs_node_size=obs_node_size, sample_pt_color="black", 
+        cbar_font_size=10)
+v.draw_map(longlat=False)
+v.draw_edges(use_weights=True)
+v.draw_obs_nodes(use_ids=False) 
+ax_00.text(.2, .85, "lambda={:.2f}\nlambda_q={:.2f}\ncv l2 error={:.5f}".format(lamb_grid[0], lamb_q_grid[0], mean_cv_err[0, 0]), 
+           fontdict={"fontsize": 4}, transform = ax_00.transAxes)
+
+# axis 10
+ax_10 = fig.add_subplot(spec[1, 0], projection=projection)
+ax_10.set_title("B", loc=title_loc, pad=title_pad, fontdict={"fontsize": title_fontsize})
+sp_graph.fit(lamb=lamb_cv, lamb_q=lamb_q_cv)
+v = Viz(ax_10, sp_graph, projection=projection, edge_width=edge_width, 
+        edge_alpha=1, edge_zorder=100, sample_pt_size=20,
+        obs_node_size=obs_node_size, sample_pt_color="black", 
+        cbar_font_size=10)
+v.draw_map(longlat=False)
+v.draw_edges(use_weights=True)
+v.draw_obs_nodes(use_ids=False) 
+ax_10.text(.2, .85, "lambda={:.2f}\nlambda_q={:.2f}\ncv l2 error={:.5f}".format(lamb_cv, lamb_q_cv, mean_cv_err[np.where(lamb_q_cv==lamb_q_grid)[0][0], np.where(lamb_cv==lamb_grid)[0][0]]), 
+           fontdict={"fontsize": 4}, transform = ax_10.transAxes)
+
+# axis 01
+ax_01 = fig.add_subplot(spec[0, 1], projection=projection)
+ax_01.set_title("C", loc=title_loc, pad=title_pad, fontdict={"fontsize": title_fontsize})
+sp_graph.fit(lamb=lamb_cv, lamb_q=0.01*lamb_q_cv)
+v = Viz(ax_01, sp_graph, projection=projection, edge_width=edge_width, 
+        edge_alpha=1, edge_zorder=100, sample_pt_size=20, 
+        obs_node_size=obs_node_size, sample_pt_color="black", 
+        cbar_font_size=10)
+v.draw_map(longlat=False)
+v.draw_edges(use_weights=True)
+v.draw_obs_nodes(use_ids=False) 
+ax_01.text(.2, .85, "lambda={:.2f}\nlambda_q={:.2f}\ncv l2 error={:.5f}".format(lamb_cv, 0.01*lamb_q_cv, mean_cv_err[np.where(0.01*lamb_q_cv==lamb_q_grid)[0][0], np.where(lamb_cv==lamb_grid)[0][0]]), 
+           fontdict={"fontsize": 4}, transform = ax_01.transAxes)
+
+# axis 11
+ax_11 = fig.add_subplot(spec[1, 1], projection=projection)
+ax_11.set_title("D", loc=title_loc, pad=title_pad, fontdict={"fontsize": title_fontsize})
+sp_graph.fit(lamb=lamb_grid[-2], lamb_q=lamb_q_grid[-1])
+v = Viz(ax_11, sp_graph, projection=projection, edge_width=edge_width, 
+       edge_alpha=1, edge_zorder=100, sample_pt_size=20, 
+       obs_node_size=obs_node_size, sample_pt_color="black", 
+       cbar_font_size=10)
+v.draw_map(longlat=False)
+v.draw_edges(use_weights=True)
+v.draw_obs_nodes(use_ids=False)
+v.cbar_font_size = cbar_font_size
+v.cbar_orientation = cbar_orientation
+v.cbar_ticklabelsize = cbar_ticklabelsize
+v.draw_edge_colorbar()
+ax_11.text(.2, .85, "lambda={:.2f}\nlambda_q={:.2f}\ncv l2 error={:.5f}".format(lamb_grid[-2], lamb_q_grid[-1], mean_cv_err[-1, -2]), 
+          fontdict={"fontsize": 4}, transform = ax_11.transAxes)
+
+plt.savefig(os.path.join(os.getcwd(), "SspeluncaeOnlygridr8_lambsiferentes.png"),
+            dpi=200, bbox_inches='tight')
+plt.close()
+
+#######################################################
+# extract the first minimum CV 
+# restrict λ range manually (example indices)
+lmin, lmax = 2, 5   # adjust to bracket first dip
+
+sub = mean_cv_err[:, lmin:lmax]
+idx_q, idx_l = np.unravel_index(np.argmin(sub), sub.shape)
+
+lamb_q_cv = lamb_q_grid[idx_q]
+lamb_cv   = lamb_grid[idx_l + lmin]
 
 # running FEEMS
-sp_graph.fit(lamb = 2.0, optimize_q=None)
+sp_graph.fit(lamb = 21544.346900318822,lamb_q=0.01,optimize_q=None)
 # graphic
 fig = plt.figure(dpi=300)
 ax = fig.add_subplot(1, 1, 1, projection=projection)  
 v = Viz(ax, sp_graph, projection=projection, edge_width=.5, 
-        edge_alpha=1, edge_zorder=200, sample_pt_size=20, 
+        edge_alpha=1, edge_zorder=100, sample_pt_size=20, 
         obs_node_size=7.5, sample_pt_color="black", 
         cbar_font_size=10,cbar_loc='upper left',cbar_orientation = "horizontal")
 v.draw_map()
@@ -134,8 +231,7 @@ v.draw_edges(use_weights=True)
 v.draw_obs_nodes(use_ids=False) 
 v.draw_edge_colorbar()
 v.draw_samples()
-v.draw_map(longlat=True)
-plt.savefig(os.path.join(os.getcwd(), "SspeluncaeOnlygridr8_lamb2feemsrun.svg"),
+plt.savefig(os.path.join(os.getcwd(), "SspeluncaeOnlygridr8_lambfirstminimumCVfeemsrun.svg"),
             dpi=200, bbox_inches='tight')
 plt.close()
 
@@ -180,6 +276,5 @@ plt.title(r"$\tt{FEEMS}$ fit with fixed node-specific variance")
 plt.savefig(os.path.join(os.getcwd(), "SspeluncaeOnlygridr8_lamb2feemsrun_modelfit.svg"),
             dpi=200, bbox_inches='tight')
 plt.close()
-
 
 
