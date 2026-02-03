@@ -11,227 +11,101 @@
 #                     determine whether the best-fitting graph is significantly better than the next best-fitting graph. If it is not, identify a set of graphs which are not 
 #                     clearly worse than the best-fitting graph by performing bootstrap model comparison for many model pairs."
 
+library("igraph")
 library("admixtools")
 library("dplyr")
 
-setwd("~/Scytalopus/vcffiles/FinalVCFs")
-prefix ="Thinned1000_maxmissin0.7_FilteredPCAandUCEandOtherspecies_FilteredMax30missingDepthmin5_GeographicNames_allsamples"
-outd = "~/Scytalopus/Admixtools/onlyspeluncae/m0123"
+setwd("./")
+prefix ="Max30missinessDepthmin10max100LD0.15_OutgroupSnovacapitalis"
+outd = "./out"
 
+# extract f2 statistic from geno file extracted with vcf2eigenstrat.py
 extract_f2(prefix, outd,auto_only = FALSE,overwrite=T)
 
-# to run and save the models 
-setwd("~/Scytalopus/Admixtools/onlyspeluncae/m0123")
+# load f2 statistic
+f2_blocks =  f2_from_precomp(outd)
 
-# 0 mig
-# A good model should fit all 𝑓3-statistics, and have a score close to zero
-# 0 migration, 1 run
-aab.1m0 = find_graphs(outd,outpop = "Ssuperciliaris",numadmix = 0,stop_gen2 = 1000,numgraphs=100,plusminus_generations=20,verbose=TRUE)
-winnerb.1m0 = aab.1m0 %>% slice_min(score, with_ties = FALSE)
-# plot and score
-write.csv(winnerb.1m0$score[[1]], file = "aab.1m0.txt")
-svg("Thinned1000_maxmissin0.7_FilteredPCAandUCEandOtherspecies_FilteredMax30missingDepthmin5_GeographicNames_allsamples-1m0.svg")
-plot_graph(winnerb.1m0$edges[[1]], textsize=6)
+pop1=c("Lin1","Lin2","Lin3","Lin4","Lin5","Lin6","Lin7","Devoniana")
+
+# calculating f3
+f3<-qp3pop(f2_blocks,pop1)
+write.table(f3,"f3_pop.txt")
+# calculating f4
+f4<-qpdstat(f2_blocks, pop1)
+write.table(f4,"f4_pop.txt")
+
+# qpWave: for estimating the number of admixture events; compares two sets of populations (left and right)
+# qpAdm: for estimating admixture weights;  tests how a single target population (which can be one of the left populations) relates to left and right
+
+# to do qpWave: 
+left = c("Lin1","Lin2","Lin3","Lin4")
+right = c("Lin5","Lin6","Lin7","Devoniana")
+results_qpwave = qpwave(f2_blocks, left, right)
+write.table(results_qpwave,"qpwave.txt")
+
+# to run qpWave + qpAdm
+qpwave_pairs <- qpwave_pairs(f2_blocks, left, right)
+write.table(qpwave_pairs,"qpwave_pairs.txt")
+
+# swifted populations 
+left = c("Lin1","Lin2","Lin3")
+right = c("Lin4","Lin5","Lin6","Lin7","Devoniana")
+qpwave_pairs <- qpwave_pairs(f2_blocks, left, right)
+write.table(qpwave_pairs,"qpwave_pairs_lin4withsouth.txt")
+
+# explore different graphics with f3 result 
+mig0 <- find_graphs(f2_blocks,numadmix=0, outpop= "Snovacapitalis", stop_gen = 100) 
+winner = mig0 %>% slice_min(score, with_ties = FALSE)
+winner$score[[1]]
+write.csv(winner$score[[1]], file = "mig0.txt")
+svg("Max30missinessDepthmin10max100LD0.15_OutgroupSnovacapitalis_m0.svg")
+plot_graph(winner$edges[[1]], textsize=6)
 dev.off()
 
-########################################
-# 1 migration, run1
-aab.1m1 = find_graphs(outd,outpop = "Ssuperciliaris",numadmix = 1,stop_gen2 = 1000,numgraphs=100,plusminus_generations=20,verbose=TRUE)
-winnerb.1m1 = aab.1m1 %>% slice_min(score, with_ties = FALSE)
-write.csv(winnerb.1m1$score[[1]], file = "aab.1m1.txt")
-plot_graph(winnerb.1m1$edges[[1]], textsize=6)
-svg("Thinned1000_maxmissin0.7_FilteredPCAandUCE_FilteredMax30missingDepthmin5_GeographicNames_allsamples-1m1.svg")
-plot_graph(winnerb.1m1$edges[[1]], textsize=6)
+mig1 <- find_graphs(f2_blocks,numadmix=1, outpop= "Snovacapitalis", stop_gen = 100) 
+winner = mig1 %>% slice_min(score, with_ties = FALSE)
+winner$score[[1]]
+write.csv(winner$score[[1]], file = "mig1.txt")
+svg("Max30missinessDepthmin10max100LD0.15_OutgroupSnovacapitalis_m1.svg")
+plot_graph(winner$edges[[1]], textsize=6)
 dev.off()
-# run 2
-aab.2m1 = find_graphs(outd,outpop = "Ssuperciliaris",numadmix = 1,stop_gen2 = 1000,numgraphs=100,plusminus_generations=20,verbose=TRUE)
-winnerb.2m1 = aab.2m1 %>% slice_min(score, with_ties = FALSE)
-write.csv(winnerb.2m1$score[[1]], file = "aab.2m1.txt")
-plot_graph(winnerb.2m1$edges[[1]], textsize=6)
-svg("Thinned1000_maxmissin0.7_FilteredPCAandUCE_FilteredMax30missingDepthmin5_GeographicNames_allsamples-2m1.svg")
-plot_graph(winnerb.2m1$edges[[1]], textsize=6)
-dev.off()
-# run 3
-aab.3m1 = find_graphs(outd,outpop = "Ssuperciliaris",numadmix = 1,stop_gen2 = 1000,numgraphs=100,plusminus_generations=20,verbose=TRUE)
-winnerb.3m1 = aab.3m1 %>% slice_min(score, with_ties = FALSE)
-write.csv(winnerb.3m1$score[[1]], file = "aab.3m1.txt")
-plot_graph(winnerb.3m1$edges[[1]], textsize=6)
-svg("Thinned1000_maxmissin0.7_FilteredPCAandUCE_FilteredMax30missingDepthmin5_GeographicNames_allsamples-3m1.svg")
-plot_graph(winnerb.3m1$edges[[1]], textsize=6)
-dev.off()
-########################################
 
-########################################
-# 2 migration, 1 run
-aab.1m2 = find_graphs(outd,outpop = "Ssuperciliaris",numadmix = 2,stop_gen2 = 1000,numgraphs=100,plusminus_generations=20,verbose=TRUE)
-winnerb.1m2 = aab.1m2 %>% slice_min(score, with_ties = FALSE)
-write.csv(winnerb.1m2$score[[1]], file = "aab.1m2.txt")
-plot_graph(winnerb.1m2$edges[[1]], textsize=6)
-svg("Thinned1000_maxmissin0.7_FilteredPCAandUCE_FilteredMax30missingDepthmin5_GeographicNames_allsamples-1m2.svg")
-plot_graph(winnerb.1m2$edges[[1]], textsize=6)
+mig2 <- find_graphs(f2_blocks,numadmix=2, outpop= "Snovacapitalis", stop_gen = 100) 
+winner = mig2 %>% slice_min(score, with_ties = FALSE)
+winner$score[[1]]
+write.csv(winner$score[[1]], file = "mig2.txt")
+svg("Max30missinessDepthmin10max100LD0.15_OutgroupSnovacapitalis_m2.svg")
+plot_graph(winner$edges[[1]], textsize=6)
 dev.off()
-# 2 migration, 2 run
-aab.2m2 = find_graphs(outd,outpop = "Ssuperciliaris",numadmix = 2,stop_gen2 = 1000,numgraphs=100,plusminus_generations=20,verbose=TRUE)
-winnerb.2m2 = aab.2m2 %>% slice_min(score, with_ties = FALSE)
-write.csv(winnerb.2m2$score[[1]], file = "aab.2m2.txt")
-plot_graph(winnerb.2m2$edges[[1]], textsize=6)
-svg("Thinned1000_maxmissin0.7_FilteredPCAandUCE_FilteredMax30missingDepthmin5_GeographicNames_allsamples-2m2.svg")
-plot_graph(winnerb.2m2$edges[[1]], textsize=6)
-dev.off()
-# 2 migration, 3 run
-aab.3m2 = find_graphs(outd,outpop = "Ssuperciliaris",numadmix = 2,stop_gen2 = 1000,numgraphs=100,plusminus_generations=20,verbose=TRUE)
-winnerb.3m2 = aab.3m2 %>% slice_min(score, with_ties = FALSE)
-write.csv(winnerb.3m2$score[[1]], file = "aab.3m2.txt")
-plot_graph(winnerb.3m2$edges[[1]], textsize=6)
-svg("Thinned1000_maxmissin0.7_FilteredPCAandUCE_FilteredMax30missingDepthmin5_GeographicNames_allsamples-3m2.svg")
-plot_graph(winnerb.3m2$edges[[1]], textsize=6)
-dev.off()
-########################################
 
-########################################
-# 3 migration, 1 run
-aab.1m3 = find_graphs(outd,outpop = "Ssuperciliaris",numadmix = 3,stop_gen2 = 1000,numgraphs=100,plusminus_generations=20,verbose=TRUE)
-winnerb.1m3 = aab.1m3 %>% slice_min(score, with_ties = FALSE)
-write.csv(winnerb.1m3$score[[1]], file = "aab.1m3.txt")
-plot_graph(winnerb.1m3$edges[[1]], textsize=6)
-svg("Thinned1000_maxmissin0.7_FilteredPCAandUCE_FilteredMax30missingDepthmin5_GeographicNames_allsamples-1m3.svg")
-plot_graph(winnerb.1m3$edges[[1]], textsize=6)
+mig3 <- find_graphs(f2_blocks,numadmix=3, outpop= "Snovacapitalis", stop_gen = 100) 
+winner = mig3 %>% slice_min(score, with_ties = FALSE)
+winner$score[[1]]
+write.csv(winner$score[[1]], file = "mig3.txt")
+svg("Max30missinessDepthmin10max100LD0.15_OutgroupSnovacapitalis_m3.svg")
+plot_graph(winner$edges[[1]], textsize=6)
 dev.off()
-# 3 migration, 2 run
-aab.2m3 = find_graphs(outd,outpop = "Ssuperciliaris",numadmix = 3,stop_gen2 = 1000,numgraphs=100,plusminus_generations=20,verbose=TRUE)
-winnerb.2m3 = aab.2m3 %>% slice_min(score, with_ties = FALSE)
-write.csv(winnerb.2m3$score[[1]], file = "aab.2m3.txt")
-plot_graph(winnerb.2m3$edges[[1]], textsize=6)
-svg("Thinned1000_maxmissin0.7_FilteredPCAandUCE_FilteredMax30missingDepthmin5_GeographicNames_allsamples-2m3.svg")
-plot_graph(winnerb.2m3$edges[[1]], textsize=6)
-dev.off()
-# 3 migration, 3 run
-aab.3m3 = find_graphs(outd,outpop = "Ssuperciliaris",numadmix = 3,stop_gen2 = 1000,numgraphs=100,plusminus_generations=20,verbose=TRUE)
-winnerb.3m3 = aab.3m3 %>% slice_min(score, with_ties = FALSE)
-write.csv(winnerb.3m3$score[[1]], file = "aab.3m3.txt")
-plot_graph(winnerb.3m3$edges[[1]], textsize=6)
-svg("Thinned1000_maxmissin0.7_FilteredPCAandUCE_FilteredMax30missingDepthmin5_GeographicNames_allsamples-3m3.svg")
-plot_graph(winnerb.3m3$edges[[1]], textsize=6)
-dev.off()
-########################################
 
-########################################
-# 4 migration, 1 run
-aab.1m4 = find_graphs(outd,outpop = "Ssuperciliaris",numadmix = 4,stop_gen2 = 1000,numgraphs=100,plusminus_generations=20,verbose=TRUE)
-winnerb.1m4 = aab.1m4 %>% slice_min(score, with_ties = FALSE)
-write.csv(winnerb.1m4$score[[1]], file = "aab.1m4.txt")
-plot_graph(winnerb.1m4$edges[[1]], textsize=6)
-svg("Thinned1000_maxmissin0.7_FilteredPCAandUCE_FilteredMax30missingDepthmin5_GeographicNames_allsamples-1m4.svg")
-plot_graph(winnerb.1m4$edges[[1]], textsize=6)
+mig4 <- find_graphs(f2_blocks,numadmix=4, outpop= "Snovacapitalis", stop_gen = 100) 
+winner = mig4 %>% slice_min(score, with_ties = FALSE)
+winner$score[[1]]
+write.csv(winner$score[[1]], file = "mig4.txt")
+svg("Max30missinessDepthmin10max100LD0.15_OutgroupSnovacapitalis_m4.svg")
+plot_graph(winner$edges[[1]], textsize=6)
 dev.off()
-# 4 migration, 2 run
-aab.2m4 = find_graphs(outd,outpop = "Ssuperciliaris",numadmix = 4,stop_gen2 = 1000,numgraphs=100,plusminus_generations=20,verbose=TRUE)
-winnerb.2m4 = aab.2m4 %>% slice_min(score, with_ties = FALSE)
-write.csv(winnerb.2m4$score[[1]], file = "aab.2m4.txt")
-plot_graph(winnerb.2m4$edges[[1]], textsize=6)
-svg("Thinned1000_maxmissin0.7_FilteredPCAandUCE_FilteredMax30missingDepthmin5_GeographicNames_allsamples-2m4.svg")
-plot_graph(winnerb.2m4$edges[[1]], textsize=6)
-dev.off()
-# 4 migration, 3 run
-aab.3m4 = find_graphs(outd,outpop = "Ssuperciliaris",numadmix = 4,stop_gen2 = 1000,numgraphs=100,plusminus_generations=20,verbose=TRUE)
-winnerb.3m4 = aab.3m4 %>% slice_min(score, with_ties = FALSE)
-write.csv(winnerb.3m4$score[[1]], file = "aab.3m4.txt")
-plot_graph(winnerb.3m4$edges[[1]], textsize=6)
-svg("Thinned1000_maxmissin0.7_FilteredPCAandUCE_FilteredMax30missingDepthmin5_GeographicNames_allsamples-3m4.svg")
-plot_graph(winnerb.3m4$edges[[1]], textsize=6)
-dev.off()
-########################################
-########################################
-# new run
-library("admixtools")
-library("dplyr")
 
-setwd("~/Scytalopus/vcffiles/FinalVCFs")
-prefix ="Thinned1000_maxmissin0.7_FilteredPCAandUCEandOtherspecies_FilteredMax30missingDepthmin5_GeographicNames_allsamples"
-outd = "~/Scytalopus/Admixtools/onlyspeluncae/m456"
+mig5 <- find_graphs(f2_blocks,numadmix=5, outpop= "Snovacapitalis", stop_gen = 100) 
+winner = mig5 %>% slice_min(score, with_ties = FALSE)
+winner$score[[1]]
+write.csv(winner$score[[1]], file = "mig5.txt")
+svg("Max30missinessDepthmin10max100LD0.15_OutgroupSnovacapitalis_m5.svg")
+plot_graph(winner$edges[[1]], textsize=6)
+dev.off()
 
-extract_f2(prefix, outd,auto_only = FALSE,overwrite=T)
-
-# to run and save the models 
-setwd("~/Scytalopus/Admixtools/onlyspeluncae/m456")
-
-########################################
-# 5 migration, 1 run
-aab.1m5 = find_graphs(outd,outpop = "Ssuperciliaris",numadmix = 5,stop_gen2 = 1000,numgraphs=100,plusminus_generations=20,verbose=TRUE)
-winnerb.1m5 = aab.1m5 %>% slice_min(score, with_ties = FALSE)
-write.csv(winnerb.1m5$score[[1]], file = "aab.1m5.txt")
-plot_graph(winnerb.1m5$edges[[1]], textsize=6)
-svg("Thinned1000_maxmissin0.7_FilteredPCAandUCE_FilteredMax30missingDepthmin5_GeographicNames_allsamples-1m5.svg")
-plot_graph(winnerb.1m5$edges[[1]], textsize=6)
+mig6 <- find_graphs(f2_blocks,numadmix=6, outpop= "Snovacapitalis", stop_gen = 100) 
+winner = mig6 %>% slice_min(score, with_ties = FALSE)
+winner$score[[1]]
+write.csv(winner$score[[1]], file = "mig6.txt")
+svg("Max30missinessDepthmin10max100LD0.15_OutgroupSnovacapitalis_m6.svg")
+plot_graph(winner$edges[[1]], textsize=6)
 dev.off()
-# 5 migration, 2 run
-aab.2m5 = find_graphs(outd,outpop = "Ssuperciliaris",numadmix = 5,stop_gen2 = 1000,numgraphs=100,plusminus_generations=20,verbose=TRUE)
-winnerb.2m5 = aab.2m5 %>% slice_min(score, with_ties = FALSE)
-write.csv(winnerb.2m5$score[[1]], file = "aab.2m5.txt")
-plot_graph(winnerb.2m5$edges[[1]], textsize=6)
-svg("Thinned1000_maxmissin0.7_FilteredPCAandUCE_FilteredMax30missingDepthmin5_GeographicNames_allsamples-2m5.svg")
-plot_graph(winnerb.2m5$edges[[1]], textsize=6)
-dev.off()
-# 5 migration, 3 run
-aab.3m5 = find_graphs(outd,outpop = "Ssuperciliaris",numadmix = 5,stop_gen2 = 1000,numgraphs=100,plusminus_generations=20,verbose=TRUE)
-winnerb.3m5 = aab.3m5 %>% slice_min(score, with_ties = FALSE)
-write.csv(winnerb.3m5$score[[1]], file = "aab.3m5.txt")
-plot_graph(winnerb.3m5$edges[[1]], textsize=6)
-svg("Thinned1000_maxmissin0.7_FilteredPCAandUCE_FilteredMax30missingDepthmin5_GeographicNames_allsamples-3m5.svg")
-plot_graph(winnerb.3m5$edges[[1]], textsize=6)
-dev.off()
-########################################
-
-########################################
-# 6 migration, 1 run
-aab.1m6 = find_graphs(outd,outpop = "Ssuperciliaris",numadmix = 6,stop_gen2 = 1000,numgraphs=100,plusminus_generations=20,verbose=TRUE)
-winnerb.1m6 = aab.1m6 %>% slice_min(score, with_ties = FALSE)
-write.csv(winnerb.1m6$score[[1]], file = "aab.1m6.txt")
-plot_graph(winnerb.1m6$edges[[1]], textsize=6)
-svg("Thinned1000_maxmissin0.7_FilteredPCAandUCE_FilteredMax30missingDepthmin5_GeographicNames_allsamples-1m6.svg")
-plot_graph(winnerb.1m6$edges[[1]], textsize=6)
-dev.off()
-# 6 migration, 2 run
-aab.2m6 = find_graphs(outd,outpop = "Ssuperciliaris",numadmix = 6,stop_gen2 = 1000,numgraphs=100,plusminus_generations=20,verbose=TRUE)
-winnerb.2m6 = aab.2m6 %>% slice_min(score, with_ties = FALSE)
-write.csv(winnerb.2m6$score[[1]], file = "aab.2m6.txt")
-plot_graph(winnerb.2m6$edges[[1]], textsize=6)
-svg("Thinned1000_maxmissin0.7_FilteredPCAandUCE_FilteredMax30missingDepthmin5_GeographicNames_allsamples-2m6.svg")
-plot_graph(winnerb.2m6$edges[[1]], textsize=6)
-dev.off()
-# 6 migration, 3 run
-aab.3m6 = find_graphs(outd,outpop = "Ssuperciliaris",numadmix = 6,stop_gen2 = 1000,numgraphs=100,plusminus_generations=20,verbose=TRUE)
-winnerb.3m6 = aab.3m6 %>% slice_min(score, with_ties = FALSE)
-write.csv(winnerb.3m6$score[[1]], file = "aab.3m6.txt")
-plot_graph(winnerb.3m6$edges[[1]], textsize=6)
-svg("Thinned1000_maxmissin0.7_FilteredPCAandUCE_FilteredMax30missingDepthmin5_GeographicNames_allsamples-3m6.svg")
-plot_graph(winnerb.3m6$edges[[1]], textsize=6)
-dev.off()
-########################################
-
-########################################
-# 7 migration, 1 run
-aab.1m7 = find_graphs(outd,outpop = "Ssuperciliaris",numadmix = 6,stop_gen2 = 1000,numgraphs=100,plusminus_generations=20,verbose=TRUE)
-winnerb.1m7 = aab.1m7 %>% slice_min(score, with_ties = FALSE)
-write.csv(winnerb.1m7$score[[1]], file = "aab.1m7.txt")
-plot_graph(winnerb.1m7$edges[[1]], textsize=6)
-svg("Thinned1000_maxmissin0.7_FilteredPCAandUCE_FilteredMax30missingDepthmin5_GeographicNames_allsamples-1m7.svg")
-plot_graph(winnerb.1m7$edges[[1]], textsize=6)
-dev.off()
-# 7 migration, 2 run
-aab.2m7 = find_graphs(outd,outpop = "Ssuperciliaris",numadmix = 6,stop_gen2 = 1000,numgraphs=100,plusminus_generations=20,verbose=TRUE)
-winnerb.2m7 = aab.2m7 %>% slice_min(score, with_ties = FALSE)
-write.csv(winnerb.2m7$score[[1]], file = "aab.2m7.txt")
-plot_graph(winnerb.2m7$edges[[1]], textsize=6)
-svg("Thinned1000_maxmissin0.7_FilteredPCAandUCE_FilteredMax30missingDepthmin5_GeographicNames_allsamples-2m7.svg")
-plot_graph(winnerb.2m7$edges[[1]], textsize=6)
-dev.off()
-# 7 migration, 3 run
-aab.3m7 = find_graphs(outd,outpop = "Ssuperciliaris",numadmix = 6,stop_gen2 = 1000,numgraphs=100,plusminus_generations=20,verbose=TRUE)
-winnerb.3m7 = aab.3m7 %>% slice_min(score, with_ties = FALSE)
-write.csv(winnerb.3m7$score[[1]], file = "aab.3m7.txt")
-plot_graph(winnerb.3m7$edges[[1]], textsize=6)
-svg("Thinned1000_maxmissin0.7_FilteredPCAandUCE_FilteredMax30missingDepthmin5_GeographicNames_allsamples-3m7.svg")
-plot_graph(winnerb.3m7$edges[[1]], textsize=6)
-dev.off()
-########################################
