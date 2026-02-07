@@ -1,8 +1,6 @@
 # run ROH estimation 
-# sem qualidade da base  
-# bcftools roh --rec-rate 9e-10 ../../../../DATAPART3/bandriola/Scytalopus/snparcher/vcfs/FilteredPCAandUCE_Max30missingDepthmin10_GeographicNames_allsamples.vcf.gz
 # com qualidade da base 
-# bcftools roh -G30 --rec-rate 9e-10 ../../../../DATAPART3/bandriola/Scytalopus/snparcher/vcfs/FilteredPCAandUCE_Max30missingDepthmin10_GeographicNames_allsamples.vcf.gz
+# bcftools roh -G30 --rec-rate 3.1e−8 --output FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex ~/DATAPART3/bandriola/Scytalopus/snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz 
 
 # arquivo para plotar: 
 # grep "RG"allsamples.roh.txt | cut -f 2,3,6 > allsamples.edited.roh.txt
