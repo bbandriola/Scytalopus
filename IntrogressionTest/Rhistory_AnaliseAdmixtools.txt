@@ -1,0 +1,117 @@
+library("admixtools")
+library("devtools")
+devtools::install_github("uqrmaie1/admixtools")
+library(admixtools)
+quit()
+library("admixtools")
+library("dplyr")
+setwd("./")
+prefix ="Max30missinessDepthmin10max100LD0.15_OutgroupSnovacapitalis"
+outd = "./out"
+extract_f2(prefix, outd,auto_only = FALSE,overwrite=T)
+f2_blocks =  f2_from_precomp(outd)
+f2_blocks
+dim(f2_blocks)
+count_snps(f2_blocks)
+?f3
+pop1=c("Lin1","Lin2","Lin3","Lin4","Lin5","Lin6","Lin7","Devoniana")
+qp3pop(f2_blocks,pop1)
+f3_pops <- qp3pop(f2_blocks,pop1)
+write.table(f3_pops,"f3_pop.txt")
+?f4
+qpdstat(f2_blocks, pop1)
+f4<-qpdstat(f2_blocks, pop1)
+write.table(f4,"f4_pop.txt")
+left = c("Lin1","Lin2","Lin3","Lin4")
+right = c("Lin5","Lin6","Lin7","Devoniana")
+results_qpwave = qpwave(f2_blocks, left, right)
+write.table(results_qpwave,"qpwave.txt")
+qpwave_pairs <- qpwave_pairs(f2_blocks, left, right)
+write.table(qpwave_pairs,"qpwave_pairs.txt")
+left = c("Lin1","Lin2","Lin3")
+right = c("Lin4","Lin5","Lin6","Lin7","Devoniana")
+qpwave_pairs <- qpwave_pairs(f2_blocks, left, right)
+write.table(qpwave_pairs,"qpwave_pairs_lin4withsouth.txt")
+?qpgraph
+?find_graphs
+qpwave_pairs
+qpwave_pairs
+f2_blocks
+0mig <- find_graphs(f2_blocks,numadmix=0, outpop= "Snovacapitalis", stop_gen = 100) 
+0mig <- find_graphs(f2_blocks,numadmix=0, outpop= "Snovacapitalis", stop_gen = 100)
+mig0 <- find_graphs(f2_blocks,numadmix=0, outpop= "Snovacapitalis", stop_gen = 100) 
+igraph
+packageVersion(igraph)
+library("igraph")
+mig0 <- find_graphs(f2_blocks,numadmix=0, outpop= "Snovacapitalis", stop_gen = 100) 
+packageVersion(igraph)
+quit()
+library("devtools")
+devtools::install_github("uqrmaie1/admixtools")
+library("igraph")
+library("admixtools")
+setwd("./")
+prefix ="Max30missinessDepthmin10max100LD0.15_OutgroupSnovacapitalis"
+outd = "./out"
+f2_blocks =  f2_from_precomp(outd)
+mig0 <- find_graphs(f2_blocks,numadmix=0, outpop= "Snovacapitalis", stop_gen = 100)
+winner = mig0 %>% slice_min(score, with_ties = FALSE)
+winner$score[[1]]
+write.csv(winner$score[[1]], file = "mig0.txt")
+svg("Max30missinessDepthmin10max100LD0.15_OutgroupSnovacapitalis_m0.svg")
+plot_graph(winner$edges[[1]], textsize=6)
+dev.off()
+library("dplyr")
+winner = mig0 %>% slice_min(score, with_ties = FALSE)
+winner$score[[1]]
+write.csv(winner$score[[1]], file = "mig0.txt")
+svg("Max30missinessDepthmin10max100LD0.15_OutgroupSnovacapitalis_m0.svg")
+plot_graph(winner$edges[[1]], textsize=6)
+dev.off()
+mig2 <- find_graphs(f2_blocks,numadmix=2, outpop= "Snovacapitalis", stop_gen = 100) 
+winner = mig2 %>% slice_min(score, with_ties = FALSE)
+winner$score[[1]]
+write.csv(winner$score[[1]], file = "mig2.txt")
+svg("Max30missinessDepthmin10max100LD0.15_OutgroupSnovacapitalis_m2.svg")
+plot_graph(winner$edges[[1]], textsize=6)
+dev.off()
+
+mig3 <- find_graphs(f2_blocks,numadmix=3, outpop= "Snovacapitalis", stop_gen = 100) 
+winner = mig3 %>% slice_min(score, with_ties = FALSE)
+winner$score[[1]]
+write.csv(winner$score[[1]], file = "mig3.txt")
+svg("Max30missinessDepthmin10max100LD0.15_OutgroupSnovacapitalis_m3.svg")
+plot_graph(winner$edges[[1]], textsize=6)
+dev.off()
+
+mig4 <- find_graphs(f2_blocks,numadmix=4, outpop= "Snovacapitalis", stop_gen = 100) 
+winner = mig4 %>% slice_min(score, with_ties = FALSE)
+winner$score[[1]]
+write.csv(winner$score[[1]], file = "mig4.txt")
+svg("Max30missinessDepthmin10max100LD0.15_OutgroupSnovacapitalis_m4.svg")
+plot_graph(winner$edges[[1]], textsize=6)
+dev.off()
+
+mig5 <- find_graphs(f2_blocks,numadmix=5, outpop= "Snovacapitalis", stop_gen = 100) 
+winner = mig5 %>% slice_min(score, with_ties = FALSE)
+winner$score[[1]]
+write.csv(winner$score[[1]], file = "mig5.txt")
+svg("Max30missinessDepthmin10max100LD0.15_OutgroupSnovacapitalis_m5.svg")
+plot_graph(winner$edges[[1]], textsize=6)
+dev.off()
+
+mig6 <- find_graphs(f2_blocks,numadmix=6, outpop= "Snovacapitalis", stop_gen = 100) 
+winner = mig6 %>% slice_min(score, with_ties = FALSE)
+winner$score[[1]]
+write.csv(winner$score[[1]], file = "mig6.txt")
+svg("Max30missinessDepthmin10max100LD0.15_OutgroupSnovacapitalis_m6.svg")
+plot_graph(winner$edges[[1]], textsize=6)
+dev.off()
+mig1 <- find_graphs(f2_blocks,numadmix=1, outpop= "Snovacapitalis", stop_gen = 100) 
+winner = mig1 %>% slice_min(score, with_ties = FALSE)
+winner$score[[1]]
+write.csv(winner$score[[1]], file = "mig1.txt")
+svg("Max30missinessDepthmin10max100LD0.15_OutgroupSnovacapitalis_m1.svg")
+plot_graph(winner$edges[[1]], textsize=6)
+dev.off()
+quit()
