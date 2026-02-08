@@ -23,7 +23,7 @@ library(tidyverse)
 library(ggrepel)
 
 # Read data with read_delim() for better control over input file parsing
-roh <- read_delim("FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.edited.roh.population.txt, delim = "\t", col_names = c("Sample", "Chromosome", "RoH_length", "Population"))
+roh <- read_delim("FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.edited.roh.population.txt", delim = "\t", col_names = c("Sample", "Chromosome", "RoH_length", "Population"))
 
 # Compute NROH and SROH
 nroh <- roh %>%
