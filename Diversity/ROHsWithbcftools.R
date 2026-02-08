@@ -23,7 +23,7 @@ library(tidyverse)
 library(ggrepel)
 
 # Read data with read_delim() for better control over input file parsing
-roh <- read_delim("allsamples.edited.roh.population.txt", delim = "\t", col_names = c("Sample", "Chromosome", "RoH_length", "Population"))
+roh <- read_delim("FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.edited.roh.population.txt, delim = "\t", col_names = c("Sample", "Chromosome", "RoH_length", "Population"))
 
 # Compute NROH and SROH
 nroh <- roh %>%
@@ -51,7 +51,7 @@ snroh_plot <- data %>%
 
 # Print the plot
 print(snroh_plot)
-ggsave("dsroh_nroh_seppops.png", snroh_plot, width = 8, height = 6, dpi = 300)
+ggsave("dsroh_nroh.png", snroh_plot, width = 8, height = 6, dpi = 300)
 
 #summed_roh%%R
 
@@ -104,8 +104,7 @@ my_sample_order <- c("SerradaLontras1_lin1","SerradaLontras2_lin1","SerradaLontr
                      "NortePR2_lin7","NortePR3_lin7","NortePR4_lin7","NortePR5_lin7","HNortePR_lin7","CentroLestePR1_lin7",
                      "HCentroLesteSC_lin7","CentroLesteSC1_lin7","CentroOesteSC1_lin7","CentroOesteSC2_lin7","CentroOesteSC3_lin7",
                      "CentroOesteSC4_lin7","CentroOesteSC5_lin7","ExtremoSulSC1_lin7","ExtremoSulRS3_lin7","ExtremoSulRS2_lin7",
-                     "BoaEsperanca1_lin6","BoaEsperanca2_lin6","BoaEsperanca3_lin7","Sdiamantinensis","Snovacapitalis",
-                     "Spachecoi","Spetrophilus","Ssuperciliaris")  # your list here
+                     "BoaEsperanca1_lin6","BoaEsperanca2_lin6","BoaEsperanca3_lin7")  # your list here
 summed_roh <- summed_roh %>%
   mutate(Sample = factor(Sample, levels = my_sample_order))
 roh_colors <- c(
