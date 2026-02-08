@@ -26,6 +26,9 @@ library(ggrepel)
 roh <- read_delim("FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.edited.roh.population.txt", delim = "\t", col_names = c("Sample", "Chromosome", "RoH_length", "Population"))
 
 # Compute NROH and SROH
+roh <- roh %>%
+  mutate(RoH_length = as.numeric(RoH_length))
+
 nroh <- roh %>%
   group_by(Sample) %>%
   summarize(NROH = n())
@@ -41,11 +44,14 @@ data <- inner_join(nroh, sroh, by = "Sample") %>%
 # Inspect the resulting dataset to ensure it is correct
 #head(data)
 
+my.colors <- c("#0660FB","#4D9F8C", "#7570B3", "#E8488B", "#66A61D","#E93F33","#E6AC2F")
+
 # Create the plot using the preprocessed dataset
 snroh_plot <- data %>%
   ggplot(aes(x = SROH, y = NROH, color = Population)) +
   geom_point(size = 3) +
- theme_minimal() +
+  scale_colour_manual(values =my.colors)+
+  theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5)) +
   labs(title = "NROH vs. SROH", color = "Population")
 
@@ -105,8 +111,9 @@ my_sample_order <- c("SerradaLontras1_lin1","SerradaLontras2_lin1","SerradaLontr
                      "HCentroLesteSC_lin7","CentroLesteSC1_lin7","CentroOesteSC1_lin7","CentroOesteSC2_lin7","CentroOesteSC3_lin7",
                      "CentroOesteSC4_lin7","CentroOesteSC5_lin7","ExtremoSulSC1_lin7","ExtremoSulRS3_lin7","ExtremoSulRS2_lin7",
                      "BoaEsperanca1_lin6","BoaEsperanca2_lin6","BoaEsperanca3_lin7")  # your list here
+my_sample_order_rev <- rev(my_sample_order)
 summed_roh <- summed_roh %>%
-  mutate(Sample = factor(Sample, levels = my_sample_order))
+  mutate(Sample = factor(Sample, levels = my_sample_order_rev))
 roh_colors <- c(
   "< 100 kb"      = "#568743",
   "100 kb - 500 kb" = "#5bc12c",
@@ -119,11 +126,12 @@ print(summed_roh)
 # Create the stacked bar plot
 stacked_barplot <- summed_roh %>%
   ggplot(aes(x = Sample, y = total_RoH_length/1000000, fill = RoH_category)) +
-  geom_bar(stat = "identity") +
-  theme_minimal() +
+  geom_bar(stat = "identity",width = 0.8) +
+  theme_minimal(base_size = 10) +
   theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),
-    strip.text = element_text(angle = 90, size = 10)
+    axis.text.x = element_text(hjust = 1),
+    strip.text = element_text(angle = 90, size = 10),panel.grid.major.x = element_blank(),
+    panel.grid.minor = element_blank()
   ) +
   scale_y_continuous(labels = scales::comma) +
   scale_fill_manual(values = roh_colors) +
@@ -131,7 +139,7 @@ stacked_barplot <- summed_roh %>%
     x = "Sample",
     y = "Total RoH Length (Mb)",
     fill = "RoH Category"
-  )
+  )+ coord_flip()
 # Print the plot
 print(stacked_barplot)
 ggsave("smallcategories_rohs_barplot.png", stacked_barplot, width = 8, height = 6, dpi = 300)
