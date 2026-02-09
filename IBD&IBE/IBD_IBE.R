@@ -59,13 +59,43 @@ run_mantel <- function(geo_file, gene_file, sheet_geo = 1, sheet_gene = 1, permu
   
   # Run Mantel test
   results_mantel <- mantel(gene_dist, geo_dist, method = "pearson", permutations = permutations)
-  
   return(results_mantel)
+  list(mantel = results_mantel,geo_dist = geo_dist,gene_dist = gene_dist)
 }
 
-geo_file="utm_lin1vslin4.xlsx"
-gene_file="genedist_lin1vslin4.xlsx"
-run_mantel(geo_file,gene_file)
+geo_file="geodist/utm_lin5vslin6.xlsx"
+gene_file="genedist/genedist_lin5vslin6.xlsx"
+result<-run_mantel(geo_file,gene_file)
+
+geo  <- as.vector(as.dist(geo_matrix))
+gene <- as.vector(as.dist(gene_matrix))
+
+mat <- data.frame(
+  geo= as.vector(as.dist(geo_matrix)),
+  gene= as.vector(as.dist(gene_matrix)))
+
+r_mantel <- as.numeric(result$statistic)
+p_mantel <- result$signif
+
+mm <- ggplot(mat, aes(x = gene, y = geo)) + 
+  geom_point(size = 3,alpha = 0.5,shape = 21,aes(fill = geo)) +
+  geom_smooth(method = "lm",colour = "black",alpha = 0.2) +
+  annotate("text",x = 0.09, y = -1,label = bquote(
+      "Mantel r" == .(round(r_mantel, 3)) ~ "," ~ italic(p) == .(signif(p_mantel, 3))),
+    hjust = 1.0,size = 5,fontface = "bold") +
+  labs(x = "Geographic distance",y = "Genetic distance",title = "Mantel test Lin5 vs Lin6") +
+  theme(
+    axis.text.x = element_text(face = "bold", colour = "black", size = 12), 
+    axis.text.y = element_text(face = "bold", size = 11, colour = "black"), 
+    axis.title = element_text(face = "bold", size = 14, colour = "black"), 
+    panel.background = element_blank(), 
+    panel.border = element_rect(fill = NA, colour = "black"),
+    legend.position="none")
+
+mm
+
+ggsave("lin5vslin6_geovsgene.png")
+
 
 #### MANTEL TEST WITH ENVIRONMENTAL VARIABLES AND GENETIC DISTANCE ####
 # Matrix de variáveis ambientais
@@ -131,7 +161,7 @@ env_file="elev_lin1vslin4.xlsx"
 gene_file="genedist_lin1vslin4.xlsx"
 run_mantelENV(env_file,gene_file)
 
-#### Pairwise scatter plots ####
+#### PLOTS ####
 # data preparation 
 # load distance matrices
 gene_matrix <- read.xlsx("genedist_lin1vslin3.xlsx", 1, header = TRUE)
