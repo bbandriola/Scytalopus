@@ -13,7 +13,7 @@ library(geosphere)
 # Carrega matriz genética gerada com o ngsdist (beagle) ou VCF2Dis (VCF)
 # VCF2Dis calcula p-distance = numero de diferenças nucleotidicas / numero de nucleotideos comparados
 # command: VCF2DIS -Input ../vcffiles/FinalVCFs/OnlySspeluncae_FilteredPCA_FilteredMax10missingDepthmin10max100_GeographicNames_allsamples.vcf.gz -Out Sspeluncae_FilteredPCA_FilteredMax10missingDepthmin10max100_GeographicNames
-
+#        ~/Softwares/VCF2Dis-1.54/bin/VCF2Dis -InPut ../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_SspeluncaeOnly.vcf.gz -OutPut FilteredPCAandUCE_Max30missinessDepthmin10max100_SspeluncaeOnly
 # As matrizes precisam ser iguais em tamanho (mesmo numero de ind) e ter a mesma ordem
 # Matriz geografica é gerada a partir de coordenadas no formato UTM
 # data <- read.table("56samples_UTM_coordinates.csv", sep = ",", header = T)
