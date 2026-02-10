@@ -60,31 +60,29 @@ run_mantel <- function(geo_file, gene_file, sheet_geo = 1, sheet_gene = 1, permu
   
   # Run Mantel test
   results_mantel <- mantel(gene_dist, geo_dist, method = "pearson", permutations = permutations)
-  return(results_mantel)
-  list(mantel = results_mantel,geo_dist = geo_dist,gene_dist = gene_dist)
+  return(list(mantel = results_mantel,geo_dist = geo_dist,gene_dist = gene_dist))
 }
 
-geo_file="geodist/utm_lin5vslin6.xlsx"
-gene_file="genedist/genedist_lin5vslin6.xlsx"
+geo_file="geodist/utm_lin5vslin7.xlsx"
+gene_file="genedist/genedist_lin5vslin7.xlsx"
 result<-run_mantel(geo_file,gene_file)
+result$mantel
 
-geo  <- as.vector(as.dist(geo_matrix))
-gene <- as.vector(as.dist(gene_matrix))
+# Distance vectors
+geo  <- as.vector(result$geo_dist)
+gene <- as.vector(result$gene_dist)
 
-mat <- data.frame(
-  geo= as.vector(as.dist(geo_matrix)),
-  gene= as.vector(as.dist(gene_matrix)))
+mat <- data.frame(geo  = geo,gene = gene)
 
-r_mantel <- as.numeric(result$statistic)
-p_mantel <- result$signif
+r_mantel <- as.numeric(result$mantel$statistic)
+p_mantel <- result$mantel$signif
 
-mm <- ggplot(mat, aes(x = gene, y = geo)) + 
+mm <- ggplot(mat, aes(x = geo, y = gene)) + 
   geom_point(size = 3,alpha = 0.5,shape = 21,aes(fill = geo)) +
   geom_smooth(method = "lm",colour = "black",alpha = 0.2) +
-  annotate("text",x = 0.09, y = -1,label = bquote(
-      "Mantel r" == .(round(r_mantel, 3)) ~ "," ~ italic(p) == .(signif(p_mantel, 3))),
-    hjust = 1.0,size = 5,fontface = "bold") +
-  labs(x = "Geographic distance",y = "Genetic distance",title = "Mantel test Lin5 vs Lin6") +
+  annotate("text",x = 4, y = 0.055,label = bquote(
+      "Mantel r" == .(round(r_mantel, 3)) ~ "," ~ italic(p) == .(signif(p_mantel, 3))),hjust = 1.0,size = 5,fontface = "bold") +
+  labs(x = "Geographic distance",y = "Genetic distance",title = "Mantel test Lin5 vs Lin7") +
   theme(
     axis.text.x = element_text(face = "bold", colour = "black", size = 12), 
     axis.text.y = element_text(face = "bold", size = 11, colour = "black"), 
@@ -93,9 +91,9 @@ mm <- ggplot(mat, aes(x = gene, y = geo)) +
     panel.border = element_rect(fill = NA, colour = "black"),
     legend.position="none")
 
-mm
+#mm
 
-ggsave("lin5vslin6_geovsgene.png")
+ggsave("lin5vslin7_geovsgene.png")
 
 
 #### MANTEL TEST WITH ENVIRONMENTAL VARIABLES AND GENETIC DISTANCE ####
