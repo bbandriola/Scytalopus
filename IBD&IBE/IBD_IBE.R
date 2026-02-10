@@ -80,9 +80,9 @@ p_mantel <- result$mantel$signif
 mm <- ggplot(mat, aes(x = geo, y = gene)) + 
   geom_point(size = 3,alpha = 0.5,shape = 21,aes(fill = geo)) +
   geom_smooth(method = "lm",colour = "black",alpha = 0.2) +
-  annotate("text",x = 4, y = 0.055,label = bquote(
+  annotate("text",x = Inf, y = Inf,hjust = 1.05,vjust = 1.3,label = bquote(
       "Mantel r" == .(round(r_mantel, 3)) ~ "," ~ italic(p) == .(signif(p_mantel, 3))),hjust = 1.0,size = 5,fontface = "bold") +
-  labs(x = "Geographic distance",y = "Genetic distance",title = "Mantel test Lin5 vs Lin7") +
+  labs(x = "Geographic distance",y = "Genetic distance",title = "Mantel test Lin6 vs Lin7") +
   theme(
     axis.text.x = element_text(face = "bold", colour = "black", size = 12), 
     axis.text.y = element_text(face = "bold", size = 11, colour = "black"), 
