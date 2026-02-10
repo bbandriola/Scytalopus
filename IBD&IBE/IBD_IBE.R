@@ -95,7 +95,6 @@ mm <- ggplot(mat, aes(x = geo, y = gene)) +
 
 ggsave("lin5vslin7_geovsgene.png")
 
-
 #### MANTEL TEST WITH ENVIRONMENTAL VARIABLES AND GENETIC DISTANCE ####
 # Matrix de variáveis ambientais
 env_variables = read.csv("SpeluncaeSamples.csv",sep=";")
@@ -140,33 +139,82 @@ run_mantelENV <- function(env_file, gene_file, controlled_file, sheet_env = 1, s
   
   # Run Mantel test
   results_mantel <- mantel.partial(gene_dist, env_dist, geo_dist, method = "pearson", permutations = permutations)
-  return(results_mantel)
+   return(list(mantel = results_mantel,env_dist = env_dist,gene_dist = gene_dist))
 }
 
-env_file="envdist/temp_lin6vslin7.xlsx"
-gene_file="genedist/genedist_lin6vslin7.xlsx"
-controlled_file="geodist/utm_lin6vslin7.xlsx"
-run_mantelENV(env_file,gene_file,controlled_file)
+# plot PLOT plot 
 
-env_file="envdist/precipseasonality_lin6vslin7.xlsx"
-gene_file="genedist/genedist_lin6vslin7.xlsx"
-controlled_file="geodist/utm_lin6vslin7.xlsx"
-run_mantelENV(env_file,gene_file,controlled_file)
+plotenvmantel <- function(results_mantel,output) {
+  env  <- as.vector(results_mantel$env_dist)
+  gene <- as.vector(results_mantel$gene_dist)
 
-env_file="envdist/meandiurnalrange_lin6vslin7.xlsx"
-gene_file="genedist/genedist_lin6vslin7.xlsx"
-controlled_file="geodist/utm_lin6vslin7.xlsx"
-run_mantelENV(env_file,gene_file,controlled_file)
+  mat <- data.frame(env  = env,gene = gene)
 
-env_file="envdist/annualprecipitation_lin6vslin7.xlsx"
-gene_file="genedist/genedist_lin6vslin7.xlsx"
-controlled_file="geodist/utm_lin6vslin7.xlsx"
-run_mantelENV(env_file,gene_file,controlled_file)
+  r_mantel <- as.numeric(results_mantel$mantel$statistic)
+  p_mantel <- results_mantel$mantel$signif
 
-env_file="envdist/elev_lin6vslin7.xlsx"
-gene_file="genedist/genedist_lin6vslin7.xlsx"
-controlled_file="geodist/utm_lin6vslin7.xlsx"
-run_mantelENV(env_file,gene_file,controlled_file)
+  mm <- ggplot(mat, aes(x = env, y = gene)) + 
+    geom_point(size = 3,alpha = 0.5,shape = 21,aes(fill = env)) +
+    geom_smooth(method = "lm",colour = "black",alpha = 0.2) +
+    annotate("text",x = Inf, y = Inf,hjust = 1.05,vjust = 1.3,label = bquote(
+        "Mantel r" == .(round(r_mantel, 3)) ~ "," ~ italic(p) == .(signif(p_mantel, 3))),hjust = 1.0,size = 5,fontface = "bold") +
+    labs(x = "Environmental distance",y = "Genetic distance",title = paste("Partial Mantel test", output)) +
+    theme(
+      axis.text.x = element_text(face = "bold", colour = "black", size = 12), 
+      axis.text.y = element_text(face = "bold", size = 11, colour = "black"), 
+      axis.title = element_text(face = "bold", size = 14, colour = "black"), 
+      panel.background = element_blank(), 
+      panel.border = element_rect(fill = NA, colour = "black"),
+      legend.position="none")
+  ggsave(filename = paste0(output, ".png"))
+}
+
+env_file="envdist/temp_lin5vslin7.xlsx"
+gene_file="genedist/genedist_lin5vslin7.xlsx"
+controlled_file="geodist/utm_lin5vslin7.xlsx"
+results_mantelTEMP <- run_mantelENV(env_file,gene_file,controlled_file)
+
+results_mantel = results_mantelTEMP 
+output = "lin5vslin7_TEMP"
+plotenvmantel(results_mantel,output)
+
+env_file="envdist/precipseasonality_lin5vslin7.xlsx"
+gene_file="genedist/genedist_lin5vslin7.xlsx"
+controlled_file="geodist/utm_lin5vslin7.xlsx"
+results_mantelPS <- run_mantelENV(env_file,gene_file,controlled_file)
+
+results_mantel = results_mantelPS 
+output = "lin5vslin7_PS"
+plotenvmantel(results_mantel,output)
+
+env_file="envdist/meandiurnalrange_lin5vslin7.xlsx"
+gene_file="genedist/genedist_lin5vslin7.xlsx"
+controlled_file="geodist/utm_lin5vslin7.xlsx"
+results_mantelMDR <- run_mantelENV(env_file,gene_file,controlled_file)
+
+results_mantel = results_mantelMDR 
+output = "lin5vslin7_MDR"
+plotenvmantel(results_mantel,output)
+
+env_file="envdist/annualprecipitation_lin5vslin7.xlsx"
+gene_file="genedist/genedist_lin5vslin7.xlsx"
+controlled_file="geodist/utm_lin5vslin7.xlsx"
+results_mantelAP <- run_mantelENV(env_file,gene_file,controlled_file)
+
+results_mantel = results_mantelAP 
+output = "lin5vslin7_AP"
+plotenvmantel(results_mantel,output)
+
+env_file="envdist/elev_lin5vslin7.xlsx"
+gene_file="genedist/genedist_lin5vslin7.xlsx"
+controlled_file="geodist/utm_lin5vslin7.xlsx"
+results_mantelELEV <- run_mantelENV(env_file,gene_file,controlled_file)
+
+results_mantel = results_mantelELEV 
+output = "lin5vslin7_ELEV"
+plotenvmantel(results_mantel,output)
+
+
 
 
 #### PLOTS ####
