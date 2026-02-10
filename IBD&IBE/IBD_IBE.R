@@ -119,45 +119,54 @@ write.table(as.matrix(dist.elevation), "dist.elevation_matrixeuclideanist.xlsx")
 # all the txt file where opened into the excel and extracted as xlsx files
 
 # all files were subsetted to include only the pairwise compartion lineages
-run_mantelENV <- function(env_file, gene_file, sheet_env = 1, sheet_gene = 1, permutations = 10000) {
-  # Read geographic matrix
+run_mantelENV <- function(env_file, gene_file, controlled_file, sheet_env = 1, sheet_gene = 1, sheet_geo = 1, permutations = 10000) {
+  # Geographic matrix
   env_matrix <- read.xlsx(env_file, sheet_env, header = TRUE)
   row.names(env_matrix) <- env_matrix[,1]   # use first column as row names
   env_matrix <- env_matrix[,-1]             # remove first column
-
-  # Read genetic matrix
+  # Genetic matrix
   gene_matrix <- read.xlsx(gene_file, sheet_gene, header = TRUE)
   row.names(gene_matrix) <- gene_matrix[,1] # use first column as row names
   gene_matrix <- gene_matrix[,-1]           # remove first column
+  # Controlled variable
+  geo_matrix <- read.xlsx(controlled_file, sheet_geo, header = TRUE)
+  row.names(geo_matrix) <- geo_matrix[,1]   # use first column as row names
+  geo_matrix <- geo_matrix[,-1]  
   
   # Convert to distance objects
   env_dist  <- as.dist(env_matrix)
   gene_dist <- as.dist(gene_matrix)
+  geo_dist  <- as.dist(geo_matrix)
   
   # Run Mantel test
-  results_mantel <- mantel(gene_dist, env_dist, method = "pearson", permutations = permutations)
+  results_mantel <- mantel.partial(gene_dist, env_dist, geo_dist, method = "pearson", permutations = permutations)
   return(results_mantel)
 }
 
 env_file="envdist/temp_lin6vslin7.xlsx"
 gene_file="genedist/genedist_lin6vslin7.xlsx"
-run_mantelENV(env_file,gene_file)
+controlled_file="geodist/utm_lin6vslin7.xlsx"
+run_mantelENV(env_file,gene_file,controlled_file)
 
 env_file="envdist/precipseasonality_lin6vslin7.xlsx"
 gene_file="genedist/genedist_lin6vslin7.xlsx"
-run_mantelENV(env_file,gene_file)
+controlled_file="geodist/utm_lin6vslin7.xlsx"
+run_mantelENV(env_file,gene_file,controlled_file)
 
 env_file="envdist/meandiurnalrange_lin6vslin7.xlsx"
 gene_file="genedist/genedist_lin6vslin7.xlsx"
-run_mantelENV(env_file,gene_file)
+controlled_file="geodist/utm_lin6vslin7.xlsx"
+run_mantelENV(env_file,gene_file,controlled_file)
 
 env_file="envdist/annualprecipitation_lin6vslin7.xlsx"
 gene_file="genedist/genedist_lin6vslin7.xlsx"
-run_mantelENV(env_file,gene_file)
+controlled_file="geodist/utm_lin6vslin7.xlsx"
+run_mantelENV(env_file,gene_file,controlled_file)
 
 env_file="envdist/elev_lin6vslin7.xlsx"
 gene_file="genedist/genedist_lin6vslin7.xlsx"
-run_mantelENV(env_file,gene_file)
+controlled_file="geodist/utm_lin6vslin7.xlsx"
+run_mantelENV(env_file,gene_file,controlled_file)
 
 
 #### PLOTS ####
