@@ -7,6 +7,7 @@ library(ecodist)
 library(xlsx)
 library(vegan)
 library(geosphere)
+library(ggplot2)
 
 #### RUN MANTEL TEST GEOGRAPHIC AND GENETIC DISTANCE#####
 # run in linux to convert VCF into a distance matrix with VCF2DIS script 
@@ -125,7 +126,7 @@ run_mantelENV <- function(env_file, gene_file, sheet_env = 1, sheet_gene = 1, pe
   env_matrix <- read.xlsx(env_file, sheet_env, header = TRUE)
   row.names(env_matrix) <- env_matrix[,1]   # use first column as row names
   env_matrix <- env_matrix[,-1]             # remove first column
-  
+
   # Read genetic matrix
   gene_matrix <- read.xlsx(gene_file, sheet_gene, header = TRUE)
   row.names(gene_matrix) <- gene_matrix[,1] # use first column as row names
@@ -137,29 +138,29 @@ run_mantelENV <- function(env_file, gene_file, sheet_env = 1, sheet_gene = 1, pe
   
   # Run Mantel test
   results_mantel <- mantel(gene_dist, env_dist, method = "pearson", permutations = permutations)
-  
   return(results_mantel)
 }
 
-env_file="temp_lin1vslin2.xlsx"
-gene_file="genedist_lin1vslin2.xlsx"
+env_file="envdist/temp_lin6vslin7.xlsx"
+gene_file="genedist/genedist_lin6vslin7.xlsx"
 run_mantelENV(env_file,gene_file)
 
-env_file="precipseasonality_lin1vslin4.xlsx"
-gene_file="genedist_lin1vslin4.xlsx"
+env_file="envdist/precipseasonality_lin6vslin7.xlsx"
+gene_file="genedist/genedist_lin6vslin7.xlsx"
 run_mantelENV(env_file,gene_file)
 
-env_file="meandiurnalrange_lin1vslin4.xlsx"
-gene_file="genedist_lin1vslin4.xlsx"
+env_file="envdist/meandiurnalrange_lin6vslin7.xlsx"
+gene_file="genedist/genedist_lin6vslin7.xlsx"
 run_mantelENV(env_file,gene_file)
 
-env_file="annualprecip_lin1vslin4.xlsx"
-gene_file="genedist_lin1vslin4.xlsx"
+env_file="envdist/annualprecipitation_lin6vslin7.xlsx"
+gene_file="genedist/genedist_lin6vslin7.xlsx"
 run_mantelENV(env_file,gene_file)
 
-env_file="elev_lin1vslin4.xlsx"
-gene_file="genedist_lin1vslin4.xlsx"
+env_file="envdist/elev_lin6vslin7.xlsx"
+gene_file="genedist/genedist_lin6vslin7.xlsx"
 run_mantelENV(env_file,gene_file)
+
 
 #### PLOTS ####
 # data preparation 
