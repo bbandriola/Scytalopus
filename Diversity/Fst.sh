@@ -1,27 +1,27 @@
 .# Fst with vcftools 
-vcftools --gzvcf ../../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../../lin1.txt --weir-fst-pop ../../../lin2.txt --out fstlin1_lin2
-vcftools --gzvcf ../../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../../lin1.txt --weir-fst-pop ../../../lin3.txt --out fstlin1_lin3
-vcftools --gzvcf ../../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../../lin1.txt --weir-fst-pop ../../../lin4.txt --out fstlin1_lin4
-vcftools --gzvcf ../../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../../lin1.txt --weir-fst-pop ../../../lin57.txt --out fstlin1_lin57
-vcftools --gzvcf ../../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../../lin1.txt --weir-fst-pop ../../../lin6.txt --out fstlin1_lin6
-vcftools --gzvcf ../../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../../lin1.txt --weir-fst-pop ../../../lin7.txt --out fstlin1_lin7
-vcftools --gzvcf ../../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../../lin2.txt --weir-fst-pop ../../../lin3.txt --out fstlin2_lin3
-vcftools --gzvcf ../../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../../lin2.txt --weir-fst-pop ../../../lin4.txt --out fstlin2_lin4
-vcftools --gzvcf ../../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../../lin2.txt --weir-fst-pop ../../../lin57.txt --out fstlin2_lin57
-vcftools --gzvcf ../../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../../lin2.txt --weir-fst-pop ../../../lin6.txt --out fstlin2_lin6
-vcftools --gzvcf ../../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../../lin2.txt --weir-fst-pop ../../../lin7.txt --out fstlin2_lin7
-vcftools --gzvcf ../../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../../lin3.txt --weir-fst-pop ../../../lin4.txt --out fstlin3_lin4
-vcftools --gzvcf ../../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../../lin3.txt --weir-fst-pop ../../../lin57.txt --out fstlin3_lin57
-vcftools --gzvcf ../../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../../lin3.txt --weir-fst-pop ../../../lin6.txt --out fstlin3_lin6
-vcftools --gzvcf ../../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../../lin3.txt --weir-fst-pop ../../../lin7.txt --out fstlin3_lin7
-vcftools --gzvcf ../../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../../lin4.txt --weir-fst-pop ../../../lin57.txt --out fstlin4_lin57
-vcftools --gzvcf ../../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../../lin4.txt --weir-fst-pop ../../../lin6.txt --out fstlin4_lin6
-vcftools --gzvcf ../../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../../lin4.txt --weir-fst-pop ../../../lin7.txt --out fstlin4_lin7
-vcftools --gzvcf ../../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../../lin57.txt --weir-fst-pop ../../../lin6.txt --out fstlin57_lin6
-vcftools --gzvcf ../../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../../lin57.txt --weir-fst-pop ../../../lin7.txt --out fstlin57_lin7 
-vcftools --gzvcf ../../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../../lin6.txt --weir-fst-pop ../../../lin7.txt --out fstlin6_lin7
-vcftools --gzvcf ../../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../../lin57.txt --weir-fst-pop ../../../lin7.txt --out fstlin57_lin7 
-vcftools --gzvcf ../../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../../lin6.txt --weir-fst-pop ../../../lin7.txt --out fstlin6_lin7
+vcftools --gzvcf ../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../lin1.txt --weir-fst-pop ../../lin2.txt --out fstlin1_lin2
+vcftools --gzvcf ../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../lin1.txt --weir-fst-pop ../../lin3.txt --out fstlin1_lin3
+vcftools --gzvcf ../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../lin1.txt --weir-fst-pop ../../lin4.txt --out fstlin1_lin4
+vcftools --gzvcf ../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../lin1.txt --weir-fst-pop ../../lin57.txt --out fstlin1_lin57
+vcftools --gzvcf ../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../lin1.txt --weir-fst-pop ../../lin6.txt --out fstlin1_lin6
+vcftools --gzvcf ../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../lin1.txt --weir-fst-pop ../../lin7.txt --out fstlin1_lin7
+vcftools --gzvcf ../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../lin2.txt --weir-fst-pop ../../lin3.txt --out fstlin2_lin3
+vcftools --gzvcf ../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../lin2.txt --weir-fst-pop ../../lin4.txt --out fstlin2_lin4
+vcftools --gzvcf ../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../lin2.txt --weir-fst-pop ../../lin57.txt --out fstlin2_lin57
+vcftools --gzvcf ../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../lin2.txt --weir-fst-pop ../../lin6.txt --out fstlin2_lin6
+vcftools --gzvcf ../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../lin2.txt --weir-fst-pop ../../lin7.txt --out fstlin2_lin7
+vcftools --gzvcf ../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../lin3.txt --weir-fst-pop ../../lin4.txt --out fstlin3_lin4
+vcftools --gzvcf ../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../lin3.txt --weir-fst-pop ../../lin57.txt --out fstlin3_lin57
+vcftools --gzvcf ../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../lin3.txt --weir-fst-pop ../../lin6.txt --out fstlin3_lin6
+vcftools --gzvcf ../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../lin3.txt --weir-fst-pop ../../lin7.txt --out fstlin3_lin7
+vcftools --gzvcf ../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../lin4.txt --weir-fst-pop ../../lin57.txt --out fstlin4_lin57
+vcftools --gzvcf ../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../Devoniana.txt --weir-fst-pop ../../lin57.txt --out fstlin4_Devoniana
+vcftools --gzvcf ../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../lin4.txt --weir-fst-pop ../../lin6.txt --out fstlin4_lin6
+vcftools --gzvcf ../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../lin4.txt --weir-fst-pop ../../lin7.txt --out fstlin4_lin7
+vcftools --gzvcf ../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../lin57.txt --weir-fst-pop ../../lin6.txt --out fstlin57_lin6
+vcftools --gzvcf ../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../lin57.txt --weir-fst-pop ../../lin7.txt --out fstlin57_lin7 
+vcftools --gzvcf ../../../snparcher/vcfs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --weir-fst-pop ../../lin6.txt --weir-fst-pop ../../lin7.txt --out fstlin6_lin7
+
   # heatmap with the result 
   Rscript heatmap.r
 # subset sites with FST values > 0.9
