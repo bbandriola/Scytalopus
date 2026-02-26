@@ -79,3 +79,51 @@ b + xlab(paste0("PC1(", signif(pve$pve[1], 3), "%)")) +
   theme(axis.title.x = element_text(size = 20),  
         axis.title.y = element_text(size = 20))
 dev.off()
+
+# plot pca circles with transparency
+pdf("Autosomal_FilteredPCAandUCE_Max30missinessDepthmin10max100LD0.15_LinSouth_PCA_blackborder.pdf",width = 10,height = 10)
+b <- ggplot(pca, aes(PC1, PC2)) + 
+  geom_point(aes(colour = Lineages),position = position_jitter(seed = 1, width = 0.03, height=0.04),size = 12,alpha = 0.6,stroke=1)+
+  geom_point(aes(PC1, PC2),position = position_jitter(seed = 1, width = 0.03, height=0.04),colour = "black",shape = 1,size = 12, stroke=0.8,alpha = 0.6)+
+  scale_color_manual(values = c("#00deff", "#7570B3", "#ff14d4", "#66A61D", 
+                                "#E93F33", "#E6AC2F"))+
+  coord_equal() + 
+  theme_bw(base_size = 15) +
+  theme(axis.title = element_text(size = 20),
+    axis.title.x = element_text(size =20),  
+    axis.title.y = element_text(size =20))+
+    labs(fill = "Lineage")+
+    theme(axis.ticks = element_line(colour = "gray60", size = 0.2),
+    panel.grid.major = element_line(colour = "white", size = 0.2),
+    panel.border = element_rect(colour = "gray60", fill = NA))
+b + xlab(paste0("PC1(", signif(pve$pve[1], 3), "%)")) + ylab(paste0("PC2(", signif(pve$pve[2], 3), "%)"))+
+  labs(color = "Lineage")+
+  theme(axis.title.x = element_text(size =22),  
+    axis.title.y = element_text(size =22))+
+    labs(fill = "Lineage")
+dev.off()
+
+ggsave("Autosomal_FilteredPCAandUCE_Max30missinessDepthmin10max100LD0.15_LinSouth_PCA_colorfull.png", b, width=5, height=5)
+
+
+# plot pca circles with transparency
+pdf("Autosomal_FilteredPCAandUCE_Max30missinessDepthmin10max100LD0.15_LinSouth_PCA_colorfull.pdf",width = 10,height = 10)
+b <- ggplot(pca, aes(PC1, PC2)) + 
+  geom_point(aes(colour = Lineages),position = position_jitter(seed = 1, width = 0.03, height=0.04),size = 12,alpha = 0.6,stroke=1)+
+#  geom_point(aes(PC1, PC2),position = position_jitter(seed = 1, width = 0.03, height=0.04),colour = "black",shape = 1,size = 12, stroke=0.8,alpha = 0.6)+
+  scale_color_manual(values = c("#66A61D", "#E93F33", "#E6AC2F"))+
+  coord_equal() + 
+  theme_bw(base_size = 15) +
+  theme(axis.title = element_text(size = 20),
+    axis.title.x = element_text(size =20),  
+    axis.title.y = element_text(size =20))+
+    labs(fill = "Lineage")+
+    theme(axis.ticks = element_line(colour = "gray60", size = 0.2),
+    panel.grid.major = element_line(colour = "white", size = 0.2),
+    panel.border = element_rect(colour = "gray60", fill = NA))
+b + xlab(paste0("PC1(", signif(pve$pve[1], 3), "%)")) + ylab(paste0("PC2(", signif(pve$pve[2], 3), "%)"))+
+  labs(color = "Lineage")+
+  theme(axis.title.x = element_text(size =22),  
+    axis.title.y = element_text(size =22))+
+    labs(fill = "Lineage")
+dev.off()
