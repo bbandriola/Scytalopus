@@ -571,9 +571,11 @@ p<-ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
   theme_minimal() +
   theme(
     axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
-    panel.grid = element_blank()
+    panel.grid = element_blank(),
+	axis.title.x = element_text(size = 14, face = "bold"),
+  	axis.title.y = element_text(size = 14, face = "bold")
   )
-ggsave("K3_SspeluncaeOnly.png", plot = p, width = 14, height = 5)
+ggsave("K3_SspeluncaeOnly.png", plot = p, width = 20, height = 5)
 
 tbl=read.table("Autosomal_FilteredPCAandUCE_Max30missinessDepthmin10max100LD0.15_SspeluncaeOnly.4.Q")
 tbl$V1 <- factor(tbl$V1, levels = unique(tbl$V1))
@@ -588,9 +590,11 @@ p<-ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
   theme_minimal() +
   theme(
     axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
-    panel.grid = element_blank()
+    panel.grid = element_blank(),
+	axis.title.x = element_text(size = 14, face = "bold"),
+  	axis.title.y = element_text(size = 14, face = "bold")
   )
-ggsave("K4_SspeluncaeOnly.png", plot = p, width = 14, height = 5)
+ggsave("K4_SspeluncaeOnly.png", plot = p, width = 20, height = 5)
 
 tbl=read.table("Autosomal_FilteredPCAandUCE_Max30missinessDepthmin10max100LD0.15_SspeluncaeOnly.5.Q")
 tbl$V1 <- factor(tbl$V1, levels = unique(tbl$V1))
@@ -605,9 +609,11 @@ p<-ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
   theme_minimal() +
   theme(
     axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
-    panel.grid = element_blank()
+    panel.grid = element_blank(),
+	axis.title.x = element_text(size = 14, face = "bold"),
+  	axis.title.y = element_text(size = 14, face = "bold")
   )
-ggsave("K5_SspeluncaeOnly.png", plot = p, width = 14, height = 5)
+ggsave("K5_SspeluncaeOnly.png", plot = p, width = 20, height = 5)
 
 
 tbl=read.table("Autosomal_FilteredPCAandUCE_Max30missinessDepthmin10max100LD0.15_SspeluncaeOnly.6.Q")
