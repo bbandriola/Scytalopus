@@ -169,3 +169,26 @@ height_in <- width_in * aspect_ratio
 #   dpi = 300,
 #   bg = "white"
 # )
+
+############################### GRAPHIC 
+pdf("SpeluncaeOnly_AdmixMap_wlarlong.pdf")
+ggplot() +
+  ggspatial::layer_spatial(genoscape_spat) +
+  geom_sf(data = range, fill = NA, linewidth = 0.2225 , alpha = 0.8,colour = NA) +
+  geom_sf(data = countries, fill = NA, linewidth = 0.25) +
+  geom_sf(data = coastlines, fill = NA, linewidth = 0.1225) +
+  geom_sf(data = states, fill = NA, linewidth = 0.1225) +
+  geom_sf(data = ocean, fill = "lightblue") +
+  geom_sf(data = site_coords_sf,fill = "black",shape = 21,color = "white",size = 2,stroke = 0.3,alpha = 1) +
+  theme_void() +
+  coord_sf(crs = st_crs(4326),xlim = coord_limits$xlim,ylim = coord_limits$ylim,label_graticule = "SW",expand = FALSE) +
+  theme(
+    axis.text = element_text(size = 9.5, color = "black"),
+    axis.title = element_text(size = 9.5),
+    axis.ticks = element_line(color = "black"),
+    panel.border = element_rect(color = "black", fill = NA)) +
+    scale_x_continuous(breaks = seq(floor(coord_limits$xlim[1]),ceiling(coord_limits$xlim[2]),by = 4)) +
+    scale_y_continuous(breaks = seq(floor(coord_limits$ylim[1]),
+               ceiling(coord_limits$ylim[2]),by = 4))
+dev.off()
+
