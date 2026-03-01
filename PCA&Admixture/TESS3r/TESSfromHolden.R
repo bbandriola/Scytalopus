@@ -170,7 +170,185 @@ height_in <- width_in * aspect_ratio
 #   bg = "white"
 # )
 
-############################### GRAPHIC 
+############################### my env
+library("raster")
+#install.packages("raster")
+
+library("raster")
+library(remotes)
+library(raster)
+library(tess3r)
+library(tidyverse)
+library(ggthemes)
+library(sf)
+library(rnaturalearth)
+library(ggrepel)
+setwd("~/Desktop/")
+source("./TESS3_encho_sen-master/R/variogram.R")
+source("./TESS3_encho_sen-master/R/utils.R")
+source("./TESS3_encho_sen-master/R/tess3.R")
+source("./TESS3_encho_sen-master/R/tess3project.R")
+source("./TESS3_encho_sen-master/R/spatialPlots.R")
+source("./TESS3_encho_sen-master/R/plotG.R")
+source("./TESS3_encho_sen-master/R/plotQ.R")
+source("./TESS3_encho_sen-master/R/RcppExports.R")
+source("./TESS3_encho_sen-master/R/sampler.R")
+source("./TESS3_encho_sen-master/R/selectionscan.R")
+source("./TESS3_encho_sen-master/R/solver.R")
+source("./TESS3_encho_sen-master/R/imputation.R")
+
+source("./TESS3_encho_sen-master/R/error.R")
+source("./TESS3_encho_sen-master/R/getter.R")
+source("./TESS3_encho_sen-master/R/graph.R")
+source("./TESS3_encho_sen-master/R/helpers.R")
+source("./TESS3_encho_sen-master/R/check.R")
+source("./TESS3_encho_sen-master-2/R/imputation.R")
+source("./TESS3_encho_sen-master-2/R/check.R")
+source("./TESS3_encho_sen-master-2/R/erics-funcs.R")
+source("./TESS3_encho_sen-master-2/R/error.R")
+source("./TESS3_encho_sen-master-2/R/getter.R")
+source("./TESS3_encho_sen-master-2/R/graph.R")
+source("./TESS3_encho_sen-master-2/R/helpers.R")
+source("./TESS3_encho_sen-master-2/R/plotG.R")
+
+source("./TESS3_encho_sen-master-2/R/plotQ.R")
+source("./TESS3_encho_sen-master-2/R/RcppExports.R")
+source("./TESS3_encho_sen-master-2/R/sampler.R")
+source("./TESS3_encho_sen-master-2/R/selectionscan.R")
+source("./TESS3_encho_sen-master-2/R/solver.R")
+source("./TESS3_encho_sen-master-2/R/spatialPlots.R")
+source("./TESS3_encho_sen-master-2/R/tess3.R")
+source("./TESS3_encho_sen-master-2/R/tess3project.R")
+source("./TESS3_encho_sen-master-2/R/utils.R")
+source("./TESS3_encho_sen-master-2/R/variogram.R")
+source("./genoscapeRtools-master/R/hwe_exact_test.R")
+source("./genoscapeRtools-master/R/apwnd_windows.R")
+source("./genoscapeRtools-master/R/explore-missingness.R")
+source("./genoscapeRtools-master/R/geno_freq_calcs.R")
+source("./genoscapeRtools-master/R/genoscape_pca.R")
+source("./genoscapeRtools-master/R/genoscapeRtools-package.R")
+source("./genoscapeRtools-master/R/grt_positions.R")
+source("./genoscapeRtools-master/R/hohz_windows.R")
+source("./genoscapeRtools-master/R/import.R")
+source("./genoscapeRtools-master/R/pairwise_fst.R")
+source("./genoscapeRtools-master/R/plink-admixture-etc.R")
+source("./genoscapeRtools-master/R/qprob_rando_raster.R")
+source("./genoscapeRtools-master/R/RcppExports.R")
+source("./genoscapeRtools-master/R/read_012.R")
+source("./genoscapeRtools-master/R/read_angsd_geno_probs.R")
+source("./genoscapeRtools-master/R/scan_012.R")
+source("./genoscapeRtools-master/R/small_utils.R")
+source("./genoscapeRtools-master/R/snp-selection.R")
+
+Q_tibble <- read_table2("./Autosomal_FilteredPCAandUCE_Max30missinessDepthmin10max100LD0.15_SspeluncaeOnly.5.Q", col_names = F)
+
+inds <- read_tsv("./ind.txt", col_names = "sample_name")
+
+Q_tibble <- bind_cols(inds, Q_tibble)
+
+coords <- read.table("./UTM_speluncaeonly.csv",header=T,sep=";")
+
+LatLong_Tibble <- coords %>%
+  rename(long = Longitude, lat = Latitude)%>%
+  dplyr::select(sample_name, lat, long)
+
+LatLong_Tibble <- Q_tibble %>%
+  left_join(LatLong_Tibble) %>%
+  dplyr::select(sample_name,lat, long)
+
+cluster_colors <- c(
+  X1 = "#7570B3",
+  X2 = "#E93F33",
+  X3 = "#E6AC2F",
+  X4 = "#66A61D",
+  X5 = "deeppink")
+
+range <- st_read("./smoothed_speluncaeonly_dist.shp",quiet=T)
+
+long_lat_tibble <- Q_tibble %>%
+  dplyr::select(sample_name) %>%
+  left_join(LatLong_Tibble, by = "sample_name")
+
+long_lat_matrix <- long_lat_tibble %>%
+  dplyr::select(long, lat) %>%
+  as.matrix()
+
+Q_matrix <- Q_tibble %>%
+  dplyr::select(-sample_name) %>%
+  as.matrix()
+
+genoscape_brick <- tess3Q_map_rasters(
+  x = Q_matrix,
+  coord = long_lat_matrix,
+  map.polygon = range,
+  window = extent(range)[1:5],
+  resolution = c(1000,1000), # if you want more cells in your raster, set higher # bump to 3000x3000 for publication
+  # this next lines need to to be here, but don't do much...
+  col.palette = CreatePalette(cluster_colors, length(cluster_colors)),
+  method = "map.max",
+  interpol = FieldsKrigModel(10),
+  main = "Ancestry coefficients",
+  xlab = "Longitude",
+  ylab = "Latitude",
+  cex = .4
+)
+
+names(genoscape_brick) <- names(Q_tibble)[-1]
+
+genoscape_rgba <- qprob_rando_raster(
+  TRB = genoscape_brick,
+  cols = cluster_colors,
+  alpha_scale = 3.0, # high value makes pixels with higher Q value become more opaque
+  abs_thresh = 0.5,
+  alpha_exp = 1.55,
+  alpha_chop_max = 100
+)
+
+crs(genoscape_rgba) <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+
+genoscape_spat <- rast(genoscape_rgba)
+
+lamproj <- "+proj=lcc +lat_1=20 +lat_2=60 +lat_0=40 +lon_0=-100 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs"
+
+genoscape_projected <- terra::project(genoscape_spat, lamproj, method = "near")
+
+coastlines <- ne_download(scale = 10, type = "coastline", category = "physical", returnclass = "sf")
+countries <- ne_download(scale = 10, type = "admin_0_boundary_lines_land", category = "cultural", returnclass = "sf")
+states <- ne_download(scale = 10, type = "admin_1_states_provinces_lines", category = "cultural", returnclass = "sf")
+ocean <- ne_download(scale = 10, type = "ocean", category = "physical", returnclass = "sf")
+#lakes <- ne_download(scale = 10, type = "lakes", category = "physical", returnclass = "sf")
+
+site_coords <- Q_tibble %>%
+  dplyr::select(sample_name) %>%
+  left_join(LatLong_Tibble, by = "sample_name") %>%
+  filter(!is.na(long) & !is.na(lat))
+
+site_coords_sf <- st_as_sf(site_coords, coords = c("long", "lat"), crs = 4326)
+
+range_proj <- st_transform(range, st_crs(lamproj))
+
+genoscape_bbox <- st_bbox(range_proj)
+
+x_range <- genoscape_bbox$xmax - genoscape_bbox$xmin
+
+y_range <- genoscape_bbox$ymax - genoscape_bbox$ymin
+
+coord_limits <- list(
+  xlim = c(genoscape_bbox$xmin - 1.50*x_range, genoscape_bbox$xmax + 1.50*x_range),
+  ylim = c(genoscape_bbox$ymin - 0.30*y_range, genoscape_bbox$ymax + 0.30*y_range)
+)
+
+bbox_pts <- st_bbox(site_coords_sf)
+
+x_range <- bbox_pts$xmax - bbox_pts$xmin
+y_range <- bbox_pts$ymax - bbox_pts$ymin
+
+coord_limits <- list(
+  xlim = c(bbox_pts$xmin - 0.2 * x_range,
+           bbox_pts$xmax + 0.2 * x_range),
+  ylim = c(bbox_pts$ymin - 0.2 * y_range,
+           bbox_pts$ymax + 0.2 * y_range)
+)
 pdf("SpeluncaeOnly_AdmixMap_wlarlong.pdf")
 ggplot() +
   ggspatial::layer_spatial(genoscape_spat) +
