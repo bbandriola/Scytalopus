@@ -29,9 +29,7 @@ python filterVCF_Robinson_et_al.py ../FilteredPCAandUCE_GeographicNames_allsampl
 # Filter by missingness per site
 bcftools view -i 'F_MISSING <= 0.3' -m2 -M2 -V indels -Oz -o FilteredMinDPMaxDPperInd30MaxMissBialelicNoindels_FilteredPCAandUCE_GeographicNames_allsamples.vcf.gz FilteredMinDPMaxDPperInd_FilteredPCAandUCE_GeographicNames_allsamples.vcf.gz
 #LD filter
-vcftools --gzvcf FilteredMinDPMaxDPperInd30MaxMissBialelicNoindels_FilteredPCAandUCE_GeographicNames_allsamples.vcf.gz --out FilteredMinDPMaxDPperInd30MaxMissBialelicNoindels_FilteredPCAandUCE_GeographicNames_allsamples --plink
 plink --file FilteredMinDPMaxDPperInd30MaxMissBialelicNoindels_FilteredPCAandUCE_GeographicNames_allsamples --make-bed --out FilteredMinDPMaxDPperInd30MaxMissBialelicNoindels_FilteredPCAandUCE_GeographicNames_allsamples
-PCAone -b FilteredMinDPMaxDPperInd30MaxMissBialelicNoindels_FilteredPCAandUCE_GeographicNames_allsamples --ld --ld-stats 1
 
 # 3. chromossomes dataset
 # Aut dataset
@@ -46,8 +44,8 @@ gzip Wscaffolds_FilteredMinDPMaxDPperInd30MaxMissBialelicNoindels_FilteredPCAand
 
 # 4. prune by ld with vcftools 
 # LD pairwise calculation | # LD decay to filter at a minimun distance
-#PopLDdecay -InVCF ../FilteredMax30missingDepthmin5MAF_FilteredPCA_GeographicNames_onlyspeluncae.vcf.gz.recode.vcf.gz -OutStat LDdecay_speluncae
-  # plot: perl ./PopLDdecay/bin/Plot_OnePop.pl -inFile LDdecay.stat.gz
+PopLDdecay -InVCF FilteredMax30missingDepthmin5MAF_FilteredPCA_GeographicNames_onlyspeluncae.vcf.gz.recode.vcf.gz -OutStat LDdecay_speluncae
+   plot: perl ./PopLDdecay/bin/Plot_OnePop.pl -inFile LDdecay.stat.gz
   # Rscrip LDdecay.r
 #test with plink; ref: https://speciationgenomics.github.io/ld_decay/
 # plink --vcf ../FilteredMax30missingDepthmin5MAF_GeographicNames_allsamples.vcf.gz.recode.vcf.gz --double-id --allow-extra-chr --set-missing-var-ids @:# --geno 0.1 --thin 0.1 --r2 gz --ld-window 100 --ld-window-kb 1000 --ld-window-r2 0 --out r2Plink_onlyspeluncae
