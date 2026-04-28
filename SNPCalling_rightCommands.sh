@@ -27,7 +27,7 @@ bcftools reheader --samples GeographicNames.txt --output GeographicNames_allsamp
 # Filter by max and min DP per ind 
 python filterVCF_Robinson_et_al.py ../FilteredPCAandUCE_GeographicNames_allsamples.vcf.gz | gzip > FilteredMinDPMaxDPperInd_FilteredPCAandUCE_GeographicNames_allsamples.vcf.gz
 # Filter by missingness per site
-bcftools view -i 'F_MISSING <= 0.3' -m2 -M2 -V indels -Oz -o FilteredMinDPMaxDPperInd30MaxMissBialelicNoindels_FilteredPCAandUCE_GeographicNames_allsamples.vcf.gz FilteredMinDPMaxDPperInd_FilteredPCAandUCE_GeographicNames_allsamples.vcf.gz
+bcftools view -i 'F_MISSING <= 0.2' -m2 -M2 -v snps -Oz -o FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_allsamples.vcf.gz FilteredMinDPMaxDPperInd_FilteredPCAandUCE_GeographicNames_allsamples.vcf.gz
 #LD filter
 plink --file FilteredMinDPMaxDPperInd30MaxMissBialelicNoindels_FilteredPCAandUCE_GeographicNames_allsamples --make-bed --out FilteredMinDPMaxDPperInd30MaxMissBialelicNoindels_FilteredPCAandUCE_GeographicNames_allsamples
 
