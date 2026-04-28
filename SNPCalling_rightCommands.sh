@@ -39,7 +39,7 @@ PopLDdecay -InVCF FilteredMax30missingDepthmin5MAF_FilteredPCA_GeographicNames_o
 # LD prunning with plink 
   # a partir disso, fazer um filtro de prunning adequado para os dados  
  # no meu novo vcf utilizar 1kb e não 60 SNPs
-plink2 --vcf FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_allsamples.vcf.gz --indep-pairwise 1kb 10 0.15 --out pruning_60snps_r2_0.15 --allow-extra-chr --set-missing-var-ids @:# # ajustar o ultimo valor para o valor que tiver saido no LDdecay
+plink2 --vcf FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_allsamples.vcf.gz --indep-pairwise 1kb 1 0.15 --out pruning_60snps_r2_0.15 --allow-extra-chr --set-missing-var-ids @:# # ajustar o ultimo valor para o valor que tiver saido no LDdecay
 # snps 90,658 pruning_60snps_r2_0.15.prune.in
 awk -F':' '{print $1"\t"($2-1)"\t"$2}' pruning_60snps_r2_0.15.prune.in > prune_in.bed
 bcftools view -R LD/prune_in.bed -Oz -o NoZW_FilteredPCAandUCE_Max30missingDepthmin10LD015_GeographicNames_allsamples.vcf.gz NoZW_FilteredPCAandUCE_Max30missingDepthmin10_GeographicNames_allsamples.vcf.gz
