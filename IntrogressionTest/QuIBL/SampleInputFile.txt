@@ -1,13 +1,13 @@
 [Input]
-treefile: ./1824rootedtrees_1kb.txt.txt
+treefile: allind_trees.newick
 numdistributions: 2
 likelihoodthresh: 0.01
 numsteps: 50
 gradascentscalar: 0.5
-totaloutgroup: Ssuperciliariswin1kb
+totaloutgroup: Sspeluncae120
 multiproc: True
-maxcores:15
+maxcores: 4
 
 
 [Output]
-OutputPath: ./Quilb_Sspeluncae.csv
+OutputPath: ./QuIBL_Scyta_1kb_10ind.csv
