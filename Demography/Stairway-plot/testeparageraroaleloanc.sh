@@ -1,10 +1,7 @@
-python Generate_input_est-sfs.py chrVXBX01004249_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_allsamples.vcf.recode.vcf.gz groupfile_Lin3.txt > groupfile_Lin3_chrVXBX01009921.allele 
+for i in chrVXBX0100*vcf.gz; do python SFS/Generate_input_est-sfs.py $i SFS/groupfile_Dev_3SP_1PR.txt > groupfileDev_$i.allele; done
+for i in chrVXBX0100*vcf.gz; do python SFS/Generate_input_est-sfs.py $i SFS/groupfile_Lin3_4ind.txt > groupfileLin3_4ind_$i.allele; done
 
-awk -F'\t' 'BEGIN{OFS="\t"} {gsub(/2/,"1",$2); gsub(/2/,"1",$3); print}' groupfile_Lin3_chrVXBX01009921.allele > groupfile_Lin3_chrVXBX01009921.allele.txt 
-
-python Generate_input_est-sfs.py chrVXBX01004249_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_allsamples.vcf.recode.vcf.gz groupfile_Lin3.txt > groupfile_Lin3_chrVXBX01004249.allele 
-
-awk -F'\t' 'BEGIN{OFS="\t"} {gsub(/2/,"1",$2); gsub(/2/,"1",$3); print}' groupfile_Lin3_chrVXBX01004249.allele > groupfile_Lin3_chrVXBX01004249.allele.txt
+for i in groupfile*allele; do tail -n +2 $i | awk -F'\t' 'BEGIN{OFS="\t"} {gsub(/2/,"1",$2); gsub(/2/,"1",$3); print}' > $i.txt; done
 
 
 echo "running first chr..."
