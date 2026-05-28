@@ -6,9 +6,9 @@ for i in inputest-sfs_*.allele; do tail -n +2 $i | awk -F'\t' 'BEGIN{OFS="\t"} {
 
 # run est-sfsls 
 echo "running first chr..."
-est-sfs config_file.txt groupfile_Lin3_chrVXBX01009921.allele.txt seedfile.txt Lin3_chrVXBX01009921_output-file-sfs.txt Lin3_chrVXBX01009921_output-file-pvalues.txt
+est-sfs config_file.txt chrVXBX01009921.allele.txt seedfile.txt chrVXBX01009921_output-file-sfs.txt hrVXBX01009921_output-file-pvalues.txt
 echo "you made it! next"
-est-sfs config_file.txt groupfile_Lin3_chrVXBX01004249.allele.txt seedfile.txt Lin3_chrVXBX01009921_output-file-sfs.txt Lin3_chrVXBX01009921_output-file-pvalues.txt
+est-sfs config_file.txt chrVXBX01004249.allele.txt seedfile.txt chrVXBX01009921_output-file-sfs.txt chrVXBX01009921_output-file-pvalues.txt
 echo "done! celebrate and do it all again"
 
 # get the ancester allele 
@@ -24,6 +24,18 @@ done
 # do for all files
 paste -d '\t' ../variants_chrchrVXBX01000547_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_allsamples.recode.vcf.gz.txt ./ancestral_states_chrVXBX0100MODIF_chrVXBX01000547_output-file-pvalues.txt.txt > ./chrVXBX01000547_ref_ancalleles.txt
 cat *_ref_ancalleles.txt > 41chr_ancallele.txt
+
+# change fasta position to ancestral allele base
+# the command understand fastas in block 
+# there is no need to change the header of the fasta sequence 
+# needs to check if there is need to change -1 or +1 the position of the base to change 
+# write a script to extract only the bases that have the anc allele as A, as T, as G and as T
+# sunset to use this positions in each step
+
+bedtools maskfasta -fi original.fasta -bed position2changeA.bed -fo editedA.fasta -mc A
+bedtools maskfasta -fi editedA.fasta -bed position2changeC.bed -fo editedAC.fasta -mc C
+bedtools maskfasta -fi editedAC.fasta -bed position2changeG.bed -fo editedACG.fasta -mc G
+bedtools maskfasta -fi editedACG.fasta -bed position2changeT.bed -fo editedACGT.fasta -mc T
 
 
 
