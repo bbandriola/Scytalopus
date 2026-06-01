@@ -31,11 +31,29 @@ cat *_ref_ancalleles.txt > 41chr_ancallele.txt
 # needs to check if there is need to change -1 or +1 the position of the base to change 
 # write a script to extract only the bases that have the anc allele as A, as T, as G and as T
 # sunset to use this positions in each step
+bash basefiles.sh
+  #!/bin/bash
 
-bedtools maskfasta -fi original.fasta -bed position2changeA.bed -fo editedA.fasta -mc A
-bedtools maskfasta -fi editedA.fasta -bed position2changeC.bed -fo editedAC.fasta -mc C
-bedtools maskfasta -fi editedAC.fasta -bed position2changeG.bed -fo editedACG.fasta -mc G
-bedtools maskfasta -fi editedACG.fasta -bed position2changeT.bed -fo editedACGT.fasta -mc T
+  input="41chr_ancallele.txt"
+  awk '$3=="A"' "$input" > baseA.txt
+  awk '$3=="C"' "$input" > baseC.txt
+  awk '$3=="G"' "$input" > baseG.txt
+  awk '$3=="T"' "$input" > baseT.txt
+  awk '$3=="-nan"' 41chr_ancallele.txt > basenan.txt
+
+# now organize the base file to be a bed format 
+awk 'BEGIN{OFS="\t"} {print $1, $2-1, $2}' baseA.txt > position2changeA.bed
+awk 'BEGIN{OFS="\t"} {print $1, $2-1, $2}' baseC.txt > position2changeC.bed
+awk 'BEGIN{OFS="\t"} {print $1, $2-1, $2}' baseG.txt > position2changeG.bed
+awk 'BEGIN{OFS="\t"} {print $1, $2-1, $2}' baseT.txt > position2changeT.bed
+awk 'BEGIN{OFS="\t"} {print $1, $2-1, $2}' basenan.txt > position2changenan.bed
+
+# modify fasta to explicity determiny the bases to the ancestral allele
+bedtools maskfasta -fi GCA_013400415.1_ASM1340041v1_genomic.fa -bed position2changeA.bed -fo editedA_GCA_013400415.1_ASM1340041v1_genomic.fasta -mc A
+bedtools maskfasta -fi editedA_GCA_013400415.1_ASM1340041v1_genomic.fasta -bed position2changeC.bed -fo editedAC_GCA_013400415.1_ASM1340041v1_genomic.fasta -mc C
+bedtools maskfasta -fi editedAC_GCA_013400415.1_ASM1340041v1_genomic.fasta -bed position2changeG.bed -fo editedACG_GCA_013400415.1_ASM1340041v1_genomic.fasta -mc G
+bedtools maskfasta -fi editedACG_GCA_013400415.1_ASM1340041v1_genomic.fasta -bed position2changeT.bed -fo editedACGT_GCA_013400415.1_ASM1340041v1_genomic.fasta -mc T
+bedtools maskfasta -fi editedACGT_GCA_013400415.1_ASM1340041v1_genomic.fasta -bed position2changeT.bed -fo editedACGTnan_GCA_013400415.1_ASM1340041v1_genomic.fasta -mc N
 
 
 
