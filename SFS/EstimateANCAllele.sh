@@ -25,6 +25,11 @@ done
 paste -d '\t' ../variants_chrchrVXBX01000547_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_allsamples.recode.vcf.gz.txt ./ancestral_states_chrVXBX0100MODIF_chrVXBX01000547_output-file-pvalues.txt.txt > ./chrVXBX01000547_ref_ancalleles.txt
 cat *_ref_ancalleles.txt > 41chr_ancallele.txt
 
+# subset the reference fasta and turn all bases in N 
+bedtools maskfasta -fi GCA_013400415.1_ASM1340041v1_genomic.fa -bed Ninallpos.bed -fo allNchr.fasta -mc N
+samtools faidx allNchr.fasta
+xargs samtools faidx allNchr.fasta < keepchr.txt > subset41chr_allNchr.fasta
+
 # change fasta position to ancestral allele base
 # the command understand fastas in block 
 # there is no need to change the header of the fasta sequence 
@@ -49,11 +54,49 @@ awk 'BEGIN{OFS="\t"} {print $1, $2-1, $2}' baseT.txt > position2changeT.bed
 awk 'BEGIN{OFS="\t"} {print $1, $2-1, $2}' basenan.txt > position2changenan.bed
 
 # modify fasta to explicity determiny the bases to the ancestral allele
-bedtools maskfasta -fi GCA_013400415.1_ASM1340041v1_genomic.fa -bed position2changeA.bed -fo editedA_GCA_013400415.1_ASM1340041v1_genomic.fasta -mc A
-bedtools maskfasta -fi editedA_GCA_013400415.1_ASM1340041v1_genomic.fasta -bed position2changeC.bed -fo editedAC_GCA_013400415.1_ASM1340041v1_genomic.fasta -mc C
-bedtools maskfasta -fi editedAC_GCA_013400415.1_ASM1340041v1_genomic.fasta -bed position2changeG.bed -fo editedACG_GCA_013400415.1_ASM1340041v1_genomic.fasta -mc G
-bedtools maskfasta -fi editedACG_GCA_013400415.1_ASM1340041v1_genomic.fasta -bed position2changeT.bed -fo editedACGT_GCA_013400415.1_ASM1340041v1_genomic.fasta -mc T
-bedtools maskfasta -fi editedACGT_GCA_013400415.1_ASM1340041v1_genomic.fasta -bed position2changeT.bed -fo editedACGTnan_GCA_013400415.1_ASM1340041v1_genomic.fasta -mc N
+bedtools maskfasta -fi subset41chr_allNchr.fasta -bed position2changeA.bed -fo editedA_subset41chr_allNchr.fasta -mc A
+bedtools maskfasta -fi editedA_subset41chr_allNchr.fasta -bed position2changeC.bed -fo editedAC_subset41chr_allNchr.fasta -mc C
+bedtools maskfasta -fi editedAC_subset41chr_allNchr.fasta -bed position2changeG.bed -fo editedACG_subset41chr_allNchr.fasta -mc G
+bedtools maskfasta -fi editedACG_subset41chr_allNchr.fasta -bed position2changeT.bed -fo editedACGT_subset41chr_allNchr.fasta -mc T
+
+# subset the individuals to generate the SFS 
+## LinSouthDEV_4ind.bamlist DevonianaSP4_lin5 DevonianaSP1_lin5 DevonianaSP2_lin5 DevonianaPR6_lin5
+## Lin3_4ind.bamlist SulMantiqueira2_lin3 SulMantiqueira3_lin3 NorteMantiqueira1_lin3 NorteMantiqueira3_lin3
+## Lin4_4ind.bamlist BocainaSerraDoMarRJ1_lin4 BocainaSerraDoMarRJ3_lin4 BocainaSerraDoMarRJ4_lin4 CunhaSerraDoMarRJ2_lin4
+## LinSouthDEV_4ind.bamlist
+## /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/bams/Sspeluncae32_lin5_final.bam
+## /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/bams/Sspeluncae23_lin5_final.bam
+## /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/bams/Sspeluncae28_lin5_final.bam
+## /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/bams/Sspeluncae109_lin5_final.bam
+## 
+## Lin3_4ind.bamlist
+## /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/bams/Sspeluncae13_lin3_final.bam
+## /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/bams/Sspeluncae14_lin3_final.bam
+## /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/bams/Sspeluncae9_lin3_final.bam
+## /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/bams/Sspeluncae113_lin3_final.bam
+## 
+## Lin4_4ind.bamlist
+## /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/bams/Sspeluncae2_lin4_final.bam
+## /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/bams/Sspeluncae4_lin4_final.bam
+## /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/bams/Sspeluncae5_lin4_final.bam
+## /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/bams/Sspeluncae16_lin4_final.bam
+
+# reindex bam 
+while read bam; do echo "Reindexing $bam"; samtools index -@ 10 "$bam"; done < Lin3_4ind.bamlist
+while read bam; do echo "Reindexing $bam"; samtools index -@ 10 "$bam"; done < Lin4_4ind.bamlist
+while read bam; do echo "Reindexing $bam"; samtools index -@ 10 "$bam"; done < LinSouthDEV_4ind.bamlist
+
+# generate saf file 
+angsd -GL 1 -b LinSouthDEV_4ind.bamlist -anc editedfastaancallele/editedACGT_subset41chr_allNchr.fasta -P 10 -out LinSouthDEV -doSaf 1 -minInd 4 -rf chr2include.txt
+angsd -GL 1 -b Lin4_4ind.bamlist -anc editedfastaancallele/editedACGT_subset41chr_allNchr.fasta -P 10 -out Lin4 -doSaf 1 -minInd 4 -rf chr2include.txt
+angsd -GL 1 -b Lin3_4ind.bamlist -anc editedfastaancallele/editedACGT_subset41chr_allNchr.fasta -P 10 -out Lin3 -doSaf 1 -minInd 4 -rf chr2include.txt
+
+# generate SFS
+realSFS Lin3.saf.idx Lin4.saf.idx LinSouthDEV.saf.idx -P 24 > Lin3Lin4LInDEV_3dsfs.sfs
+
+
+
+
 
 
 
