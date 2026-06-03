@@ -92,7 +92,7 @@ angsd -GL 1 -b Lin4_4ind.bamlist -anc editedfastaancallele/editedACGT_subset41ch
 angsd -GL 1 -b Lin3_4ind.bamlist -anc editedfastaancallele/editedACGT_subset41chr_allNchr.fasta -P 10 -out Lin3 -doSaf 1 -minInd 4 -rf chr2include.txt
   # this resulted in 665,530 (LinDEV) /665,481 (Lin3) /665,499 (Lin4) sites analyzed
 
-# generate SFS
+# generate SFS# run realSFS with the v.921 teh steps above were ran with the v.940
 realSFS Lin3.saf.idx Lin4.saf.idx LinSouthDEV.saf.idx -P 24 > Lin3Lin4LInDEV_3dsfs.sfs
 
 
