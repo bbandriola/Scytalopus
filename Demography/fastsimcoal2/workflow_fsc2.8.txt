@@ -1,0 +1,169 @@
+###################################################
+#### workflow to run fastsimcoal2 to megaptera ####
+###################################################
+
+##### USE THE ARTICLE BELOW TO TRY TO MIMIC THE FIGURES: https://www.nature.com/articles/s41467-023-40052-z#Fig5 | https://doi.org/10.1038/s41467-023-40052-z
+
+# fastsimcoal2 (coisas que o nelson falou na aula de genética de populações)
+# utiliza a verossimilhança a partir de outras maneiras
+# diferença entre ABC e verossimilhança:
+# ABC: problema? muitas observações
+# fastsimcoal2: estimador de maxima verossimilhança, maxima a probabilidade de observar o conjunto
+# de dados
+
+# refs used to construct this workflow and analysis
+# fsc28: https://doi.org/10.1093/bioinformatics/btab468
+# Ref: https://evomics.org/learning/population-and-speciation-genomics/2020-population-and-speciation-genomics/inferring-demography/
+# easySFS: https://github.com/isaacovercast/easySFS
+# refletir sobre o growth rate https://www.int-res.com/articles/meps2017/575/m575p195.pdf
+# Maximum composite likelihood estimation of parameters was carried out with 40 expectation-conditional maximization iterations. -> REF: https://www.nature.com/articles/s41588-024-01695-w#Sec8
+# scrip based on: https://speciationgenomics.github.io/fastsimcoal2/
+
+##### references #####
+#  https://doi.org/10.1111/mec.15898
+#  For each model, we performed 100 independent model runs per population (40 expectation/
+#  conditional maximization [ECM] cycles, 1,000,000 simulations per run) and chose the run with
+#  the highest likelihood as the best estimate of demographic parameters under a given model.
+#  To determine which of the two models (null or bottleneck) had the highest support we then
+#  compared the best maximum-likelihood run under each model using Akaike Information Criterium (AIC).
+#  strongest support = lowest AIC values
+
+# diverse repositories about fsc:
+# https://github.com/mirandasherlock/Population-dispersal-model-testing-with-fastsimcoal2/tree/main
+# https://github.com/Elahep/fastsimcoal_model_eval_utils
+
+-> 1. convert vcf2sfs with easySFS
+# sfs: describes the number of single nucleotide polymorphisms (SNPs) with a given frequency in our sample.
+# in this case I used FOLDED SFS
+
+  # activate env
+  conda activate easySFS
+  # to chose the haplotype with that maximaze the number os SNPs
+  ../../Softwares/easySFS/easySFS -i vcf -p popfile.txt -a -preview
+  # the result from above will be add at the end of the proj flag
+  ../../Softwares/easySFS/easySFS -i vcf -p popfile.txt -a --proj=50 (esse mesmo valor deve ser adicionado como SAMPLE SIZE no arquivo tpl)
+
+-> 2. Define the template model file (filename.tpl)
+# $NPOP$ -> to estimate parameters
+# mutation rates: 1.54e-9 per year (https://academic.oup.com/mbe/article/36/8/1746/5485251) /10-4 a 10e-3 per generation (https://www.scielo.br/j/gmb/a/mB9zqhSpwHVcpDhxbvMWkjB/?format=pdf&lang=en)
+# generation time: 21.5 years (https://academic.oup.com/mbe/article/36/8/1746/5485251) / 12 a 24 years (https://www.scielo.br/j/gmb/a/mB9zqhSpwHVcpDhxbvMWkjB/?format=pdf&lang=en)
+//Number of population samples (demes)
+# the number of populations that will be simulated (if there will be two populations being simulated the number here should be 2)
+//Population effective sizes (number of genes)
+# given in number of gene copies; if you want to establish that there are between 1 and 100 individuals in the population, here the number should be 2 to 200
+//Samples sizes
+# given in gene copies; if your SFS has 50 individuals, your SFS should have 100 observed genes, so the number here should be the 100 representing every haploid gene.
+//Growth rates : negative growth implies population expansion
+# growth ate can also be a parameter to be estimated
+//Number of migration matrices : 0 implies no migration between demes
+# migration matrix should be written in migration rates backward in time. Example:
+# 0 000 MIG_01
+# MIG_10 0 000
+# for each generation backward in time, any gene from population 0 has probability MIG_01 to be sent to population 1, and that a gene from population 1 has a probability MIG_10 to move to population 0.
+//historical event: time, source, sink, migrants, new deme size, new growth rate, migration matrix
+index
+# backward in time. Check manual for examples
+//Number of independent loci [chromosome]
+
+//Per chromosome: Number of contiguous linkage Block: a block is a set of contiguous loci
+
+//per Block:data type, number of loci, per gen recomb and mut rates
+# FREQ is for SFS data; number of loci with SFS should be 1; mu rates can be estimated
+
+-> 3. Estimation file for search range for parameters (filename.est)
+
+-> 4. Run fsc2.8
+# we Run 100 times to find the best parameter estimates fsc28 with the ml aproach
+# three files are needed: prefix.est. prefix.tpl, prefix_MAF/DAFpop0.obs
+# todos os arquivos precisam ter o mesmo prefix para o programa identificar
+# eles devem todos estar na pasta do modelo
+# FILE: 4.Runfsc100Times.sh
+# command:
+  4.Runfsc100Times.sh modelname
+
+# -n: number of simulations (better between 200000 and 1000000)
+# -d: derived SFS # change in the command line depending the data
+# -m: using MAF # change in the command line depending the data
+# -M: Maximum likelihood needs to be performed parameter estimation
+# -L: number of loops from the ML (bettern between 50 and 100)
+
+  # OUTPUT FILES
+  # ${PREFIX}.bestlhoods: file with the Maximum likelihood estimates for each parameter specified “output” in the est file and the model likelihoods.
+  # ${PREFIX}._MAFpop0.txt: file with the expected SFS obtained with the parameters that maximized the likelihood during optimization. This is needed to visually check the fit of the expected SFS to the observed SFS. This file has the same suffix as the observed SFS provided.
+  # ${PREFIX}.simparam: file with an example of the settings to run the simulations. This is useful to check when you have errors. Many times errors in specification of models can be detected in this file.
+  # ${PREFIX}_maxL.par: Model specification file with the best parameter estimates. It is basically the tpl file with the keywords replaced by estimated values. This file is useful if you want to simulate data under the best model using Arlequin.
+
+##########################################
+########## Finding the best run ##########
+##########################################
+
+-> 5. find the the smallest difference between the maximum possible likelihood (MaxObsLhood) and the obtained likelihood (MaxEstLhood)
+# script 5.fsc-selectbestrun.sh from Joana Meier
+# commands:
+  cd model_directory_with_dif_runs
+  5.fsc-selectbestrun.sh modelname
+
+-> 6. Calculate AIC value with calculateAIC.sh
+# In order to find the best model, the likelihoods of the best run of each model should be compared
+# the Akaike information criterium or AIC is typically calculated to determine if the models differ in their likelihoods accounting for the number of parameters in each model
+# script: 6.calculateAIC.sh from Victor Sousa
+# cd bestrun/ directory inside model directory
+# commands:
+  cd bestrun/
+  6.calculateAIC.sh early_geneflow
+
+-> 7. Visualize the fit of the simulated SFS to the data
+# scripts 7.CalculateSFSexp_GenmaxLbestrun.sh 7.SFStools.r 7.1.Generate_maxLbestrun.sh
+# command: ./7.CalculateSFSexp_GenmaxLbestrun.sh pwd/4.1.SFStools.r -t_option model_name
+##### Gera, mas precisa sobrepor os gráficos
+  -> 7.1 Generate likelihood distributions under each model bestrun folder
+  # WHY?
+  # command:
+    bash 7.1.Generate_maxLbestrun.sh
+    ####### you have to plot the likelihoods as boxplots with python #######
+    # DIDN'T DO THAT
+
+-> 8. Generate bootstrap from bestrun model parameters
+# to run:
+
+    -> 8.1 GENERATING PARAMETRIC BOOTSTRAPS SFS
+    # needed file: {model}_maxL.par
+    # this file will be modified so it will generate DNA sequences data modifying the: //Number of independent loci & //per Block:data type, number of loci,...
+    # instead: number of ind loci be "1 0", specify the number of fragments you want to submit
+    # instead: data and number of loci "FREQ 1", specify the size of you block. e.g.: DNA 100
+    # after that run the command line with the par file:
+    # to generate this file you have to know how many snps sites you have and if they are linked or not
+        # to get the snp sites per chr/scaffold in a vcf
+        # command:
+        bcftools query -f '%CHROM\n' your_data.vcf | sort | uniq -c > lociANDsnps.txt
+    # then configure your par file according the manual and your data
+        # command:
+        fsc28 -i {model}_boot.par -n1000 -j -m -s0 -x –I -q
+    # -i obs_SFS.txt: Input observed SFS file.
+    # -b 100: Generate 100 bootstrap replicates.
+    # -n 10000: Number of simulations per bootstrap replicate (adjust as needed).
+    # -q: Quiet mode (optional, suppresses some output).
+
+# BALEIAS RUN #
+## O vcf da megaptera tem 13.373 que foram separados por 100 bp cada
+## para contar quantos loci e SNPs por loci usar o comando:
+bcftools query -f '%CHROM\n' your_data.vcf | sort | uniq -c > lociANDsnps.txt
+## generate .par file com as configurações corretas 13373 loci independentes do tamanho dos fragmentos de 100 RAD
+testDNA_BootstrapSFS_from_maxLParFile.par
+testSNPs_BootstrapSFS_from_maxLParFile.par
+##  roda fastsimcoal com o comando de boots para gerar os SFSs
+fsc27 -i testDNA_BootstrapSFS_from_maxLParFile.par -n100 -j -m -s0 -x –I -q
+
+    -> 8.2 RUN FSC FOR EACH BOOTSTRAPS REPLICATE
+    # follow: https://github.com/FernandoSeixas/HeliconiusHybridSpeciation/blob/main/2.5.fastsimcoal2/4.bootsrap_CI.sh
+    # script: 8.2.runFscBoots.sh
+    # command: ./8.2.runFscBoots.sh model_name boots_dir
+
+      -> Alternative bootstrap replicate with blocked vcfs
+
+
+    -> 8.3 Find the best run for each of the bootstrap datasets
+    # script: 8.3.findbestrun_boots
+    # command: ./8.3.findbestrun_boots model_name boots_dir
+
+-> 9. Get partial results from bootstrap
