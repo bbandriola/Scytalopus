@@ -1,0 +1,13 @@
+// Priors and rules file
+// *********************
+[PARAMETERS]
+//#isInt? #name #dist. #min #max
+//all N are in number of haploid individuals
+1 NPOP3 logunif 50 100000 output bounded
+1 NPOP4 logunif 20 100000 output bounded
+1 NPOPDEV logunif 100 100000 output bounded
+1 TSPLIT1 logunif 700000 1250000 output bounded
+1 TSPLIT2 logunif TSPLIT1 1250000 output paramInRange
+0 RESIZE1 unif 1e-3 10 output
+0 RESIZE2 unif 1e-3 10 output
+[COMPLEX PARAMETERS]
