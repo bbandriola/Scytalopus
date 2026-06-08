@@ -86,14 +86,34 @@ while read bam; do echo "Reindexing $bam"; samtools index -@ 10 "$bam"; done < L
 while read bam; do echo "Reindexing $bam"; samtools index -@ 10 "$bam"; done < Lin4_4ind.bamlist
 while read bam; do echo "Reindexing $bam"; samtools index -@ 10 "$bam"; done < LinSouthDEV_4ind.bamlist
 
-# generate saf file 
+# generate saf file for fastsimcoal
 angsd -GL 1 -b LinSouthDEV_4ind.bamlist -anc editedfastaancallele/editedACGT_subset41chr_allNchr.fasta -P 10 -out LinSouthDEV -doSaf 1 -minInd 4 -rf chr2include.txt
 angsd -GL 1 -b Lin4_4ind.bamlist -anc editedfastaancallele/editedACGT_subset41chr_allNchr.fasta -P 10 -out Lin4 -doSaf 1 -minInd 4 -rf chr2include.txt
 angsd -GL 1 -b Lin3_4ind.bamlist -anc editedfastaancallele/editedACGT_subset41chr_allNchr.fasta -P 10 -out Lin3 -doSaf 1 -minInd 4 -rf chr2include.txt
   # this resulted in 665,530 (LinDEV) /665,481 (Lin3) /665,499 (Lin4) sites analyzed
-
 # generate SFS# run realSFS with the v.921 teh steps above were ran with the v.940
 realSFS Lin3.saf.idx Lin4.saf.idx LinSouthDEV.saf.idx -P 24 > Lin3Lin4LInDEV_3dsfs.sfs
+
+# generate saf file for stairwayplot 
+while read bam; do echo "Reindexing $bam"; samtools index -@ 10 "$bam"; done < Lin5.bamlist
+while read bam; do echo "Reindexing $bam"; samtools index -@ 10 "$bam"; done < Lin6.bamlist
+while read bam; do echo "Reindexing $bam"; samtools index -@ 10 "$bam"; done < Lin7.bamlist
+while read bam; do echo "Reindexing $bam"; samtools index -@ 10 "$bam"; done < Lin3_OnlyMant.bamlist
+while read bam; do echo "Reindexing $bam"; samtools index -@ 10 "$bam"; done < Lin1.bamlist
+
+angsd -GL 1 -b Lin5.bamlist -anc editedfastaancallele/editedACGT_subset41chr_allNchr.fasta -P 10 -out Lin5 -doSaf 1 -minInd 4 -rf chr2include.txt
+angsd -GL 1 -b Lin6.bamlist -anc editedfastaancallele/editedACGT_subset41chr_allNchr.fasta -P 10 -out Lin6 -doSaf 1 -minInd 4 -rf chr2include.txt
+angsd -GL 1 -b Lin7.bamlist -anc editedfastaancallele/editedACGT_subset41chr_allNchr.fasta -P 10 -out Lin7 -doSaf 1 -minInd 4 -rf chr2include.txt
+angsd -GL 1 -b Lin3_OnlyMant.bamlist -anc editedfastaancallele/editedACGT_subset41chr_allNchr.fasta -P 10 -out Lin3_OnlyMant -doSaf 1 -minInd 4 -rf chr2include.txt
+angsd -GL 1 -b Lin1.bamlist -anc editedfastaancallele/editedACGT_subset41chr_allNchr.fasta -P 10 -out Lin1 -doSaf 1 -minInd 4 -rf chr2include.txt
+realSFS Lin3_OnlyMant.saf.idx -P 10 > Lin3OnlyMant_dsfs.sfs
+realSFS Lin4.saf.idx -P 10 > Lin4_dsfs.sfs
+realSFS Lin5.saf.idx -P 10 > Lin5_dsfs.sfs
+realSFS Lin6.saf.idx -P 10 > Lin6_dsfs.sfs
+realSFS Lin7.saf.idx -P 10 > Lin7_dsfs.sfs
+realSFS Lin1.saf.idx -P 10 > Lin1_dsfs.sfs
+
+
 
 
 
