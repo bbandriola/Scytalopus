@@ -5,34 +5,75 @@
 # model4 -> topology (Lin3,(LinDEV,Lin4)) with introgression from Lin3 -> Lin4
 
 # to generate the a multiSFS file of 3D populations 
-fsc27 -i 3PopDNASFSsmall.par -x -s0 -d -n1 --multiSFS --seed 1234 -q
+#fsc27 -i model1.par -x -s0 -d -n1 --multiSFS --seed 1234 -q
 
-# exemple par file 
-## //Number of population samples (demes)
-## 3
-## //Population effective sizes (number of genes)
-## 1000
-## 1000
-## 10000
-## //Sample sizes
-## 2
-## 3
-## 6 1500
-## //Growth rates: negative growth implies population expansion
-## 0
-## 0
-## 0
-## //Number of migration matrices : 0 implies no migration between demes
-## 0
-## //historical event: time, source, sink, migrants, new size, new growth rate, migr. matrix
-## 4 historical event
-## 2000 1 2 0.05 1 0 0
-## 2800 1 1 0 0.04 0 0
-## 3000 1 0 1 1 0 0
-## 15000 0 2 1 3 0 0
-## //Number of independent loci [chromosome]
-## 1 0
-## //Per chromosome: Number of linkage blocks
-## 1
-## //per Block: data type, num loci, rec. rate and mut rate + optional parameters
-## DNA 10000000 0.00000001 0.00000002 0.33 
+#1. run fsc 100 times: Runfsc100times.sh
+  #!/bin/bash
+  # command: ./1.Runfsc100Times.sh fscpwd(/media/labgenoma5/DATAPART2/bandriola/Softwares/fsc28_linux64/fsc28) model_name
+
+  fsc2=$1
+
+  for i in {1..100}
+  do
+     PREFIX=$2
+     mkdir run$i
+     cp ${PREFIX}.par ${PREFIX}.est ${PREFIX}_DSFS.obs run$i"/"
+     cd run$i
+     ${fsc2} -i ${PREFIX}.par -e ${PREFIX}.est -s0 -x -d  -b 50 -M -L 100 -0 --multiSFS -c 10 -n1 --seed 1234 -q 
+     cd ..
+  done
+
+#2. find the best run: fsc-findbestrun.sh
+#!/bin/bash
+
+# Bash script by Joana Meier to select the best fastsimcoal run of multiple runs under the same demographic model
+# The script expects output files of different runs to be found in folders starting with run
+
+m=-1000000000000000
+p=$1
+c=0
+best="ConstanteSize"
+diff=0
+diffBest=0
+
+for i in run{1..80};
+do
+ a=$(ls | grep ${p}".tpl" | sed s'/.tpl//')
+
+ # if the file is in the run directory
+ if [ -e $i/$a.bestlhoods ]
+ then
+   l=$(cat $i/$a.bestlhoods | awk '{print $(NF-1)}' | tail -1 | cut -f 1 -d ".")
+   diff=$(cat $i/$a.bestlhoods | awk '{print $NF-$(NF-1)}' | tail -1 | cut -f 1 -d ".")
+   ((c++))
+ else
+   # if the file is in a subdirectory
+   if [ -e $i/$a/$a.bestlhoods ]
+   then
+     l=$(cat $i/$a/$a.bestlhoods | awk '{print $(NF-1)}' | tail -1 | cut -f 1 -d ".")
+     diff=$(cat $i/$a/$a.bestlhoods | awk '{print $NF-$(NF-1)}' | tail -1 | cut -f 1 -d ".")
+     ((c++))
+   else
+     echo "no .bestlhoods file found in "$i
+   fi
+
+ fi
+
+
+ if [ $l -gt $m ]
+ then
+   m=$l; x=$i; best=$i;
+   diffBest=$diff
+ fi
+done
+
+if [ -z ${x+1} ]
+then echo "Error: No run with lik>-1000000000000000"
+else mkdir bestrun
+cp $x/* ./bestrun/
+cp $x/$a/* ./bestrun/
+fi
+
+echo -e "\n"$c" bestlhoods files found, "$best" with "$diffBest" Lhood diff fits best."
+
+
