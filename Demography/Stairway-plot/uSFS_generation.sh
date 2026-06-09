@@ -1,20 +1,15 @@
-# 1. generate est-sfs 
-# python 3
-for i in groupfile_*.txt; python Generate_input_est-sfs.py *.vcf.gz > $i.allele ; done 
-# INGROUP: sample1 sample2 sample3
-# OUTGROUP1: sample11
-# OUTGROUP2: sample12 sample13
-  # remove header 
-  # run the command bellow to change the two from outgroup alleles to one 
-  awk -F'\t' 'BEGIN{OFS="\t"} {gsub(/2/,"1",$2); gsub(/2/,"1",$3); print}' file.allele > file.allele.txt
+angsd -GL 1 -b Lin5.bamlist -anc editedfastaancallele/editedACGT_subset41chr_allNchr.fasta -P 10 -out Lin5 -doSaf 1 -minInd 4 -rf chr2include.txt
+angsd -GL 1 -b Lin6.bamlist -anc editedfastaancallele/editedACGT_subset41chr_allNchr.fasta -P 10 -out Lin6 -doSaf 1 -minInd 4 -rf chr2include.txt
+angsd -GL 1 -b Lin7.bamlist -anc editedfastaancallele/editedACGT_subset41chr_allNchr.fasta -P 10 -out Lin7 -doSaf 1 -minInd 4 -rf chr2include.txt
+angsd -GL 1 -b Lin3_OnlyMant.bamlist -anc editedfastaancallele/editedACGT_subset41chr_allNchr.fasta -P 10 -out Lin3_OnlyMant -doSaf 1 -minInd 4 -rf chr2include.txt
+angsd -GL 1 -b Lin1.bamlist -anc editedfastaancallele/editedACGT_subset41chr_allNchr.fasta -P 10 -out Lin1 -doSaf 1 -minInd 4 -rf chr2include.txt
+realSFS Lin3_OnlyMant.saf.idx -P 10 > Lin3OnlyMant_dsfs.sfs # total sites: 665,743
+realSFS Lin4.saf.idx -P 10 > Lin4_dsfs.sfs # total sites: 
+realSFS Lin5.saf.idx -P 10 > Lin5_dsfs.sfs # total sites: 665,822
+realSFS Lin6.saf.idx -P 10 > Lin6_dsfs.sfs # total sites: 
+realSFS Lin7.saf.idx -P 10 > Lin7_dsfs.sfs # total sites: 665,819
+realSFS Lin1.saf.idx -P 10 > Lin1_dsfs.sfs # total sites: 665,656
 
-# 2. run est-sfs to obtain the anc allele 
-est-sfs config_file.txt groupfile_Lin4.txt.allele.txt seedfile.txt Lin4_sfs Lin4_p_anc
-
-# 3. generate uSFS 
-# ./easySFS.py -i input.vcf -p pops_file.txt --proj 12,20
-# https://www.popgen.dk/angsd/index.php/SFS_Estimation -doSAF
-# realSFS 
 
 
 
