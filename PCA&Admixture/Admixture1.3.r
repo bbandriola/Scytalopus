@@ -1,21 +1,25 @@
 ## Workflow for admixture 
 
-# 1. Generate a ped/map file (plink) from thinned vcf (1 snp every 25kb) 
-# vcftools -gzvcf Thinned1SNPevery25kb_*.recode.vcf.gz --out Thinned1SNPevery25kb_*.recode --plink --remove-indv Sdiamantinensis,SerradaLontras5_lin1,Snovacapitalis,Spachecoi,Spetrophilus,SerradaLontras2_lin1,SerradaLontras3_lin1,SerraDaOuricana2_lin1,SerraDaOuricana3_lin1,SerraDaOuricana4_lin1,SerradaLontras4_lin1,SerraDaOuricana1_lin1,SerradaLontras1_lin1,Ssuperciliaris
+# 1. Generate a ped/map file (plink) from thinned vcftools
+# vcftools --vcf NoZW_LDfiltered_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_speluncaecomplex.recode.vcf --out #NoZW_LDfiltered_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_speluncaecomplex --plink
+# vcftools --vcf NoZW_LDfiltered_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_speluncaecomplex.recode.vcf --out #NoZW_LDfiltered_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_OnlySpeluncae --remove removeinds.txt --plink
+# vcftools --vcf NoZW_LDfiltered_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_speluncaecomplex.recode.vcf --out #NoZW_LDfiltered_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_southOnly --keep keepsouthind.txt --plink
+
 
 # 2. generate the 012 file 
-#plink --file Thinned1SNPevery25kb_prefix --out Thinned1SNPevery25kb_prefix --recode12
+# plink --file NoZW_LDfiltered_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_speluncaecomplex --out NoZW_LDfiltered_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_speluncaecomplex --recode12
+# plink --file NoZW_LDfiltered_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_OnlySpeluncae --out NoZW_LDfiltered_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_OnlySpeluncae --recode12
+# plink --file NoZW_LDfiltered_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_southOnly --out NoZW_LDfiltered_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_southOnly --recode12
 
-#3: K estimation with Adxmiture 1.3
-#bash admixture_crossvalidation.sh
-#	for K in 6 7 8 9 10 11 12 13 14 15;
-#	do
-#	echo "Running admixture for K$K..."
-#	admixture --cv rec12.ped $K | tee log${K}.out
-#	done
+# 3. run adxmiture with a bash file
 
-	#check the CV values over all the log files from the command above
-#	grep -h CV log*.out
+# do
+#   echo "Running admixture for K$K..."
+#   admixture --cv /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/vcfs/ManuscriptVCFs/NoZW_LDfiltered_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_southOnly.ped $K | tee NoZW_LDfiltered_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_southOnly.${K}.out
+# done
+# 
+#         #check the CV values over all the log files from the command above
+# grep -h CV NoZW_LDfiltered_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_southOnly*.out
 
 	#plot the Admixture graphics with the *12rec.#.Q
 
@@ -140,208 +144,6 @@ ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
                "V5" = "#33A02C", "V6" = "#FB9A99", "V7" = "#E31A1C","V8" = "#FDBF6F" , "V=9"="#FF7F00",
                "V=10"="#1B9E77","V=11"="#BEAED4"),
     labels = c("K=6", "K=7", "K=8","K=9","K=10")
-  ) +
-  labs(x = "Individuals", y = "Ancestry Proportion") +
-  theme_minimal() +
-  theme(
-    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
-    panel.grid = element_blank()
-  )
-
-dev.off()
-
-pdf("K11_ALLspecies.pdf", height = 5, width = 6)
-tbl=read.table("Thinned1SNPevery25kb_Filtered_mergedVCFproject1_2_5_6_7_8.11.Q")
-tbl$V1 <- factor(tbl$V1, levels = unique(tbl$V1))
-tbl_long <- pivot_longer(tbl, cols = V2:V12, names_to = "K", values_to = "Proportion")
-ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
-  geom_col(width = 1, color = NA) +  # Full-width bars
-  scale_fill_manual(
-    values = c("V2" = "#A6CEE3", "V3" = "#1F78B4", "V4" = "#B2DF8A",
-               "V5" = "#33A02C", "V6" = "#FB9A99", "V7" = "#E31A1C","V8" = "#FDBF6F" , "V=9"="#FF7F00",
-               "V=10"="#1B9E77","V=11"="#BEAED4","V=12"="#7570B3"),
-    labels = c("K=6", "K=7", "K=8","K=9","K=10","K=11")
-  ) +
-  labs(x = "Individuals", y = "Ancestry Proportion") +
-  theme_minimal() +
-  theme(
-    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
-    panel.grid = element_blank()
-  )
-
-dev.off()
-
-pdf("K12_ALLspecies.pdf", height = 5, width = 6)
-tbl=read.table("Thinned1SNPevery25kb_Filtered_mergedVCFproject1_2_5_6_7_8.12.Q")
-tbl$V1 <- factor(tbl$V1, levels = unique(tbl$V1))
-tbl_long <- pivot_longer(tbl, cols = V2:V13, names_to = "K", values_to = "Proportion")
-ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
-  geom_col(width = 1, color = NA) +  # Full-width bars
-  scale_fill_manual(
-    values = c("V2" = "#A6CEE3", "V3" = "#1F78B4", "V4" = "#B2DF8A",
-               "V5" = "#33A02C", "V6" = "#FB9A99", "V7" = "#E31A1C","V8" = "#FDBF6F" , "V=9"="#FF7F00",
-               "V=10"="#1B9E77","V=11"="#BEAED4","V=12"="#7570B3","V=13"="#E7298A"),
-    labels = c("K=6", "K=7", "K=8","K=9","K=10","K=11","K=12")
-  ) +
-  labs(x = "Individuals", y = "Ancestry Proportion") +
-  theme_minimal() +
-  theme(
-    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
-    panel.grid = element_blank()
-  )
-
-dev.off()
-
-pdf("K13_ALLspecies.pdf", height = 5, width = 6)
-tbl=read.table("Thinned1SNPevery25kb_Filtered_mergedVCFproject1_2_5_6_7_8.13.Q")
-tbl$V1 <- factor(tbl$V1, levels = unique(tbl$V1))
-tbl_long <- pivot_longer(tbl, cols = V2:V14, names_to = "K", values_to = "Proportion")
-ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
-  geom_col(width = 1, color = NA) +  # Full-width bars
-  scale_fill_manual(
-    values = c("V2" = "#A6CEE3", "V3" = "#1F78B4", "V4" = "#B2DF8A",
-               "V5" = "#33A02C", "V6" = "#FB9A99", "V7" = "#E31A1C","V8" = "#FDBF6F" , "V=9"="#FF7F00",
-               "V=10"="#1B9E77","V=11"="#BEAED4","V=12"="#7570B3","V=13"="#E7298A","V=14"="#E78AC3"),
-    labels = c("K=6", "K=7", "K=8","K=9","K=10","K=11","K=12","K=13")
-  ) +
-  labs(x = "Individuals", y = "Ancestry Proportion") +
-  theme_minimal() +
-  theme(
-    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
-    panel.grid = element_blank()
-  )
-
-dev.off()
-
-pdf("K14_ALLspecies.pdf", height = 5, width = 6)
-tbl=read.table("Thinned1SNPevery25kb_Filtered_mergedVCFproject1_2_5_6_7_8.14.Q")
-tbl$V1 <- factor(tbl$V1, levels = unique(tbl$V1))
-tbl_long <- pivot_longer(tbl, cols = V2:V15, names_to = "K", values_to = "Proportion")
-ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
-  geom_col(width = 1, color = NA) +  # Full-width bars
-  scale_fill_manual(
-    values = c("V2" = "#A6CEE3", "V3" = "#1F78B4", "V4" = "#B2DF8A",
-               "V5" = "#33A02C", "V6" = "#FB9A99", "V7" = "#E31A1C","V8" = "#FDBF6F" , "V=9"="#FF7F00",
-               "V=10"="#1B9E77","V=11"="#BEAED4","V=12"="#7570B3","V=13"="#E7298A","V=14"="#E78AC3", 
-               "V=15"="#E6AB02"),
-    labels = c("K=6", "K=7", "K=8","K=9","K=10","K=11","K=12","K=13",
-               "K=14")
-  ) +
-  labs(x = "Individuals", y = "Ancestry Proportion") +
-  theme_minimal() +
-  theme(
-    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
-    panel.grid = element_blank()
-  )
-
-dev.off()
-
-pdf("K15_ALLspecies.pdf", height = 5, width = 6)
-tbl=read.table("Thinned1SNPevery25kb_Filtered_mergedVCFproject1_2_5_6_7_8.15.Q")
-tbl$V1 <- factor(tbl$V1, levels = unique(tbl$V1))
-tbl_long <- pivot_longer(tbl, cols = V2:V16, names_to = "K", values_to = "Proportion")
-ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
-  geom_col(width = 1, color = NA) +  # Full-width bars
-  scale_fill_manual(
-    values = c("V2" = "#A6CEE3", "V3" = "#1F78B4", "V4" = "#B2DF8A",
-               "V5" = "#33A02C", "V6" = "#FB9A99", "V7" = "#E31A1C","V8" = "#FDBF6F" , "V=9"="#FF7F00",
-               "V=10"="#1B9E77","V=11"="#BEAED4","V=12"="#7570B3","V=13"="#E7298A","V=14"="#E78AC3", 
-               "V=15"="#E6AB02","V=16"="#386CB0"),
-    labels = c("K=6", "K=7", "K=8","K=9","K=10","K=11","K=12","K=13",
-               "K=14","K=15")
-  ) +
-  labs(x = "Individuals", y = "Ancestry Proportion") +
-  theme_minimal() +
-  theme(
-    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
-    panel.grid = element_blank()
-  )
-
-dev.off()
-
-pdf("K16_ALLspecies.pdf", height = 5, width = 6)
-tbl=read.table("Thinned1SNPevery25kb_Filtered_mergedVCFproject1_2_5_6_7_8.16.Q")
-tbl$V1 <- factor(tbl$V1, levels = unique(tbl$V1))
-tbl_long <- pivot_longer(tbl, cols = V2:V17, names_to = "K", values_to = "Proportion")
-ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
-  geom_col(width = 1, color = NA) +  # Full-width bars
-  scale_fill_manual(
-    values = c("V2" = "#A6CEE3", "V3" = "#1F78B4", "V4" = "#B2DF8A",
-               "V5" = "#33A02C", "V6" = "#FB9A99", "V7" = "#E31A1C","V8" = "#FDBF6F" , "V=9"="#FF7F00",
-               "V=10"="#1B9E77","V=11"="#BEAED4","V=12"="#7570B3","V=13"="#E7298A","V=14"="#E78AC3", 
-               "V=15"="#E6AB02","V=16"="#386CB0","V=17"="#762A83"),
-    labels = c("K=6", "K=7", "K=8","K=9","K=10","K=11","K=12","K=13",
-               "K=14","K=15","K=16")
-  ) +
-  labs(x = "Individuals", y = "Ancestry Proportion") +
-  theme_minimal() +
-  theme(
-    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
-    panel.grid = element_blank()
-  )
-
-dev.off()
-
-pdf("K17_ALLspecies.pdf", height = 5, width = 6)
-tbl=read.table("Thinned1SNPevery25kb_Filtered_mergedVCFproject1_2_5_6_7_8.17.Q")
-tbl$V1 <- factor(tbl$V1, levels = unique(tbl$V1))
-tbl_long <- pivot_longer(tbl, cols = V2:V18, names_to = "K", values_to = "Proportion")
-ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
-  geom_col(width = 1, color = NA) +  # Full-width bars
-  scale_fill_manual(
-    values = c("V2" = "#A6CEE3", "V3" = "#1F78B4", "V4" = "#B2DF8A",
-               "V5" = "#33A02C", "V6" = "#FB9A99", "V7" = "#E31A1C","V8" = "#FDBF6F" , "V=9"="#FF7F00",
-               "V=10"="#1B9E77","V=11"="#BEAED4","V=12"="#7570B3","V=13"="#E7298A","V=14"="#E78AC3", 
-               "V=15"="#E6AB02","V=16"="#386CB0","V=17"="#762A83","V=18"="#7FC97F"),
-    labels = c("K=6", "K=7", "K=8","K=9","K=10","K=11","K=12","K=13",
-               "K=14","K=15","K=16","K=17")
-  ) +
-  labs(x = "Individuals", y = "Ancestry Proportion") +
-  theme_minimal() +
-  theme(
-    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
-    panel.grid = element_blank()
-  )
-
-dev.off()
-
-pdf("K18_ALLspecies.pdf", height = 5, width = 6)
-tbl=read.table("Thinned1SNPevery25kb_Filtered_mergedVCFproject1_2_5_6_7_8.18.Q")
-tbl$V1 <- factor(tbl$V1, levels = unique(tbl$V1))
-tbl_long <- pivot_longer(tbl, cols = V2:V19, names_to = "K", values_to = "Proportion")
-ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
-  geom_col(width = 1, color = NA) +  # Full-width bars
-  scale_fill_manual(
-    values = c("V2" = "#A6CEE3", "V3" = "#1F78B4", "V4" = "#B2DF8A",
-               "V5" = "#33A02C", "V6" = "#FB9A99", "V7" = "#E31A1C","V8" = "#FDBF6F" , "V=9"="#FF7F00",
-               "V=10"="#1B9E77","V=11"="#BEAED4","V=12"="#7570B3","V=13"="#E7298A","V=14"="#E78AC3", 
-               "V=15"="#E6AB02","V=16"="#386CB0","V=17"="#762A83","V=18"="#7FC97F","V=19"="#FFFF99"),
-    labels = c("K=6", "K=7", "K=8","K=9","K=10","K=11","K=12","K=13",
-               "K=14","K=15","K=16","K=17","K=18")
-  ) +
-  labs(x = "Individuals", y = "Ancestry Proportion") +
-  theme_minimal() +
-  theme(
-    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
-    panel.grid = element_blank()
-  )
-
-dev.off()
-
-pdf("K19_ALLspecies.pdf", height = 5, width = 6)
-tbl=read.table("Thinned1SNPevery25kb_Filtered_mergedVCFproject1_2_5_6_7_8.19.Q")
-tbl$V1 <- factor(tbl$V1, levels = unique(tbl$V1))
-tbl_long <- pivot_longer(tbl, cols = V2:V20, names_to = "K", values_to = "Proportion")
-ggplot(tbl_long, aes(x = V1, y = Proportion, fill = K)) +
-  geom_col(width = 1, color = NA) +  # Full-width bars
-  scale_fill_manual(
-    values = c("V2" = "#A6CEE3", "V3" = "#1F78B4", "V4" = "#B2DF8A",
-               "V5" = "#33A02C", "V6" = "#FB9A99", "V7" = "#E31A1C","V8" = "#FDBF6F" , "V=9"="#FF7F00",
-               "V=10"="#1B9E77","V=11"="#BEAED4","V=12"="#7570B3","V=13"="#E7298A","V=14"="#E78AC3", 
-               "V=15"="#E6AB02","V=16"="#386CB0","V=17"="#762A83","V=18"="#7FC97F","V=19"="#FFFF99",
-               "V=20"="#FD8D3C"),
-    labels = c("K=6", "K=7", "K=8","K=9","K=10","K=11","K=12","K=13",
-               "K=14","K=15","K=16","K=17","K=18","K=19")
   ) +
   labs(x = "Individuals", y = "Ancestry Proportion") +
   theme_minimal() +
