@@ -31,6 +31,7 @@ pca <- pca[,-1]
 pca <- pca %>%
   separate(col = 1, into = c("Ind", "Lineages"), sep = "_")
 names(pca)[3:ncol(pca)] <- paste0("PC", 1:(ncol(pca)-1))
+# # names(pca)[2] <- paste0("Lineages")
 
 pve <- data.frame(PC = 1:20, pve = eigenval/sum(eigenval)*100)
 # percentage of variance
