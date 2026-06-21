@@ -1,7 +1,7 @@
 ## Workflow to generate the PCA files 
 
 # 1 -> Generate the PCA with plink 
-# plink --allow-extra-chr --out project1_2_6_7_8 --pca --vcf /media/labgenoma4/DATAPART6/bandriola/Scytalopus/vcffiles/Filtered_mergedVCFproject1_2_6_7_8.vcf.gz 
+# plink --allow-extra-chr --out project1_2_6_7_8 --double-id --pca --vcf /media/labgenoma4/DATAPART6/bandriola/Scytalopus/vcffiles/Filtered_mergedVCFproject1_2_6_7_8.vcf.gz 
 
 # Lineage colors:
 # Lin1: "#0660FB"
