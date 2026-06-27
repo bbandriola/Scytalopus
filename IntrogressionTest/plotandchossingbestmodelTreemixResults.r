@@ -1,10 +1,10 @@
 # from https://speciationgenomics.github.io/Treemix/
 library(RColorBrewer)
-library(optM)
+library(OptM)
 source("~/Softwares/Treemix/treemix/src/plotting_funcs.R")
 
-setwd("/media/labgenoma5/DATAPART3/bandriola/Scytalopus/Treemix/NoZW_FilteredPCAandUCE_Max30missingDepthmin10LD015_GeographicNames_superciliarisoutgroup/") # of course this needs to be adjusted
-prefix="Ssuperciliarisoutgroup"
+setwd("./") # of course this needs to be adjusted
+prefix="SnovacapitalisOutgroup"
 
 ####################################
 ######## with treemix codes ########
