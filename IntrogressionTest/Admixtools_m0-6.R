@@ -1,5 +1,8 @@
 # generate file 
-# vcftools --gzvcf ../../snparcher/vcfs/ManuscriptVCFs/FilteredLDfiltered_MinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_complex_novacapitalis.recode.vcf.gz --out LDfiltered_MinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_complex_novacapitalis --plink
+# py27
+# python ~/Softwares/gdc/vcf2eigenstrat.py -v vcf_file.vcf(.gz) -o out_root
+# edit file for the right labels: 
+# third collumn has to be add for each sample
 
 library("admixtools")
 library("dplyr")
