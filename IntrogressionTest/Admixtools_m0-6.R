@@ -1,3 +1,6 @@
+# generate file 
+# vcftools --gzvcf ../../snparcher/vcfs/ManuscriptVCFs/FilteredLDfiltered_MinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_complex_novacapitalis.recode.vcf.gz --out LDfiltered_MinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_complex_novacapitalis --plink
+
 library("admixtools")
 library("dplyr")
 
