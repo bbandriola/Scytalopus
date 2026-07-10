@@ -1,6 +1,8 @@
-#plink --allow-extra-chr --maf 0.0000001 --make-bed --out ./OnlyVars_NomissingGenos_FilteredPCAandUCE_Max30missinessDepthmin10max100_SspeluncaeOnly --vcf /media/labgenoma5/DATAPART2/bandriola/Scytalopus/vcfs/FinalVCFs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --remove-fam removeind_speluncaeOnly.txt
-
-#plink --allow-extra-chr --maf 0.0000001 --make-bed --out ./OnlyVars_NomissingGenos_FilteredPCAandUCE_Max30missinessDepthmin10max100_SspeluncaeOnly --vcf /media/labgenoma5/DATAPART2/bandriola/Scytalopus/vcfs/FinalVCFs/FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.vcf.gz --remove-fam removeind_speluncaeOnly.txt
+# exclude missing and keep only polymorphic sites 
+# plink --allow-extra-chr --geno 1 --make-bed --out ./NonmissingdataOnlyvars_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_Onlyspeluncae --mac 1 --vcf ../snparcher/vcfs/ManuscriptVCFs/FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_speluncaecomplex.vcf.gz --remove-fam removeind_speluncaeOnly.txt
+# precisa de um arquivo .coord
+# precisa de um arquivo .outer
+# 
 
 import numpy as np
 import os
