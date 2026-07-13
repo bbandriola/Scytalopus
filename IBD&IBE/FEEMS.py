@@ -23,24 +23,34 @@ from feems.cross_validation import run_cv, run_cv_joint
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 # change matplotlib fonts
-plt.rcParams["font.family"] = "Arial"
-plt.rcParams["font.sans-serif"] = "Arial"
+plt.rcParams["font.family"] = "Helvetica"
+plt.rcParams["font.sans-serif"] = "Helvetica"
 plt.rcParams["font.family"] = "Helvetica"
 plt.rcParams["font.sans-serif"] = "Helvetica"
 
-##OnlyVars_NomissingGenos_FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex_bettermap.outer
 
-(bim, fam, G) = read_plink("OnlyVars_NomissingGenos_FilteredPCAandUCE_Max30missinessDepthmin10max100_SspeluncaeOnly".format(os.getcwd))
+# read the data 
+data_path = os.getcwd()
+(bim, fam, G) = read_plink(os.path.join(data_path,"NonmissingdataOnlyvars_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_Onlyspeluncae"))
 imp = SimpleImputer(missing_values=np.nan, strategy="mean")
 genotypes = imp.fit_transform((np.array(G)).T)
 print("n_samples={}, n_snps={}".format(genotypes.shape[0], genotypes.shape[1]))
 
 # load files
-coord = np.loadtxt("{}/oldrun/Onlyspeluncae.coord".format(os.getcwd()))
-outer = np.loadtxt("{}/oldrun/Onlyspeluncae.outer".format(os.getcwd()))
-data_path = str(resources.files('feems') / 'data')
-grid_path = "{}/grid_100.shp".format(data_path)  
-grid_path = ("{}/world_triangle_res8.shp".format(os.getcwd()))
+coord = np.loadtxt(os.path.join(data_path,"FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.coord"))
+# if needed swap the columns of the coordinates 
+# coord is (lat, lon) → swap to (lon, lat)
+#if np.mean(coord[:, 0]) < 0 and np.mean(coord[:, 0]) > -40:  # lat range ~ -35 to -5
+#    coord = coord[:, ::-1]  # swap columns
+#    print("Swapped columns of coord to (lon, lat)")
+
+outer = np.loadtxt(os.path.join(data_path,"onlyspeluncaedistribution.outer"))
+
+# generate shape file 
+# dggs <- dgconstruct(res = 8,precision = 30,projection = "ISEA",
+#     aperture = 4,topology = "TRIANGLE")
+# dgearthgrid(dggs, savegrid="./world_triangle_res4.shp")
+grid_path = os.path.join(data_path,"world_triangle_res8.shp")
 
 # graph input files
 outer, edges, grid, _ = prepare_graph_inputs(coord=coord, 
@@ -220,6 +230,7 @@ lamb_q_cv = lamb_q_grid[idx_q]
 lamb_cv   = lamb_grid[idx_l + lmin]
 
 # running FEEMS
+# the value lamb should be changed according the result of the code above
 sp_graph.fit(lamb = 21544.346900318822,lamb_q=0.01,optimize_q=None)
 # graphic
 fig = plt.figure(dpi=300)
@@ -278,5 +289,3 @@ plt.title(r"$\tt{FEEMS}$ fit with fixed node-specific variance")
 plt.savefig(os.path.join(os.getcwd(), "SspeluncaeOnlygridr8_lamb2feemsrun_modelfit.svg"),
             dpi=200, bbox_inches='tight')
 plt.close()
-
-
