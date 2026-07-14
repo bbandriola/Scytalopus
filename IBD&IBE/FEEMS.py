@@ -207,7 +207,7 @@ ax_11.text(.2, .85, "lambda={:.2f}\nlambda_q={:.2f}\ncv l2 error={:.5f}".format(
           fontdict={"fontsize": 4}, transform = ax_11.transAxes)
 
 plt.savefig(os.path.join(os.getcwd(), "SspeluncaeOnlygridr8_lambsiferentes.png"),
-            dpi=200, bbox_inches='tight')
+            dpi=200)
 plt.close()
 
 #######################################################
@@ -223,7 +223,7 @@ lamb_cv   = lamb_grid[idx_l + lmin]
 
 # running FEEMS
 # the value lamb should be changed according the result of the code above
-sp_graph.fit(lamb = 21544.346900318822,lamb_q=0.01,optimize_q=None)
+sp_graph.fit(lamb = 4641.588833612777,lamb_q=0.01,optimize_q=None)
 # graphic
 fig = plt.figure(dpi=300)
 ax = fig.add_subplot(1, 1, 1, projection=projection)  
@@ -241,7 +241,7 @@ plt.savefig(os.path.join(os.getcwd(), "SspeluncaeOnlygridr8_lambfirstminimumCVfe
 plt.close()
 
 # visualize deme-specific variance parameter (based on het and ne)
-sp_graph.fit(lamb = 2.0, lamb_q = 10.0, optimize_q = 'n-dim')
+sp_graph.fit(lamb = 4641.588833612777, lamb_q = 10.0, optimize_q = 'n-dim')
 fig = plt.figure(dpi=300)
 ax = fig.add_subplot(1, 1, 1, projection=projection)  
 v = Viz(ax, sp_graph, projection=projection, edge_width=.5, 
