@@ -35,6 +35,7 @@ data_path = os.getcwd()
 imp = SimpleImputer(missing_values=np.nan, strategy="mean")
 genotypes = imp.fit_transform((np.array(G)).T)
 print("n_samples={}, n_snps={}".format(genotypes.shape[0], genotypes.shape[1]))
+#### RESULT: n_samples=45, n_snps=3210204
 
 # load files
 coord = np.loadtxt(os.path.join(data_path,"FilteredPCAandUCE_Max30missinessDepthmin10max100_Sspeluncaecomplex.coord"))
@@ -63,28 +64,19 @@ outer, edges, grid, _ = prepare_graph_inputs(coord=coord,
 plt.figure(dpi=200, figsize=(8,6))
 projection = ccrs.AzimuthalEquidistant(central_longitude=-100)
 ax = plt.axes(projection=projection)
-# add coastlines, borders, and land features
 ax.add_feature(cfeature.COASTLINE, edgecolor='#636363', linewidth=0.5)
 ax.add_feature(cfeature.BORDERS, edgecolor='gray', linewidth=0.3)
 ax.add_feature(cfeature.LAND, facecolor='#f7f7f7')
-# add grid points
 ax.scatter(grid[:, 0], grid[:, 1], s=3, color='grey', alpha=0.7, transform=ccrs.PlateCarree(), label='grid point')
-# add outer boundary
 ax.plot(outer[:, 0], outer[:, 1], color='black', linewidth=1, transform=ccrs.PlateCarree(), label='outer boundary')
-# add edges
-# add grid points
 ax.scatter(grid[:, 0], grid[:, 1], s=3, color='grey', alpha=0.7, transform=ccrs.PlateCarree(), label='grid point')
-# add outer boundary
 ax.plot(outer[:, 0], outer[:, 1], color='black', linewidth=1, transform=ccrs.PlateCarree(), label='outer boundary')
-# add edges
 for edge in edges:
     i, j = edge - 1
     ax.plot([grid[i, 0], grid[j, 0]], [grid[i, 1], grid[j, 1]], 
             color='lightgray', linewidth=1, alpha=0.6, transform=ccrs.PlateCarree())
-# add sample points
 ax.scatter(coord[:, 0], coord[:, 1], s=8, color='black', zorder=2,transform=ccrs.PlateCarree(), label='sample points')
 plt.legend()
-# output in the current directory
 plt.savefig(os.path.join(os.getcwd(), "SspeluncaeOnlygridr8_feems_map.png"), dpi=200, bbox_inches='tight')
 plt.close()
 
