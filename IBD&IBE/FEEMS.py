@@ -62,11 +62,12 @@ outer, edges, grid, _ = prepare_graph_inputs(coord=coord,
 
 # graph to check if the samples fit to the edges of the map 
 plt.figure(dpi=200, figsize=(8,6))
-projection = ccrs.AzimuthalEquidistant(central_longitude=-100)
+projection = ccrs.PlateCarree()
 ax = plt.axes(projection=projection)
 ax.add_feature(cfeature.COASTLINE, edgecolor='#636363', linewidth=0.5)
 ax.add_feature(cfeature.BORDERS, edgecolor='gray', linewidth=0.3)
 ax.add_feature(cfeature.LAND, facecolor='#f7f7f7')
+ax.set_extent([-60, -32, -35, 6],crs=ccrs.PlateCarree())
 ax.scatter(grid[:, 0], grid[:, 1], s=3, color='grey', alpha=0.7, transform=ccrs.PlateCarree(), label='grid point')
 ax.plot(outer[:, 0], outer[:, 1], color='black', linewidth=1, transform=ccrs.PlateCarree(), label='outer boundary')
 ax.scatter(grid[:, 0], grid[:, 1], s=3, color='grey', alpha=0.7, transform=ccrs.PlateCarree(), label='grid point')
@@ -129,7 +130,7 @@ plt.close()
 ## testing different lamb params ########
 
 # figure params
-projection = ccrs.AzimuthalEquidistant(central_longitude=-108.842926, central_latitude=66.037547)
+projection = ccrs.PlateCarree()
 title_loc = "left"
 title_pad = "-10"
 title_fontsize = 12
@@ -202,12 +203,14 @@ v.draw_obs_nodes(use_ids=False)
 v.cbar_font_size = cbar_font_size
 v.cbar_orientation = cbar_orientation
 v.cbar_ticklabelsize = cbar_ticklabelsize
+v.cbar_loc = "bottom right"
+v.cbar_orientation = "horizontal"
 v.draw_edge_colorbar()
 ax_11.text(.2, .85, "lambda={:.2f}\nlambda_q={:.2f}\ncv l2 error={:.5f}".format(lamb_grid[-2], lamb_q_grid[-1], mean_cv_err[-1, -2]), 
           fontdict={"fontsize": 4}, transform = ax_11.transAxes)
 
 plt.savefig(os.path.join(os.getcwd(), "SspeluncaeOnlygridr8_lambsiferentes.png"),
-            dpi=200)
+            dpi=300,bbox_inches="tight", pad_inches=0.05)
 plt.close()
 
 #######################################################
@@ -225,7 +228,7 @@ lamb_cv   = lamb_grid[idx_l + lmin]
 # the value lamb should be changed according the result of the code above
 sp_graph.fit(lamb = 4641.588833612777,lamb_q=0.01,optimize_q=None)
 # graphic
-fig = plt.figure(dpi=300)
+fig = plt.figure(figsize=(12, 12),dpi=300)
 ax = fig.add_subplot(1, 1, 1, projection=projection)  
 v = Viz(ax, sp_graph, projection=projection, edge_width=.5, 
         edge_alpha=1, edge_zorder=100, sample_pt_size=20, 
@@ -234,10 +237,14 @@ v = Viz(ax, sp_graph, projection=projection, edge_width=.5,
 v.draw_map()
 v.draw_edges(use_weights=True)
 v.draw_obs_nodes(use_ids=False) 
+v.cbar_orientation = cbar_orientation
+v.cbar_ticklabelsize = cbar_ticklabelsize
+v.cbar_loc = "top left"
+v.cbar_orientation = "horizontal"
 v.draw_edge_colorbar()
-v.draw_samples()
+#v.draw_samples()
 plt.savefig(os.path.join(os.getcwd(), "SspeluncaeOnlygridr8_lambfirstminimumCVfeemsrun.svg"),
-            dpi=200, bbox_inches='tight')
+            dpi=500, bbox_inches="tight", pad_inches=0.05)
 plt.close()
 
 # visualize deme-specific variance parameter (based on het and ne)
@@ -251,8 +258,9 @@ v = Viz(ax, sp_graph, projection=projection, edge_width=.5,
 v.draw_map()
 v.draw_edges(use_weights=True)
 v.draw_obs_nodes(use_ids=False) 
+v.cbar_orientation = cbar_orientation
+v.cbar_ticklabelsize = cbar_ticklabelsize
 v.draw_edge_colorbar()
-v.draw_samples()
 plt.savefig(os.path.join(os.getcwd(), "SspeluncaeOnlygridr8_lamb2feemsrun_variance.svg"),
             dpi=200, bbox_inches='tight')
 plt.close()
