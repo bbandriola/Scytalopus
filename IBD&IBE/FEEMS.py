@@ -233,8 +233,8 @@ projection = ccrs.PlateCarree()
 
 fig = plt.figure(figsize=(12, 12),dpi=300)
 ax = fig.add_subplot(1, 1, 1, projection=projection)
-ax.add_feature(cfeature.LAND,facecolor="#ffffff",edgecolor="black",linewidth=0.5,zorder=0) 
-v = Viz(ax, sp_graph, projection=projection, edge_width=.5, 
+ax.add_feature(cfeature.LAND,facecolor="#ffffff",edgecolor="black",linewidth=2,zorder=0) 
+v = Viz(ax, sp_graph, projection=projection, edge_width=4, 
         edge_alpha=1, edge_zorder=100, sample_pt_size=20, 
         obs_node_size=50, sample_pt_color="black", 
         cbar_font_size=10,cbar_loc='upper left',cbar_orientation = "horizontal")
@@ -245,7 +245,7 @@ v.cbar_ticklabelsize = 10
 v.cbar_orientation = cbar_orientation
 v.draw_edge_colorbar()
 #v.draw_samples()
-plt.savefig(os.path.join(os.getcwd(), "SspeluncaeOnlygridr8_lambfirstminimumCVfeemsrun.svg"),
+plt.savefig(os.path.join(os.getcwd(), "SspeluncaeOnlygridr8_lambfirstminimumCVfeemsrun_tickerlines.svg"),
             dpi=500, bbox_inches='tight')
 plt.close()
 
