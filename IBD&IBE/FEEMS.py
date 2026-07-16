@@ -244,10 +244,15 @@ v.draw_obs_nodes(use_ids=False)
 v.cbar_ticklabelsize = 10
 v.cbar_orientation = cbar_orientation
 v.draw_edge_colorbar()
-#v.draw_samples()
+v.draw_samples()
 plt.savefig(os.path.join(os.getcwd(), "SspeluncaeOnlygridr8_lambfirstminimumCVfeemsrun_tickerlines.svg"),
             dpi=500, bbox_inches='tight')
 plt.close()
+
+# to count the samples assined to each deme
+from collections import Counter
+Counter(sp_graph.assned_node_idx)
+# RESULTS: Counter({366: 4, 228: 3, 387: 3, 258: 2, 268: 2, 336: 2, 370: 2, 514: 2, 369: 2, 564: 2, 592: 1, 325: 1, 421: 1, 164: 1, 314: 1, 656: 1, 280: 1, 259: 1, 315: 1, 297: 1, 438: 1, 640: 1, 216: 1, 360: 1, 411: 1, 466: 1, 413: 1, 283: 1, 594: 1, 523: 1, 367: 1})
 
 # visualize deme-specific variance parameter (based on het and ne)
 sp_graph.fit(lamb = 4641.588833612777, lamb_q = 10.0, optimize_q = 'n-dim')
