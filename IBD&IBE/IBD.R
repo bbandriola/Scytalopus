@@ -44,14 +44,15 @@ write.table(as.matrix(testUTM), "utm_matrixeuclideanist.txt")
 # results_mantel <- mantel(as.dist(geo_matrix) ~ as.dist(gene_matrix)) #testar ao contrario
 #results_mantel
 
-run_mantel <- function(geo_file, gene_file, sheet_geo = 1, sheet_gene = 1, permutations = 10000) {
+
+run_mantel <- function(geo_file, gene_file, permutations = 10000) {
   # Read geographic matrix
-  geo_matrix <- read.xlsx(geo_file, sheet_geo)
+  geo_matrix <- read.xlsx(geo_file, sheet=1)
   row.names(geo_matrix) <- geo_matrix[,1]   # use first column as row names
   geo_matrix <- geo_matrix[,-1]             # remove first column
   
   # Read genetic matrix
-  gene_matrix <- read.xlsx(gene_file, sheet_gene)
+  gene_matrix <- read.xlsx(gene_file, sheet=1)
   row.names(gene_matrix) <- gene_matrix[,1] # use first column as row names
   gene_matrix <- gene_matrix[,-1]           # remove first column
 
@@ -65,39 +66,59 @@ run_mantel <- function(geo_file, gene_file, sheet_geo = 1, sheet_gene = 1, permu
   
   # Run Mantel test
   results_mantel <- mantel(gene_dist, geo_dist, method = "pearson", permutations = permutations)
+
+  # Dataset to plot 
+  mat <- data.frame(geo  = as.vector(geo_dist),gene = as.vector(gene_dist))
+  r_mantel <- as.numeric(result$mantel$statistic)
+  p_mantel <- result$mantel$signif
+
+  # Plot
+  title_name <- trimws(strsplit(basename(gene_file), "_")[[1]][1])
+  title_name <- gsub(" ", "_", title_name)
+  mm <- ggplot(mat, aes(x = geo, y = gene)) + 
+    geom_point(size = 3,alpha = 0.5,shape = 21,aes(fill = geo)) +
+    geom_smooth(method = "lm",colour = "black",alpha = 0.2) +
+    annotate("text",x = Inf, y = Inf,hjust = 1.05,vjust = 1.3,label = bquote(
+        "Mantel r" == .(round(r_mantel, 3)) ~ "," ~ italic(p) == .(signif(p_mantel, 3))),hjust = 1.0,size = 5,fontface = "bold") +
+    labs(x = "Geographic distance",y = "Genetic distance",title = paste("Mantel test", title_name)) +
+    theme(
+      axis.text.x = element_text(family = "Helvetica",face = "bold", colour = "black", size = 12), 
+      axis.text.y = element_text(family = "Helvetica",face = "bold", size = 11, colour = "black"), 
+      axis.title = element_text(family = "Helvetica",face = "bold", size = 14, colour = "black"), 
+      panel.background = element_blank(), 
+      panel.border = element_rect(fill = NA, colour = "black"),
+      legend.position="none")
+  
+  ggsave(paste0(title_name, "_geovsgene.svg"), plot=mm, width = 6, height = 8, dpi = 600)
   return(list(mantel = results_mantel,geo_dist = geo_dist,gene_dist = gene_dist))
 }
 
-geo_file="utm_lin6xlin7.xlsx"
-gene_file="lin6xlin7_modnames.xlsx"
+geo_file="utm_lin2vslin3.xlsx"
+gene_file="lin2xlin3_modnames.xlsx"
 result<-run_mantel(geo_file,gene_file)
 result$mantel
 
-# Distance vectors
-geo  <- as.vector(result$geo_dist)
-gene <- as.vector(result$gene_dist)
+geo_file="utm_lin2vslin4.xlsx"
+gene_file="lin2xlin4_modnames.xlsx"
+result<-run_mantel(geo_file,gene_file)
+result$mantel
 
-mat <- data.frame(geo  = geo,gene = gene)
+geo_file="utm_lin3vslin4.xlsx"
+gene_file="lin3xlin4_modnames.xlsx"
+result<-run_mantel(geo_file,gene_file)
+result$mantel
 
-r_mantel <- as.numeric(result$mantel$statistic)
-p_mantel <- result$mantel$signif
+geo_file="utm_lin5vslin6.xlsx"
+gene_file="lin5xlin6_modnames.xlsx"
+result<-run_mantel(geo_file,gene_file)
+result$mantel
 
-title_name <- trimws(strsplit(basename(gene_file), "_")[[1]][1])
-title_name <- gsub(" ", "_", title_name)
-mm <- ggplot(mat, aes(x = geo, y = gene)) + 
-  geom_point(size = 3,alpha = 0.5,shape = 21,aes(fill = geo)) +
-  geom_smooth(method = "lm",colour = "black",alpha = 0.2) +
-  annotate("text",x = Inf, y = Inf,hjust = 1.05,vjust = 1.3,label = bquote(
-      "Mantel r" == .(round(r_mantel, 3)) ~ "," ~ italic(p) == .(signif(p_mantel, 3))),hjust = 1.0,size = 5,fontface = "bold") +
-  labs(x = "Geographic distance",y = "Genetic distance",title = paste("Mantel test", title_name)) +
-  theme(
-    axis.text.x = element_text(face = "bold", colour = "black", size = 12), 
-    axis.text.y = element_text(face = "bold", size = 11, colour = "black"), 
-    axis.title = element_text(face = "bold", size = 14, colour = "black"), 
-    panel.background = element_blank(), 
-    panel.border = element_rect(fill = NA, colour = "black"),
-    legend.position="none")
+geo_file="utm_lin5vslin7.xlsx"
+gene_file="lin5xlin7_modnames.xlsx"
+result<-run_mantel(geo_file,gene_file)
+result$mantel
 
-#mm
-
-ggsave(paste0(title_name, "_geovsgene.png"))
+geo_file="utm_lin6vslin7.xlsx"
+gene_file="lin6xlin7_modnames.xlsx"
+result<-run_mantel(geo_file,gene_file)
+result$mantel
