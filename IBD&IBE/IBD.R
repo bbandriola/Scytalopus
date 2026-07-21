@@ -69,8 +69,8 @@ run_mantel <- function(geo_file, gene_file, permutations = 10000) {
 
   # Dataset to plot 
   mat <- data.frame(geo  = as.vector(geo_dist),gene = as.vector(gene_dist))
-  r_mantel <- as.numeric(result$mantel$statistic)
-  p_mantel <- result$mantel$signif
+  r_mantel <- as.numeric(results_mantel$statistic)
+  p_mantel <- results_mantel$signif
 
   # Plot
   title_name <- trimws(strsplit(basename(gene_file), "_")[[1]][1])
@@ -88,8 +88,8 @@ run_mantel <- function(geo_file, gene_file, permutations = 10000) {
       panel.background = element_blank(), 
       panel.border = element_rect(fill = NA, colour = "black"),
       legend.position="none")
-  
-  ggsave(paste0(title_name, "_geovsgene.svg"), plot=mm, width = 6, height = 8, dpi = 600)
+
+  ggsave(paste0(title_name, "_geovsgene.pdf"), plot=mm, width = 6, height = 8)
   return(list(mantel = results_mantel,geo_dist = geo_dist,gene_dist = gene_dist))
 }
 
