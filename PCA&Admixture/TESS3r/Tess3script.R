@@ -105,17 +105,22 @@ genotype <- read.table("./NoZW_LDfiltered_FilteredMinDPMaxDPperInd20MaxMissBiale
 genotype_asmatrix <-as.matrix(genotype)
 genotype_asmatrix[genotype_asmatrix == 9] <- NA
 
-coord <- read.table("coord_onlyspeluncae.txt", sep="\t")
+coord <- read.table("coord_onlyspeluncae.txt", header = FALSE)
+colnames(coord) <- c("long", "lat")
 long_lat_matrix <-as.matrix(coord)
 
 # ------------------ RUN TESS ------------------ 
 
 tess3.obj <- tess3(X = genotype_asmatrix, coord = long_lat_matrix, K = 5, method = "projected.ls", ploidy = 2, openMP.core.num = 4) 
 
-crossvalidation <- plot(tess3.obj, pch = 19, col = "blue", xlab = "Number of ancestral populations",ylab = "Cross-validation score")
-
 Q_matrix <- qmatrix(tess3.obj, K = 5)
 
+#colnames(Q_matrix) <- paste0("X", 1:ncol(Q_matrix))
+#inds <- read_tsv("./ind.txt",col_names = "sample_name")
+#Q_tibble <- bind_cols(inds,as_tibble(Q_matrix))
+
+Q_matrix <- qmatrix(tess3.obj, K = 5)
+colnames(Q_matrix) <- paste0("X", 1:ncol(Q_matrix))
 # ------------------ PLOT MAP ------------------ 
 
 cluster_colors <- c(
@@ -144,7 +149,7 @@ genoscape_brick <- tess3Q_map_rasters(
   cex = .4
 )
 
-names(genoscape_brick) <- names(Q_tibble)[-1]
+names(genoscape_brick) <- colnames(Q_matrix)
 
 # RGBA raster
 genoscape_rgba <- qprob_rando_raster(
@@ -177,10 +182,12 @@ ocean <- ne_download(scale = 10, type = "ocean", category = "physical", returncl
 lakes <- ne_download(scale = 10, type = "lakes", category = "physical", returnclass = "sf")
 
 # Sample locations
-site_coords <- Q_tibble %>%
-  dplyr::select(sample_name) %>%
-  left_join(LatLong_Tibble, by = "sample_name") %>%
-  filter(!is.na(long) & !is.na(lat))
+#site_coords <- Q_tibble %>%
+#  dplyr::select(sample_name) %>%
+#  left_join(LatLong_Tibble, by = "sample_name") %>%
+#  filter(!is.na(long) & !is.na(lat))
+site_coords <- coord %>%
+    filter(!is.na(long) & !is.na(lat))
 
 site_coords_sf <- st_as_sf(site_coords, coords = c("long", "lat"), crs = 4326)
 
@@ -201,7 +208,7 @@ coord_limits <- list(
   ylim = c(
     genoscape_bbox$ymin - 0.3 * y_range,
     genoscape_bbox$ymax + 0.3 * y_range
-  )
+  ))
 
 # Elevation raster
 range_raster <- rast("./HYP_LR_SR_W/HYP_LR_SR_W.tif")
@@ -258,38 +265,9 @@ ggplot() +
 
 dev.off()
 
-
-
-
-
-
-
-
-
-
-
   
 
 ###############
-# Create a raster layer
-r <- raster("/media/labgenoma5/DATAPART3/bandriola/Scytalopus/TESSK5/HYP_LR_SR_W/HYP_LR_SR_W.tif")
-
-# get my map bounds 
-min_x <- min(coord$V2)
-max_x <- max(coord$V2)
-min_y <- min(coord$V1)
-max_y <- max(coord$V1)
-# add a buffer
-study_extent <- extent(
-  min_x - 0.5, max_x + 0.5,  # Adjust buffer size as needed
-  min_y - 0.5, max_y + 0.5
-)
-
-# Crop raster to this extent
-r_cropped <- crop(r, study_extent)
-plot(r_cropped)
-points(coord$V1, coord$V2, col = "red", pch = 19)
-
 #ancestry+map
 pdf("mapk5.pdf")
 plot(q.matrix, coord_asmatrix, method = "map.max", cex = .4,  
@@ -302,60 +280,3 @@ plot(q.matrix, coord_asmatrix, method = "map.max", cex = .4,
 dev.off()
 
 
-#####################################################
-# Install required packages (if not already installed)
-if (!require("tess3r")) install.packages("tess3r")
-if (!require("raster")) install.packages("raster")
-if (!require("ggplot2")) install.packages("ggplot2")
-if (!require("sf")) install.packages("sf")
-if (!require("RColorBrewer")) install.packages("RColorBrewer")
-
-# Load libraries
-library(tess3r)
-library(raster)
-library(ggplot2)
-library(sf)
-library(dplyr)
-library(rasterVis)
-library(RColorBrewer)
-
-# Set your working directory to where your TESS3 files are located
-# setwd("path/to/your/tess3/files")
-# Read your data
-set.seed(123)
-k6 <- read.table("k6.txt")  # Ancestry proportions matrix (Q matrix)
-coord <- read.table("coord.txt", sep="\t")  # Coordinates
-coord_asmatrix <- as.matrix(coord)  # Convert to matrix
-
-plot(k6, coord_asmatrix, method = "map.max", interpol = FieldsKrigModel(10),  
-     main = "Ancestry coefficients",
-     xlab = "Longitude", ylab = "Latitude", 
-     resolution = c(300,300), cex = .4, 
-     col.palette = my.palette)
-
-# Create a raster layer
-r <- raster("~/Desktop/NE1_HR_LC_SR/NE1_HR_LC_SR.tif")
-
-# get my map bounds 
-min_x <- min(coord$V2)
-max_x <- max(coord$V2)
-min_y <- min(coord$V1)
-max_y <- max(coord$V1)
-# add a buffer
-study_extent <- extent(
-  min_x - 0.5, max_x + 0.5,  # Adjust buffer size as needed
-  min_y - 0.5, max_y + 0.5
-)
-
-# Crop raster to this extent
-r_cropped <- crop(r, study_extent)
-plot(r_cropped)
-points(coord$V1, coord$V2, col = "red", pch = 19)
-
-#ancestry+map
-plot(k6, coord, method = "map.max", cex = .4,  
-     interpol = FieldsKrigModel(10), 
-     raster.filename = r_cropped,
-     main = "Ancestry coefficients",
-     xlab = "Longitude", ylab = "Latitude", 
-     col.palette = my.palette)
