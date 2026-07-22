@@ -269,14 +269,33 @@ dev.off()
 
 ###############
 #ancestry+map
+coord <- read.table("coord_onlyspeluncae.txt", header = FALSE)
+colnames(coord) <- c("long", "lat")
+
+r <- raster("/media/labgenoma5/DATAPART3/bandriola/Scytalopus/TESSK5/HYP_LR_SR_W/HYP_LR_SR_W.tif")
+
+# get my map bounds 
+min_x <- min(coord$lat)
+max_x <- max(coord$lat)
+min_y <- min(coord$long)
+max_y <- max(coord$long)
+# add a buffer
+study_extent <- extent(
+  min_x - 0.5, max_x + 0.5,  # Adjust buffer size as needed
+  min_y - 0.5, max_y + 0.5
+)
+
+# Crop raster to this extent
+r_cropped <- crop(r, study_extent)
+
+q.matrix <- qmatrix(tess3.obj, K = 5)
+
 pdf("mapk5.pdf")
-plot(q.matrix, coord_asmatrix, method = "map.max", cex = .4,  
-     interpol = FieldsKrigModel(10), 
-     raster.filename = r_cropped,
+plot(q.matrix, coord, method = "map.max", interpol = FieldsKrigModel(10),  
      main = "Ancestry coefficients",
      xlab = "Longitude", ylab = "Latitude", 
      resolution = c(300,300), cex = .4, 
-     col.palette = my.palette)
+     col.palette = cluster_colors)
 dev.off()
 
 
