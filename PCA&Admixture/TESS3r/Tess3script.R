@@ -18,7 +18,6 @@ library(rnaturalearthdata)
 library(ggrepel)
 library(ggspatial)
 library(remotes)
-library(tess3)
 
 ############################################################
 # Working directory
@@ -102,37 +101,42 @@ setwd("/media/labgenoma5/DATAPART3/bandriola/Scytalopus/TESSK5")
 # To convert ped to lmmf
 # genotype = "/media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/vcfs/ManuscriptVCFs/NoZW_LDfiltered_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_OnlySpeluncae.ped"
 # ped2lfmm(genotype)
-genotype <- read.table("NoZW_LDfiltered_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_OnlySpeluncae_withnames.lfmm", header = FALSE, sep="",row.names = 1)
+genotype <- read.table("./NoZW_LDfiltered_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_OnlySpeluncae.lfmm", header = FALSE, sep="")
 genotype_asmatrix <-as.matrix(genotype)
 genotype_asmatrix[genotype_asmatrix == 9] <- NA
 
-coord <- read.table("coords_withname.coords", header = FALSE, sep=";")
-colnames(coord) <- c("Ind","long", "lat")
+coord <- read.table("coords_withname.coords", header = FALSE,sep=";")
+colnames(coord) <- c("Ind", "lat", "long")
 coord <- coord[match(rownames(genotype_asmatrix), coord$Ind), ]
-all(rownames(genotype_asmatrix) == coord$Ind)
 long_lat_matrix <- as.matrix(coord[, c("long", "lat")])
 
 # ------------------ RUN TESS ------------------ 
 
 tess3.obj <- tess3(X = genotype_asmatrix, coord = long_lat_matrix, K = 5, method = "projected.ls", ploidy = 2, openMP.core.num = 4) 
 
-#colnames(Q_matrix) <- paste0("X", 1:ncol(Q_matrix))
+Q_matrix <- qmatrix(tess3.obj, K = 5)
+colnames(Q_matrix) <- paste0("X", seq_len(ncol(Q_matrix)))
+
 #inds <- read_tsv("./ind.txt",col_names = "sample_name")
 #Q_tibble <- bind_cols(inds,as_tibble(Q_matrix))
+#colnames(Q_matrix) <- paste0("X", 1:ncol(Q_matrix))
 
-Q_matrix <- qmatrix(tess3.obj, K = 5)
-barplot(q.matrix, border = NA, space = 0, 
-        ylab = "Ancestry proportions", 
+# ------------------ PLOT BARS ------------------ 
+pdf("k5_barplot.pdf")  
+barplot(Q_matrix, border = NA, space = 0, 
+        xlab = "Individuals", ylab = "Ancestry proportions", 
         main = "Ancestry matrix") -> bp
+axis(1, at = 1:nrow(Q_matrix), labels = bp$order, las = 3, cex.axis = .4)                                        
+dev.off()
 
-colnames(Q_matrix) <- paste0("X", 1:ncol(Q_matrix))
+
 # ------------------ PLOT MAP ------------------ 
 
 cluster_colors <- c(
-  X1 = "#7570B3",
-  X2 = "#E93F33",
+  X1 = "#66A61D",
+  X2 = "#7570B3",
   X3 = "#E6AC2F",
-  X4 = "#66A61D",
+  X4 = "#E93F33",
   X5 = "deeppink"
 )
 
@@ -147,12 +151,11 @@ genoscape_brick <- tess3Q_map_rasters(
   resolution = c(1000, 1000),
   col.palette = CreatePalette(cluster_colors, length(cluster_colors)),
   method = "map.max",
-  interpol = FieldsKrigModel(4),
+  nterpol = FieldsKrigModel(10),
   main = "Ancestry coefficients",
   xlab = "Longitude",
   ylab = "Latitude",
-  cex = .4
-)
+  cex = .4)
 
 names(genoscape_brick) <- colnames(Q_matrix)
 
@@ -163,8 +166,7 @@ genoscape_rgba <- qprob_rando_raster(
   alpha_scale = 3.0,
   abs_thresh = 0.5,
   alpha_exp = 1.55,
-  alpha_chop_max = 100
-)
+  alpha_chop_max = 100)
 
 crs(genoscape_rgba) <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
 
@@ -173,11 +175,7 @@ genoscape_spat <- rast(genoscape_rgba)
 
 lamproj <- "+proj=laea +lat_0=-15 +lon_0=-55 +datum=WGS84 +units=m +no_defs"
 
-genoscape_projected <- terra::project(
-  genoscape_spat,
-  lamproj,
-  method = "near"
-)
+genoscape_projected <- terra::project(genoscape_spat,lamproj,method = "near")
 
 # Basemap layers
 coastlines <- ne_download(scale = 10, type = "coastline", category = "physical", returnclass = "sf")
@@ -186,20 +184,13 @@ states <- ne_download(scale = 10, type = "admin_1_states_provinces_lines", categ
 ocean <- ne_download(scale = 10, type = "ocean", category = "physical", returnclass = "sf")
 lakes <- ne_download(scale = 10, type = "lakes", category = "physical", returnclass = "sf")
 
-# Sample locations
-#site_coords <- Q_tibble %>%
-#  dplyr::select(sample_name) %>%
-#  left_join(LatLong_Tibble, by = "sample_name") %>%
-#  filter(!is.na(long) & !is.na(lat))
 site_coords <- coord %>%
     filter(!is.na(long) & !is.na(lat))
-
 site_coords_sf <- st_as_sf(site_coords, coords = c("long", "lat"), crs = 4326)
 
 # Project range and compute map extent
 
 range_proj <- st_transform(range, st_crs(lamproj))
-
 genoscape_bbox <- st_bbox(range_proj)
 
 x_range <- genoscape_bbox$xmax - genoscape_bbox$xmin
@@ -212,66 +203,65 @@ coord_limits <- list(
   ),
   ylim = c(
     genoscape_bbox$ymin - 0.3 * y_range,
-    genoscape_bbox$ymax + 0.3 * y_range
-  ))
+    genoscape_bbox$ymax + 0.3 * y_range))
 
-# Elevation raster
-range_raster <- rast("./HYP_LR_SR_W/HYP_LR_SR_W.tif")
-
-range_raster_proj <- project(
-  range_raster,
-  lamproj,
-  method = "near",
-  res = 5000
-)
+## Elevation raster
+#range_raster <- rast("./HYP_LR_SR_W/HYP_LR_SR_W.tif")
+#
+#range_raster_proj <- project(
+#  range_raster,
+#  lamproj,
+#  method = "near",
+#  res = 5000
+#)
+#dem <- range_raster_proj[[1]]dem <- range_raster_proj[[1]]
+#slope <- terrain(dem, v = "slope", unit = "radians")
+#aspect <- terrain(dem, v = "aspect", unit = "radians")
+#hill <- shade(slope, aspect, angle = 40, direction = 315)
 
 # South America mask
 countries_sf <- ne_countries(
   scale = "medium",
-  returnclass = "sf"
-)
-
+  returnclass = "sf")
 sa_sf <- countries_sf[countries_sf$continent == "South America", ]
 sa_sf <- st_union(sa_sf)
-
 sa <- vect(sa_sf)
 sa <- project(sa, crs(range_raster_proj))
-
 range_raster_proj <- crop(range_raster_proj, sa)
 range_raster_proj <- mask(range_raster_proj, sa)
 
+#hill <- crop(hill, sa)
+#hill <- mask(hill, sa)
+
 # Final map
-pdf("SpeluncaeOnly_AdmixMap_withelevationmap.pdf")
+pdf("SpeluncaeOnly_AdmixMap_inter10.pdf")
 
 ggplot() +
-  ggspatial::layer_spatial(range_raster_proj) + 
+  #ggspatial::layer_spatial(hill) +
+  #scale_fill_gradient(low = "white",high = "grey70",na.value = NA,guide = "none")+
   ggspatial::layer_spatial(genoscape_projected) +
   geom_sf(data = range, fill = NA, linewidth = 0.2225, alpha = 0.8, colour = NA) +
   geom_sf(data = countries, fill = NA, linewidth = 0.25) +
   geom_sf(data = coastlines, fill = NA, linewidth = 0.1225) +
   geom_sf(data = states, fill = NA, linewidth = 0.1225) +
   #geom_sf(data = ocean, fill = "lightblue") +
-  #geom_sf(data = lakes, fill = "lightblue") +
+  geom_sf(data = lakes, fill = "lightblue") +
   geom_sf(data = site_coords_sf,
     fill = "black",
     shape = 21,
     color = "white",
     size = 2,
     stroke = 0.3,
-    alpha = 1
-  ) +
+    alpha = 1) +
   theme_void() +
-  coord_sf(crs = st_crs(lamproj),
-    xlim = coord_limits$xlim,
-    ylim = coord_limits$ylim,
-    expand = FALSE
-  )
+  coord_sf(crs = st_crs(lamproj),xlim = coord_limits$xlim,
+    ylim = coord_limits$ylim,expand = FALSE)
 
 dev.off()
 
   
 
-#----------- SIMPLER PLOT #-----------
+###############
 #ancestry+map
 coord <- read.table("coord_onlyspeluncae.txt", header = FALSE)
 colnames(coord) <- c("long", "lat")
@@ -301,5 +291,3 @@ plot(q.matrix, coord, method = "map.max", interpol = FieldsKrigModel(10),
      resolution = c(300,300), cex = .4, 
      col.palette = cluster_colors)
 dev.off()
-
-
