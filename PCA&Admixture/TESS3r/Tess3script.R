@@ -148,10 +148,10 @@ genoscape_brick <- tess3Q_map_rasters(
   coord = long_lat_matrix,
   map.polygon = range,
   window = extent(range)[1:4],
-  resolution = c(800, 800),
+  resolution = c(1000, 1000),
   col.palette = CreatePalette(cluster_colors, length(cluster_colors)),
   method = "map.max",
-  nterpol = FieldsKrigModel(60),
+  nterpol = FieldsKrigModel(30),
   main = "Ancestry coefficients",
   xlab = "Longitude",
   ylab = "Latitude",
@@ -234,7 +234,7 @@ range_raster_proj <- mask(range_raster_proj, sa)
 #hill <- mask(hill, sa)
 
 # Final map
-pdf("SpeluncaeOnly_AdmixMap_inter60.pdf")
+pdf("SpeluncaeOnly_AdmixMap_inter30.pdf")
 
 ggplot() +
   #ggspatial::layer_spatial(hill) +
@@ -247,11 +247,11 @@ ggplot() +
   #geom_sf(data = ocean, fill = "lightblue") +
   geom_sf(data = lakes, fill = "lightblue") +
   geom_sf(data = site_coords_sf,
-    fill = "black",
+    fill = "darkgray",
     shape = 21,
-    color = "white",
-    size = 2,
-    stroke = 0.3,
+    color = "lightgray",
+    size = 1,
+    stroke = 0.1,
     alpha = 1) +
   theme_void() +
   coord_sf(crs = st_crs(lamproj),xlim = coord_limits$xlim,
