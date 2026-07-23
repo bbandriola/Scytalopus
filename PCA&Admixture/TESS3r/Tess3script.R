@@ -18,6 +18,7 @@ library(rnaturalearthdata)
 library(ggrepel)
 library(ggspatial)
 library(remotes)
+library(tess3)
 
 ############################################################
 # Working directory
@@ -101,25 +102,29 @@ setwd("/media/labgenoma5/DATAPART3/bandriola/Scytalopus/TESSK5")
 # To convert ped to lmmf
 # genotype = "/media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/vcfs/ManuscriptVCFs/NoZW_LDfiltered_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_OnlySpeluncae.ped"
 # ped2lfmm(genotype)
-genotype <- read.table("./NoZW_LDfiltered_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_OnlySpeluncae.lfmm", header = FALSE, sep="")
+genotype <- read.table("NoZW_LDfiltered_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_OnlySpeluncae_withnames.lfmm", header = FALSE, sep="",row.names = 1)
 genotype_asmatrix <-as.matrix(genotype)
 genotype_asmatrix[genotype_asmatrix == 9] <- NA
 
-coord <- read.table("coord_onlyspeluncae.txt", header = FALSE)
-colnames(coord) <- c("long", "lat")
-long_lat_matrix <-as.matrix(coord)
+coord <- read.table("coords_withname.coords", header = FALSE, sep=";")
+colnames(coord) <- c("Ind","long", "lat")
+coord <- coord[match(rownames(genotype_asmatrix), coord$Ind), ]
+all(rownames(genotype_asmatrix) == coord$Ind)
+long_lat_matrix <- as.matrix(coord[, c("long", "lat")])
 
 # ------------------ RUN TESS ------------------ 
 
 tess3.obj <- tess3(X = genotype_asmatrix, coord = long_lat_matrix, K = 5, method = "projected.ls", ploidy = 2, openMP.core.num = 4) 
-
-Q_matrix <- qmatrix(tess3.obj, K = 5)
 
 #colnames(Q_matrix) <- paste0("X", 1:ncol(Q_matrix))
 #inds <- read_tsv("./ind.txt",col_names = "sample_name")
 #Q_tibble <- bind_cols(inds,as_tibble(Q_matrix))
 
 Q_matrix <- qmatrix(tess3.obj, K = 5)
+barplot(q.matrix, border = NA, space = 0, 
+        ylab = "Ancestry proportions", 
+        main = "Ancestry matrix") -> bp
+
 colnames(Q_matrix) <- paste0("X", 1:ncol(Q_matrix))
 # ------------------ PLOT MAP ------------------ 
 
@@ -142,7 +147,7 @@ genoscape_brick <- tess3Q_map_rasters(
   resolution = c(1000, 1000),
   col.palette = CreatePalette(cluster_colors, length(cluster_colors)),
   method = "map.max",
-  interpol = FieldsKrigModel(10),
+  interpol = FieldsKrigModel(4),
   main = "Ancestry coefficients",
   xlab = "Longitude",
   ylab = "Latitude",
@@ -239,15 +244,15 @@ range_raster_proj <- mask(range_raster_proj, sa)
 pdf("SpeluncaeOnly_AdmixMap_withelevationmap.pdf")
 
 ggplot() +
-  ggspatial::layer_spatial(range_raster_proj) +
+  ggspatial::layer_spatial(range_raster_proj) + 
+  ggspatial::layer_spatial(genoscape_projected) +
   geom_sf(data = range, fill = NA, linewidth = 0.2225, alpha = 0.8, colour = NA) +
   geom_sf(data = countries, fill = NA, linewidth = 0.25) +
   geom_sf(data = coastlines, fill = NA, linewidth = 0.1225) +
   geom_sf(data = states, fill = NA, linewidth = 0.1225) +
-  geom_sf(data = ocean, fill = "lightblue") +
-  geom_sf(data = lakes, fill = "lightblue") +
-  geom_sf(
-    data = site_coords_sf,
+  #geom_sf(data = ocean, fill = "lightblue") +
+  #geom_sf(data = lakes, fill = "lightblue") +
+  geom_sf(data = site_coords_sf,
     fill = "black",
     shape = 21,
     color = "white",
@@ -256,8 +261,7 @@ ggplot() +
     alpha = 1
   ) +
   theme_void() +
-  coord_sf(
-    crs = st_crs(lamproj),
+  coord_sf(crs = st_crs(lamproj),
     xlim = coord_limits$xlim,
     ylim = coord_limits$ylim,
     expand = FALSE
@@ -267,7 +271,7 @@ dev.off()
 
   
 
-###############
+#----------- SIMPLER PLOT #-----------
 #ancestry+map
 coord <- read.table("coord_onlyspeluncae.txt", header = FALSE)
 colnames(coord) <- c("long", "lat")
