@@ -147,11 +147,11 @@ genoscape_brick <- tess3Q_map_rasters(
   x = Q_matrix,
   coord = long_lat_matrix,
   map.polygon = range,
-  window = extent(range)[1:5],
-  resolution = c(1000, 1000),
+  window = extent(range)[1:4],
+  resolution = c(800, 800),
   col.palette = CreatePalette(cluster_colors, length(cluster_colors)),
   method = "map.max",
-  nterpol = FieldsKrigModel(10),
+  nterpol = FieldsKrigModel(60),
   main = "Ancestry coefficients",
   xlab = "Longitude",
   ylab = "Latitude",
@@ -164,7 +164,7 @@ genoscape_rgba <- qprob_rando_raster(
   TRB = genoscape_brick,
   cols = cluster_colors,
   alpha_scale = 3.0,
-  abs_thresh = 0.5,
+  abs_thresh = 0,
   alpha_exp = 1.55,
   alpha_chop_max = 100)
 
@@ -234,7 +234,7 @@ range_raster_proj <- mask(range_raster_proj, sa)
 #hill <- mask(hill, sa)
 
 # Final map
-pdf("SpeluncaeOnly_AdmixMap_inter10.pdf")
+pdf("SpeluncaeOnly_AdmixMap_inter60.pdf")
 
 ggplot() +
   #ggspatial::layer_spatial(hill) +
@@ -284,10 +284,10 @@ r_cropped <- crop(r, study_extent)
 
 q.matrix <- qmatrix(tess3.obj, K = 5)
 
-pdf("mapk5.pdf")
-plot(q.matrix, coord, method = "map.max", interpol = FieldsKrigModel(10),  
+pdf("mapk5_interpol4.pdf")
+plot(q.matrix, long_lat_matrix, method = "map.max", interpol = FieldsKrigModel(4),  
      main = "Ancestry coefficients",
      xlab = "Longitude", ylab = "Latitude", 
-     resolution = c(300,300), cex = .4, 
+     resolution = c(700,700), cex = .2, 
      col.palette = cluster_colors)
 dev.off()
