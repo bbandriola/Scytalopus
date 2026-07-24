@@ -86,11 +86,24 @@ while read bam; do echo "Reindexing $bam"; samtools index -@ 10 "$bam"; done < L
 while read bam; do echo "Reindexing $bam"; samtools index -@ 10 "$bam"; done < Lin4_4ind.bamlist
 while read bam; do echo "Reindexing $bam"; samtools index -@ 10 "$bam"; done < LinSouthDEV_4ind.bamlist
 
-# generate saf file for fastsimcoal
+# generate saf file for SFS unfolded
 angsd -GL 1 -b LinSouthDEV_4ind.bamlist -anc editedfastaancallele/editedACGT_subset41chr_allNchr.fasta -P 10 -out LinSouthDEV -doSaf 1 -minInd 4 -rf chr2include.txt
 angsd -GL 1 -b Lin4_4ind.bamlist -anc editedfastaancallele/editedACGT_subset41chr_allNchr.fasta -P 10 -out Lin4 -doSaf 1 -minInd 4 -rf chr2include.txt
 angsd -GL 1 -b Lin3_4ind.bamlist -anc editedfastaancallele/editedACGT_subset41chr_allNchr.fasta -P 10 -out Lin3 -doSaf 1 -minInd 4 -rf chr2include.txt
   # this resulted in 665,530 (LinDEV) /665,481 (Lin3) /665,499 (Lin4) sites analyzed
+realSFS Lin4.saf.idx -P 3 > Lin4_dsfs.sfs
+realSFS LinSouthDEV.saf.idx -P 3 > LinSouthDEV_4ind_dsfs.sfs
+realSFS Lin3.saf.idx -P 3 > Lin3_4ind_dsfs.sfs
+
+# generate saf file for SFS folded to get the monomorphirc sites 
+angsd -GL 1 -b LinSouthDEV_4ind.bamlist -anc editedfastaancallele/GCA_013400415.1_ASM1340041v1_genomic.fa -P 10 -out LinSouthDEV_4indunfoldedSFS -doSaf 1 -minInd 4 -rf chr2include.txt
+angsd -GL 1 -b Lin4_4ind.bamlist -anc editedfastaancallele/GCA_013400415.1_ASM1340041v1_genomic.fa -P 10 -out Lin4_4indunfoldedSFS -doSaf 1 -minInd 4 -rf chr2include.txt
+angsd -GL 1 -b Lin3_4ind.bamlist -anc editedfastaancallele/GCA_013400415.1_ASM1340041v1_genomic.fa -P 10 -out Lin3_4indunfoldedSFS -doSaf 1 -minInd 4 -rf chr2include.txt
+  # this resulted in 665,530 (LinDEV) /665,481 (Lin3) /665,499 (Lin4) sites analyzed
+realSFS LinSouthDEV_4indunfoldedSFS.saf.idx -P 3 -fold 1 > LinSouthDEV_4indunfoldedSFS.sfs
+realSFS Lin4_4indunfoldedSFS.saf.idx -P 3 -fold 1 > Lin4_4indunfoldedSFS.sfs
+realSFS Lin3_4indunfoldedSFS.saf.idx -P 3 -fold 1 > Lin3_4indunfoldedSFS.sfs
+
 # generate SFS# run realSFS with the v.921 teh steps above were ran with the v.940
 realSFS Lin3.saf.idx Lin4.saf.idx LinSouthDEV.saf.idx -P 24 > Lin3Lin4LInDEV_3dsfs.sfs
 
@@ -101,6 +114,8 @@ while read bam; do echo "Reindexing $bam"; samtools index -@ 10 "$bam"; done < L
 while read bam; do echo "Reindexing $bam"; samtools index -@ 10 "$bam"; done < Lin3_OnlyMant.bamlist
 while read bam; do echo "Reindexing $bam"; samtools index -@ 10 "$bam"; done < Lin1.bamlist
 
+
+# SFS unfolded for all other lineages
 angsd -GL 1 -b Lin5.bamlist -anc editedfastaancallele/editedACGT_subset41chr_allNchr.fasta -P 10 -out Lin5 -doSaf 1 -minInd 4 -rf chr2include.txt
 angsd -GL 1 -b Lin6.bamlist -anc editedfastaancallele/editedACGT_subset41chr_allNchr.fasta -P 10 -out Lin6 -doSaf 1 -minInd 4 -rf chr2include.txt
 angsd -GL 1 -b Lin7.bamlist -anc editedfastaancallele/editedACGT_subset41chr_allNchr.fasta -P 10 -out Lin7 -doSaf 1 -minInd 4 -rf chr2include.txt
