@@ -117,7 +117,7 @@ realSFS Lin3_4ind2foldedSFS_maskedancallele.saf.idx -P 3 -fold 1 > Lin3_4indfold
 
 # generate SFS# run realSFS with the v.921 teh steps above were ran with the v.940
 realSFS Lin3.saf.idx Lin4.saf.idx LinSouthDEV.saf.idx -P 24 > Lin3Lin4LInDEV_3dsfs.sfs
-realSFS Lin3_4indunfoldedSFS.saf.idx Lin4_4indunfoldedSFS.saf.idx LinSouthDEV_4indunfoldedSFS.saf.idx -P 1- -fold 1 > foldedSFS_Lin3Lin4LInDEV_3dsfs.sfs
+realSFS Lin3_4ind2foldedSFS_maskedancallele.saf.idx  Lin4_4ind2foldedSFS_maskedancallele.saf.idx LinSouthDEV_4ind2foldedSFS_maskedancallele.saf.idx -P 1 -fold 1 > foldedSFS_Lin3Lin4LInDEV_maskedancallele_3dsfs.sfs
 
 # generate saf file for stairwayplot 
 while read bam; do echo "Reindexing $bam"; samtools index -@ 10 "$bam"; done < Lin5.bamlist
