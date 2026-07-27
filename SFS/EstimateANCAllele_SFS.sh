@@ -95,17 +95,29 @@ realSFS Lin4.saf.idx -P 3 > Lin4_dsfs.sfs
 realSFS LinSouthDEV.saf.idx -P 3 > LinSouthDEV_4ind_dsfs.sfs
 realSFS Lin3.saf.idx -P 3 > Lin3_4ind_dsfs.sfs
 
+# APPROACH TO CALCULATE THE MONOMORPHIC SITES 
+# change all the estimated ancesters allele by est-sfs to Ns
+# calculate the saf with this fasta modified with N in te parts that were considered as the rest of the fasta 
+# calcula the fold SFS 
+# extract the mornomorphic sites of the folded SFS and sum with the unfolded. Use this as the number of monomorphic sites
 # generate saf file for SFS folded to get the monomorphirc sites 
-angsd -GL 1 -b LinSouthDEV_4ind.bamlist -anc editedfastaancallele/GCA_013400415.1_ASM1340041v1_genomic.fa -P 10 -out LinSouthDEV_4indunfoldedSFS -doSaf 1 -minInd 4 -rf chr2include.txt
-angsd -GL 1 -b Lin4_4ind.bamlist -anc editedfastaancallele/GCA_013400415.1_ASM1340041v1_genomic.fa -P 10 -out Lin4_4indunfoldedSFS -doSaf 1 -minInd 4 -rf chr2include.txt
-angsd -GL 1 -b Lin3_4ind.bamlist -anc editedfastaancallele/GCA_013400415.1_ASM1340041v1_genomic.fa -P 10 -out Lin3_4indunfoldedSFS -doSaf 1 -minInd 4 -rf chr2include.txt
+# 1. change the ref fasta: 
+cat position2changeA.bed position2changeC.bed position2changeG.bed position2changeT.bed position2changenan.bed > maskancAleles.bed
+bedtools maskfasta -fi GCA_013400415.1_ASM1340041v1_genomic.fa -bed maskancAleles.bed -fo maskedAncAllele_subset41chr.fasta -mc N
+
+# 2. Generate the SAF files
+angsd -GL 1 -b LinSouthDEV_4ind.bamlist -anc editedfastaancallele/maskedAncAllele_subset41chr.fasta -P 10 -out LinSouthDEV_4ind2foldedSFS_maskedancallele -doSaf 1 -minInd 4 -rf chr2include.txt
+angsd -GL 1 -b Lin4_4ind.bamlist -anc editedfastaancallele/maskedAncAllele_subset41chr.fasta -P 10 -out Lin4_4ind2foldedSFS_maskedancallele -doSaf 1 -minInd 4 -rf chr2include.txt
+angsd -GL 1 -b Lin3_4ind.bamlist -anc editedfastaancallele/maskedAncAllele_subset41chr.fasta -P 10 -out Lin3_4ind2foldedSFS_maskedancallele -doSaf 1 -minInd 4 -rf chr2include.txt
   # this resulted in 665,530 (LinDEV) /665,481 (Lin3) /665,499 (Lin4) sites analyzed
-realSFS LinSouthDEV_4indunfoldedSFS.saf.idx -P 3 -fold 1 > LinSouthDEV_4indunfoldedSFS.sfs
-realSFS Lin4_4indunfoldedSFS.saf.idx -P 3 -fold 1 > Lin4_4indunfoldedSFS.sfs
-realSFS Lin3_4indunfoldedSFS.saf.idx -P 3 -fold 1 > Lin3_4indunfoldedSFS.sfs
+# 3. Generate the folded SFS 
+realSFS LinSouthDEV_4ind2foldedSFS_maskedancallele.saf.idx -P 3 -fold 1 > LinSouthDEV_4indfoldedSFS.sfs
+realSFS Lin4_4ind2foldedSFS_maskedancallele.saf.idx -P 3 -fold 1 > Lin4_4indfoldedSFS.sfs
+realSFS Lin3_4ind2foldedSFS_maskedancallele.saf.idx -P 3 -fold 1 > Lin3_4indfoldedSFS.sfs
 
 # generate SFS# run realSFS with the v.921 teh steps above were ran with the v.940
 realSFS Lin3.saf.idx Lin4.saf.idx LinSouthDEV.saf.idx -P 24 > Lin3Lin4LInDEV_3dsfs.sfs
+realSFS Lin3_4indunfoldedSFS.saf.idx Lin4_4indunfoldedSFS.saf.idx LinSouthDEV_4indunfoldedSFS.saf.idx -P 1- -fold 1 > foldedSFS_Lin3Lin4LInDEV_3dsfs.sfs
 
 # generate saf file for stairwayplot 
 while read bam; do echo "Reindexing $bam"; samtools index -@ 10 "$bam"; done < Lin5.bamlist
