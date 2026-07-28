@@ -25,10 +25,11 @@ done
 paste -d '\t' ../variants_chrchrVXBX01000547_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_allsamples.recode.vcf.gz.txt ./ancestral_states_chrVXBX0100MODIF_chrVXBX01000547_output-file-pvalues.txt.txt > ./chrVXBX01000547_ref_ancalleles.txt
 cat *_ref_ancalleles.txt > 41chr_ancallele.txt
 
+# DO NOT DO THIS 
 # subset the reference fasta and turn all bases in N 
-bedtools maskfasta -fi GCA_013400415.1_ASM1340041v1_genomic.fa -bed Ninallpos.bed -fo allNchr.fasta -mc N
-samtools faidx allNchr.fasta
-xargs samtools faidx allNchr.fasta < keepchr.txt > subset41chr_allNchr.fasta
+#bedtools maskfasta -fi GCA_013400415.1_ASM1340041v1_genomic.fa -bed Ninallpos.bed -fo allNchr.fasta -mc N
+#samtools faidx allNchr.fasta
+#xargs samtools faidx allNchr.fasta < keepchr.txt > subset41chr_allNchr.fasta
 
 # change fasta position to ancestral allele base
 # the command understand fastas in block 
@@ -53,12 +54,36 @@ awk 'BEGIN{OFS="\t"} {print $1, $2-1, $2}' baseG.txt > position2changeG.bed
 awk 'BEGIN{OFS="\t"} {print $1, $2-1, $2}' baseT.txt > position2changeT.bed
 awk 'BEGIN{OFS="\t"} {print $1, $2-1, $2}' basenan.txt > position2changenan.bed
 
-# modify fasta to explicity determiny the bases to the ancestral allele
-bedtools maskfasta -fi subset41chr_allNchr.fasta -bed position2changeA.bed -fo editedA_subset41chr_allNchr.fasta -mc A
-bedtools maskfasta -fi editedA_subset41chr_allNchr.fasta -bed position2changeC.bed -fo editedAC_subset41chr_allNchr.fasta -mc C
-bedtools maskfasta -fi editedAC_subset41chr_allNchr.fasta -bed position2changeG.bed -fo editedACG_subset41chr_allNchr.fasta -mc G
-bedtools maskfasta -fi editedACG_subset41chr_allNchr.fasta -bed position2changeT.bed -fo editedACGT_subset41chr_allNchr.fasta -mc T
+# obtain all the variants called in the vcf 
+bcftools query -f '%CHROM\t%POS\n' FilteredMinDPMaxDPperInd_FilteredPCAandUCE_GeographicNames_allsamples.vcf.gz | awk 'BEGIN{OFS="\t"}{print $1,$2-1,$2}' > Sites_FilteredMinDPMaxDPperInd_FilteredPCAandUCE_GeographicNames_allsamples.bed
+awk 'NR==FNR {keep[$1]; next} $1 in keep' chromosomesbigger2M.txt Sites_FilteredMinDPMaxDPperInd_FilteredPCAandUCE_GeographicNames_allsamples.bed > subset_Sites_FilteredMinDPMaxDPperInd_FilteredPCAandUCE_GeographicNames_allsamples.bed
+awk 'NR==FNR {exclude[$1 FS $2 FS $3]; next} !($1 FS $2 FS $3 in exclude)' SFS/editedfastaancallele/allpositionsancalleles.bed subset_Sites_FilteredMinDPMaxDPperInd_FilteredPCAandUCE_GeographicNames_allsamples.bed > position2changelowdepthvariants.bed
 
+# modify fasta to explicity determiny the bases to the ancestral allele
+echo "starting.."
+bedtools maskfasta -fi GCA_013400415.1_ASM1340041v1_genomic.fa -bed position2changeA.bed -fo editedA_subset41chr.fasta -mc A
+echo "next"
+bedtools maskfasta -fi editedA_subset41chr.fasta -bed position2changeC.bed -fo editedAC_subset41chr.fasta -mc C
+echo "next"
+bedtools maskfasta -fi editedAC_subset41chr.fasta -bed position2changeG.bed -fo editedACG_subset41chr.fasta -mc G
+echo "next"
+bedtools maskfasta -fi editedACG_subset41chr.fasta -bed position2changeT.bed -fo editedACGT_subset41chr.fasta -mc T
+echo "next"
+bedtools maskfasta -fi editedACGT_subset41chr.fasta -bed position2changenan.bed -fo editedACGTnan_subset41chr.fasta -mc N
+echo "next"
+bedtools maskfasta -fi editedACGTnan_subset41chr.fasta -bed position2changelowdepthvariants.bed -fo editedACGTnanlowdepthvariants_subset41chr.fasta -mc N 
+echo "done!"
+
+# ----------------- Workflow using vcf_to_fastsimcoal.py -----------------
+# source: https://ppp.readthedocs.io/en/latest/PPP_pages/Input_File_Generators/vcf_to_fastsimcoal.html
+conda activate py3
+
+
+
+
+
+
+# ----------------- Workflow using ANGSD/realSFS -----------------
 # subset the individuals to generate the SFS 
 ## LinSouthDEV_4ind.bamlist DevonianaSP4_lin5 DevonianaSP1_lin5 DevonianaSP2_lin5 DevonianaPR6_lin5
 ## Lin3_4ind.bamlist SulMantiqueira2_lin3 SulMantiqueira3_lin3 NorteMantiqueira1_lin3 NorteMantiqueira3_lin3
