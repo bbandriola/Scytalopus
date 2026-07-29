@@ -78,8 +78,11 @@ echo "done!"
 # source: https://ppp.readthedocs.io/en/latest/PPP_pages/Input_File_Generators/vcf_to_fastsimcoal.html
 conda activate py3
 
+model_creator.py --model 3Pop --model-pop-file 3Pop 3Pops.txt --pop-ind-file Lin3 Lin3.txt --pop-ind-file Lin4 Lin4.txt --pop-ind-file LinSouth LinSouth.txt
+# output: out.model
 
-
+# generate unfolded sfs
+vcf_to_fastsimcoal.py --vcf ../FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_allsamples.vcf.gz --model-file out.model --modelname 3Pop --dim m --basename Lin3Lin4LinSouth --bed-file editedfastaancallele/allpositionsancalleles.bed --outgroup-fasta editedfastaancallele/editedACGTnanlowdepthvariants_subseted41chr.fasta
 
 
 
