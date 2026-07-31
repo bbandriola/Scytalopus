@@ -138,6 +138,7 @@ angsd -GL 1 -b Lin6.bamlist -anc editedfastaancallele/editedACGTnanlowdepthvaria
 angsd -GL 1 -b Lin7.bamlist -anc editedfastaancallele/editedACGTnanlowdepthvariants_subseted41chr.fasta -P 10 -out Lin7_maskedancallele -doSaf 1 -rf chr2include.txt
   # this resulted in 665,530 (LinDEV) /665,481 (Lin3) /665,499 (Lin4) sites analyzed
 # generate SFS# run realSFS with the v.921 teh steps above were ran with the v.940
+realSFS Lin1_maskedancallele.saf.idx -P 3 > Lin1_maskedancallele.sfs
 realSFS Lin3_OnlyMant_maskedancallele.saf.idx -P 3 > Lin3_OnlyMant_maskedancallele_dsfs.sfs
 realSFS Lin3OnlyMant_maskedancallele.saf.idx -P 3 > Lin3OnlyMant4ind_maskedancallele.sfs
 realSFS Lin4_maskedancallele.saf.idx -P 3 > Lin4_maskedancallele.sfs
