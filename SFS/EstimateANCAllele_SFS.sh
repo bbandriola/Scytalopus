@@ -107,20 +107,6 @@ vcf_to_fastsimcoal.py --vcf ../FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_Fil
 ## /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/bams/Sspeluncae5_lin4_final.bam
 ## /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/bams/Sspeluncae16_lin4_final.bam
 
-# reindex bam 
-while read bam; do echo "Reindexing $bam"; samtools index -@ 10 "$bam"; done < Lin3_4ind.bamlist
-while read bam; do echo "Reindexing $bam"; samtools index -@ 10 "$bam"; done < Lin4_4ind.bamlist
-while read bam; do echo "Reindexing $bam"; samtools index -@ 10 "$bam"; done < LinSouthDEV_4ind.bamlist
-
-# generate saf file for SFS unfolded
-angsd -GL 1 -b LinSouthDEV_4ind.bamlist -anc editedfastaancallele/editedACGT_subset41chr_allNchr.fasta -P 10 -out LinSouthDEV -doSaf 1 -minInd 4 -rf chr2include.txt
-angsd -GL 1 -b Lin4_4ind.bamlist -anc editedfastaancallele/editedACGT_subset41chr_allNchr.fasta -P 10 -out Lin4 -doSaf 1 -minInd 4 -rf chr2include.txt
-angsd -GL 1 -b Lin3_4ind.bamlist -anc editedfastaancallele/editedACGT_subset41chr_allNchr.fasta -P 10 -out Lin3 -doSaf 1 -minInd 4 -rf chr2include.txt
-  # this resulted in 665,530 (LinDEV) /665,481 (Lin3) /665,499 (Lin4) sites analyzed
-realSFS Lin4.saf.idx -P 3 > Lin4_dsfs.sfs
-realSFS LinSouthDEV.saf.idx -P 3 > LinSouthDEV_4ind_dsfs.sfs
-realSFS Lin3.saf.idx -P 3 > Lin3_4ind_dsfs.sfs
-
 # APPROACH TO CALCULATE THE MONOMORPHIC SITES 
 # change all the estimated ancesters allele by est-sfs to Ns
 # calculate the saf with this fasta modified with N in te parts that were considered as the rest of the fasta 
@@ -132,35 +118,30 @@ cat position2changeA.bed position2changeC.bed position2changeG.bed position2chan
 bedtools maskfasta -fi GCA_013400415.1_ASM1340041v1_genomic.fa -bed maskancAleles.bed -fo maskedAncAllele_subset41chr.fasta -mc N
 
 # 2. Generate the SAF files
-angsd -GL 1 -b LinSouthDEV_4ind.bamlist -anc editedfastaancallele/maskedAncAllele_subset41chr.fasta -P 10 -out LinSouthDEV_4ind2foldedSFS_maskedancallele -doSaf 1 -minInd 4 -rf chr2include.txt
-angsd -GL 1 -b Lin4_4ind.bamlist -anc editedfastaancallele/maskedAncAllele_subset41chr.fasta -P 10 -out Lin4_4ind2foldedSFS_maskedancallele -doSaf 1 -minInd 4 -rf chr2include.txt
-angsd -GL 1 -b Lin3_4ind.bamlist -anc editedfastaancallele/maskedAncAllele_subset41chr.fasta -P 10 -out Lin3_4ind2foldedSFS_maskedancallele -doSaf 1 -minInd 4 -rf chr2include.txt
-  # this resulted in 665,530 (LinDEV) /665,481 (Lin3) /665,499 (Lin4) sites analyzed
-# 3. Generate the folded SFS 
-realSFS LinSouthDEV_4ind2foldedSFS_maskedancallele.saf.idx -P 3 -fold 1 > LinSouthDEV_4indfoldedSFS.sfs
-realSFS Lin4_4ind2foldedSFS_maskedancallele.saf.idx -P 3 -fold 1 > Lin4_4indfoldedSFS.sfs
-realSFS Lin3_4ind2foldedSFS_maskedancallele.saf.idx -P 3 -fold 1 > Lin3_4indfoldedSFS.sfs
-
-# generate SFS# run realSFS with the v.921 teh steps above were ran with the v.940
-realSFS Lin3.saf.idx Lin4.saf.idx LinSouthDEV.saf.idx -P 24 > Lin3Lin4LInDEV_3dsfs.sfs
-realSFS Lin3_4ind2foldedSFS_maskedancallele.saf.idx  Lin4_4ind2foldedSFS_maskedancallele.saf.idx LinSouthDEV_4ind2foldedSFS_maskedancallele.saf.idx -P 1 -fold 1 > foldedSFS_Lin3Lin4LInDEV_maskedancallele_3dsfs.sfs
-
-# generate saf file for stairwayplot 
+# reindex bam 
+while read bam; do echo "Reindexing $bam"; samtools index -@ 10 "$bam"; done < Lin3_4ind.bamlist
+while read bam; do echo "Reindexing $bam"; samtools index -@ 10 "$bam"; done < Lin4_4ind.bamlist
+while read bam; do echo "Reindexing $bam"; samtools index -@ 10 "$bam"; done < LinSouthDEV_4ind.bamlist
 while read bam; do echo "Reindexing $bam"; samtools index -@ 10 "$bam"; done < Lin5.bamlist
 while read bam; do echo "Reindexing $bam"; samtools index -@ 10 "$bam"; done < Lin6.bamlist
 while read bam; do echo "Reindexing $bam"; samtools index -@ 10 "$bam"; done < Lin7.bamlist
 while read bam; do echo "Reindexing $bam"; samtools index -@ 10 "$bam"; done < Lin3_OnlyMant.bamlist
 while read bam; do echo "Reindexing $bam"; samtools index -@ 10 "$bam"; done < Lin1.bamlist
 
-# SFS unfolded for all other lineages
-angsd -GL 1 -b Lin5.bamlist -anc editedfastaancallele/editedACGT_subset41chr_allNchr.fasta -P 10 -out Lin5 -doSaf 1 -minInd 4 -rf chr2include.txt
-angsd -GL 1 -b Lin6.bamlist -anc editedfastaancallele/editedACGT_subset41chr_allNchr.fasta -P 10 -out Lin6 -doSaf 1 -rf chr2include.txt
-angsd -GL 1 -b Lin7.bamlist -anc editedfastaancallele/editedACGT_subset41chr_allNchr.fasta -P 10 -out Lin7 -doSaf 1 -minInd 4 -rf chr2include.txt
-angsd -GL 1 -b Lin3_OnlyMant.bamlist -anc editedfastaancallele/editedACGT_subset41chr_allNchr.fasta -P 10 -out Lin3_OnlyMant -doSaf 1 -minInd 4 -rf chr2include.txt
-angsd -GL 1 -b Lin1.bamlist -anc editedfastaancallele/editedACGT_subset41chr_allNchr.fasta -P 10 -out Lin1 -doSaf 1 -minInd 4 -rf chr2include.txt
-realSFS Lin3_OnlyMant.saf.idx -P 10 > Lin3OnlyMant_dsfs.sfs
-realSFS Lin4.saf.idx -P 10 > Lin4_dsfs.sfs
-realSFS Lin5.saf.idx -P 10 > Lin5_dsfs.sfs
-realSFS Lin6.saf.idx -P 10 > Lin6_dsfs.sfs
-realSFS Lin7.saf.idx -P 10 > Lin7_dsfs.sfs
-realSFS Lin1.saf.idx -P 10 > Lin1_dsfs.sfs
+# generate saf file for SFS unfolded
+angsd -GL 1 -b Lin1.bamlist -anc editedfastaancallele/editedACGTnanlowdepthvariants_subseted41chr.fasta -P 10 -out Lin1_maskedancallele -doSaf 1 -rf 41chromosomes_sorted.txt
+angsd -GL 1 -b Lin3_OnlyMant.bamlist -anc editedfastaancallele/editedACGTnanlowdepthvariants_subseted41chr.fasta -P 10 -out Lin3OnlyMant_maskedancallele -doSaf 1 -minInd 4 -rf chr2include.txt 
+angsd -GL 1 -b Lin3_OnlyMant.bamlist -anc editedfastaancallele/editedACGTnanlowdepthvariants_subseted41chr.fasta -P 10 -out Lin3_OnlyMant_maskedancallele -doSaf 1 -rf chr2include.txt 
+angsd -GL 1 -b Lin4_4ind.bamlist -anc editedfastaancallele/editedACGTnanlowdepthvariants_subseted41chr.fasta -P 10 -out Lin4_maskedancallele -doSaf 1 -minInd 4 -rf chr2include.txt
+angsd -GL 1 -b Lin5.bamlist -anc editedfastaancallele/editedACGTnanlowdepthvariants_subseted41chr.fasta -P 10 -out Lin5_maskedancallele -doSaf 1 -rf chr2include.txt
+angsd -GL 1 -b Lin6.bamlist -anc editedfastaancallele/editedACGTnanlowdepthvariants_subseted41chr.fasta -P 10 -out Lin6_maskedancallele -doSaf 1 -rf chr2include.txt
+angsd -GL 1 -b Lin7.bamlist -anc editedfastaancallele/editedACGTnanlowdepthvariants_subseted41chr.fasta -P 10 -out Lin7_maskedancallele -doSaf 1 -rf chr2include.txt
+  # this resulted in 665,530 (LinDEV) /665,481 (Lin3) /665,499 (Lin4) sites analyzed
+# generate SFS# run realSFS with the v.921 teh steps above were ran with the v.940
+realSFS Lin3_OnlyMant_maskedancallele.saf.idx -P 3 > Lin3_OnlyMant_maskedancallele_dsfs.sfs
+realSFS Lin3OnlyMant_maskedancallele.saf.idx -P 3 > Lin3OnlyMant4ind_maskedancallele.sfs
+realSFS Lin4_maskedancallele.saf.idx -P 3 > Lin4_maskedancallele.sfs
+realSFS Lin5_maskedancallele.saf.idx -P 3 > Lin5_maskedancallele.sfs
+realSFS Lin6_maskedancallele.saf.idx -P 3 > Lin6_maskedancallele.sfs
+realSFS Lin7_maskedancallele.saf.idx -P 3 > Lin7_maskedancallele.sfs
+
