@@ -117,7 +117,7 @@ vcf_to_fastsimcoal.py --vcf ../FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_Fil
 cat position2changeA.bed position2changeC.bed position2changeG.bed position2changeT.bed position2changenan.bed > maskancAleles.bed
 bedtools maskfasta -fi GCA_013400415.1_ASM1340041v1_genomic.fa -bed maskancAleles.bed -fo maskedAncAllele_subset41chr.fasta -mc N
 
-# 2. Generate the SAF files
+# 2. Generate the SAF files for paper 2
 # reindex bam 
 while read bam; do echo "Reindexing $bam"; samtools index -@ 10 "$bam"; done < Lin3_4ind.bamlist
 while read bam; do echo "Reindexing $bam"; samtools index -@ 10 "$bam"; done < Lin4_4ind.bamlist
@@ -145,4 +145,11 @@ realSFS Lin4_maskedancallele.saf.idx -P 3 > Lin4_maskedancallele.sfs
 realSFS Lin5_maskedancallele.saf.idx -P 3 > Lin5_maskedancallele.sfs
 realSFS Lin6_maskedancallele.saf.idx -P 3 > Lin6_maskedancallele.sfs
 realSFS Lin7_maskedancallele.saf.idx -P 3 > Lin7_maskedancallele.sfs
+
+# 2. Generate the SAF files for paper 1
+# Generate file saf
+angsd -GL 1 -b Lin3_4ind.bamlist -anc editedfastaancallele/editedACGTnanlowdepthvariants_subseted41chr.fasta -P 10 -out Lin34ind_maskedancallele -doSaf 1 -rf 41chromosomes_sorted.txt
+angsd -GL 1 -b LinSouthDEV_4ind.bamlist -anc editedfastaancallele/editedACGTnanlowdepthvariants_subseted41chr.fasta -P 10 -out LinSouthDEV4ind_maskedancallele -doSaf 1 -minInd 4 -rf 41chromosomes_sorted.txt
+# Generate SFS from saf 
+realSFS Lin34ind_maskedancallele.saf.idx Lin4_maskedancallele.saf.idx LinSouthDEV4ind_maskedancallele.saf.idx -P 3 > Lin34indLin4LinSouthDEV4ind_maskedancallele_DSFS.sfs
 
