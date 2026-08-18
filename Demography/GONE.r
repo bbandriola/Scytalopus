@@ -83,7 +83,7 @@ if ("Ne_low" %in% colnames(gone)) {
 ###################################################################
 conda activate plink
 
-plink --vcf /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/vcfs/ManuscriptVCFs/41chr_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_allsamples.recode.vcf.gz.recode.vcf.gz --keep Lin1.txt --allow-extra-chr --recode --double-id --out Lin1_41chr_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs
+plink --vcf /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/vcfs/ManuscriptVCFs/41chr_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_allsamples.recode.vcf.gz.recode.vcf.gz --keep Lin1.txt --allow-extra-chr --recode --double-id --geno 0.5 --out Lin1_41chr_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs
 plink --vcf /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/vcfs/ManuscriptVCFs/41chr_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_allsamples.recode.vcf.gz.recode.vcf.gz --keep Lin3Mant.txt --allow-extra-chr --recode --double-id --out Lin3Mant_41chr_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs
 plink --vcf /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/vcfs/ManuscriptVCFs/41chr_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_allsamples.recode.vcf.gz.recode.vcf.gz --keep Lin4.txt --allow-extra-chr --recode --double-id --out Lin4_41chr_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs
 plink --vcf /media/labgenoma5/DATAPART3/bandriola/Scytalopus/snparcher/vcfs/ManuscriptVCFs/41chr_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_allsamples.recode.vcf.gz.recode.vcf.gz --keep Lin5n.txt --allow-extra-chr --recode --double-id --out Lin5n_41chr_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs
@@ -119,15 +119,12 @@ mv Lin4_41chr_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_chr1.map Lin4_41chr_
 mv Lin5n_41chr_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_chr1.map Lin5n_41chr_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_chr.map
 mv Lin7n_41chr_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_chr1.map Lin7n_41chr_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_chr.map
 
-mv Lin1_41chr_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_chr* ~/Scytalopus/GONE/
-mv Lin3Mant_41chr_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_chr* ~/Scytalopus/GONE/
-mv Lin4_41chr_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_chr* ~/Scytalopus/GONE/
-mv Lin5n_41chr_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_chr* ~/Scytalopus/GONE/
-mv Lin7n_41chr_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_chr* ~/Scytalopus/GONE/
+cp Lin1_41chr_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_chr.* ./GONE/Linux/
+cp Lin3Mant_41chr_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_chr.* ./GONE/Linux/
+cp Lin4_41chr_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_chr.* ./GONE/Linux/
+cp Lin5n_41chr_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_chr.* ./GONE/Linux/
+cp Lin7n_41chr_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_chr.* ./GONE/Linux/
 
-bash script_GONE.sh Lin1_41chr_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_chr
-bash script_GONE.sh Lin3Mant_41chr_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_chr
-bash script_GONE.sh Lin4_41chr_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_chr
-bash script_GONE.sh Lin5n_41chr_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_chr
-bash script_GONE.sh Lin7n_41chr_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_chr
-bash script_GONE.sh Lin7_42scaffolds2M_FilteredPCAandUCE_Max30missingDepthmin10_chr
+# using GONE v.1
+bash bashfile.sh Lin1_41chr_FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_chr
+
