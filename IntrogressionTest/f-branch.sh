@@ -8,6 +8,7 @@
 ~/Softwares/Dsuite/Build/Dsuite Dtrios -t Onlyspeluncae_PCAfiltered_Devoniana_hipo1.nwk -o Onlyspeluncae_PCAfiltered_Devoniana_hipo1 ../snparcher/vcfs/ManuscriptVCFs/FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_allsamples.vcf.gz Onlyspeluncae_PCAfiltered_Devoniana_popfile.txt
 ~/Softwares/Dsuite/Build/Dsuite Dtrios -t Onlyspeluncae_PCAfiltered_Devoniana_hipo2.nwk -o Onlyspeluncae_PCAfiltered_Devoniana_hipo2 ../snparcher/vcfs/ManuscriptVCFs/FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_allsamples.vcf.gz Onlyspeluncae_PCAfiltered_Devoniana_popfile.txt
 ~/Softwares/Dsuite/Build/Dsuite Dtrios -t Onlyspeluncae_PCAfiltered_mitofilo.nwk -o Onlyspeluncae_PCAfiltered_mitofilo .../snparcher/vcfs/ManuscriptVCFs/FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_allsamples.vcf.gz Onlyspeluncae_PCAfiltered_Devoniana_popfile.txt
+~/Softwares/Dsuite/Build/Dsuite Dtrios -t ../speluncaenovacapisuperciliaris.nwk -o speluncaenovacapi_ ../../snparcher/vcfs/ManuscriptVCFs/FilteredMinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_allsamples.vcf.gz ../speluncaenovacapisuperciliaris_PCAfiltered_popfile.txt
 
 # 2. Fbranch  
 ~/Softwares/Dsuite/Build/Dsuite Fbranch -Z Onlyspeluncae_PCAfiltered.nwk Onlyspeluncae_PCAfiltered_dtrios_tree.txt > fbranch_Onlyspeluncae_PCAfiltered_dtrios.txt
@@ -15,6 +16,7 @@
 ~/Softwares/Dsuite/Build/Dsuite Fbranch -Z Onlyspeluncae_PCAfiltered_Devoniana_hipo1.nwk Onlyspeluncae_PCAfiltered_Devoniana_hipo1_dtrios_tree.txt > fbranch_Onlyspeluncae_PCAfiltered_Devoniana_hipo1_dtrios.txt
 ~/Softwares/Dsuite/Build/Dsuite Fbranch -Z Onlyspeluncae_PCAfiltered_Devoniana_hipo2.nwk Onlyspeluncae_PCAfiltered_Devoniana_hipo2_dtrios_tree.txt > fbranch_Onlyspeluncae_PCAfiltered_Devoniana_hipo2_dtrios.txt
 ~/Softwares/Dsuite/Build/Dsuite Fbranch -Z Onlyspeluncae_PCAfiltered_mitofilo.nwk Onlyspeluncae_PCAfiltered_mitofilo_dtrios_tree.txt > fbranch_Onlyspeluncae_PCAfiltered_mitofilo_dtrios.txt
+~/Softwares/Dsuite/Build/Dsuite Fbranch -Z ../speluncaenovacapisuperciliaris.nwk speluncaenovacapi_dtrios_tree.txt > fbranch_speluncaenovacapi_dtrios.txt
 
 # 3. fbranch
 ~/Softwares/Dsuite/utils/dtools.py -n fbranch_Onlyspeluncae_PCAfiltered_dtrios --outgroup Outgroup fbranch_Onlyspeluncae_PCAfiltered_dtrios.txt Onlyspeluncae_PCAfiltered.nwk 
@@ -22,6 +24,7 @@
 ~/Softwares/Dsuite/utils/dtools.py -n fbranch_Onlyspeluncae_PCAfiltered_Devoniana_hipo1_dtrios --outgroup Outgroup fbranch_Onlyspeluncae_PCAfiltered_Devoniana_hipo1_dtrios.txt Onlyspeluncae_PCAfiltered_Devoniana_hipo1.nwk 
 ~/Softwares/Dsuite/utils/dtools.py -n fbranch_Onlyspeluncae_PCAfiltered_Devoniana_hipo2_dtrios --outgroup Outgroup fbranch_Onlyspeluncae_PCAfiltered_Devoniana_hipo2_dtrios.txt Onlyspeluncae_PCAfiltered_Devoniana_hipo2.nwk 
 ~/Softwares/Dsuite/utils/dtools.py -n fbranch_Onlyspeluncae_PCAfiltered_mitofilo_dtrios --outgroup Outgroup fbranch_Onlyspeluncae_PCAfiltered_mitofilo_dtrios.txt Onlyspeluncae_PCAfiltered_mitofilo.nwk
+~/Softwares/Dsuite/utils/dtools.py -n fbranch_speluncaenovacapi_dtrios --outgroup Outgroup fbranch_speluncaenovacapi_dtrios.txt ../speluncaenovacapisuperciliaris.nwk 
 
 ### plot in R 
 #### BBAA file
