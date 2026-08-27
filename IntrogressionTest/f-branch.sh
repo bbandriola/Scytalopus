@@ -28,29 +28,29 @@
 
 ### plot in R 
 #### BBAA file
-#D_BBAA_noGF <- read.table("Onlyspelucae_Lin1Outgroup_Dtrios_BBAA.txt",as.is=T,header=T)
-#D_BBAA_noGF[which(D_BBAA_noGF$Dstatistic > 0.03),]
-#svg("Onlyspelucae_Lin1Outgroup_Dtrios_BBAA.svg",width = 10,height = 10)
-#p1<-plot(p.adjust(D_BBAA_noGF$p.value,method="BH"), ylab="p value",xlab="Trio number",main = "BBAA file",ylim=c(0,0.05))
-#p2<-plot(D_BBAA_noGF$f4.ratio, ylab="f4-ratio",xlab="trio number", ylim=c(0,1), main = "BBAA file")
-#p3<-plot(D_BBAA_noGF$Dstatistic, ylab="D statistic",xlab="trio number", main = "BBAA file")
-#dev.off()
+D_BBAA_noGF <- read.table("speluncaenovacapi_BBAA.txt",as.is=T,header=T)
+D_BBAA_noGF[which(D_BBAA_noGF$Dstatistic > 0.03),]
+svg("speluncaenovacapi_BBAA.svg",width = 10,height = 10)
+p1<-plot(p.adjust(D_BBAA_noGF$p.value,method="BH"), ylab="p value",xlab="Trio number",main = "BBAA file",ylim=c(0,0.05))
+p2<-plot(D_BBAA_noGF$f4.ratio, ylab="f4-ratio",xlab="trio number", ylim=c(0,1), main = "BBAA file")
+p3<-plot(D_BBAA_noGF$Dstatistic, ylab="D statistic",xlab="trio number", main = "BBAA file")
+dev.off()
 
 ####Dmin file
-#DminF <- read.table("Onlyspelucae_Lin1Outgroup_Dtrios_Dmin.txt",as.is=T,header=T)
-#svg("Onlyspelucae_Lin1Outgroup_Dtrios_Dmin.svg",width = 10,height = 10)
-#p1<-plot(DminF$Dstatistic, ylab="D statistic",xlab="Trio number", main = "Dmin file" )
-#p2<-plot(p.adjust(DminF$p.value,method="BH"), ylab="p value",xlab="Trio number", main = "Dmin file",ylim=c(0,0.05))
-#p3<-plot(DminF$f4.ratio, ylab="f4-ratio",xlab="Trio number", ylim=c(0,1), main = "Dmin file")
-#dev.off()
+DminF <- read.table("speluncaenovacapi_Dmin.txt",as.is=T,header=T)
+svg("speluncaenovacapi_Dmin.svg",width = 10,height = 10)
+p1<-plot(DminF$Dstatistic, ylab="D statistic",xlab="Trio number", main = "Dmin file" )
+p2<-plot(p.adjust(DminF$p.value,method="BH"), ylab="p value",xlab="Trio number", main = "Dmin file",ylim=c(0,0.05))
+p3<-plot(DminF$f4.ratio, ylab="f4-ratio",xlab="Trio number", ylim=c(0,1), main = "Dmin file")
+dev.off()
 
 ####Tree file
-#Tree<- read.table("Onlyspelucae_Lin1Outgroup_Dtrios_tree.txt",as.is=T,header=T)
-#svg("Onlyspelucae_Lin1Outgroup_Dtrios_tree.svg",width = 10,height = 10)
-#p1<-plot(Tree$Dstatistic, ylab="D statistic",xlab="Trio number", main = "Tree file")
-#p2<-plot(p.adjust(Tree$p.value,method="BH"), ylab="p value",xlab="Trio number", main = "Tree file",ylim=c(0,0.05))
-#p3<-plot(Tree$f4.ratio, ylab="f4-ratio",xlab="Trio number", ylim=c(0,1), main = "Tree file")
-#dev.off()
+Tree<- read.table("speluncaenovacapi_tree.txt",as.is=T,header=T)
+svg("speluncaenovacapi_tree.svg",width = 10,height = 10)
+p1<-plot(Tree$Dstatistic, ylab="D statistic",xlab="Trio number", main = "Tree file")
+p2<-plot(p.adjust(Tree$p.value,method="BH"), ylab="p value",xlab="Trio number", main = "Tree file",ylim=c(0,0.05))
+p3<-plot(Tree$f4.ratio, ylab="f4-ratio",xlab="Trio number", ylim=c(0,1), main = "Tree file")
+dev.off()
 
 # plot in terminal 
 #2.1: plot fbranch
