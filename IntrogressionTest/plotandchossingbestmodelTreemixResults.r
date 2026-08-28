@@ -4,7 +4,7 @@ library(OptM)
 source("~/Softwares/Treemix/treemix/src/plotting_funcs.R")
 
 setwd("./") # of course this needs to be adjusted
-prefix="SnovacapitalisOutgroup"
+prefix="VariableKflag_SnovacapitalisOutgroupDevsep"
 
 ####################################
 ######## with treemix codes ########
@@ -117,4 +117,7 @@ plot_resid(stem=paste0(prefix,"7_rep1"),pop_order="plotorder.txt")
 dev.off()
 
 #best model fit
-optM("./",orientagraph=F,"bestmodelfit.tsv",method="Evanno")
+folder <- "./"
+results <- optM(folder = folder, orientagraph=F, prefix = "VariableKflag_SnovacapitalisOutgroupDevsep", method = "Evanno")
+write.csv(results,"bestTReemix.csv")
+
