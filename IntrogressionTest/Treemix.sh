@@ -28,3 +28,10 @@ for m in {0..7}; do
       -root Snovacapitalis
   done
 done
+
+# run in R 
+library(OptM)
+folder <- "./"
+setwd("./")
+results <- optM(folder = folder, prefix = "VariableKflag_SnovacapitalisOutgroup", method = "Evanno")
+write.csv(results,"bestTReemix.csv")
