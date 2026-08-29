@@ -19,11 +19,13 @@ bcftools query -l *.vcf.gz | awk '{split($1,pop,"."); print $1"\t"$1"\t"pop[2]}'
 # conda activate Treemix
 for m in {0..7}; do
   for rep in {1..3}; do
+    k=$((rep * 500))
+
     treemix \
       -i FilteredLDfiltered_MinDPMaxDPperInd20MaxMissBialelicSNPs_FilteredPCAandUCE_GeographicNames_complex_novacapitalis.recode.treemix.frq.gz \
-      -o SnovacapitalisOutgroup${m}_rep${rep} \
+      -o VariableKflag_SnovacapitalisOutgroupDevsep${m}_rep${rep} \
       -m $m \
-      -k 500 \
+      -k $k \
       -noss \
       -root Snovacapitalis
   done
