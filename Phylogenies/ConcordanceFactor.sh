@@ -1,5 +1,5 @@
 # annotate astrall tree
-astral -q astral_species.tree -i loci.treefile -t 2 -o astral_species_annotated.tree 2> astral_species_annotated.log
+astral -i loci.treefile -o astral_species.tree 2> astral_species.log
 
 # Concordant Factor 
 # first calculate the site concordance vectors
