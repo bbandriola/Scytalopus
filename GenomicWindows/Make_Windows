@@ -75,5 +75,5 @@ for i in *.log; do grep -H 'Bonferroni' $i >> NameFile.csv; done
   # 12: AMAS (estatísticas de cada amostra)
   ## input: todas as janelas *edited
   ## output: *.csv
-for i in edited*; do ./AMAS.py summary -f fasta -d dna -i $i | grep 'edited' summary.txt >> allsummaries.csv; done
+for i in edited*; do ~/Softwares/AMAS.py summary -f fasta -d dna -i $i | grep 'edited' summary.txt >> allsummaries.csv; done
   # remover as files com outliers, ou seja, aquelas as quais fogem de um padrão do número de sítios parcimoniosos
