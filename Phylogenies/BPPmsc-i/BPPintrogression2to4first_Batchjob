@@ -77,7 +77,7 @@ echo $SLURM_JOBID
 echo ################
 
 ############# Command example, if using MP
-
+/labgenomaarea2/bandriola/Software/bpp-4.8.7/src/bpp --bffile BPP_introgression2to4first.ctl --points 4
 /labgenomaarea2/bandriola/Software/bpp-4.8.7/src/bpp --cfile BPP_introgression2to4first.ctl
 
 ############# If running a sequential or openMP program
