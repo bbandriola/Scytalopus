@@ -1,0 +1,6 @@
+tree (Snovacapitalis152win1kb,(Lin1,((Lin2,Lin3),(Lin4,(Lin67,Lin5)))));
+define P1 as Lin2,Lin3,Lin4,Lin5,Lin67
+define P2 as Lin2,Lin3 
+define P4 as Lin4,Lin5,Lin67
+define P5 as Lin5,Lin67
+hybridization P2 Lin2, H4 Lin4 as T1 H1 tau=no,yes phi=0.1
